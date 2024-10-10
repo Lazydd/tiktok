@@ -97,7 +97,7 @@ class MyApp extends StatelessWidget {
             // darkTheme: ThemeData.dark(),
             // themeMode: ThemeMode.dark,
             debugShowCheckedModeBanner: false,
-            initialRoute: RouteNames.mainRoute,
+            initialRoute: UserFunc.jumpRouteName(),
             getPages: RoutePages.pages,
             navigatorObservers: [RoutePages.observer],
             builder: (context, child) {
