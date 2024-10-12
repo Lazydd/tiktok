@@ -31,7 +31,8 @@ class OpusController extends GetxController {
     // list.addAll(tmpList);
     list = r['list'];
     for (int i = 0; i < r['list'].length; i++) {
-      list2.add('/images/${r['list'][i]['video']['cover']['url_list'][0]}');
+      list2.add(
+          '${Constants.imagesUrl}/images/${r['list'][i]['video']['cover']['url_list'][0]}');
     }
     _total = r['total'];
     update(["opus"]);
