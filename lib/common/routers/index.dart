@@ -3,7 +3,6 @@ library routers;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icebery_flutter/pages/index.dart';
-import 'package:icebery_flutter/pages/publish/index.dart';
 
 part 'observers.dart'; //路由所指向的页面
 part 'names.dart'; //路由所指向的页面

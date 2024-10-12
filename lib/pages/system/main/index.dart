@@ -10,4 +10,5 @@ import 'package:local_auth/local_auth.dart';
 
 part 'controller.dart';
 part 'view.dart';
+part 'binding.dart';
 // part 'widgets/navigation.dart';

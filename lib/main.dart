@@ -4,10 +4,19 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import 'global.dart';
 import 'common/index.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  // 这个表示先就行原生端（ios android）插件注册，然后再处理后续操作，这样能保证代码运行正确。【注：不加这个强制横/竖屏会报错】
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Global.init().then((_) {
+    Future.wait([]).whenComplete(() {
+      runApp(const MyApp());
+    });
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -97,7 +106,7 @@ class MyApp extends StatelessWidget {
             // darkTheme: ThemeData.dark(),
             // themeMode: ThemeMode.dark,
             debugShowCheckedModeBanner: false,
-            initialRoute: UserFunc.jumpRouteName(),
+            initialRoute: UserFunc.jumpRouteName(false), //false 不走权限，true走权限
             getPages: RoutePages.pages,
             navigatorObservers: [RoutePages.observer],
             builder: (context, child) {
