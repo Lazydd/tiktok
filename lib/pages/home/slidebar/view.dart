@@ -23,13 +23,15 @@ class SlidebarPage extends GetView<SlidebarController> {
               ),
               ElevatedButton.icon(
                 onPressed: () async {
-                  Access.openCamera(
-                    context,
-                    onCameraGranted: () {
-                      Get.back(result: AccessEnum.takePhoto);
-                    },
-                    isNavigatorPop: true,
-                  );
+                  // Access.openCamera(
+                  //   context,
+                  //   onCameraGranted: () {
+                  //     Get.back(result: AccessEnum.takePhoto);
+                  //   },
+                  //   isNavigatorPop: true,
+                  // );
+                  var result = await Get.to(() => const ScanCodePage());
+                  return result;
                 },
                 label: Text(
                   '扫一扫',
@@ -38,7 +40,8 @@ class SlidebarPage extends GetView<SlidebarController> {
                 icon: Icon(Icons.crop_free, color: Colors.white, size: 24.sp),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xff1d1d1d),
-                  padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
                 ),
               )
             ],

@@ -90,7 +90,8 @@ dependencies:
   vibration: ^2.0.0
   # 推特点赞效果
   like_button: ^2.0.5
-  # 开屏广告
+  # 二维码扫描
+  qr_code_scanner: 1.0.1
 
 dev_dependencies:
   flutter_test:

@@ -69,5 +69,10 @@ abstract class RoutePages {
       // customTransition: RouteTransition(),
       // binding: MainBinding(),
     ),
+
+    GetPage(
+      name: RouteNames.scanCodeRoute,
+      page: () => const ScanCodePage(),
+    ),
   ];
 }

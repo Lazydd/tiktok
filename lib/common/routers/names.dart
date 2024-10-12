@@ -14,6 +14,8 @@ class RouteNames {
   static const editRoute = '/edit';
   static const addfriendRoute = '/addfriend';
   static const editUserInfoRoute = '/edit-user-info';
-  
+
   static const publishRoute = '/publish';
+
+  static const scanCodeRoute = '/scan_code';
 }
