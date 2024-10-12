@@ -214,6 +214,6 @@ class UtilsFunc {
       quality: quality,
       rotate: rotate,
     );
-    return File(result!.path);
+    return result != null ? File(result.path) : null;
   }
 }

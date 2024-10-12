@@ -32,8 +32,7 @@ class EditPage extends GetView<EditController> {
                       ],
                     ),
             ).clipRRect(all: 40.r).onTap(() async {
-              dynamic fileObj = await Access.showPhotoLibrary(context);
-              controller.addHeadImgFile(fileObj);
+              _showPhotoActionSheet();
             }),
             SizedBox(height: 30.h),
             CustomCell(
@@ -196,6 +195,88 @@ class EditPage extends GetView<EditController> {
         ),
       ),
     );
+  }
+
+  _showPhotoActionSheet() async {
+    var result = await showCupertinoModalPopup(
+        context: Get.context!,
+        builder: (context) {
+          return CupertinoActionSheet(
+            actions: [
+              CupertinoActionSheetAction(
+                child: Text(
+                  "拍摄照片",
+                  style: TextStyle(fontSize: 20.sp),
+                ),
+                onPressed: () async {
+                  Access.openCamera(
+                    context,
+                    onCameraGranted: () {
+                      Get.back(result: AccessEnum.takePhoto);
+                    },
+                    isNavigatorPop: true,
+                  );
+                },
+              ),
+              CupertinoActionSheetAction(
+                child: Text(
+                  "从手机相册选择",
+                  style: TextStyle(fontSize: 20.sp),
+                ),
+                onPressed: () {
+                  Get.back(result: AccessEnum.photoLibrary);
+                },
+              ),
+            ],
+            cancelButton: CupertinoActionSheetAction(
+              child: Text(
+                "取消",
+                style: TextStyle(color: Colors.red, fontSize: 20.sp),
+              ),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          );
+        });
+    if (result == AccessEnum.takePhoto) {
+      dynamic fileObj = await Access.showTakePhoto(Get.context!);
+      // controller.addProfileImgFile(fileObj);
+      var path = formatImage(fileObj);
+    }
+    if (result == AccessEnum.photoLibrary) {
+      dynamic fileObj = await Access.showPhotoLibrary(Get.context!);
+      // controller.addProfileImgFile(fileObj);
+      var path = formatImage(fileObj);
+    }
+  }
+
+  formatImage(
+    dynamic imageFileItem, {
+    bool isPath = false,
+    String? api,
+  }) async {
+    if (imageFileItem != null) {
+      File? file = await UtilsFunc.compressImage(
+        imageFileItem['file'],
+        rotate: imageFileItem["rotate"] ?? 0,
+      );
+      file ??= imageFileItem['file'];
+      if (isPath) {
+        Map<String, dynamic> params = {
+          "path": 'devicetype',
+        };
+        // String url = await OtherAPI.uploadFile(file!, params, api: api);
+        // if (url.isNotEmpty) {
+        //   return url;
+        // }
+      } else {
+        final bytes = await file!.readAsBytes();
+        final encodedBytes = base64Encode(bytes);
+        return encodedBytes;
+      }
+    }
+    return null;
   }
 
   @override

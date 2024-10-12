@@ -53,11 +53,11 @@ class EditController extends GetxController {
   addProfileImgFile(dynamic imgFileItem) async {
     if (imgFileItem != null) {
       File? file = await UtilsFunc.compressImage(imgFileItem['file']);
-      // print(file);
-      // // Map<String, dynamic> params = {
-      // //   "path": 'devicetype',
-      // // };
-      // // String url = await OtherAPI.uploadFile(file!, params);
+      // file ??= imgFileItem['file'];
+      // Map<String, dynamic> params = {
+      //   "path": 'devicetype',
+      // };
+      // String url = await OtherAPI.uploadFile(file!, params);
       // if (url.isNotEmpty) {
       //   updateProfileInfo(UserProfileModel(profilePicture: url));
       // }
