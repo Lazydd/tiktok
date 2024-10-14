@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:icebery_flutter/common/index.dart';
+import 'package:icebery_flutter/pages/friend/widget/row.dart';
 
 import 'index.dart';
 
@@ -57,48 +58,17 @@ class FriendPage extends GetView<FriendController> {
             padding: EdgeInsets.all(AppSpace.card.w),
             color: const Color.fromARGB(255, 67, 72, 73),
             child: Column(
-              children: [
-                _buildRow(
+              children: <Widget>[
+                const BuildRow(
                   icon: AssetsSvgs.wechat,
                   text: '快速添加微信朋友',
-                  iconColor: const Color(0xff07C160),
                 ),
                 SizedBox(height: 20.h),
-                _buildRow(icon: AssetsSvgs.qq, text: '快速添加QQ朋友'),
+                const BuildRow(icon: AssetsSvgs.qq, text: '快速添加QQ朋友'),
               ],
             ),
           ).clipRRect(all: AppSpace.card.r).paddingAll(AppSpace.card.w),
         ),
-      ],
-    );
-  }
-
-  Widget _buildRow({String? icon, String? text, Color? iconColor}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                color: Color(0xff3a3a43),
-                shape: BoxShape.circle,
-              ),
-              child: Center(child: IconWidget.svg(icon, size: 20.sp)),
-            ),
-            SizedBox(width: 5.w),
-            Text(
-              text ?? '',
-              style: TextStyle(color: Colors.white, fontSize: 14.sp),
-            )
-          ],
-        ),
-        Icon(
-          Icons.arrow_forward_ios_rounded,
-          size: 16.w,
-          color: Colors.white,
-        )
       ],
     );
   }

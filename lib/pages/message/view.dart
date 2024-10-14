@@ -127,45 +127,12 @@ class MessagePage extends GetView<MessageController> {
                     ],
                   ),
                 ),
-                buildConditionalWidget(item['noRead'])
+                BuildConditional(item['noRead'])
               ],
             ).paddingSymmetric(horizontal: 20.w, vertical: 10.h),
           )));
     }
     return list.toColumn();
-  }
-
-  Widget buildConditionalWidget(item) {
-    Widget wd = Icon(
-      Icons.arrow_forward_ios_rounded,
-      size: 16.w,
-      color: Colors.grey,
-    );
-    if (item is bool && item) {
-      wd = badges.Badge(
-        badgeStyle: badges.BadgeStyle(
-          badgeColor: Colors.red,
-          elevation: 0,
-          padding: EdgeInsets.all(5.r),
-        ),
-      );
-    } else if (item is int) {
-      wd = badges.Badge(
-        badgeContent: Text(
-          item <= 99 ? item.toString() : "99+",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 12.sp,
-          ),
-        ),
-        badgeStyle: badges.BadgeStyle(
-          badgeColor: Colors.red,
-          elevation: 0,
-          padding: EdgeInsets.all(5.r),
-        ),
-      );
-    }
-    return wd;
   }
 
   @override
