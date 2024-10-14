@@ -84,9 +84,9 @@ abstract class Access {
         name: DateTime.now().millisecondsSinceEpoch.toString(), //取时间戳作为文件名
       );
       if (result["isSuccess"]) {
-        Loading.success(text: "已保存到相册");
+        Loading.success("已保存到相册");
       } else {
-        Loading.error(text: "保存失败");
+        Loading.error("保存失败");
       }
     } else {
       //未开权限弹框提示
@@ -138,9 +138,9 @@ abstract class Access {
           name: DateTime.now().millisecondsSinceEpoch.toString(), //取时间戳作为文件名
         );
         if (result['isSuccess']) {
-          Loading.success(text: "已保存到相册");
+          Loading.success("已保存到相册");
         } else {
-          Loading.error(text: "保存失败");
+          Loading.error("保存失败");
         }
       }
     } else {
@@ -164,9 +164,9 @@ abstract class Access {
       });
       final result = await ImageGallerySaverPlus.saveFile(savePath);
       if (result["isSuccess"]) {
-        Loading.success(text: "已保存到相册");
+        Loading.success("已保存到相册");
       } else {
-        Loading.error(text: "保存失败");
+        Loading.error("保存失败");
       }
     } else {
       //未开权限弹框提示
@@ -182,12 +182,12 @@ abstract class Access {
       String savePath = "${appDocDir.path}/temp.gif";
       String fileUrl = url;
       await Dio().download(fileUrl, savePath);
-      final result =
-          await ImageGallerySaverPlus.saveFile(savePath, isReturnPathOfIOS: true);
+      final result = await ImageGallerySaverPlus.saveFile(savePath,
+          isReturnPathOfIOS: true);
       if (result['isSuccess']) {
-        Loading.success(text: "已保存到相册");
+        Loading.success("已保存到相册");
       } else {
-        Loading.error(text: "保存失败");
+        Loading.error("保存失败");
       }
     } else {
       //未开权限弹框提示

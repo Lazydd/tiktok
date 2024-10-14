@@ -23,8 +23,8 @@ class Loading {
   }
 
   /// show Loading
-  static void show({
-    String? text,
+  static void show(
+    String? text, {
     Color? indicatorColor,
     Color? textColor,
   }) {
@@ -36,8 +36,8 @@ class Loading {
   }
 
   /// show Success
-  static Future<void> success({
-    String? text,
+  static Future<void> success(
+    String? text, {
     Color? indicatorColor,
     Color? textColor,
   }) async {
@@ -51,8 +51,8 @@ class Loading {
   }
 
   /// show Error
-  static Future<void> error({
-    String? text,
+  static Future<void> error(
+    String? text, {
     Color? indicatorColor,
     Color? textColor,
   }) async {

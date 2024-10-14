@@ -175,7 +175,7 @@ class RequestInterceptors extends Interceptor {
   /// 退出并重新登录
   _errorNoAuthLogout() {
     //添加提示 todo
-    Loading.error(text: "登录已过期，请重新登录");
+    Loading.error("登录已过期，请重新登录");
 
     /// 添加登录过期的校验，防止反复跳转到登录页
     if (Get.currentRoute == '/LoginPage') {
@@ -217,26 +217,26 @@ class RequestInterceptors extends Interceptor {
                 break;
               }
           }
-          Loading.error(text: "$msg【$statusCode】");
+          Loading.error("$msg【$statusCode】");
         }
         break;
       case DioExceptionType.connectionTimeout:
-        Loading.error(text: "网络连接超时");
+        Loading.error("网络连接超时");
         break;
       case DioExceptionType.sendTimeout:
-        Loading.error(text: "网络连接超时");
+        Loading.error("网络连接超时");
         break;
       case DioExceptionType.receiveTimeout:
-        Loading.error(text: "网络连接超时");
+        Loading.error("网络连接超时");
         break;
       case DioExceptionType.cancel:
-        Loading.error(text: "网络连接取消");
+        Loading.error("网络连接取消");
         break;
       case DioExceptionType.unknown:
-        Loading.error(text: "该服务器不存在");
+        Loading.error("该服务器不存在");
         break;
       default:
-        Loading.error(text: "未知错误");
+        Loading.error("未知错误");
         break;
     }
     err = err.copyWith(error: exception);

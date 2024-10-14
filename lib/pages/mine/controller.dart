@@ -31,11 +31,11 @@ class MineController extends GetxController {
     if ((userformKey.currentState as FormState).validate()) {
       try {
         Loading.show(
-          text: "登录中，请稍后...",
+          "登录中，请稍后...",
           indicatorColor: Colors.blue,
         );
         await Future.delayed(const Duration(milliseconds: 500));
-        Loading.success(text: "登录成功！");
+        Loading.success("登录成功！");
       } finally {
         await Loading.dismiss();
       }
