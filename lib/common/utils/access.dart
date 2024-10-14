@@ -197,22 +197,23 @@ abstract class Access {
   }
 
   /// 访问图片资源库
-  static showPhotoLibrary(BuildContext context) async {
+  static showPhotoLibrary(BuildContext context, {int maxAssets = 1}) async {
     if (await requestPhotoPermisson()) {
-      // ignore: use_build_context_synchronously
-      final List<AssetEntity>? entityList = await AssetPicker.pickAssets(
-        context,
-        pickerConfig: const AssetPickerConfig(
-          maxAssets: 1,
-          requestType: RequestType.image,
-          textDelegate: AssetPickerTextDelegate(),
-        ),
-      );
-      if (entityList != null) {
-        return {
-          "key": entityList[0].id,
-          "file": await entityList[0].file,
-        };
+      if (context.mounted) {
+        final List<AssetEntity>? entityList = await AssetPicker.pickAssets(
+          context,
+          pickerConfig: AssetPickerConfig(
+            maxAssets: maxAssets,
+            requestType: RequestType.image,
+            textDelegate: const AssetPickerTextDelegate(),
+          ),
+        );
+        if (entityList != null) {
+          return {
+            "key": entityList[0].id,
+            "file": await entityList[0].file,
+          };
+        }
       }
     } else {
       //未开权限弹框提示

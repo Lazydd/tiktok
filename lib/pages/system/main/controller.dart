@@ -48,7 +48,7 @@ class MainController extends GetxController {
           ),
         );
       } on PlatformException catch (e) {
-        print(e);
+        Loading.error(e.message);
       }
     }
     didAuthenticate = isAuthorized;
