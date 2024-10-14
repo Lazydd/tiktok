@@ -57,6 +57,12 @@ class _MainViewGetX extends GetView<MainController> {
                     top: 0,
                     bottom: 0,
                     child: InkWell(
+                      onTap: () async {
+                        if (controller.didAuthenticate ||
+                            await controller._checkBiometric()) {
+                          Get.toNamed('/publish');
+                        }
+                      },
                       child: Center(
                         child: Icon(
                           Icons.add_box,
@@ -64,11 +70,6 @@ class _MainViewGetX extends GetView<MainController> {
                           size: 32.sp,
                         ),
                       ),
-                      onTap: () async {
-                        final bool didAuthenticate = await controller.auth
-                            .authenticate(localizedReason: '面容识别');
-                        if (didAuthenticate) Get.toNamed('/publish');
-                      },
                     ),
                   )
                 ],

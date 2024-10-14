@@ -3,8 +3,6 @@ part of main;
 class MainController extends GetxController {
   MainController();
 
-  final LocalAuthentication auth = LocalAuthentication();
-
   final PageController pageController = PageController();
 
   int currentIndex = 0;
@@ -24,6 +22,37 @@ class MainController extends GetxController {
 
   _initData() {
     update(["main"]);
+  }
+
+  final LocalAuthentication auth = LocalAuthentication();
+
+  bool didAuthenticate = false;
+
+  Future<bool> _checkBiometric() async {
+    final List<BiometricType> availableBiometrics =
+        await auth.getAvailableBiometrics();
+    bool isAuthorized = false;
+
+    if (availableBiometrics.isEmpty) {
+      Loading.error('当前设备不支持生物识别');
+    }
+    if (availableBiometrics.contains(BiometricType.strong) ||
+        availableBiometrics.contains(BiometricType.face)) {
+      try {
+        isAuthorized = await auth.authenticate(
+          localizedReason: "Please authenticate to complete your transaction",
+          options: const AuthenticationOptions(
+            useErrorDialogs: true,
+            stickyAuth: true,
+            biometricOnly: true,
+          ),
+        );
+      } on PlatformException catch (e) {
+        print(e);
+      }
+    }
+    didAuthenticate = isAuthorized;
+    return isAuthorized;
   }
 
   void onTap() {}
