@@ -72,7 +72,7 @@ dependencies:
   # 保存文件或图片到本地
   image_gallery_saver_plus: ^3.0.5
   # 仿微信 - 媒体选择
-  wechat_assets_picker: ^9.3.0
+  wechat_assets_picker: ^9.3.2
   wechat_camera_picker: ^4.3.2
   # svg
   flutter_svg: ^2.0.10+1
