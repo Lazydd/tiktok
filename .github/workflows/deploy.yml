@@ -1,0 +1,28 @@
+name: tiktok web deploy
+
+# push 提交中修改`pubspec.yaml`触发此workflow。
+# 为了避免每次部署，这里使用一个不存在的文件名。
+on:
+  push:
+    branches: [ main ]  # 根据你的主分支名称调整
+
+jobs:
+  web_build_and_deploy:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2.16.0
+        with:
+          flutter-version: 3.24.3
+          channel: stable
+          architecture: x64
+      - name: "Web Build 🔧"
+        run: |
+          flutter pub get
+          flutter build web
+      - name: "Web Deploy 🚀"
+          # https://github.com/JamesIves/github-pages-deploy-action
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages
+          folder: build/web
