@@ -56,7 +56,10 @@ class FriendPage extends GetView<FriendController> {
           width: MediaQuery.of(context).size.width,
           child: Container(
             padding: EdgeInsets.all(AppSpace.card.w),
-            color: const Color.fromARGB(255, 67, 72, 73),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 67, 72, 73),
+              borderRadius: BorderRadius.circular(AppSpace.card.r),
+            ),
             child: Column(
               children: <Widget>[
                 const BuildRow(
@@ -67,7 +70,7 @@ class FriendPage extends GetView<FriendController> {
                 const BuildRow(icon: AssetsSvgs.qq, text: '快速添加QQ朋友'),
               ],
             ),
-          ).clipRRect(all: AppSpace.card.r).paddingAll(AppSpace.card.w),
+          ).paddingAll(AppSpace.card.w),
         ),
       ],
     );

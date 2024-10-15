@@ -172,20 +172,13 @@ Widget _info() {
         Container(
           width: 100.h,
           height: 100.h,
+          clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             border: Border.all(width: 2.h, color: Colors.white),
             borderRadius: BorderRadius.circular(50.r),
           ),
-          child: ClipOval(
-            child: Image.network(
-              "https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-avt-0015_f14282e10099a4b436a9ca62c0902595~c5_168x168.jpeg?from=2956013662", // 图片的地址
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Image.asset(
-                AssetsImages.avatarPng,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          child: const ImageWidget(
+              'https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-avt-0015_f14282e10099a4b436a9ca62c0902595~c5_168x168.jpeg?from=2956013662'),
         ),
         SizedBox(width: 15.w),
         Column(
@@ -211,7 +204,6 @@ Widget _detail() {
   return Column(children: [
     Row(children: [
       Expanded(
-        flex: 1,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

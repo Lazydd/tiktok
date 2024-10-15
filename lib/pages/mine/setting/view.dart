@@ -48,7 +48,7 @@ class SettingPage extends GetView<SettingController> {
             ),
             ListTile(
               title: Text('稍后再看', style: TextStyle(fontSize: 18.sp)),
-              leading: Icon(Icons.timelapse),
+              leading: const Icon(Icons.timelapse),
             ),
             ListTile(
               title: Text('抖音创作者中心', style: TextStyle(fontSize: 18.sp)),

@@ -21,11 +21,15 @@ class MessagePage extends GetView<MessageController> {
                   width: 70.w,
                   height: 70.w,
                   alignment: Alignment.center,
-                  color: const Color(0xff333333),
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff333333),
+                    borderRadius: BorderRadius.circular(35.r),
+                  ),
                   child: ImageWidget(
                     controller.topList[i]['avatar'],
                   ),
-                ).clipRRect(all: 35.r),
+                ),
                 SizedBox(height: 6.h),
                 Text(
                   controller.topList[i]['name'],
@@ -89,7 +93,6 @@ class MessagePage extends GetView<MessageController> {
                 ).clipRRect(all: 27.5.r),
                 SizedBox(width: 15.w),
                 Expanded(
-                  flex: 1,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

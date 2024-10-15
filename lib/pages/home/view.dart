@@ -22,19 +22,15 @@ class HomePage extends GetView<HomeController> {
                   videoUrl:
                       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
                 ),
-                _toolBar(),
+                Positioned(
+                  right: 5.w,
+                  bottom: 15.h,
+                  child: const InteractivePage(),
+                ),
                 _desc(context)
               ],
             );
           }),
-    );
-  }
-
-  Widget _toolBar() {
-    return Positioned(
-      right: 5.w,
-      bottom: 15.h,
-      child: const InteractivePage(),
     );
   }
 

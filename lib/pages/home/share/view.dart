@@ -23,15 +23,17 @@ class SharePage extends GetView<ShareController> {
                 alignment: Alignment.center,
                 width: 20.w,
                 height: 20.w,
-                decoration: const BoxDecoration(
-                  color: Color.fromRGBO(58, 58, 70, 0.4),
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(58, 58, 70, 0.4),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
                 child: Icon(
                   Icons.close,
                   color: Colors.white,
                   size: 14.sp,
                 ),
-              ).clipRRect(all: 10.r).onTap(Get.back)
+              ).onTap(Get.back)
             ],
           ).paddingSymmetric(horizontal: 20.w, vertical: 10.h),
           Expanded(
@@ -48,16 +50,20 @@ class SharePage extends GetView<ShareController> {
                             width: 58.w,
                             height: 58.w,
                             alignment: Alignment.center,
-                            color:
-                                ShareController.topList[i]['type'] == 'wechat'
-                                    ? const Color(0xff07C160)
-                                    : const Color(0xff333333),
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              color:
+                                  ShareController.topList[i]['type'] == 'wechat'
+                                      ? const Color(0xff07C160)
+                                      : const Color(0xff333333),
+                              borderRadius: BorderRadius.circular(29.r),
+                            ),
                             child: Icon(
                               ShareController.topList[i]['icon'],
                               color: Colors.white,
                               size: 40.sp,
                             ),
-                          ).clipRRect(all: 29.r)
+                          )
                         : ImageWidget(
                             ShareController.topList[i]['icon'],
                             width: 58.w,
@@ -91,13 +97,17 @@ class SharePage extends GetView<ShareController> {
                       width: 58.w,
                       height: 58.w,
                       alignment: Alignment.center,
-                      color: const Color(0xff333333),
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        color: const Color(0xff333333),
+                        borderRadius: BorderRadius.circular(29.r),
+                      ),
                       child: Icon(
                         ShareController.bottomList[i]['icon'],
                         color: Colors.white,
                         size: 40.sp,
                       ),
-                    ).clipRRect(all: 29.r),
+                    ),
                     SizedBox(height: 8.h),
                     Text(
                       ShareController.bottomList[i]['name'],

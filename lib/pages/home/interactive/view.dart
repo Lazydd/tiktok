@@ -14,14 +14,13 @@ class InteractivePage extends GetView<InteractiveController> {
             Container(
               width: 45.w,
               height: 45.w,
+              clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 border: Border.all(width: 2.w, color: Colors.red),
                 borderRadius: BorderRadius.circular(22.5.r),
               ),
-              child: const ClipOval(
-                child: ImageWidget(
-                    'https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-avt-0015_f14282e10099a4b436a9ca62c0902595~c5_168x168.jpeg?from=2956013662'),
-              ),
+              child: const ImageWidget(
+                  'https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-avt-0015_f14282e10099a4b436a9ca62c0902595~c5_168x168.jpeg?from=2956013662'),
             ),
             Positioned(
               bottom: -5,
