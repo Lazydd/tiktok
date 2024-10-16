@@ -1,6 +1,5 @@
 {
     "i18n-ally.localesPaths": [
         "lib/common/i18n"
-    ],
-    "dart.flutterSdkPath": "D:\\fvm\\versions\\3.24.3",
+    ]
 }
