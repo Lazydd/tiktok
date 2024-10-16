@@ -12,3 +12,4 @@ export 'mine/edit/edit_user_info/index.dart';
 export 'mine/addfriend/index.dart';
 export 'publish/index.dart';
 export 'scanCode/index.dart';
+export 'chat/index.dart';

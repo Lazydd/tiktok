@@ -150,7 +150,7 @@ class RequestInterceptors extends Interceptor {
         true,
       );
     } else {
-      int ret = response.data["code"];
+      int ret = 0;
       // String? info = response.data["info"] ?? "";
       // 退出登录的一些错误码
       const invalidTokenCodes = ["-2002", "3131"];

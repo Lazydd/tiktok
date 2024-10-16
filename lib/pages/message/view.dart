@@ -58,7 +58,8 @@ class MessagePage extends GetView<MessageController> {
     List<Widget> list = [];
     for (int i = 0; i < controller.messageList.length; i++) {
       var item = controller.messageList[i];
-      list.add(Slidable(
+      list.add(
+        Slidable(
           key: ValueKey(i),
           endActionPane: ActionPane(
             motion: const ScrollMotion(),
@@ -133,7 +134,11 @@ class MessagePage extends GetView<MessageController> {
                 BuildConditional(item['noRead'])
               ],
             ).paddingSymmetric(horizontal: 20.w, vertical: 10.h),
-          )));
+          ),
+        ).onTap(() {
+          controller._messageDetail(item);
+        }),
+      );
     }
     return list.toColumn();
   }

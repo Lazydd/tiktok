@@ -55,64 +55,79 @@ class MessageController extends GetxController {
       "name": "新朋友",
       "avatar": 'https://dy.ttentau.top/assets/msg-icon1-DJyp8a5e.png',
       "content": 'xxx关注了你',
-      "noRead": false
+      "noRead": false,
+      "type": 1
     },
     {
       "name": "互动消息",
       "avatar": 'https://dy.ttentau.top/assets/msg-icon2-Bn3qfJvM.png',
       "content": 'xxx近期访问过你的主页',
-      "noRead": false
+      "noRead": false,
+      "type": 2
     },
     {
       "name": "杨老虎🐯（磕穿下巴掉牙版）",
       "avatar": '	https://dy.ttentau.top/assets/2-BN5PI5K_.png',
       "content": '哈哈哈哈哈哈',
       "date": "09-13",
-      "noRead": 2
+      "noRead": 2,
+      "type": 3
     },
     {
       "name": "抖音小助手",
       "avatar": 'https://dy.ttentau.top/assets/msg-icon5-CT2-p36i.webp',
       "content": "#今天谁请客呢",
       "date": "星期四",
-      "noRead": true
+      "noRead": true,
+      "type": 1
     },
     {
       "name": "系统通知",
       "avatar": 'https://dy.ttentau.top/assets/msg-icon4-vDykjBaw.png',
       "content": "协议修订通知",
       "date": "08-31",
-      "noRead": true
+      "noRead": true,
+      "type": 1
     },
     {
       "name": "求更新",
       "avatar": AssetsImages.msgIcon6,
       "content": "你收到过1次求更新",
       "date": "08-31",
-      "noRead": true
+      "noRead": true,
+      "type": 1
     },
     {
       "name": "任务通知",
       "avatar": AssetsImages.msgIcon7,
       "content": "发作品得流量",
       "date": "05-26",
-      "noRead": true
+      "noRead": true,
+      "type": 1
     },
     {
       "name": "直播通知",
       "avatar": AssetsImages.msgIcon8,
       "content": "举报结果通知",
       "date": "05-26",
-      "noRead": true
+      "noRead": true,
+      "type": 1
     },
     {
       "name": "钱包通知",
       "avatar": AssetsImages.msgIcon9,
       "content": "卡券发放提醒",
       "date": "05-26",
-      "noRead": true
+      "noRead": true,
+      "type": 1
     },
   ];
+
+  void _messageDetail(dynamic item) {
+    if (item['type'] == 3) {
+      Get.toNamed(RouteNames.chatRoute);
+    }
+  }
 
   _initData() {
     update(["message"]);

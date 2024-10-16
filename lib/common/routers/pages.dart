@@ -74,5 +74,9 @@ abstract class RoutePages {
       name: RouteNames.scanCodeRoute,
       page: () => const ScanCodePage(),
     ),
+    GetPage(
+      name: RouteNames.chatRoute,
+      page: () => ChatPage(),
+    ),
   ];
 }
