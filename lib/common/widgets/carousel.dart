@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:icebery_flutter/common/index.dart';
+import 'package:tiktok/common/index.dart';
 
 class CarouselWidget extends StatelessWidget {
   const CarouselWidget({

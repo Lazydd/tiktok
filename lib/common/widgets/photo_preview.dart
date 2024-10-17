@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:icebery_flutter/common/index.dart';
+import 'package:tiktok/common/index.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 typedef PageChanged = void Function(int index);

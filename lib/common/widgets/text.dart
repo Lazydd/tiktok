@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icebery_flutter/common/index.dart';
+import 'package:tiktok/common/index.dart';
 
 /// 文字组件
 class TextWidget extends StatelessWidget {

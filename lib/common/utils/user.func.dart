@@ -1,4 +1,4 @@
-import 'package:icebery_flutter/common/index.dart';
+import 'package:tiktok/common/index.dart';
 
 class UserFunc {
   static String jumpRouteName(bool type) {

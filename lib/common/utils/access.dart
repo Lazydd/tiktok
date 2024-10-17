@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:icebery_flutter/common/index.dart';
+import 'package:tiktok/common/index.dart';
 import 'package:native_device_orientation/native_device_orientation.dart';
 
 import 'package:path_provider/path_provider.dart';

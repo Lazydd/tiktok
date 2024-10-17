@@ -5,7 +5,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:icebery_flutter/common/index.dart';
+import 'package:tiktok/common/index.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class UtilsFunc {

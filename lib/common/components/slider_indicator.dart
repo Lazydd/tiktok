@@ -1,4 +1,4 @@
-import 'package:icebery_flutter/common/style/index.dart';
+import 'package:tiktok/common/style/index.dart';
 import 'package:flutter/material.dart';
 
 /// slider indicator

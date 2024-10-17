@@ -1,4 +1,4 @@
-import 'package:icebery_flutter/common/index.dart';
+import 'package:tiktok/common/index.dart';
 
 abstract class UserAPI {
   /// 登录获取token

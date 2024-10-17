@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:icebery_flutter/global.dart';
-import 'package:icebery_flutter/pages/index.dart';
+import 'package:tiktok/global.dart';
+import 'package:tiktok/pages/index.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile;
