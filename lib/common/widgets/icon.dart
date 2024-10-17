@@ -1,6 +1,6 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vector_graphics/vector_graphics_compat.dart';
 
 import '../index.dart';
 
@@ -136,11 +136,11 @@ class IconWidget extends StatelessWidget {
         );
         break;
       case IconWidgetType.svg:
-        icon = SvgPicture.asset(
-          assetName!,
+        icon = VectorGraphic(
+          loader: AssetBytesLoader(assetName!),
           width: width ?? size,
           height: height ?? size,
-          color: color,
+          colorFilter: ColorFilter.mode(color!, BlendMode.srcIn),
           fit: fit ?? BoxFit.contain,
         );
         break;

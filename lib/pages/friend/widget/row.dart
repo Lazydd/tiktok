@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tiktok/common/index.dart';
+import 'package:vector_graphics/vector_graphics_compat.dart';
 
 class BuildRow extends StatelessWidget {
   final String? text;
@@ -21,7 +21,13 @@ class BuildRow extends StatelessWidget {
                 color: Color(0xff3a3a43),
                 shape: BoxShape.circle,
               ),
-              child: Center(child: IconWidget.svg(icon, size: 20.sp)),
+              child: Center(
+                child: VectorGraphic(
+                  loader: AssetBytesLoader(icon!),
+                  width: 20.sp,
+                  height: 20.sp,
+                ),
+              ),
             ),
             SizedBox(width: 5.w),
             Text(
