@@ -80,16 +80,22 @@ class InteractivePage extends GetView<InteractiveController> {
             )
           ],
         ).onTap(() {
-          Get.bottomSheet(
-            backgroundColor: Colors.black,
+          buttonSheet<void>(
             const CommentPage(),
+            title: Text(
+              '2.2万条评论',
+              style: TextStyle(color: Colors.white, fontSize: 14.sp),
+            ),
+            height: .6,
           );
         }),
         SizedBox(height: 20.h),
         LikeButton(
           size: 40.sp,
           circleColor: const CircleColor(
-              start: Color(0xffcebc20), end: Color(0xffafac0c)),
+            start: Color(0xffcebc20),
+            end: Color(0xffafac0c),
+          ),
           bubblesColor: const BubblesColor(
             dotPrimaryColor: Color(0xff33b5e5),
             dotSecondaryColor: Color(0xff0099cc),

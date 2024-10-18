@@ -5,48 +5,11 @@ class CommentPage extends GetView<CommentController> {
 
   // 主视图
   Widget _buildView(context) {
-    return SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  '${controller.commitlist.length}条评论',
-                  style: TextStyle(color: Colors.white, fontSize: 14.sp),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: 20.w,
-                  height: 20.w,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color: const Color.fromRGBO(58, 58, 70, 0.4),
-                  ),
-                  child: Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 14.sp,
-                  ),
-                ).onTap(Get.back)
-              ],
-            ).paddingSymmetric(horizontal: 20.w, vertical: 10.h),
-            Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.all(10.w),
-                itemCount: controller.commitlist.length,
-                itemBuilder: (context, index) => GetBuilder<CommentController>(
-                  builder: (_) {
-                    return _comment(controller.commitlist[index], index: index);
-                  },
-                ),
-              ),
-            )
-          ],
-        ));
+    List<Widget> list = [];
+    for (int i = 0; i < controller.commitlist.length; i++) {
+      list.add(_comment(controller.commitlist[i], index: i));
+    }
+    return list.toColumn();
   }
 
   Widget _comment(item, {int? index}) {
@@ -203,9 +166,7 @@ class CommentPage extends GetView<CommentController> {
       init: CommentController(),
       id: "comment",
       builder: (_) {
-        return SafeArea(
-          child: _buildView(context),
-        );
+        return _buildView(context);
       },
     );
   }

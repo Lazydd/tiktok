@@ -97,8 +97,10 @@ dependencies:
   flutter_chat_types: ^3.6.2
   # emoji表情
   emoji_picker_flutter: ^3.1.0
-  # 底部弹框
+  # 底部键盘弹框
   chat_bottom_container: ^0.2.1
+  # 底部弹框
+  bottom_sheet: ^4.0.4
 
 dev_dependencies:
   flutter_test:
