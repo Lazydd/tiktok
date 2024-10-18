@@ -2,10 +2,6 @@ part of chat;
 
 class ChatController extends GetxController {
   ChatController();
-
-  final TextEditingController _messageTextController =
-      TextEditingController(text: '啊啊啊aa');
-
   _initData() {
     const other = types.User(
       id: 'otheruser',
@@ -18,8 +14,7 @@ class ChatController extends GetxController {
       author: other,
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: 'a13d1sfa31df32s1d3324f',
-      text:
-          '啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
+      text: 'helloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworld',
     );
     _addMessage(textMessage);
     _handleEndReached();
@@ -80,17 +75,11 @@ class ChatController extends GetxController {
     final textMessage = types.TextMessage(
       author: _user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: 'a13d1sfa31df32s1d3f',
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
       text: message.text,
       status: types.Status.delivered,
     );
     _addMessage(textMessage);
-  }
-
-  bool _emojiShowing = true;
-
-  void _changeEmojiShowing() {
-    _emojiShowing = _emojiShowing;
   }
 
   // @override

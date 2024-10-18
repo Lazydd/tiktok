@@ -29,14 +29,14 @@ class ChatPage extends GetView<ChatController> {
         avatarBuilder: _avatarBuilder,
         customBottomWidget: const SizedBox(),
       ),
-      // Container(
-      //   color: Colors.red,
-      // ),
       safeAreaBottom: 0,
       showAppBar: false,
       changeKeyboardPanelHeight: (keyboardHeight) => keyboardHeight,
       onControllerCreated: (buttonController) {
         panelController = buttonController;
+      },
+      onSubmitted: (String text) {
+        controller._handleSendPressed(types.PartialText(text: text));
       },
     );
   }
