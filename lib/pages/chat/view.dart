@@ -27,17 +27,67 @@ class ChatPage extends GetView<ChatController> {
         ),
         textMessageBuilder: _textMessageBuilder,
         avatarBuilder: _avatarBuilder,
+        disableImageGallery: true,
         customBottomWidget: const SizedBox(),
       ),
-      // Container(
-      //   color: Colors.red,
-      // ),
+      toolPanelBuild: _toolPanelBuild(),
       safeAreaBottom: 0,
       showAppBar: false,
       changeKeyboardPanelHeight: (keyboardHeight) => keyboardHeight,
       onControllerCreated: (buttonController) {
         panelController = buttonController;
       },
+      onSubmitted: (String text) {
+        controller._handleSendPressed(types.PartialText(text: text));
+      },
+    );
+  }
+
+  Widget _toolPanelBuild() {
+    return Container(
+      color: Colors.black,
+      padding: EdgeInsets.all(20.w),
+      child: GridView.builder(
+        shrinkWrap: true,
+        itemCount: 8,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
+          mainAxisSpacing: 20.w,
+          crossAxisSpacing: 20.w,
+        ),
+        itemBuilder: (context, index) {
+          var item = controller.list[index];
+          return GestureDetector(
+            onTap: item["ontap"],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(10.w),
+                  margin: EdgeInsets.only(bottom: 10.h),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.w),
+                    color: Colors.grey,
+                  ),
+                  child: item["name"] == "收藏"
+                      ? IconWidget.svg(
+                          AssetsSvgs.deployedCode,
+                          color: Colors.white,
+                          size: 24.sp,
+                        )
+                      : Icon(item["icon"], color: Colors.white, size: 24.sp),
+                ),
+                Text(
+                  item['name'],
+                  style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                )
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 

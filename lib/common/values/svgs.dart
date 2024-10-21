@@ -6,4 +6,5 @@ class AssetsSvgs {
   static const myCloseSvg = 'assets/svg/my_close.svg';
   static const refreshSvg = 'assets/svg/refresh.svg';
   static const mySettingSvg = 'assets/svg/my_setting.svg';
+  static const deployedCode = 'assets/svg/deployed_code.svg';
 }

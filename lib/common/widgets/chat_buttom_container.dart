@@ -2,8 +2,10 @@ import 'package:chat_bottom_container/chat_bottom_container.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' as foundation;
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tiktok/common/index.dart';
 
 enum PanelType {
   none,
@@ -16,6 +18,8 @@ class ChatButtomContainer extends StatefulWidget {
   const ChatButtomContainer(
     this.children, {
     super.key,
+    this.toolPanelBuild,
+    this.onSubmitted,
     this.safeAreaBottom,
     this.showAppBar = true,
     this.changeKeyboardPanelHeight,
@@ -23,9 +27,14 @@ class ChatButtomContainer extends StatefulWidget {
   });
 
   final Widget children;
+
+  final Widget? toolPanelBuild;
+
   final double? safeAreaBottom;
 
   final bool showAppBar;
+
+  final void Function(String text)? onSubmitted;
 
   final ChatKeyboardChangeKeyboardPanelHeight? changeKeyboardPanelHeight;
 
@@ -62,6 +71,7 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
   @override
   void dispose() {
     inputFocusNode.dispose();
+    _messageTextController.dispose();
     super.dispose();
   }
 
@@ -104,13 +114,14 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
           case PanelType.emoji:
             return _buildEmojiPickerPanel();
           case PanelType.tool:
-            return _buildToolPanel();
+            return widget.toolPanelBuild != null
+                ? widget.toolPanelBuild!
+                : _buildToolPanel();
           default:
             return const SizedBox.shrink();
         }
       },
       onPanelTypeChange: (panelType, data) {
-        debugPrint('panelType: $panelType');
         switch (panelType) {
           case ChatBottomPanelType.none:
             currentPanelType = PanelType.none;
@@ -141,14 +152,10 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
   }
 
   Widget _buildToolPanel() {
-    return Container(
-      height: 450,
-      color: Colors.red[50],
-      child: const Center(
-        child: Text('Tool Panel'),
-      ),
-    );
+    return const SizedBox();
   }
+
+  final TextEditingController _messageTextController = TextEditingController();
 
   Widget _buildEmojiPickerPanel() {
     // If the keyboard height has been recorded, priority is given to setting
@@ -164,6 +171,13 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
     }
 
     return EmojiPicker(
+      onEmojiSelected: (Category? category, Emoji emoji) {
+        _messageTextController.text += emoji.emoji;
+      },
+      onBackspacePressed: () {
+        _messageTextController.text =
+            _messageTextController.text.characters.skipLast(1).toString();
+      },
       config: Config(
         height: height,
         checkPlatformCompatibility: true,
@@ -202,8 +216,9 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
       ),
       child: Column(
         children: [
-          Padding(
+          Container(
             padding: EdgeInsets.all(15.w),
+            color: Colors.black,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -217,7 +232,7 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
                       focusNode: inputFocusNode,
                       readOnly: readOnly,
                       showCursor: true,
-                      // controller: controller._messageTextController,
+                      controller: _messageTextController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.r),
@@ -234,9 +249,23 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
                         color: Colors.white,
                       ),
                       keyboardType: TextInputType.multiline,
+                      textInputAction: TextInputAction.send,
                       maxLines: 9,
                       minLines: 1,
                       cursorColor: const Color(0xFF07C160),
+                      onSubmitted: (String text) {
+                        if (widget.onSubmitted == null) {
+                          return;
+                        }
+                        try {
+                          widget.onSubmitted!(text);
+                        } on PlatformException catch (e) {
+                          Loading.error(e.message);
+                          return;
+                        }
+                        _messageTextController.clear();
+                        inputFocusNode.requestFocus();
+                      },
                       onChanged: (value) {},
                     ).marginSymmetric(horizontal: 15.w),
                   ),

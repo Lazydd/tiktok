@@ -2,10 +2,6 @@ part of chat;
 
 class ChatController extends GetxController {
   ChatController();
-
-  final TextEditingController _messageTextController =
-      TextEditingController(text: '啊啊啊aa');
-
   _initData() {
     const other = types.User(
       id: 'otheruser',
@@ -19,7 +15,7 @@ class ChatController extends GetxController {
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: 'a13d1sfa31df32s1d3324f',
       text:
-          '啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
+          'helloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworldhelloworld',
     );
     _addMessage(textMessage);
     _handleEndReached();
@@ -80,18 +76,73 @@ class ChatController extends GetxController {
     final textMessage = types.TextMessage(
       author: _user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: 'a13d1sfa31df32s1d3f',
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
       text: message.text,
       status: types.Status.delivered,
     );
     _addMessage(textMessage);
   }
 
-  bool _emojiShowing = true;
-
-  void _changeEmojiShowing() {
-    _emojiShowing = _emojiShowing;
-  }
+  List<Map<String, dynamic>> get list => [
+        {
+          "icon": Icons.image,
+          "name": "照片",
+          "ontap": () async {
+            dynamic fileObj = await Access.showPhotoLibrary(Get.context!);
+            File? file = await UtilsFunc.compressImage(fileObj["file"]);
+            final bytes = await file!.readAsBytes();
+            final image = await decodeImageFromList(bytes);
+            final message = types.ImageMessage(
+              author: const types.User(
+                id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
+              ),
+              createdAt: DateTime.now().millisecondsSinceEpoch,
+              height: image.height.toDouble(),
+              width: image.width.toDouble(),
+              id: 'randomString()',
+              name: 'result.name',
+              size: bytes.length,
+              uri:
+                  'https://via.placeholder.com/1001x100.png/ffffff/6f61e8?text=I+love+Flyer+Chat+:)',
+            );
+            _addMessage(message);
+          }
+        },
+        {
+          "icon": Icons.photo_camera,
+          "name": "拍摄",
+          "ontap": () async {
+            dynamic fileObj = await Access.showTakePhoto(Get.context!);
+            print('333${fileObj['file']}');
+            File? file = await UtilsFunc.compressImage(
+              fileObj["file"],
+              rotate: fileObj["rotate"],
+            );
+            final bytes = await file!.readAsBytes();
+            final image = await decodeImageFromList(bytes);
+            final message = types.ImageMessage(
+              author: const types.User(
+                id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
+              ),
+              createdAt: DateTime.now().millisecondsSinceEpoch,
+              height: image.height.toDouble(),
+              width: image.width.toDouble(),
+              id: 'randomString()',
+              name: 'result.name',
+              size: bytes.length,
+              uri:
+                  'https://via.placeholder.com/1001x100.png/ffffff/6f61e8?text=I+love+Flyer+Chat+:)',
+            );
+            _addMessage(message);
+          }
+        },
+        {"icon": Icons.location_on, "name": "位置"},
+        {"icon": Icons.mic, "name": "语音输入"},
+        {"icon": Icons.search, "name": "收藏"},
+        {"icon": Icons.person, "name": "个人名片"},
+        {"icon": Icons.folder_open, "name": "文件"},
+        {"icon": Icons.music_note, "name": "音乐"},
+      ];
 
   // @override
   // void onInit() {
