@@ -276,14 +276,14 @@ abstract class Access {
 
           return false;
         },
-        onEntitySaving: isAutoSave
-            ? null
-            : (ctx, pickerType, File file) {
-                fileToBeHandle = file;
-                Navigator.of(context)
-                  ..pop()
-                  ..pop();
-              },
+        // onEntitySaving: isAutoSave
+        //     ? null
+        //     : (ctx, pickerType, File file) {
+        //         fileToBeHandle = file;
+        //         Navigator.of(context)
+        //           ..pop()
+        //           ..pop();
+        //       },
       ),
     );
 

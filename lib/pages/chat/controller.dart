@@ -99,7 +99,7 @@ class ChatController extends GetxController {
               createdAt: DateTime.now().millisecondsSinceEpoch,
               height: image.height.toDouble(),
               width: image.width.toDouble(),
-              id: 'randomString()',
+              id: DateTime.now().millisecondsSinceEpoch.toString(),
               name: 'result.name',
               size: bytes.length,
               uri:
@@ -113,7 +113,6 @@ class ChatController extends GetxController {
           "name": "拍摄",
           "ontap": () async {
             dynamic fileObj = await Access.showTakePhoto(Get.context!);
-            print('333${fileObj['file']}');
             File? file = await UtilsFunc.compressImage(
               fileObj["file"],
               rotate: fileObj["rotate"],
@@ -127,7 +126,7 @@ class ChatController extends GetxController {
               createdAt: DateTime.now().millisecondsSinceEpoch,
               height: image.height.toDouble(),
               width: image.width.toDouble(),
-              id: 'randomString()',
+              id: DateTime.now().millisecondsSinceEpoch.toString(),
               name: 'result.name',
               size: bytes.length,
               uri:
