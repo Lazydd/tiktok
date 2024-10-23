@@ -101,6 +101,9 @@ dependencies:
   chat_bottom_container: ^0.2.1
   # 底部弹框
   bottom_sheet: ^4.0.4
+  # 音频波形
+  audio_waveforms: ^1.1.0
+  scroll_to_index: ^3.0.1
 
 dev_dependencies:
   flutter_test:
