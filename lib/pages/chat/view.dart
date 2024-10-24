@@ -9,6 +9,7 @@ class ChatPage extends GetView<ChatController> {
   Widget _buildView(context) {
     return ChatButtomContainer(
       Chat(
+        scrollController: controller._scrollController,
         messages: controller._messages,
         onSendPressed: controller._handleSendPressed,
         user: controller._user,
@@ -30,6 +31,7 @@ class ChatPage extends GetView<ChatController> {
         disableImageGallery: true,
         customBottomWidget: const SizedBox(),
       ),
+      scrollController: controller._scrollController,
       toolPanelBuild: _toolPanelBuild(),
       safeAreaBottom: 0,
       showAppBar: false,
@@ -40,6 +42,7 @@ class ChatPage extends GetView<ChatController> {
       onSubmitted: (String text) {
         controller._handleSendPressed(types.PartialText(text: text));
       },
+      onSendSounds: (sendContentType, string) {},
     );
   }
 

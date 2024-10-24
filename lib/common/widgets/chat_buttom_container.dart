@@ -1,3 +1,6 @@
+import 'dart:math';
+import 'dart:ui' as ui;
+
 import 'package:chat_bottom_container/chat_bottom_container.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +8,15 @@ import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:tiktok/common/index.dart';
+import 'package:tiktok/common/widgets/data.dart';
+import 'package:tiktok/common/widgets/recorder.dart';
+import 'package:tiktok/common/widgets/sounds_message/sounds_button.dart';
+import 'wave.dart';
+
+part 'recording_status_mask.dart';
+part 'canvas.dart';
 
 enum PanelType {
   none,
@@ -23,6 +34,8 @@ class ChatButtomContainer extends StatefulWidget {
     this.safeAreaBottom,
     this.showAppBar = true,
     this.changeKeyboardPanelHeight,
+    this.scrollController,
+    this.onSendSounds,
     this.onControllerCreated,
   });
 
@@ -37,6 +50,10 @@ class ChatButtomContainer extends StatefulWidget {
   final void Function(String text)? onSubmitted;
 
   final ChatKeyboardChangeKeyboardPanelHeight? changeKeyboardPanelHeight;
+
+  final AutoScrollController? scrollController;
+
+  final void Function(SendContentType, String)? onSendSounds;
 
   final Function(ChatBottomPanelContainerController)? onControllerCreated;
 
@@ -209,6 +226,19 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
     );
   }
 
+  RxBool talk = false.obs;
+
+  void talkChange() {
+    talk.value = !talk.value;
+    if (talk.value) {
+      _messageTextController.text = '按住 说话';
+    } else {
+      _messageTextController.clear();
+    }
+  }
+
+  final _padding = ValueNotifier(EdgeInsets.zero);
+
   Widget _buildInputView() {
     return Theme(
       data: Theme.of(Get.context!).copyWith(
@@ -222,52 +252,84 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Icon(Icons.volume_up),
+                GestureDetector(
+                  onTap: talkChange,
+                  child: Obx(
+                    () => talk.value
+                        ? const Icon(Icons.keyboard)
+                        : const Icon(Icons.volume_up),
+                  ),
+                ),
                 Expanded(
                   child: Listener(
                     onPointerUp: (event) {
+                      if (talk.value) return;
                       inputChange();
                     },
-                    child: TextField(
-                      focusNode: inputFocusNode,
-                      readOnly: readOnly,
-                      showCursor: true,
-                      controller: _messageTextController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.r),
-                          borderSide: BorderSide.none,
-                        ),
-                        fillColor: Colors.grey.shade600,
-                        filled: true,
-                        isDense: true,
-                        hoverColor: Colors.transparent,
-                        contentPadding: EdgeInsets.all(8.w),
+                    child: Obx(
+                      () => SoundsMessageButton(
+                        TextField(
+                          focusNode: inputFocusNode,
+                          readOnly: readOnly,
+                          showCursor: true,
+                          enabled: !talk.value,
+                          textAlign:
+                              talk.value ? TextAlign.center : TextAlign.start,
+                          controller: _messageTextController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.r),
+                              borderSide: BorderSide.none,
+                            ),
+                            fillColor: Colors.grey.shade600,
+                            filled: true,
+                            isDense: true,
+                            hoverColor: Colors.transparent,
+                            contentPadding: EdgeInsets.all(8.w),
+                          ),
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: talk.value
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            color: Colors.white,
+                          ),
+                          keyboardType: TextInputType.multiline,
+                          textInputAction: TextInputAction.send,
+                          maxLines: 9,
+                          minLines: 1,
+                          cursorColor: const Color(0xFF07C160),
+                          onSubmitted: (String text) {
+                            if (widget.onSubmitted == null) {
+                              return;
+                            }
+                            try {
+                              widget.onSubmitted!(text);
+                            } on PlatformException catch (e) {
+                              Loading.error(e.message);
+                              return;
+                            }
+                            _messageTextController.clear();
+                            inputFocusNode.requestFocus();
+                          },
+                          onChanged: (value) {},
+                        ).marginSymmetric(horizontal: 15.w),
+                        onChanged: (status) {
+                          debugPrint(status.toString());
+                          // 120 是遮罩层的视图高度
+                          _padding.value = EdgeInsets.symmetric(
+                              vertical: status == SoundsMessageStatus.none
+                                  ? 0
+                                  : (120 + 60 - (30 + 44) / 2) / 2 + 15);
+                          widget.scrollController?.animateTo(
+                            0,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeOut,
+                          );
+                        },
+                        onSendSounds: widget.onSendSounds,
                       ),
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: Colors.white,
-                      ),
-                      keyboardType: TextInputType.multiline,
-                      textInputAction: TextInputAction.send,
-                      maxLines: 9,
-                      minLines: 1,
-                      cursorColor: const Color(0xFF07C160),
-                      onSubmitted: (String text) {
-                        if (widget.onSubmitted == null) {
-                          return;
-                        }
-                        try {
-                          widget.onSubmitted!(text);
-                        } on PlatformException catch (e) {
-                          Loading.error(e.message);
-                          return;
-                        }
-                        _messageTextController.clear();
-                        inputFocusNode.requestFocus();
-                      },
-                      onChanged: (value) {},
-                    ).marginSymmetric(horizontal: 15.w),
+                    ),
                   ),
                 ),
                 GestureDetector(

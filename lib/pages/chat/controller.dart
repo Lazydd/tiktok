@@ -2,6 +2,9 @@ part of chat;
 
 class ChatController extends GetxController {
   ChatController();
+
+  final AutoScrollController _scrollController = AutoScrollController();
+
   _initData() {
     const other = types.User(
       id: 'otheruser',
