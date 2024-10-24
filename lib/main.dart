@@ -65,6 +65,7 @@ class MyApp extends StatelessWidget {
           footerTriggerDistance: 150.h,
           child: GetMaterialApp(
             title: 'Icebery',
+            // showPerformanceOverlay: true,
             theme: ThemeData(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
