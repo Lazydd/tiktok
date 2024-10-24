@@ -8,3 +8,5 @@ export 'utils_func.dart';
 export 'access.dart';
 export 'user.func.dart';
 export 'screen.dart';
+export 'date_func.dart';
+export 'location.dart';

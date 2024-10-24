@@ -103,7 +103,12 @@ dependencies:
   bottom_sheet: ^4.0.4
   # 音频波形
   audio_waveforms: ^1.1.0
+  # 滚动
   scroll_to_index: ^3.0.1
+  # 定位
+  geolocator: ^12.0.0
+  # 加密安全 SHA/MD5/HMAC
+  crypto: ^3.0.6
 
 dev_dependencies:
   flutter_test:
