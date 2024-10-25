@@ -19,4 +19,7 @@ class RouteNames {
 
   static const scanCodeRoute = '/scan_code';
   static const chatRoute = '/chat';
+
+  static const systemConfigRoute = '/system';
+    static const appUpdateRoute = '/app_update';
 }

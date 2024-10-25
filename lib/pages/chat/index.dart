@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:tiktok/common/index.dart';
 import 'package:chat_bottom_container/chat_bottom_container.dart';
+import 'package:vector_graphics/vector_graphics_compat.dart';
 
 part 'controller.dart';
 part 'view.dart';

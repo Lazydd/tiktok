@@ -71,6 +71,14 @@ abstract class RoutePages {
     ),
 
     GetPage(
+      name: RouteNames.systemConfigRoute,
+      page: () => const SystemConfigPage(),
+    ),
+    GetPage(
+      name: RouteNames.appUpdateRoute,
+      page: () => const AppUpdatePage(),
+    ),
+    GetPage(
       name: RouteNames.scanCodeRoute,
       page: () => const ScanCodePage(),
     ),

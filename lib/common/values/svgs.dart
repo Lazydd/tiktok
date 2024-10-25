@@ -7,4 +7,6 @@ class AssetsSvgs {
   static const refreshSvg = 'assets/svg/refresh.svg';
   static const mySettingSvg = 'assets/svg/my_setting.svg';
   static const deployedCode = 'assets/svg/deployed_code.svg';
+  static const browserDownloadSvg = 'assets/svg/browser_download.svg';
+  static const tikTokSvg = 'assets/svg/tiktok.svg';
 }

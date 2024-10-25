@@ -10,3 +10,5 @@ export 'user.func.dart';
 export 'screen.dart';
 export 'date_func.dart';
 export 'location.dart';
+export 'version_func.dart';
+export 'cache.dart';

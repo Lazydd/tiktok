@@ -74,6 +74,9 @@ class SettingPage extends GetView<SettingController> {
             ListTile(
               title: Text('设置', style: TextStyle(fontSize: 18.sp)),
               leading: const Icon(Icons.settings),
+              onTap: () {
+                Get.toNamed(RouteNames.systemConfigRoute);
+              },
             ),
             Divider(height: 1.h).marginOnly(top: 20.h, bottom: 20.h),
             ElevatedButton.icon(
