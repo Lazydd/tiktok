@@ -6,15 +6,8 @@ class ChatController extends GetxController {
   final AutoScrollController _scrollController = AutoScrollController();
 
   _initData() {
-    const other = types.User(
-      id: 'otheruser',
-      firstName: "テスト",
-      lastName: "太郎",
-      imageUrl:
-          "https://pbs.twimg.com/profile_images/1335856760972689408/Zeyo7jdq_bigger.jpg",
-    );
     final textMessage = types.TextMessage(
-      author: other,
+      author: _user2,
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: 'a13d1sfa31df32s1d3324f',
       text:
@@ -22,6 +15,7 @@ class ChatController extends GetxController {
     );
     _addMessage(textMessage);
     _handleEndReached();
+    _connectMQTT();
     update(["chat"]);
   }
 
@@ -62,6 +56,14 @@ class ChatController extends GetxController {
     id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
   );
 
+  final _user2 = const types.User(
+    id: 'otheruser',
+    firstName: "テスト",
+    lastName: "太郎",
+    imageUrl:
+        "https://pbs.twimg.com/profile_images/1335856760972689408/Zeyo7jdq_bigger.jpg",
+  );
+
   void _addMessage(types.Message message) {
     _messages.insert(0, message);
     update(['chat']);
@@ -84,6 +86,8 @@ class ChatController extends GetxController {
       status: types.Status.delivered,
     );
     _addMessage(textMessage);
+
+    manager.publish(message.text);
   }
 
   List<Map<String, dynamic>> get list => [
@@ -151,14 +155,41 @@ class ChatController extends GetxController {
   //   super.onInit();
   // }
 
+  ///消息订阅主题
+  String topic = 'text';
+  late MQTTManager manager;
+  MQTTAppState currentAppState = Provider.of<MQTTAppState>(Get.context!);
+  _connectMQTT() {
+    manager = MQTTManager(
+      server: "10.100.23.159",
+      topic: topic,
+      identifier: '123',
+      currentState: currentAppState,
+      onMessage: (topic, message) {
+        final textMessage = types.TextMessage(
+          author: _user2,
+          createdAt: DateTime.now().millisecondsSinceEpoch,
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          text: message,
+        );
+        _addMessage(textMessage);
+        update(["chat"]);
+      },
+    );
+    manager.initializeMQTTClient();
+    manager.connect('user', '123456');
+  }
+
   @override
   void onReady() {
     super.onReady();
     _initData();
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    manager.unsubscribe(topic);
+    manager.disconnect();
+    super.onClose();
+  }
 }

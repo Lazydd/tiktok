@@ -115,8 +115,8 @@ class ChatPage extends GetView<ChatController> {
         borderRadius: BorderRadius.circular(36.r),
         child: ImageWidget(
           user.imageUrl ?? '',
-          width: 36.w,
-          height: 36.w,
+          width: 34.w,
+          height: 34.w,
         ),
       ),
     );

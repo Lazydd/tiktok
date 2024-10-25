@@ -109,8 +109,10 @@ dependencies:
   geolocator: ^12.0.0
   # 加密安全 SHA/MD5/HMAC
   crypto: ^3.0.6
-  mqtt_client: ^10.5.1
   # 消息推送
+  mqtt_client: ^10.5.1
+  # 消息传递
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
