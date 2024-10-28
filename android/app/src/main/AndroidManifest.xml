@@ -3,6 +3,15 @@
         android:label="tiktok"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -32,7 +41,6 @@
     </application>
         <!-- Provide required visibility configuration for API level 30 and above  la-->
     <queries>
-        <!-- If your app checks for SMS support -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="sms" />
