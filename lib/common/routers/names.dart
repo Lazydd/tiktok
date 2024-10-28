@@ -21,5 +21,8 @@ class RouteNames {
   static const chatRoute = '/chat';
 
   static const systemConfigRoute = '/system';
-    static const appUpdateRoute = '/app_update';
+  static const appUpdateRoute = '/app_update';
+
+  ///h5
+  static const mapRoute = '/map';
 }

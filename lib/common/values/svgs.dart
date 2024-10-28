@@ -9,4 +9,7 @@ class AssetsSvgs {
   static const deployedCode = 'assets/svg/deployed_code.svg';
   static const browserDownloadSvg = 'assets/svg/browser_download.svg';
   static const tikTokSvg = 'assets/svg/tiktok.svg';
+  static const relocateSvg = 'assets/svg/relocate.svg';
+  static const relocateFillSvg = 'assets/svg/relocate_fill.svg';
+  static const searchSvg = 'assets/svg/search.svg';
 }

@@ -142,7 +142,13 @@ class ChatController extends GetxController {
             _addMessage(message);
           }
         },
-        {"icon": Icons.location_on, "name": "位置"},
+        {
+          "icon": Icons.location_on,
+          "name": "位置",
+          "ontap": () {
+            Get.toNamed(RouteNames.mapRoute);
+          }
+        },
         {"icon": Icons.mic, "name": "语音输入"},
         {"icon": Icons.search, "name": "收藏"},
         {"icon": Icons.person, "name": "个人名片"},

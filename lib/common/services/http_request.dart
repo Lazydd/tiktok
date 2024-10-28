@@ -18,7 +18,7 @@ class HttpRequestService extends GetxService {
     super.onInit();
     // 初始 dio
     var options = BaseOptions(
-      baseUrl: Constants.apiUrl,
+      baseUrl: Constants.mainBaseUrl,
       connectTimeout: const Duration(milliseconds: 10000), //10秒
       receiveTimeout: const Duration(milliseconds: 5000), //5秒
       headers: {},

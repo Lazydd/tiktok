@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   emoji_picker_flutter
+  flutter_inappwebview_windows
   geolocator_windows
   local_auth_windows
   permission_handler_windows
