@@ -140236,8 +140236,8 @@ Gn(a,b){return this.alI(a,b)},
 alI(a,b){var s=0,r=A.n(t.H),q,p=this,o
 var $async$Gn=A.j(function(c,d){if(c===1)return A.k(d,r)
 while(true)switch(s){case 0:o=p.a.h(0,a).b
-o.muted=!(b>0)
-o.volume=b
+o.muted=b===0
+if(b>0)o.volume=b
 q=null
 s=1
 break
