@@ -4,4 +4,5 @@ class AssetsImages {
   static const msgIcon7 = 'assets/images/msg-icon7.webp';
   static const msgIcon8 = 'assets/images/msg-icon8.webp';
   static const msgIcon9 = 'assets/images/msg-icon9.webp';
+  static const redHeart = 'assets/images/red_heart.webp';
 }
