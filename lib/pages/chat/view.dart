@@ -3,8 +3,6 @@ part of chat;
 class ChatPage extends GetView<ChatController> {
   ChatPage({super.key});
 
-  late ChatBottomPanelContainerController panelController;
-
   // 主视图
   Widget _buildView(context) {
     return ChatButtomContainer(
@@ -37,7 +35,7 @@ class ChatPage extends GetView<ChatController> {
       showAppBar: false,
       changeKeyboardPanelHeight: (keyboardHeight) => keyboardHeight,
       onControllerCreated: (buttonController) {
-        panelController = buttonController;
+        controller.panelController = buttonController;
       },
       onSubmitted: (String text) {
         controller._handleSendPressed(types.PartialText(text: text));
@@ -74,13 +72,7 @@ class ChatPage extends GetView<ChatController> {
                     borderRadius: BorderRadius.circular(5.w),
                     color: Colors.grey,
                   ),
-                  child: item["name"] == "收藏"
-                      ? IconWidget.svg(
-                          AssetsSvgs.deployedCode,
-                          color: Colors.white,
-                          size: 24.sp,
-                        )
-                      : Icon(item["icon"], color: Colors.white, size: 24.sp),
+                  child: Icon(item["icon"], color: Colors.white, size: 24.sp),
                 ),
                 Text(
                   item['name'],

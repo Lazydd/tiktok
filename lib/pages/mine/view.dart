@@ -231,19 +231,14 @@ Widget _detail() {
         ),
       ),
       SizedBox(width: 40.w),
-      ElevatedButton(
+      CupertinoButton(
         onPressed: () => Get.toNamed('/edit'),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xff3a3a46),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.button),
-          ),
-          padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-        ),
+        color: const Color(0xff3a3a46),
+        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+        borderRadius: BorderRadius.all(Radius.circular(AppRadius.button)),
         child: Text(
           '编辑资料',
-          style: TextStyle(fontSize: 16.sp),
+          style: TextStyle(fontSize: 16.sp, color: Colors.white),
         ),
       )
     ]),

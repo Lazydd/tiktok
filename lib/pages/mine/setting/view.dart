@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -79,17 +80,23 @@ class SettingPage extends GetView<SettingController> {
               },
             ),
             Divider(height: 1.h).marginOnly(top: 20.h, bottom: 20.h),
-            ElevatedButton.icon(
+            CupertinoButton(
               onPressed: () {},
-              label: Text('更多更能', style: TextStyle(fontSize: 16.sp)),
-              icon: const Icon(Icons.view_cozy),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xff3a3a46),
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppRadius.button),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+              color: const Color(0xff3a3a46),
+              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+              borderRadius: BorderRadius.all(Radius.circular(AppRadius.button)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.view_cozy, color: Colors.white),
+                  Padding(
+                    padding: EdgeInsets.only(left: 8.w),
+                    child: Text(
+                      '更多更能',
+                      style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                    ),
+                  )
+                ],
               ),
             ).marginOnly(left: 20.w, right: 20.w),
             SizedBox(height: 20.w),

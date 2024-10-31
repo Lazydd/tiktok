@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -30,16 +31,12 @@ class FriendPage extends GetView<FriendController> {
                 ),
               ),
               SizedBox(height: 10.h),
-              ElevatedButton(
+              CupertinoButton(
                 onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 252, 47, 86),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppRadius.button),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 8.h),
-                ),
+                color: const Color.fromARGB(255, 252, 47, 86),
+                padding: EdgeInsets.symmetric(vertical: 8.h),
+                borderRadius:
+                    BorderRadius.all(Radius.circular(AppRadius.button)),
                 child: Align(
                   child: Text(
                     '查看',

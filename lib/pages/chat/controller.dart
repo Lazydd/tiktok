@@ -4,6 +4,7 @@ class ChatController extends GetxController {
   ChatController();
 
   final AutoScrollController _scrollController = AutoScrollController();
+  late ChatBottomPanelContainerController panelController;
 
   _initData() {
     final textMessage = types.TextMessage(
@@ -92,7 +93,7 @@ class ChatController extends GetxController {
 
   List<Map<String, dynamic>> get list => [
         {
-          "icon": Icons.image,
+          "icon": CupertinoIcons.photo,
           "name": "照片",
           "ontap": () async {
             dynamic fileObj = await Access.showPhotoLibrary(Get.context!);
@@ -116,7 +117,7 @@ class ChatController extends GetxController {
           }
         },
         {
-          "icon": Icons.photo_camera,
+          "icon": CupertinoIcons.photo_camera,
           "name": "拍摄",
           "ontap": () async {
             dynamic fileObj = await Access.showTakePhoto(Get.context!);
@@ -143,17 +144,52 @@ class ChatController extends GetxController {
           }
         },
         {
-          "icon": Icons.location_on,
+          "icon": CupertinoIcons.videocam_fill,
+          "name": "视频通话",
+          "ontap": () {
+            showCupertinoModalPopup(
+              context: Get.context!,
+              builder: (BuildContext context) => CupertinoActionSheet(
+                actions: [
+                  CupertinoActionSheetAction(
+                    onPressed: () {
+                      Get.back();
+                      panelController.updatePanelType(ChatBottomPanelType.none);
+                      Get.toNamed(RouteNames.rtcRoute);
+                    },
+                    child: const Text('视频通话'),
+                  ),
+                  CupertinoActionSheetAction(
+                    onPressed: () {
+                      Get.back();
+                      panelController.updatePanelType(ChatBottomPanelType.none);
+                      Get.toNamed(RouteNames.rtcRoute);
+                    },
+                    child: const Text('语音通话'),
+                  ),
+                ],
+                cancelButton: CupertinoActionSheetAction(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text('取消'),
+                ),
+              ),
+            );
+          }
+        },
+        {
+          "icon": CupertinoIcons.location_solid,
           "name": "位置",
           "ontap": () {
             Get.toNamed(RouteNames.mapRoute);
           }
         },
-        {"icon": Icons.mic, "name": "语音输入"},
-        {"icon": Icons.search, "name": "收藏"},
-        {"icon": Icons.person, "name": "个人名片"},
-        {"icon": Icons.folder_open, "name": "文件"},
-        {"icon": Icons.music_note, "name": "音乐"},
+        {"icon": CupertinoIcons.mic, "name": "语音输入"},
+        {"icon": CupertinoIcons.cube_fill, "name": "收藏"},
+        {"icon": CupertinoIcons.person, "name": "个人名片"},
+        {"icon": CupertinoIcons.folder, "name": "文件"},
+        {"icon": CupertinoIcons.music_note_2, "name": "音乐"},
       ];
 
   // @override

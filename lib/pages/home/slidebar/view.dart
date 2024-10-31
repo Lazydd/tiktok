@@ -21,7 +21,7 @@ class SlidebarPage extends GetView<SlidebarController> {
                 icon: Icon(Icons.settings, color: Colors.white, size: 24.sp),
                 color: const Color(0xff1d1d1d),
               ),
-              ElevatedButton.icon(
+              CupertinoButton(
                 onPressed: () async {
                   // Access.openCamera(
                   //   context,
@@ -33,17 +33,22 @@ class SlidebarPage extends GetView<SlidebarController> {
                   var result = await Get.to(() => const ScanCodePage());
                   return result;
                 },
-                label: Text(
-                  '扫一扫',
-                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                color: const Color(0xff1d1d1d),
+                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.crop_free, color: Colors.white, size: 24.sp),
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.w),
+                      child: Text(
+                        '扫一扫',
+                        style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                      ),
+                    )
+                  ],
                 ),
-                icon: Icon(Icons.crop_free, color: Colors.white, size: 24.sp),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff1d1d1d),
-                  padding:
-                      EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-                ),
-              )
+              ),
             ],
           ),
           SizedBox(height: 10.h),
