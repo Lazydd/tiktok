@@ -66,12 +66,22 @@ class MessageController extends GetxController {
       "type": 2
     },
     {
-      "name": "杨老虎🐯（磕穿下巴掉牙版）",
+      "name": "杨老虎🐯（单人）",
       "avatar": '	https://dy.ttentau.top/assets/2-BN5PI5K_.png',
       "content": '哈哈哈哈哈哈',
       "date": "09-13",
       "noRead": 2,
-      "type": 3
+      "type": 3,
+      "id": '0'
+    },
+    {
+      "name": "杨老虎🐯（多人）",
+      "avatar": '	https://dy.ttentau.top/assets/2-BN5PI5K_.png',
+      "content": '哈哈哈哈哈哈',
+      "date": "09-13",
+      "noRead": 2,
+      "type": 3,
+      "id": '2'
     },
     {
       "name": "抖音小助手",
@@ -125,7 +135,7 @@ class MessageController extends GetxController {
 
   void _messageDetail(dynamic item) {
     if (item['type'] == 3) {
-      Get.toNamed(RouteNames.chatRoute);
+      Get.toNamed(RouteNames.chatRoute, parameters: {"peerId": item['id']});
     }
   }
 

@@ -1,7 +1,9 @@
 part of chat;
 
 class ChatPage extends GetView<ChatController> {
-  ChatPage({super.key});
+  final String peerId;
+
+  const ChatPage({super.key, required this.peerId});
 
   // 主视图
   Widget _buildView(context) {
@@ -134,7 +136,7 @@ class ChatPage extends GetView<ChatController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatController>(
-      init: ChatController(),
+      init: ChatController(peerId),
       id: "chat",
       builder: (_) {
         return Scaffold(

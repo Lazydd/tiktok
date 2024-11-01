@@ -84,7 +84,11 @@ abstract class RoutePages {
     ),
     GetPage(
       name: RouteNames.chatRoute,
-      page: () => ChatPage(),
+      page: () => ChatPage(peerId: Get.parameters['peerId']!),
+    ),
+    GetPage(
+      name: RouteNames.rtcRoute,
+      page: () => const RtcPage(),
     ),
     GetPage(
       name: RouteNames.mapRoute,

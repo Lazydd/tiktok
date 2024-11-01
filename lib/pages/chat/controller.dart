@@ -1,7 +1,8 @@
 part of chat;
 
 class ChatController extends GetxController {
-  ChatController();
+  final String peerId;
+  ChatController(this.peerId);
 
   final AutoScrollController _scrollController = AutoScrollController();
   late ChatBottomPanelContainerController panelController;
@@ -16,7 +17,8 @@ class ChatController extends GetxController {
     );
     _addMessage(textMessage);
     _handleEndReached();
-    _connectMQTT();
+    // _connectMQTT();
+    _initRTM();
     update(["chat"]);
   }
 
@@ -88,7 +90,8 @@ class ChatController extends GetxController {
     );
     _addMessage(textMessage);
 
-    manager.publish(message.text);
+    // manager.publish(message.text);
+    rtmClient.sendPeerMessage(peerId, message.text);
   }
 
   List<Map<String, dynamic>> get list => [
@@ -220,6 +223,37 @@ class ChatController extends GetxController {
     );
     manager.initializeMQTTClient();
     manager.connect('user', '123456');
+  }
+
+  late RTMClient rtmClient;
+
+  _initRTM() async {
+    rtmClient = RTMClient();
+    rtmClient.onMessage = (message, peerId) {
+      final textMessage = types.TextMessage(
+        author: _user2,
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        text: message.text,
+      );
+      _addMessage(textMessage);
+      update(["chat"]);
+    };
+
+    ///消息发送失败执行
+    rtmClient.onMessageError = (message, peerId) {};
+
+    await rtmClient.init('177dbcefe8c841809a986d42dce3c01b');
+
+    // 登录
+    await rtmClient.login(
+        '007eJxTYHBauTbwA/vkt3t/OCwPyN3tPO+A2nupol+xkoFfnD40y79RYDA0N09JSk5NS7VItjAxtDCwTLS0MEsxMUpJTjVONjBM4gxVSW8IZGSoD9rAyMjAxMAIhCA+I4MhACJpHto=',
+        '1');
+    // // 加入频道
+    // final channel = await rtmClient.joinChannel('频道名');
+
+    // // 发送频道消息
+    // await channel?.sendMessage(AgoraRtmMessage.fromText('大家好!'));
   }
 
   @override
