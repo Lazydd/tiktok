@@ -304,7 +304,12 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
                               return;
                             }
                             try {
-                              widget.onSubmitted!(text);
+                              if (text.isNotEmpty) {
+                                widget.onSubmitted!(text);
+                              } else {
+                                inputFocusNode.requestFocus();
+                                return;
+                              }
                             } on PlatformException catch (e) {
                               Loading.error(e.message);
                               return;
