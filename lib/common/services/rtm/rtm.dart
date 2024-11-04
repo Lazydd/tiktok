@@ -1,4 +1,5 @@
 import 'package:agora_rtm/agora_rtm.dart';
+import 'package:flutter/cupertino.dart';
 
 class RTMClient {
   AgoraRtmClient? _client;
@@ -17,14 +18,14 @@ class RTMClient {
 
     _client?.onConnectionStateChanged2 =
         (RtmConnectionState state, RtmConnectionChangeReason reason) {
-      print("连接状态改变: state = $state, reason = $reason");
+      debugPrint("连接状态改变: state = $state, reason = $reason");
     };
   }
 
   // 登录
   Future<void> login(String token, String userId) async {
     await _client?.login(token, userId);
-    print('$userId登录成功');
+    debugPrint('$userId登录成功');
     _userId = userId;
   }
 
@@ -44,7 +45,7 @@ class RTMClient {
 
     // 设置频道消息回调
     channel?.onMessageReceived = (RtmMessage message, RtmChannelMember member) {
-      print("收到频道消息: ${message.text} 从用户: ${member.userId}");
+      debugPrint("收到频道消息: ${message.text} 从用户: ${member.userId}");
     };
 
     return channel;

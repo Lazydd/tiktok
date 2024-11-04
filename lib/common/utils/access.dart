@@ -102,11 +102,11 @@ abstract class Access {
     await file.readAsBytes().then((value) {
       bytes = Uint8List.fromList(value);
       if (kDebugMode) {
-        print('reading of bytes is completed');
+        debugPrint('reading of bytes is completed');
       }
     }).catchError((onError) {
       if (kDebugMode) {
-        print('Exception Error while reading audio from path:$onError');
+        debugPrint('Exception Error while reading audio from path:$onError');
       }
     });
     return bytes;
@@ -228,7 +228,7 @@ abstract class Access {
   //     context,
   //     pickerConfig: CameraPickerConfig(
   //       onEntitySaving: (ctx, pickerType, File file) {
-  //         print(file.path);
+  //         debugPrint(file.path);
   //         Navigator.of(context);
   //         return file;
   //       },

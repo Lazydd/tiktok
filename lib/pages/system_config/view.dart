@@ -77,7 +77,7 @@ class SystemConfigPage extends GetView<SystemConfigController> {
                 title: const Text('关于抖音'),
                 trailing: const CupertinoListTileChevron(),
                 onTap: () {
-                  print('Tapped on Software Update');
+                  debugPrint('Tapped on Software Update');
                 },
               ),
             ],

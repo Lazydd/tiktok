@@ -37,7 +37,7 @@ class PublishPage extends GetView<PublishController> {
       ),
       onMediaTap: (mediaCapture) {
         // OpenFile.open(mediaCapture.filePath);
-        // print('Tap on ${mediaCapture.filePath}');
+        // debugPrint('Tap on ${mediaCapture.filePath}');
         // Get.back();
       },
     );

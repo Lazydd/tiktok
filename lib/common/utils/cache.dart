@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CacheFunc {
@@ -68,7 +69,7 @@ class CacheFunc {
         await file.delete(recursive: true);
       }
     } catch (err) {
-      print("error:$err");
+      debugPrint("error:$err");
     }
   }
 }

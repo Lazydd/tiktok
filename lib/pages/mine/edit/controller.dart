@@ -39,7 +39,7 @@ class EditController extends GetxController {
   addHeadImgFile(dynamic imgFileItem) async {
     if (imgFileItem != null) {
       File? file = await UtilsFunc.compressImage(imgFileItem['file']);
-      // print(file);
+      // debugPrint(file);
       // Map<String, dynamic> params = {
       //   "path": 'devicetype',
       // };

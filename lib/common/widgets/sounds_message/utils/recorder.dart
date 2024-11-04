@@ -123,7 +123,7 @@ class SoundsRecorderController {
         onDurationChanged?.call(value);
 
         amplitudeList.value = recorderController!.waveData.reversed.toList();
-        print(duration);
+        debugPrint(duration.toString());
       });
 
       // 录制

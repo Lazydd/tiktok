@@ -64,7 +64,7 @@ class MQTTManager {
         .withWillMessage('My Will message')
         .startClean()
         .withWillQos(qos);
-    print('MQTT 服务器连接中...');
+    debugPrint('MQTT 服务器连接中...');
     client.connectionMessage = connMess;
   }
 
@@ -72,22 +72,22 @@ class MQTTManager {
   void connect(String username, String password) async {
     // assert(client != null);
     try {
-      print('MQTT 服务器连接中...');
+      debugPrint('MQTT 服务器连接中...');
       currentState.setAppConnectionState(MQTTAppConnectionState.connecting);
       await client.connect(username, password);
     } on Exception catch (e) {
-      print('MQTT 服务器报错 - $e');
+      debugPrint('MQTT 服务器报错 - $e');
       disconnect();
     }
   }
 
   void disconnect() {
-    print('已断开连接');
+    debugPrint('已断开连接');
     client.disconnect();
   }
 
   void unsubscribe(String topic) {
-    print('已取消订阅： $topic');
+    debugPrint('已取消订阅： $topic');
     client.unsubscribe(topic);
   }
 
@@ -103,35 +103,35 @@ class MQTTManager {
 
   /// The subscribed callback
   void onSubscribed(String topic) {
-    print('正在订阅主题： $topic');
+    debugPrint('正在订阅主题： $topic');
   }
 
   /// The unsolicited disconnect callback
   void onDisconnected() {
     currentState.setAppConnectionState(MQTTAppConnectionState.disconnected);
-    print("已断开mqtt服务 $server");
+    debugPrint("已断开mqtt服务 $server");
   }
 
   ///取消订阅
   onUnsubscribed(String? topic) {
-    print("已取消订阅 $topic");
+    debugPrint("已取消订阅 $topic");
   }
 
   onSubscribeFail(String topic) {
-    print("订阅失败 $topic");
+    debugPrint("订阅失败 $topic");
   }
 
   /// 连接成功回调
   void onConnected() {
     currentState.setAppConnectionState(MQTTAppConnectionState.connected);
-    print('MQTT 服务器连接成功！');
+    debugPrint('MQTT 服务器连接成功！');
     client.subscribe(topic, qos);
     client.updates?.listen((List<MqttReceivedMessage<MqttMessage>> c) {
       final MqttPublishMessage recMess = c[0].payload as MqttPublishMessage;
       String message = const Utf8Decoder().convert(recMess.payload.message);
       currentState.setReceivedText(message);
       if (tempMessage != message) onMessage(topic, message);
-      print('订阅主题是：<${c[0].topic}>,消息是： <-- $message -->');
+      debugPrint('订阅主题是：<${c[0].topic}>,消息是： <-- $message -->');
     });
   }
 }

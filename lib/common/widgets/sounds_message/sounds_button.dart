@@ -59,7 +59,7 @@ class _SoundsMessageButtonState extends State<SoundsMessageButton> {
   @override
   void initState() {
     super.initState();
-    // print(scSize);
+    // debugPrint(scSize);
     _soundsRecorder.status.addListener(() {
       widget.onChanged?.call(_soundsRecorder.status.value);
     });
