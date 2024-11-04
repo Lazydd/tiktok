@@ -55,14 +55,17 @@ class SystemConfigPage extends GetView<SystemConfigController> {
                   ),
                 ),
                 trailing: const CupertinoListTileChevron(),
-                onTap: () {
+                onTap: () async {
                   if (Platform.isAndroid) {
                     Get.toNamed(RouteNames.appUpdateRoute);
                   } else {
-                    LaunchReview.launch(
-                      writeReview: false,
-                      iOSAppId: Constants.iOSAppId,
-                    );
+                    String appStoreUrl =
+                        'https://apps.apple.com/app/${Constants.iOSAppId}';
+                    if (await canLaunchUrl(Uri(path: appStoreUrl))) {
+                      await launchUrl(Uri(path: appStoreUrl));
+                    } else {
+                      throw 'Could not launch $appStoreUrl';
+                    }
                   }
                 },
               ),
