@@ -34,7 +34,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.8
   # getx 路由 + 状态管理 + 多语言 + 主题
   get: ^4.6.6
   # 屏幕适配
@@ -52,13 +52,13 @@ dependencies:
   # 本地存储
   shared_preferences: ^2.3.2
   # 包信息
-  package_info_plus: ^8.0.2
+  package_info_plus: ^8.1.0
   # 播放器
-  video_player: ^2.9.1
+  video_player: ^2.9.2
   # 播放器
   chewie: ^1.8.5
   # 获取文件路径
-  path_provider: ^2.1.4
+  path_provider: ^2.1.5
   # 图片缓存管理
   cached_network_image: ^3.4.1
   # 图片预览
@@ -72,10 +72,10 @@ dependencies:
   # 保存文件或图片到本地
   image_gallery_saver_plus: ^3.0.5
   # 仿微信 - 媒体选择
-  wechat_assets_picker: ^9.3.2
-  wechat_camera_picker: ^4.3.2
+  wechat_assets_picker: ^9.3.3
+  wechat_camera_picker: ^4.3.4
   # svg
-  vector_graphics: ^1.1.11+1
+  vector_graphics: ^1.1.13
   # badges 标记
   badges: ^3.1.2
   # 时间选择器
@@ -87,11 +87,11 @@ dependencies:
   # 本地身份认证
   local_auth: ^2.3.0
   # 震动反馈
-  vibration: ^2.0.0
+  vibration: ^2.0.1
   # 推特点赞效果
   like_button: ^2.0.5
   # 二维码扫描
-  qr_code_scanner: 1.0.1
+  qr_code_scanner: ^1.0.1
   # 聊天
   flutter_chat_ui: ^1.6.15
   flutter_chat_types: ^3.6.2
@@ -102,7 +102,7 @@ dependencies:
   # 底部弹框
   bottom_sheet: ^4.0.4
   # 音频波形
-  audio_waveforms: ^1.1.0
+  audio_waveforms: ^1.1.1
   # 滚动
   scroll_to_index: ^3.0.1
   # 定位
