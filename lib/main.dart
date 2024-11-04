@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
           // 触发加载的距离
           footerTriggerDistance: 150.h,
           child: GetMaterialApp(
-            title: 'Icebery',
+            title: 'Tiktok',
             // showPerformanceOverlay: true,
             theme: ThemeData(
               splashColor: Colors.transparent,
@@ -113,7 +113,7 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
             ),
             // darkTheme: ThemeData.dark(),
-            // themeMode: ThemeMode.dark,
+            themeMode: ThemeMode.dark,
             debugShowCheckedModeBanner: false,
             initialRoute: UserFunc.jumpRouteName(false), //false 不走权限，true走权限
             getPages: RoutePages.pages,
