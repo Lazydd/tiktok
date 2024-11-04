@@ -50,6 +50,7 @@ class ScanCodePage extends GetView<ScanCodeController> {
                   Container(
                     width: 40.0,
                     height: 40.0,
+                    margin: EdgeInsets.only(bottom: 5.h),
                     decoration: const BoxDecoration(
                       color: Color.fromRGBO(58, 59, 61, 1),
                       shape: BoxShape.circle,
@@ -62,7 +63,6 @@ class ScanCodePage extends GetView<ScanCodeController> {
                       size: 20,
                     ).paddingLeft(2).paddingTop(3),
                   ),
-                  const SizedBox(height: 5),
                   Text(
                     _.isFlash ? "关闭" : "开启",
                     style: const TextStyle(color: Colors.white),

@@ -20,6 +20,7 @@ class MessagePage extends GetView<MessageController> {
                 Container(
                   width: 70.w,
                   height: 70.w,
+                  margin: EdgeInsets.only(bottom: 6.h),
                   alignment: Alignment.center,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
@@ -30,7 +31,6 @@ class MessagePage extends GetView<MessageController> {
                     controller.topList[i]['avatar'],
                   ),
                 ),
-                SizedBox(height: 6.h),
                 Text(
                   controller.topList[i]['name'],
                   style: TextStyle(

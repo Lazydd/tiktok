@@ -17,6 +17,7 @@ class BuildRow extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(5),
+              margin: EdgeInsets.only(right: 5.w),
               decoration: const BoxDecoration(
                 color: Color(0xff3a3a43),
                 shape: BoxShape.circle,
@@ -29,7 +30,6 @@ class BuildRow extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 5.w),
             Text(
               text ?? '',
               style: TextStyle(color: Colors.white, fontSize: 14.sp),

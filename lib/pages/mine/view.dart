@@ -1,5 +1,7 @@
 part of mine;
 
+const double headerOpacityThreshold = 120;
+
 class MinePage extends StatefulWidget {
   const MinePage({super.key});
 
@@ -23,9 +25,19 @@ class _MinePageState extends State<MinePage>
     _tabController = TabController(length: 4, vsync: this);
     _scrollController.addListener(() {
       double offset = _scrollController.offset;
-      setState(() {
-        _headerOpacity.value = offset <= 120 ? 0 : 1;
-      });
+      if (offset <= headerOpacityThreshold) {
+        if (_headerOpacity.value != 0) {
+          setState(() {
+            _headerOpacity.value = 0;
+          });
+        }
+      } else {
+        if (_headerOpacity.value != 1) {
+          setState(() {
+            _headerOpacity.value = 1;
+          });
+        }
+      }
     });
   }
 
@@ -83,9 +95,8 @@ class _MinePageState extends State<MinePage>
                 centerTitle: true,
                 background: Stack(
                   children: [
-                    Image.network(
+                    ImageWidget(
                       '${Constants.imagesUrl}/images/aTnyHICCi-NMudWfVELeO.png',
-                      fit: BoxFit.cover,
                       height: 230.h,
                     ),
                     _info(),
@@ -173,6 +184,7 @@ Widget _info() {
           width: 100.h,
           height: 100.h,
           clipBehavior: Clip.antiAlias,
+          margin: EdgeInsets.only(right: 15.w),
           decoration: BoxDecoration(
             border: Border.all(width: 2.h, color: Colors.white),
             borderRadius: BorderRadius.circular(50.r),
@@ -180,7 +192,6 @@ Widget _info() {
           child: const ImageWidget(
               'https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-avt-0015_f14282e10099a4b436a9ca62c0902595~c5_168x168.jpeg?from=2956013662'),
         ),
-        SizedBox(width: 15.w),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,

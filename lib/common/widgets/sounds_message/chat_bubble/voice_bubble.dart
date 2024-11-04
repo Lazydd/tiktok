@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VoiceBubble extends StatefulWidget {
   const VoiceBubble({super.key});
@@ -38,13 +39,13 @@ class _VoiceBubbleState extends State<VoiceBubble> {
           children: [
             Container(
               color: Colors.grey.withOpacity(0.5),
+              margin: EdgeInsets.only(right: 5.w),
               child: CustomPaint(
                 // width * 1.5
                 size: const Size(16, 16),
                 painter: _VoicePlayPainter(),
               ),
             ),
-            const SizedBox(width: 5),
             const Text(
               '12 \'\'',
               style: TextStyle(fontSize: 14, color: Colors.black),

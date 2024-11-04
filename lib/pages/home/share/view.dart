@@ -96,6 +96,7 @@ class SharePage extends GetView<ShareController> {
                     Container(
                       width: 58.w,
                       height: 58.w,
+                      margin: EdgeInsets.only(bottom: 8.h),
                       alignment: Alignment.center,
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
@@ -108,7 +109,6 @@ class SharePage extends GetView<ShareController> {
                         size: 40.sp,
                       ),
                     ),
-                    SizedBox(height: 8.h),
                     Text(
                       ShareController.bottomList[i]['name'],
                       style: TextStyle(

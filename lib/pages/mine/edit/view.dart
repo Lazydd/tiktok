@@ -13,6 +13,7 @@ class EditPage extends GetView<EditController> {
             Container(
               width: 80.w,
               height: 80.w,
+              margin: EdgeInsets.only(bottom: 30.h),
               color: Colors.black,
               child: controller.headFile != ''
                   ? ImageWidget(controller.headFile)
@@ -34,7 +35,6 @@ class EditPage extends GetView<EditController> {
             ).clipRRect(all: 40.r).onTap(() async {
               _showPhotoActionSheet();
             }),
-            SizedBox(height: 30.h),
             CustomCell(
               title: const Text.rich(
                 TextSpan(children: [
