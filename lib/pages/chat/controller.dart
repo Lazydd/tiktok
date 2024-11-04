@@ -158,7 +158,10 @@ class ChatController extends GetxController {
                     onPressed: () {
                       Get.back();
                       panelController.updatePanelType(ChatBottomPanelType.none);
-                      Get.toNamed(RouteNames.rtcRoute);
+                      Get.toNamed(
+                        RouteNames.rtcRoute,
+                        parameters: {"isDial": "true"},
+                      );
                     },
                     child: const Text('视频通话'),
                   ),
@@ -166,7 +169,10 @@ class ChatController extends GetxController {
                     onPressed: () {
                       Get.back();
                       panelController.updatePanelType(ChatBottomPanelType.none);
-                      Get.toNamed(RouteNames.rtcRoute);
+                      Get.toNamed(
+                        RouteNames.rtcRoute,
+                        parameters: {"isDial": "true"},
+                      );
                     },
                     child: const Text('语音通话'),
                   ),
@@ -236,8 +242,15 @@ class ChatController extends GetxController {
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         text: message.text,
       );
-      _addMessage(textMessage);
-      update(["chat"]);
+      if (json.decode(message.text)["type"] == 'video') {
+        Get.toNamed(
+          RouteNames.rtcRoute,
+          parameters: {"isDial": "false"},
+        );
+      } else {
+        _addMessage(textMessage);
+        update(["chat"]);
+      }
     };
 
     ///消息发送失败执行
@@ -247,8 +260,8 @@ class ChatController extends GetxController {
 
     // 登录
     await rtmClient.login(
-        '007eJxTYHBauTbwA/vkt3t/OCwPyN3tPO+A2nupol+xkoFfnD40y79RYDA0N09JSk5NS7VItjAxtDCwTLS0MEsxMUpJTjVONjBM4gxVSW8IZGSoD9rAyMjAxMAIhCA+I4MhACJpHto=',
-        '1');
+        '007eJxTYMi4ovdkgvv6pp1Bd86WF2x8e+bERt1TXOcmzfzOtssg70+pAoOhuXlKUnJqWqpFsoWJoYWBZaKlhVmKiVFKcqpxsoFh0gEbjfSGQEYGzrQCFkYGJgZGIATxGRmMAJX5IEc=',
+        '2');
     // // 加入频道
     // final channel = await rtmClient.joinChannel('频道名');
 

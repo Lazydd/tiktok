@@ -1,14 +1,33 @@
 part of rtc;
 
 class RtcPage extends GetView<RtcController> {
-  const RtcPage({super.key});
+  String isDial = 'false';
+  RtcPage({super.key, required this.isDial});
 
   // 主视图
   Widget _buildView(context) {
     return Stack(
       children: [
         Center(
-          child: _remoteVideo(),
+          child: _remoteVideo(controller),
+        ),
+        Positioned(
+          bottom: 200.h,
+          left: 0,
+          right: 0,
+          child: GetBuilder<RtcController>(
+            id: "time",
+            builder: (_) {
+              return controller.isDial == 'true'
+                  ? Center(
+                      child: Text(
+                        DateFunc.formatTimestampToClock(controller._seconds),
+                        style: TextStyle(color: Colors.white, fontSize: 18.sp),
+                      ),
+                    )
+                  : const SizedBox();
+            },
+          ),
         ),
         Positioned(
           bottom: 40.h,
@@ -42,11 +61,10 @@ class RtcPage extends GetView<RtcController> {
                   size: 35.0,
                 ),
               ),
-              Offstage(
-                offstage: true,
-                child: RawMaterialButton(
+              if (controller.isDial == 'false')
+                RawMaterialButton(
                   onPressed: () {
-                    Get.back();
+                    controller._start();
                   },
                   shape: const CircleBorder(),
                   fillColor: Colors.greenAccent,
@@ -57,7 +75,6 @@ class RtcPage extends GetView<RtcController> {
                     size: 35.0,
                   ),
                 ),
-              ),
             ],
           ),
         ),
@@ -85,7 +102,7 @@ class RtcPage extends GetView<RtcController> {
   }
 
   ///主视图
-  Widget _remoteVideo() {
+  Widget _remoteVideo(RtcController controller) {
     if (controller._remoteUid != null) {
       return AgoraVideoView(
         controller: VideoViewController.remote(
@@ -95,10 +112,11 @@ class RtcPage extends GetView<RtcController> {
         ),
       );
     } else {
-      return const Center(
+      return Center(
         child: Text(
-          '等待远程用户加入...',
+          controller.isDial == 'true' ? '正在等待对方接受邀请' : '邀请你进行视频聊天',
           textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white, fontSize: 18.sp),
         ),
       );
     }
@@ -107,7 +125,7 @@ class RtcPage extends GetView<RtcController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RtcController>(
-      init: RtcController(),
+      init: RtcController(isDial),
       id: "rtc",
       builder: (_) {
         return Scaffold(

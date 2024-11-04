@@ -88,7 +88,7 @@ abstract class RoutePages {
     ),
     GetPage(
       name: RouteNames.rtcRoute,
-      page: () => const RtcPage(),
+      page: () => RtcPage(isDial: Get.parameters['isDial']!),
     ),
     GetPage(
       name: RouteNames.mapRoute,

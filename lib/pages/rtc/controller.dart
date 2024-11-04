@@ -1,11 +1,16 @@
 part of rtc;
 
 class RtcController extends GetxController {
-  RtcController();
+  String isDial = 'false';
+  int _seconds = 0;
+  Timer? _timer;
+  bool _isRunning = false;
+
+  RtcController(this.isDial);
 
   static const appId = "177dbcefe8c841809a986d42dce3c01b";
   static const token =
-      "007eJxTYNgnFXRqcrVen73M+dfc7K/cdr7iaTr03t2sgVu9vTLNw1GBwdDcPCUpOTUt1SLZwsTQwsAy0dLCLMXEKCU51TjZwDDpiZNyekMgI0PkFWlGRgYIBPE5GQyNjCGIgQEAc1Id6g==";
+      "007eJxTYEhdxn7Z0OeoXwPjGm4RTwELUYf8X0ri63Wnzn0fFLlZ6ZwCg6G5eUpScmpaqkWyhYmhhYFloqWFWYqJUUpyqnGygWHS9CiN9IZARoZG+URWRgYIBPE5GQyNjCGIgQEAyEEb9g==";
   static const channel = "123123123";
 
   int? _remoteUid;
@@ -20,33 +25,36 @@ class RtcController extends GetxController {
     _engine = createAgoraRtcEngine();
     await _engine.initialize(const RtcEngineContext(
       appId: appId,
-      channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
+      //直播用channelProfileLiveBroadcasting
+      channelProfile: ChannelProfileType.channelProfileCommunication,
     ));
 
     _engine.registerEventHandler(
       RtcEngineEventHandler(
         // 加入频道成功
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-          debugPrint("local user ${connection.localUid} joined");
+          debugPrint("加入频道成功：$channel");
           _localUserJoined = true;
           update(["rtc"]);
         },
         // 有用户加入
         onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
-          debugPrint("remote user $remoteUid joined");
+          debugPrint("用户： $remoteUid 加入");
           _remoteUid = remoteUid;
+          startTimer();
           update(["rtc"]);
         },
         // 有用户离线
         onUserOffline: (RtcConnection connection, int remoteUid,
             UserOfflineReasonType reason) {
-          debugPrint("remote user $remoteUid left channel");
+          debugPrint("用户： $remoteUid 离线");
           _remoteUid = null;
         },
         // 离开频道
         onLeaveChannel: (RtcConnection connection, RtcStats stats) {
           _localUserJoined = false;
           _remoteUid = null;
+          _dispose();
           update(["rtc"]);
         },
         // token在30秒内过期触发
@@ -66,27 +74,50 @@ class RtcController extends GetxController {
       ),
     );
     await _engine.startPreview();
-
-    await _engine.joinChannel(
-      token: token,
-      channelId: channel,
-      uid: 0,
-      options: const ChannelMediaOptions(),
-    );
+    if (isDial == 'true') {
+      await _start();
+    }
+    // await _engine.joinChannel(
+    //   token: token,
+    //   channelId: channel,
+    //   uid: 0,
+    //   options: const ChannelMediaOptions(),
+    // );
   }
 
   Future<void> _dispose() async {
+    _timer?.cancel();
     await _engine.leaveChannel();
     await _engine.release();
   }
 
-  void _inviteUser() {
-    // _engine.inviteUserToChannel('user_id', 'channel_name', null, 0);
+  Future<void> _start() async {
+    await _engine.joinChannel(
+      token: token,
+      channelId: channel,
+      uid: 0,
+      options: const ChannelMediaOptions(
+        channelProfile: ChannelProfileType.channelProfileCommunication,
+        clientRoleType: ClientRoleType.clientRoleBroadcaster,
+      ),
+    );
+    isDial = 'true';
+    update(["rtc"]);
   }
 
   _initData() {
     initAgora();
     update(["rtc"]);
+  }
+
+  void startTimer() {
+    if (!_isRunning) {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        _seconds++;
+        update(['time']);
+      });
+      _isRunning = true;
+    }
   }
 
   void onTap() {}
