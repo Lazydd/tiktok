@@ -99,7 +99,7 @@ class SettingPage extends GetView<SettingController> {
                 ],
               ),
             ).marginOnly(left: 20.w, right: 20.w),
-            SizedBox(height: 20.w),
+            SizedBox(height: 20.h),
           ],
         ),
       ),

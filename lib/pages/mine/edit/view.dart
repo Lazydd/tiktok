@@ -14,7 +14,11 @@ class EditPage extends GetView<EditController> {
               width: 80.w,
               height: 80.w,
               margin: EdgeInsets.only(bottom: 30.h),
-              color: Colors.black,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(40.r),
+              ),
               child: controller.headFile != ''
                   ? ImageWidget(controller.headFile)
                   : Column(
@@ -32,7 +36,7 @@ class EditPage extends GetView<EditController> {
                         )
                       ],
                     ),
-            ).clipRRect(all: 40.r).onTap(() async {
+            ).onTap(() async {
               _showPhotoActionSheet();
             }),
             CustomCell(

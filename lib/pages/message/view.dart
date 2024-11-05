@@ -82,8 +82,7 @@ class MessagePage extends GetView<MessageController> {
               ),
             ],
           ),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
+          child: Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -171,13 +170,7 @@ class MessagePage extends GetView<MessageController> {
               )
             ],
           ),
-          body: Stack(
-            children: [
-              SafeArea(
-                child: _buildView(context),
-              )
-            ],
-          ),
+          body: SafeArea(child: _buildView(context)),
         );
       },
     );

@@ -138,10 +138,10 @@ class ScanCodePage extends GetView<ScanCodeController> {
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: 7),
           Container(
             width: 5.0,
             height: 5.0,
+            margin: EdgeInsets.only(top: 7.h),
             decoration: const BoxDecoration(
               color: Color.fromRGBO(19, 199, 95, 1),
               shape: BoxShape.circle,

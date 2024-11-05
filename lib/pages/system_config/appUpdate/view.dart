@@ -73,13 +73,13 @@ class AppUpdatePage extends GetView<AppUpdateController> {
                     ),
                   ),
                   // ),
-                  SizedBox(height: 5.w),
+                  SizedBox(height: 10.w),
                   Text(
                     _.progressValue == 1 ? "即将更新完成，进行安装！" : "正在更新中，请勿退出App！",
                     style: TextStyle(
                       color: Colors.grey.shade700,
                     ),
-                  ).paddingLeft(5.w),
+                  ),
                 ],
               ),
             ),

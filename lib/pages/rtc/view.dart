@@ -7,10 +7,9 @@ class RtcPage extends GetView<RtcController> {
   // 主视图
   Widget _buildView(context) {
     return Stack(
+      fit: StackFit.expand,
       children: [
-        Center(
-          child: _remoteVideo(controller),
-        ),
+        _remoteVideo(controller),
         Positioned(
           bottom: 200.h,
           left: 0,

@@ -72,6 +72,15 @@ class _MinePageState extends State<MinePage>
                   );
                 },
               ),
+              title: AnimatedOpacity(
+                opacity: _headerOpacity.value,
+                duration: const Duration(milliseconds: 500),
+                child: Text(
+                  '杨老虎🐯（磕穿下巴掉牙版）',
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                ),
+              ),
+              centerTitle: true,
               actions: [
                 Builder(
                   builder: (context) => IconButton(
@@ -83,29 +92,24 @@ class _MinePageState extends State<MinePage>
                 )
               ],
               backgroundColor: AppColors.background,
-              flexibleSpace: FlexibleSpaceBar(
-                title: AnimatedOpacity(
-                  opacity: _headerOpacity.value,
-                  duration: const Duration(milliseconds: 500),
-                  child: Text(
-                    '杨老虎🐯（磕穿下巴掉牙版）',
-                    style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                  ),
-                ),
-                centerTitle: true,
-                background: Stack(
-                  children: [
-                    ImageWidget(
-                      '${Constants.imagesUrl}/images/aTnyHICCi-NMudWfVELeO.png',
-                      height: 230.h,
-                    ),
-                    _info(),
-                  ],
+              flexibleSpace: RepaintBoundary(
+                child: FlexibleSpaceBar(
+                  // title: AnimatedOpacity(
+                  //   opacity: _headerOpacity.value,
+                  //   duration: const Duration(milliseconds: 200),
+                  //   child: Text(
+                  //     '杨老虎🐯（磕穿下巴掉牙版）',
+                  //     style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                  //   ),
+                  // ),
+                  background: _info(),
                 ),
               ),
             ),
             SliverToBoxAdapter(
-              child: Padding(padding: EdgeInsets.all(15.w), child: _detail()),
+              child: RepaintBoundary(
+                child: Padding(padding: EdgeInsets.all(15.w), child: _detail()),
+              ),
             ),
             SliverPersistentHeader(
               pinned: true,

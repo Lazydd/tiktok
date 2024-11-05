@@ -13,39 +13,37 @@ class FriendPage extends GetView<FriendController> {
   // 主视图
   Widget _buildView(context) {
     return Stack(
+      fit: StackFit.expand,
       children: <Widget>[
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '发现通讯录朋友',
-                style: TextStyle(color: Colors.white, fontSize: 16.sp),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '发现通讯录朋友',
+              style: TextStyle(color: Colors.white, fontSize: 16.sp),
+            ),
+            SizedBox(height: 5.h),
+            Text(
+              '你身边的朋友在用抖音，快去看看吧',
+              style: TextStyle(
+                color: const Color.fromARGB(255, 131, 146, 151),
+                fontSize: 14.sp,
               ),
-              SizedBox(height: 5.h),
-              Text(
-                '你身边的朋友在用抖音，快去看看吧',
-                style: TextStyle(
-                  color: const Color.fromARGB(255, 131, 146, 151),
-                  fontSize: 14.sp,
+            ),
+            SizedBox(height: 10.h),
+            CupertinoButton(
+              onPressed: () {},
+              color: const Color.fromARGB(255, 252, 47, 86),
+              padding: EdgeInsets.symmetric(vertical: 8.h),
+              borderRadius: BorderRadius.all(Radius.circular(AppRadius.button)),
+              child: Align(
+                child: Text(
+                  '查看',
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
               ),
-              SizedBox(height: 10.h),
-              CupertinoButton(
-                onPressed: () {},
-                color: const Color.fromARGB(255, 252, 47, 86),
-                padding: EdgeInsets.symmetric(vertical: 8.h),
-                borderRadius:
-                    BorderRadius.all(Radius.circular(AppRadius.button)),
-                child: Align(
-                  child: Text(
-                    '查看',
-                    style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                  ),
-                ),
-              ).marginOnly(left: 50.w, right: 50.w)
-            ],
-          ),
+            ).marginOnly(left: 50.w, right: 50.w)
+          ],
         ),
         Positioned(
           bottom: 0,

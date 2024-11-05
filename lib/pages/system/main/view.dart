@@ -49,7 +49,9 @@ class _MainViewGetX extends GetView<MainController> {
                         label: '消息',
                       ),
                       BottomNavigationBarItem(
-                          icon: SizedBox.shrink(), label: '我')
+                        icon: SizedBox.shrink(),
+                        label: '我',
+                      )
                     ],
                   ),
                   Positioned(
