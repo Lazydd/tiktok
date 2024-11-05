@@ -127,6 +127,8 @@ dependencies:
   agora_rtm: ^1.5.9
   # 长列表优化
   keframe: ^3.0.0
+  # 调试展示fps
+  fps_monitor: ^2.0.0
 
 dev_dependencies:
   flutter_test:

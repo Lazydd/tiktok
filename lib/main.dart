@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fps_monitor/widget/custom_widget_inspector.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -32,6 +33,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // GlobalKey<NavigatorState> globalKey = GlobalKey();
+    // WidgetsBinding.instance.addPostFrameCallback((t) {
+    //   overlayState = globalKey.currentState!.overlay!;
+    // });
     return ScreenUtilInit(
       designSize: const Size(414, 896), // 设计稿中设备的尺寸(单位随意,建议dp,但在使用过程中必须保持一致)
       splitScreenMode: false, // 支持分屏尺寸
@@ -74,6 +79,7 @@ class MyApp extends StatelessWidget {
           child: GetMaterialApp(
             title: 'Tiktok',
             // showPerformanceOverlay: true,
+            // navigatorKey: globalKey,
             theme: ThemeData(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
