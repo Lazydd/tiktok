@@ -18,6 +18,7 @@ class RouteNames {
   static const publishRoute = '/publish';
 
   static const rtcRoute = '/rtc';
+  static const rtcMoreRoute = '/rtc_more';
   static const scanCodeRoute = '/scan_code';
   static const chatRoute = '/chat';
 

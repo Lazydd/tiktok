@@ -13,6 +13,7 @@ export 'mine/addfriend/index.dart';
 export 'publish/index.dart';
 export 'scanCode/index.dart';
 export 'rtc/index.dart';
+export 'rtc_more/index.dart';
 export 'chat/index.dart';
 export 'system_config/index.dart';
 export 'system_config/appUpdate/index.dart';

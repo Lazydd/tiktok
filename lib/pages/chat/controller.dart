@@ -170,7 +170,7 @@ class ChatController extends GetxController {
                       Get.back();
                       panelController.updatePanelType(ChatBottomPanelType.none);
                       Get.toNamed(
-                        RouteNames.rtcRoute,
+                        RouteNames.rtcMoreRoute,
                         parameters: {"isDial": "true"},
                       );
                     },

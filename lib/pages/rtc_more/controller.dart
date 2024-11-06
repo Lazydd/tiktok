@@ -1,23 +1,25 @@
-part of rtc;
+part of rtc_more;
 
-class RtcController extends GetxController {
+class RtcMoreController extends GetxController {
   String isDial = 'false';
   int _seconds = 0;
   Timer? _timer;
   bool _isRunning = false;
 
-  RtcController({required this.isDial});
+  RtcMoreController({required this.isDial});
 
   static const appId = "177dbcefe8c841809a986d42dce3c01b";
   static const token =
-      "007eJxTYEhdxn7Z0OeoXwPjGm4RTwELUYf8X0ri63Wnzn0fFLlZ6ZwCg6G5eUpScmpaqkWyhYmhhYFloqWFWYqJUUpyqnGygWHS9CiN9IZARoZG+URWRgYIBPE5GQyNjCGIgQEAyEEb9g==";
-  static const channel = "123123123";
+      "007eJxTYJiyql8vuEgqu3Jhxedt1awWk9Kiyv+n/5x6g8GQYd4ZBwEFBkNz85Sk5NS0VItkCxNDCwPLREsLsxQTo5TkVONkA8OkQB7t9IZARgaGl2UMjFAI4rMxGBoZAxEDAwAyVB1J";
+  static const channel = "123123";
 
-  int? _remoteUid;
+  late final Future<bool?> initStatus;
+
+  final Set<int> _remoteUid = {};
   bool _localUserJoined = false;
   late RtcEngine _engine;
 
-  Future<void> initAgora() async {
+  Future<bool> initAgora() async {
     // retrieve permissions
     await [Permission.microphone, Permission.camera].request();
 
@@ -26,7 +28,7 @@ class RtcController extends GetxController {
     await _engine.initialize(const RtcEngineContext(
       appId: appId,
       //直播用channelProfileLiveBroadcasting
-      channelProfile: ChannelProfileType.channelProfileCommunication,
+      channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
     ));
 
     _engine.registerEventHandler(
@@ -35,27 +37,27 @@ class RtcController extends GetxController {
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
           debugPrint("加入频道成功：$channel");
           _localUserJoined = true;
-          update(["rtc"]);
+          update(["rtc_more"]);
         },
         // 有用户加入
         onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
           debugPrint("用户： $remoteUid 加入");
-          _remoteUid = remoteUid;
+          _remoteUid.add(remoteUid);
           startTimer();
-          update(["rtc"]);
+          update(["rtc_more"]);
         },
         // 有用户离线
         onUserOffline: (RtcConnection connection, int remoteUid,
             UserOfflineReasonType reason) {
           debugPrint("用户： $remoteUid 离线");
-          _remoteUid = null;
+          _remoteUid.removeWhere((v) => v == remoteUid);
         },
         // 离开频道
         onLeaveChannel: (RtcConnection connection, RtcStats stats) {
           _localUserJoined = false;
-          _remoteUid = null;
+          _remoteUid.clear();
           _dispose();
-          update(["rtc"]);
+          update(["rtc_more"]);
         },
         // token在30秒内过期触发
         onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
@@ -77,6 +79,7 @@ class RtcController extends GetxController {
     if (isDial == 'true') {
       await _start();
     }
+    return true;
   }
 
   Future<void> _dispose() async {
@@ -85,23 +88,24 @@ class RtcController extends GetxController {
     await _engine.release();
   }
 
-  Future<void> _start() async {
+  Future<bool> _start() async {
     await _engine.joinChannel(
       token: token,
       channelId: channel,
-      uid: 0,
+      uid: 100,
       options: const ChannelMediaOptions(
         channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
         clientRoleType: ClientRoleType.clientRoleBroadcaster,
       ),
     );
     isDial = 'true';
-    update(["rtc"]);
+    update(["rtc_more"]);
+    return true;
   }
 
   _initData() {
-    initAgora();
-    update(["rtc"]);
+    initStatus = initAgora();
+    update(["rtc_more"]);
   }
 
   void startTimer() {

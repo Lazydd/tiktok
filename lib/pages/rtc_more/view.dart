@@ -1,20 +1,25 @@
-part of rtc;
+part of rtc_more;
 
-class RtcPage extends GetView<RtcController> {
+class RtcMorePage extends GetView<RtcMoreController> {
   String isDial = 'false';
-  RtcPage({super.key, required this.isDial});
+  RtcMorePage({super.key, required this.isDial});
 
   // 主视图
   Widget _buildView(context) {
     return Stack(
       fit: StackFit.expand,
       children: [
-        _remoteVideo(controller),
+        AgoraVideoView(
+          controller: VideoViewController(
+            rtcEngine: controller._engine,
+            canvas: const VideoCanvas(uid: 100),
+          ),
+        ),
         Positioned(
           bottom: 200.h,
           left: 0,
           right: 0,
-          child: GetBuilder<RtcController>(
+          child: GetBuilder<RtcMoreController>(
             id: "time",
             builder: (_) {
               return controller.isDial == 'true'
@@ -77,58 +82,59 @@ class RtcPage extends GetView<RtcController> {
             ],
           ),
         ),
-
-        ///右上角本地预览
-        Align(
-          alignment: Alignment.topLeft,
-          child: SizedBox(
-            width: 100,
-            height: 150,
-            child: Center(
-              child: controller._localUserJoined
-                  ? AgoraVideoView(
-                      controller: VideoViewController(
-                        rtcEngine: controller._engine,
-                        canvas: const VideoCanvas(uid: 0),
-                      ),
-                    )
-                  : const CircularProgressIndicator(),
-            ),
-          ),
-        ),
+        Align(alignment: Alignment.topLeft, child: _remoteVideo(controller)),
       ],
     );
   }
 
   ///主视图
-  Widget _remoteVideo(RtcController controller) {
-    if (controller._remoteUid != null) {
-      return AgoraVideoView(
-        controller: VideoViewController.remote(
-          rtcEngine: controller._engine,
-          canvas: VideoCanvas(uid: controller._remoteUid),
-          connection: const RtcConnection(channelId: RtcController.channel),
-        ),
-      );
-    } else {
-      return Center(
-        child: Text(
-          controller.isDial == 'true' ? '正在等待对方接受邀请' : '邀请你进行视频聊天',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white, fontSize: 18.sp),
-        ),
-      );
-    }
+  Widget _remoteVideo(RtcMoreController controller) {
+    return FutureBuilder<bool?>(
+        future: controller.initStatus,
+        builder: (context, snap) {
+          if (snap.data != true) {
+            return Center(
+              child: Text(
+                controller.isDial == 'true' ? '正在等待对方接受邀请' : '邀请你进行视频聊天',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 18.sp),
+              ),
+            );
+          }
+          return GridView.builder(
+            itemCount: controller._remoteUid.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              mainAxisSpacing: 1,
+              childAspectRatio: 0.7,
+            ),
+            itemBuilder: (BuildContext context, index) {
+              return AgoraVideoView(
+                controller: VideoViewController.remote(
+                  rtcEngine: controller._engine,
+                  canvas: VideoCanvas(
+                    uid: controller._remoteUid.elementAt(index),
+                  ),
+                  connection:
+                      const RtcConnection(channelId: RtcMoreController.channel),
+                ),
+              );
+            },
+          );
+        });
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RtcController>(
-      init: RtcController(isDial: isDial),
-      id: "rtc",
+    return GetBuilder<RtcMoreController>(
+      init: RtcMoreController(isDial: isDial),
+      id: "rtc_more",
       builder: (_) {
         return Scaffold(
-          body: _buildView(context),
+          appBar: AppBar(title: const Text("rtc_more")),
+          body: SafeArea(
+            child: _buildView(context),
+          ),
         );
       },
     );
