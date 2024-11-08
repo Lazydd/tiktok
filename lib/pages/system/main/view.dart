@@ -60,9 +60,28 @@ class _MainViewGetX extends GetView<MainController> {
                     bottom: 0,
                     child: InkWell(
                       onTap: () async {
-                        if (controller.didAuthenticate ||
-                            await controller._checkBiometric()) {
-                          Get.toNamed('/publish');
+                        if (await Access.isBiometricAvailable()) {
+                          List<BiometricType> availableBiometrics =
+                              await Access.getAvailableBiometrics();
+
+                          if (availableBiometrics
+                              .contains(BiometricType.fingerprint)) {
+                            debugPrint('支持指纹识别');
+                          }
+                          if (availableBiometrics
+                              .contains(BiometricType.face)) {
+                            debugPrint('支持面部识别');
+                          }
+
+                          bool authenticated = await Access.authenticate();
+
+                          if (authenticated) {
+                            Get.toNamed('/publish');
+                          } else {
+                            Loading.error('认证失败');
+                          }
+                        } else {
+                          Loading.error('当前设备不支持生物识别');
                         }
                       },
                       child: Center(

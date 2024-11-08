@@ -2,6 +2,7 @@ import 'dart:io';
 // 使用 Uint8List 数据类型
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ enum AccessEnum {
   takePhoto,
   photoLibrary,
 }
+
+final LocalAuthentication auth = LocalAuthentication();
 
 abstract class Access {
   /// 相册权限 动态申请权限，需要区分android和ios，很多时候它两配置权限时各自的名称不同
@@ -228,6 +231,50 @@ abstract class Access {
       //未开权限弹框提示
       // ignore: use_build_context_synchronously
       showPermissionAlertDialog(context, "未开启相册权限，是否开启相册权限？");
+    }
+  }
+
+  /// 检查设备是否支持生物识别
+  static Future<bool> isBiometricAvailable() async {
+    try {
+      // 检查设备是否支持生物识别
+      final bool canAuthWithBiometrics = await auth.canCheckBiometrics;
+      // 检查设备是否支持生物识别或设备密码/PIN
+      final bool canAuth = await auth.isDeviceSupported();
+
+      return canAuthWithBiometrics && canAuth;
+    } catch (e) {
+      Loading.error('当前设备不支持生物识别');
+      return false;
+    }
+  }
+
+  /// 获取可用的生物识别方式
+  static Future<List<BiometricType>> getAvailableBiometrics() async {
+    try {
+      return await auth.getAvailableBiometrics();
+    } catch (e) {
+      Loading.error('当前设备不支持生物识别');
+      return [];
+    }
+  }
+
+  /// 进行生物识别认证
+  static Future<bool> authenticate() async {
+    try {
+      final bool authenticated = await auth.authenticate(
+        localizedReason: '请进行生物识别认证', // 显示给用户看的提示文本
+        options: const AuthenticationOptions(
+          stickyAuth: true, // 如果用户切换应用，认证对话框依然存在
+          biometricOnly: true, // 只使用生物识别，不允许回退到PIN/密码
+          useErrorDialogs: true, // 使用系统错误对话框
+          sensitiveTransaction: true, // 用于敏感操作的认证
+        ),
+      );
+      return authenticated;
+    } catch (e) {
+      Loading.error('当前设备不支持生物识别');
+      return false;
     }
   }
 
