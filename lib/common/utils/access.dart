@@ -1,5 +1,6 @@
 import 'dart:io';
 // 使用 Uint8List 数据类型
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -30,8 +31,12 @@ abstract class Access {
           result[Permission.photos] == PermissionStatus.limited;
     }
     if (Platform.isAndroid) {
-      final result = await [Permission.storage].request();
-      return result[Permission.storage] == PermissionStatus.granted;
+      final deviceInfo = await DeviceInfoPlugin().androidInfo;
+      final permission = deviceInfo.version.sdkInt >= 30
+          ? Permission.photos
+          : Permission.storage;
+      final result = await [permission].request();
+      return result[permission] == PermissionStatus.granted;
     }
     return false;
   }
@@ -44,8 +49,12 @@ abstract class Access {
           result[Permission.camera] == PermissionStatus.limited;
     }
     if (Platform.isAndroid) {
-      final result = await [Permission.storage].request();
-      return result[Permission.storage] == PermissionStatus.granted;
+      final deviceInfo = await DeviceInfoPlugin().androidInfo;
+      final permission = deviceInfo.version.sdkInt >= 30
+          ? Permission.photos
+          : Permission.storage;
+      final result = await [permission].request();
+      return result[permission] == PermissionStatus.granted;
     }
     return false;
   }

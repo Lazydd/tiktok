@@ -129,6 +129,8 @@ dependencies:
   keframe: ^3.0.0
   # 调试展示fps
   fps_monitor: ^2.0.0
+  # 设备信息
+  device_info_plus: ^11.1.1
 
 dev_dependencies:
   flutter_test:

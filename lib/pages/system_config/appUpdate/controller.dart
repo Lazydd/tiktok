@@ -7,11 +7,19 @@ class AppUpdateController extends GetxController {
   String progressLabel = "0B / 0B";
 
   downloadAndroid() async {
+    final deviceInfo = await DeviceInfoPlugin().androidInfo;
     String url =
         VersionFunc.versionModel.android!.path ?? Constants.androidDownloadURL;
-    final permissions = await Permission.storage.status;
-    if (!permissions.isGranted) {
-      await Permission.storage.request();
+    if (deviceInfo.version.sdkInt >= 30) {
+      final permissions = await Permission.manageExternalStorage.status;
+      if (!permissions.isGranted) {
+        await Permission.manageExternalStorage.request();
+      }
+    } else {
+      final permissions = await Permission.storage.status;
+      if (!permissions.isGranted) {
+        await Permission.storage.request();
+      }
     }
     isUpdating = true;
     update(["app_update"]);
