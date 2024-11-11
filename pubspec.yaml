@@ -52,7 +52,7 @@ dependencies:
   # 本地存储
   shared_preferences: ^2.3.2
   # 包信息
-  package_info_plus: ^8.1.0
+  package_info_plus: ^8.1.1
   # 播放器
   video_player: ^2.9.2
   # 播放器
@@ -72,10 +72,10 @@ dependencies:
   # 保存文件或图片到本地
   image_gallery_saver_plus: ^3.0.5
   # 仿微信 - 媒体选择
-  wechat_assets_picker: ^9.3.3
+  wechat_assets_picker: ^9.4.0
   wechat_camera_picker: ^4.3.4
   # svg
-  vector_graphics: ^1.1.13
+  vector_graphics: ^1.1.14
   # badges 标记
   badges: ^3.1.2
   # 时间选择器
