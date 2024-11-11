@@ -6,8 +6,8 @@ class EditUserInfoController extends GetxController {
     this.value,
   );
 
-  var type;
-  var value;
+  String type;
+  String value;
 
   TextEditingController eventNameController = TextEditingController();
 

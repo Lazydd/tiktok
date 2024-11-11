@@ -51,8 +51,8 @@ abstract class RoutePages {
     GetPage(
       name: RouteNames.editUserInfoRoute,
       page: () => EditUserInfoPage(
-        type: Get.parameters["type"],
-        value: Get.parameters["value"],
+        type: Get.parameters["type"]!,
+        value: Get.parameters["value"]!,
       ),
       // customTransition: RouteTransition(),
       // binding: MainBinding(),

@@ -1,13 +1,13 @@
 part of edit_user_info;
 
 class EditUserInfoPage extends GetView<EditUserInfoController> {
-  var type;
-  var value;
+  String type;
+  String value;
 
   EditUserInfoPage({
     Key? key,
-    this.type,
-    this.value,
+    this.type = "",
+    this.value = "",
   }) : super(key: key);
 
   Map titleMap = {

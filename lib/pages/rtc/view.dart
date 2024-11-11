@@ -1,8 +1,9 @@
 part of rtc;
 
 class RtcPage extends GetView<RtcController> {
-  String isDial = 'false';
-  RtcPage({super.key, required this.isDial});
+  const RtcPage({super.key, this.isDial = "false"});
+
+  final String isDial;
 
   // 主视图
   Widget _buildView(context) {
