@@ -34,6 +34,12 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
+  Widget more(String name) {
+    return Center(
+      child: Text(name, style: const TextStyle(color: Colors.white)),
+    );
+  }
+
   Widget _desc(context) {
     return Positioned(
       left: 10.w,
@@ -80,9 +86,30 @@ class HomePage extends GetView<HomeController> {
                 icon: Icon(Icons.search, size: 24.sp),
               )
             ],
+            title: Expanded(
+              child: TabBar(
+                controller: controller._tabController,
+                // isScrollable: true,
+                unselectedLabelColor: Colors.white70,
+                indicatorColor: Colors.white,
+                indicatorSize: TabBarIndicatorSize.label,
+                splashFactory: NoSplash.splashFactory,
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
+                labelStyle: TextStyle(fontSize: 14.sp),
+                tabs: controller.tabs.map((v) => Tab(text: v)).toList(),
+              ),
+            ),
           ),
           drawer: const SlidebarPage(),
-          body: _buildView(_),
+          body: TabBarView(
+            controller: controller._tabController,
+            children: [
+              ...controller.tabs
+                  .sublist(0, controller.tabs.length - 1)
+                  .map((v) => more(v)),
+              _buildView(_),
+            ],
+          ),
         );
       },
     );

@@ -97,6 +97,15 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
         ? Stack(
             children: [
               AbsorbPointer(child: Chewie(controller: _chewieController)),
+              TikTokVideoGesture(
+                onSingleTap: onTap,
+                onAddFavorite: () {},
+                child: Container(
+                  color: Colors.transparent,
+                  height: double.infinity,
+                  width: double.infinity,
+                ),
+              ),
               Positioned(
                 bottom: -18.h,
                 left: 0,
@@ -118,7 +127,7 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
                       ),
                 )
             ],
-          ).onTap(onTap)
+          )
         : const Center(child: CircularProgressIndicator(color: Colors.white));
   }
 

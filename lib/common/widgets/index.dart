@@ -12,3 +12,4 @@ export 'icon_font.dart';
 export 'cell.dart';
 export 'chat_buttom_container.dart';
 export 'input.dart';
+export 'tik_tok_video_gesture.dart';
