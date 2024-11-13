@@ -14,13 +14,17 @@ class InteractivePage extends GetView<InteractiveController> {
             Container(
               width: 45.w,
               height: 45.w,
-              clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                border: Border.all(width: 2.w, color: Colors.red),
-                borderRadius: BorderRadius.circular(22.5.r),
+                shape: BoxShape.circle,
+                border: Border.all(width: 2.w, color: Colors.white),
               ),
-              child: const ImageWidget(
-                  'https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-avt-0015_f14282e10099a4b436a9ca62c0902595~c5_168x168.jpeg?from=2956013662'),
+              child: ClipOval(
+                child: ImageWidget(
+                  'https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-avt-0015_f14282e10099a4b436a9ca62c0902595~c5_168x168.jpeg?from=2956013662',
+                  width: 50.w,
+                  height: 50.w,
+                ),
+              ),
             ),
             Positioned(
               bottom: -5,
@@ -28,13 +32,13 @@ class InteractivePage extends GetView<InteractiveController> {
                 width: 18.w,
                 height: 18.w,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.red,
                   borderRadius: BorderRadius.circular(9.r),
                 ),
                 child: Icon(
                   Icons.add,
                   size: 18.sp,
-                  color: Colors.red,
+                  color: Colors.white,
                 ),
               ).onTap(() {}),
             )

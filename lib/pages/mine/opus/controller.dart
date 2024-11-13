@@ -7,7 +7,7 @@ class OpusController extends GetxController {
 
   RefreshController refreshController = RefreshController();
   List list = [];
-  List list2 = [];
+  List<String> list2 = [];
 
   // 页码
   int _pageNum = 1;
