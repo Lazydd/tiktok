@@ -86,18 +86,16 @@ class HomePage extends GetView<HomeController> {
                 icon: Icon(Icons.search, size: 24.sp),
               )
             ],
-            title: Expanded(
-              child: TabBar(
-                controller: controller._tabController,
-                // isScrollable: true,
-                unselectedLabelColor: Colors.white70,
-                indicatorColor: Colors.white,
-                indicatorSize: TabBarIndicatorSize.label,
-                splashFactory: NoSplash.splashFactory,
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
-                labelStyle: TextStyle(fontSize: 14.sp),
-                tabs: controller.tabs.map((v) => Tab(text: v)).toList(),
-              ),
+            title: TabBar(
+              controller: controller._tabController,
+              isScrollable: true,
+              unselectedLabelColor: Colors.white70,
+              indicatorColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.label,
+              splashFactory: NoSplash.splashFactory,
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+              labelStyle: TextStyle(fontSize: 14.sp),
+              tabs: controller.tabs.map((v) => Tab(text: v)).toList(),
             ),
           ),
           drawer: const SlidebarPage(),
