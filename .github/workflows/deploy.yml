@@ -8,16 +8,17 @@ on:
 
 jobs:
   web_build_and_deploy:
-    runs-on: windows-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2.16.0
+      - uses: subosito/flutter-action@v2.21.0
         with:
           flutter-version: 3.24.4
           channel: stable
           architecture: x64
       - name: "Web Build 🔧"
         run: |
+          flutter clean
           flutter pub get
           flutter build web
       - name: "Web Deploy 🚀"
@@ -26,3 +27,17 @@ jobs:
         with:
           branch: gh-pages
           folder: build/web
+
+  ios_build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2.21.0
+        with:
+          flutter-version: 3.24.4
+          channel: stable
+          architecture: x64
+      - name: "Ios Build 🔧"
+        run: |
+          flutter pub get
+          flutter build ios --release --no-codesign
