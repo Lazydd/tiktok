@@ -75,7 +75,7 @@ dependencies:
   wechat_assets_picker: ^9.4.0
   wechat_camera_picker: ^4.3.4
   # svg
-  vector_graphics: ^1.1.14
+  vector_graphics: ^1.1.13
   # badges 标记
   badges: ^3.1.2
   # 时间选择器
@@ -83,7 +83,7 @@ dependencies:
   # 滑动列表
   flutter_slidable: ^3.1.1
   # 视频发布
-  camerawesome: ^2.1.0
+  camerawesome: 2.1.0
   # 本地身份认证
   local_auth: ^2.3.0
   # 震动反馈
@@ -142,7 +142,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
-  vector_graphics_compiler: ^1.1.11+1
+  vector_graphics_compiler: 1.1.12
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
