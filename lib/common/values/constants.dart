@@ -30,7 +30,7 @@ class Constants {
   static const storageIPConfig = 'ip_config'; // 存储 IP 配置
   static const externalLink = 'external_link'; // 外部链接
 
-  static const imagesUrl = 'https://dy.ttentau.top';
+  static const imagesUrl = 'https://lazydd.github.io/douyin';
 
   static const iOSAppId = ""; // Apple Store 应用ID
   static const androidKeySeries = "";
