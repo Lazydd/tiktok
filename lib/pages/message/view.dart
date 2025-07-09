@@ -82,58 +82,56 @@ class MessagePage extends GetView<MessageController> {
               ),
             ],
           ),
-          child: Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ImageWidget(
-                  item['avatar'],
-                  width: 55.w,
-                  height: 55.w,
-                ).clipRRect(all: 27.5.r),
-                SizedBox(width: 15.w),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item['name'],
-                        style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                      ),
-                      Text.rich(TextSpan(
-                        children: [
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ImageWidget(
+                item['avatar'],
+                width: 55.w,
+                height: 55.w,
+              ).clipRRect(all: 27.5.r),
+              SizedBox(width: 15.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item['name'],
+                      style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                    ),
+                    Text.rich(TextSpan(
+                      children: [
+                        TextSpan(
+                          text: item['content'],
+                          style: TextStyle(
+                            color: const Color(0xffbababb),
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        if (item['date'] != null) ...[
                           TextSpan(
-                            text: item['content'],
+                            text: '   ·  ',
                             style: TextStyle(
                               color: const Color(0xffbababb),
                               fontSize: 14.sp,
                             ),
                           ),
-                          if (item['date'] != null) ...[
-                            TextSpan(
-                              text: '   ·  ',
-                              style: TextStyle(
-                                color: const Color(0xffbababb),
-                                fontSize: 14.sp,
-                              ),
+                          TextSpan(
+                            text: item['date'],
+                            style: TextStyle(
+                              color: const Color(0xffbababb),
+                              fontSize: 14.sp,
                             ),
-                            TextSpan(
-                              text: item['date'],
-                              style: TextStyle(
-                                color: const Color(0xffbababb),
-                                fontSize: 14.sp,
-                              ),
-                            ),
-                          ]
-                        ],
-                      ))
-                    ],
-                  ),
+                          ),
+                        ]
+                      ],
+                    ))
+                  ],
                 ),
-                BuildConditional(item['noRead'])
-              ],
-            ).paddingSymmetric(horizontal: 20.w, vertical: 10.h),
-          ),
+              ),
+              BuildConditional(item['noRead'])
+            ],
+          ).paddingSymmetric(horizontal: 20.w, vertical: 10.h),
         ).onTap(() {
           controller._messageDetail(item);
         }),
