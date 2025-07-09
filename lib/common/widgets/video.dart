@@ -173,7 +173,7 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
   }
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => false;
 }
 
 class CustomTrackShape extends RoundedRectSliderTrackShape {
