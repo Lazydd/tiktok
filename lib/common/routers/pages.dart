@@ -84,7 +84,10 @@ abstract class RoutePages {
     ),
     GetPage(
       name: RouteNames.chatRoute,
-      page: () => ChatPage(peerId: Get.parameters['peerId']!),
+      page: () => ChatPage(
+        peerId: Get.parameters['peerId']!,
+        name: Get.parameters['name']!,
+      ),
     ),
     GetPage(
       name: RouteNames.rtcRoute,

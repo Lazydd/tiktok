@@ -2,8 +2,9 @@ part of chat;
 
 class ChatPage extends GetView<ChatController> {
   final String peerId;
+  final String name;
 
-  const ChatPage({super.key, required this.peerId});
+  const ChatPage({super.key, required this.peerId, required this.name});
 
   // 主视图
   Widget _buildView(context) {
@@ -141,7 +142,7 @@ class ChatPage extends GetView<ChatController> {
       builder: (_) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: AppBar(title: const Text("chat")),
+          appBar: AppBar(title: Text(name)),
           body: SafeArea(
             child: _buildView(context),
           ),

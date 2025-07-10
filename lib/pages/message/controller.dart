@@ -67,7 +67,7 @@ class MessageController extends GetxController {
     },
     {
       "name": "杨老虎🐯（单人）",
-      "avatar": '	${Constants.imagesUrl}/assets/2-BN5PI5K_.png',
+      "avatar": '${Constants.imagesUrl}/assets/2-BN5PI5K_.png',
       "content": '哈哈哈哈哈哈',
       "date": "09-13",
       "noRead": 2,
@@ -76,7 +76,7 @@ class MessageController extends GetxController {
     },
     {
       "name": "杨老虎🐯（多人）",
-      "avatar": '	${Constants.imagesUrl}/assets/2-BN5PI5K_.png',
+      "avatar": '${Constants.imagesUrl}/assets/2-BN5PI5K_.png',
       "content": '哈哈哈哈哈哈',
       "date": "09-13",
       "noRead": 2,
@@ -135,7 +135,10 @@ class MessageController extends GetxController {
 
   void _messageDetail(dynamic item) {
     if (item['type'] == 3) {
-      Get.toNamed(RouteNames.chatRoute, parameters: {"peerId": item['id']});
+      Get.toNamed(
+        RouteNames.chatRoute,
+        parameters: {"peerId": item['id'], "name": item['name']},
+      );
     }
   }
 
