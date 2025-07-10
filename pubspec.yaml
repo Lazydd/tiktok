@@ -54,9 +54,9 @@ dependencies:
   # 包信息
   package_info_plus: ^8.1.1
   # 播放器
-  video_player: ^2.9.2
+  video_player: ^2.9.5
   # 播放器
-  chewie: ^1.8.5
+  chewie: ^1.8.7
   # 获取文件路径
   path_provider: ^2.1.5
   # 图片缓存管理
