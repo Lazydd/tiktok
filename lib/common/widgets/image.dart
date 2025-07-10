@@ -16,7 +16,7 @@ class ImageWidget extends StatelessWidget {
   const ImageWidget(
     this.url, {
     super.key,
-    this.errUrl = AssetsImages.avatarPng,
+    this.errUrl = 'assets/images/guide.jpg',
     this.width = double.infinity,
     this.height = double.infinity,
     this.fit = BoxFit.cover,
