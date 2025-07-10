@@ -8,7 +8,7 @@ class HomePage extends GetView<HomeController> {
     return PageView.builder(
       scrollDirection: Axis.vertical,
       controller: controller.pageController,
-      itemCount: 4,
+      itemCount: controller.list.length,
       onPageChanged: controller.pageChange,
       itemBuilder: (context, index) => GetBuilder<HomeController>(
           id: "video",
@@ -19,8 +19,7 @@ class HomePage extends GetView<HomeController> {
               children: [
                 VideoPlayerWidget(
                   key: childKey,
-                  videoUrl:
-                      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+                  videoUrl: controller.list[index],
                 ),
                 Positioned(
                   right: 5.w,
@@ -95,6 +94,9 @@ class HomePage extends GetView<HomeController> {
               splashFactory: NoSplash.splashFactory,
               overlayColor: WidgetStateProperty.all(Colors.transparent),
               labelStyle: TextStyle(fontSize: 14.sp),
+              indicator: const UnderlineTabIndicator(
+                insets: EdgeInsets.only(bottom: 4),
+              ),
               tabs: controller.tabs.map((v) => Tab(text: v)).toList(),
             ),
           ),
@@ -102,10 +104,10 @@ class HomePage extends GetView<HomeController> {
           body: TabBarView(
             controller: controller._tabController,
             children: [
+              _buildView(_),
               ...controller.tabs
                   .sublist(0, controller.tabs.length - 1)
                   .map((v) => more(v)),
-              _buildView(_),
             ],
           ),
         );

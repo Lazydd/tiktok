@@ -5,12 +5,21 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   PageController pageController = PageController();
   late TabController _tabController;
-  final List<String> tabs = ['直播', '关注', '本地', '推荐'];
+  final List<String> tabs = ['推荐', '直播', '关注'];
 
-  _initData() {}
+  List<String> list = [
+    'https://raw.githubusercontent.com/Lazydd/images/main/20250710134657219.mp4',
+    'https://raw.githubusercontent.com/Lazydd/images/main/20250710135247921.mp4',
+    'https://raw.githubusercontent.com/Lazydd/images/main/20250710135331880.mp4',
+    'https://raw.githubusercontent.com/Lazydd/images/main/20250710135628505.mp4'
+  ];
+
+  _initData() {
+    update(["video"]);
+  }
 
   void pageChange(int page) {
-    update(['video']);
+    // update(['video']);
   }
 
   @override
@@ -18,7 +27,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     super.onInit();
     _tabController = TabController(
       length: tabs.length,
-      initialIndex: tabs.length - 1,
+      initialIndex: 0,
       vsync: this,
     );
   }

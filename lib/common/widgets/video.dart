@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tiktok/common/index.dart';
+import 'package:tiktok/common/widgets/tik_tok_loading.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
@@ -30,6 +31,7 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
 
   late bool isInitialized = false;
   double sliderValue = 0.0;
+  bool _isBuffering = true;
 
   Future<void> initializePlayer() async {
     _videoPlayerController = VideoPlayerController.networkUrl(
@@ -39,6 +41,7 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
       setState(() {
         sliderValue =
             _videoPlayerController.value.position.inSeconds.toDouble();
+        _isBuffering = _videoPlayerController.value.isBuffering;
       });
     });
     await _videoPlayerController.initialize();
@@ -125,10 +128,12 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
                         color: const Color.fromRGBO(255, 255, 255, .3),
                         size: 60.sp,
                       ),
-                )
+                ),
+              if (_isBuffering) const Center(child: TikTokLoading())
             ],
           )
-        : const Center(child: CircularProgressIndicator(color: Colors.white));
+        // : const Center(child: CircularProgressIndicator(color: Colors.white));
+        : const Center(child: TikTokLoading());
   }
 
   late Timer timer;
@@ -166,6 +171,7 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
 
   @override
   void dispose() {
+    _videoPlayerController.pause();
     _videoPlayerController.dispose();
     _chewieController.dispose();
     timer.cancel();
