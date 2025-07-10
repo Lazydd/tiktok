@@ -57,7 +57,7 @@ class TikTokLoadingState extends State<TikTokLoading>
                   Positioned(
                     top: offsetY,
                     child: Image.asset(
-                      'images/loading.webp',
+                      'assets/images/loading.webp',
                       width: frameHeight,
                       height: frameHeight * frameCount,
                       fit: BoxFit.fitWidth,
