@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok/common/values/images.dart';
-import 'package:tiktok/common/widgets/image.dart';
 
 class TikTokLoading extends StatefulWidget {
   const TikTokLoading({super.key});

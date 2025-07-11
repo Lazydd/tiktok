@@ -4,21 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tiktok/common/index.dart';
-import 'package:tiktok/common/widgets/tik_tok_loading.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
   final Widget? pauseIcon;
+  final Widget? loading;
 
-  const VideoPlayerWidget({required this.videoUrl, super.key, this.pauseIcon});
+  const VideoPlayerWidget({
+    required this.videoUrl,
+    super.key,
+    this.pauseIcon,
+    this.loading = const CircularProgressIndicator(color: Colors.white),
+  });
 
   @override
   State<VideoPlayerWidget> createState() => VideoPlayerWidgetState();
 }
 
-class VideoPlayerWidgetState extends State<VideoPlayerWidget>
-    with AutomaticKeepAliveClientMixin {
+class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController _videoPlayerController;
   late ChewieController _chewieController;
 
@@ -32,6 +36,7 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
   late bool isInitialized = false;
   double sliderValue = 0.0;
   bool _isBuffering = true;
+  bool _isPlaying = true;
 
   Future<void> initializePlayer() async {
     _videoPlayerController = VideoPlayerController.networkUrl(
@@ -42,6 +47,7 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
         sliderValue =
             _videoPlayerController.value.position.inSeconds.toDouble();
         _isBuffering = _videoPlayerController.value.isBuffering;
+        _isPlaying = _videoPlayerController.value.isPlaying;
       });
     });
     await _videoPlayerController.initialize();
@@ -69,10 +75,9 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
   }
 
   RxBool sliderBar = false.obs;
-  RxBool playing = true.obs;
 
   void onTap() {
-    if (playing.value) {
+    if (_isPlaying) {
       _videoPlayerController.pause();
     } else {
       _videoPlayerController.play();
@@ -85,17 +90,18 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
     } else {
       sliderBar.value = true;
     }
-    playing.value = !playing.value;
   }
 
   Future<void> play() async {
-    playing.value = true;
     await _videoPlayerController.play();
+  }
+
+  Future<void> pause() async {
+    await _videoPlayerController.pause();
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return isInitialized
         ? Stack(
             children: [
@@ -120,8 +126,9 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
                   child: _slider(_videoPlayerController.value),
                 ),
               ),
-              if (!playing.value)
-                Center(
+              Opacity(
+                opacity: !_isPlaying ? 1 : 0,
+                child: Center(
                   child: widget.pauseIcon ??
                       IconWidget.svg(
                         AssetsSvgs.pauseSvg,
@@ -129,11 +136,14 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
                         size: 60.sp,
                       ),
                 ),
-              if (_isBuffering) const Center(child: TikTokLoading())
+              ),
+              Opacity(
+                opacity: _isBuffering ? 1 : 0,
+                child: Center(child: widget.loading),
+              )
             ],
           )
-        // : const Center(child: CircularProgressIndicator(color: Colors.white));
-        : const Center(child: TikTokLoading());
+        : Center(child: widget.loading);
   }
 
   late Timer timer;
@@ -160,7 +170,7 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
           });
         },
         onChangeEnd: (value) {
-          if (!playing.value) play();
+          if (!_isPlaying) play();
           timer = Timer(const Duration(seconds: 2), () {
             sliderBar.value = false;
           });
@@ -177,9 +187,6 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget>
     timer.cancel();
     super.dispose();
   }
-
-  @override
-  bool get wantKeepAlive => false;
 }
 
 class CustomTrackShape extends RoundedRectSliderTrackShape {

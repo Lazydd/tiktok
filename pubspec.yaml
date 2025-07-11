@@ -131,6 +131,8 @@ dependencies:
   fps_monitor: ^2.0.0
   # 设备信息
   device_info_plus: ^11.1.1
+  # 可见度控制
+  visibility_detector: ^0.4.0+2
 
 dev_dependencies:
   flutter_test:
