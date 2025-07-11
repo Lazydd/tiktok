@@ -64,9 +64,8 @@ class HomePage extends GetView<HomeController> {
                 },
                 child: RecommendPage(key: childKey),
               ),
-              ...controller.tabs
-                  .sublist(0, controller.tabs.length - 1)
-                  .map((v) => more(v)),
+              const ShopPage(),
+              more(controller.tabs[2])
             ],
           ),
         );

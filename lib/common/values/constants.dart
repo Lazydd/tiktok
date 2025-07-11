@@ -4,7 +4,7 @@ import 'package:tiktok/common/utils/storage.dart';
 
 class Constants {
   // 服务 api
-  static const baseUrl = 'https://api.instantwebtools.net';
+  static const baseUrl = 'https://mock.presstime.cn';
 
   static get mainBaseUrl {
     if (Storage().getString(Constants.storageIPConfig).isNotEmpty) {

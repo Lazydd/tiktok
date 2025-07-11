@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:tiktok/common/index.dart';
+import 'package:tiktok/common/models/response/api_response.dart';
 
 abstract class TodoAPI {
   static Future<List<EventListItem>> getEventList(
@@ -40,6 +41,30 @@ abstract class TodoAPI {
     return {
       "total": temp.length,
       "list": temp,
+    };
+  }
+
+  static Future<Map<String, dynamic>> getEventListByPage2(
+      Map<String, dynamic> params) async {
+    var response = await HttpRequestService.to.get(
+      "/mock/6870c73ac3d879cfac4c170b/example/recommend",
+      params: params,
+    );
+    return {
+      "total": response.data['data']['totalSize'],
+      "list": response.data['data']['items'],
+    };
+  }
+
+  static Future<Map<String, dynamic>> getEventListByPage3(
+      Map<String, dynamic> params) async {
+    var response = await HttpRequestService.to.get(
+      "/mock/6870c73ac3d879cfac4c170b/example/abc",
+      params: params,
+    );
+    return {
+      "total": response.data['data']['totalSize'],
+      "list": response.data['data']['items'],
     };
   }
 

@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -99,4 +100,7 @@ class AppColors {
   static Color get lightFontColor => const Color.fromRGBO(80, 80, 80, 1);
 
   static Color get bgColor => const Color.fromRGBO(242, 242, 246, 1);
+
+  static Color get randomColor =>
+      Colors.primaries[Random().nextInt(Colors.primaries.length)];
 }

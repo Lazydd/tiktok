@@ -4,7 +4,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   HomeController();
 
   late TabController _tabController;
-  final List<String> tabs = ['推荐', '直播', '关注'];
+  final List<String> tabs = ['推荐', '团购', '直播'];
 
   @override
   void onInit() {
