@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:tiktok/common/index.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -106,9 +107,13 @@ class _PhotoPreviewState extends State<PhotoPreview> {
                     ? PhotoViewGalleryPageOptions(
                         imageProvider: NetworkImage(
                             UtilsFunc.imgUrlSplice(widget.galleryItems[index])),
+                        heroAttributes: PhotoViewHeroAttributes(
+                            tag: widget.galleryItems[index]),
                       )
                     : PhotoViewGalleryPageOptions(
                         imageProvider: FileImage(widget.galleryItems[index]),
+                        heroAttributes: PhotoViewHeroAttributes(
+                            tag: widget.galleryItems[index]),
                       );
               },
               scrollDirection: widget.direction,
