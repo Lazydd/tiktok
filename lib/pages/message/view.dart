@@ -34,7 +34,7 @@ class MessagePage extends GetView<MessageController> {
                 Text(
                   controller.topList[i]['name'],
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Context(context).theme.textColor,
                     fontSize: 12.sp,
                   ),
                   maxLines: 1,
@@ -97,7 +97,7 @@ class MessagePage extends GetView<MessageController> {
                   children: [
                     Text(
                       item['name'],
-                      style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                      style: TextStyle(color: Context(context).theme.textColor, fontSize: 16.sp),
                     ),
                     Text.rich(TextSpan(
                       children: [

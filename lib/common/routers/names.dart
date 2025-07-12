@@ -24,6 +24,7 @@ class RouteNames {
 
   static const systemConfigRoute = '/system';
   static const appUpdateRoute = '/app_update';
+  static const generalRoute = '/general';
 
   ///h5
   static const mapRoute = '/map';

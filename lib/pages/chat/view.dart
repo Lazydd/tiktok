@@ -8,6 +8,7 @@ class ChatPage extends GetView<ChatController> {
 
   // 主视图
   Widget _buildView(context) {
+    final theme = Context(context).theme;
     return ChatButtomContainer(
       Chat(
         scrollController: controller._scrollController,
@@ -21,7 +22,7 @@ class ChatPage extends GetView<ChatController> {
         // showUserNames: true,
         theme: DefaultChatTheme(
           primaryColor: const Color(0xff4874e6),
-          backgroundColor: const Color(0xff151515),
+          backgroundColor: theme.themeColor,
           messageBorderRadius: 10.w,
           messageInsetsHorizontal: 10.w,
           messageInsetsVertical: 10.w,
@@ -33,7 +34,7 @@ class ChatPage extends GetView<ChatController> {
         customBottomWidget: const SizedBox(),
       ),
       scrollController: controller._scrollController,
-      toolPanelBuild: _toolPanelBuild(),
+      toolPanelBuild: _toolPanelBuild(theme),
       safeAreaBottom: 0,
       showAppBar: false,
       changeKeyboardPanelHeight: (keyboardHeight) => keyboardHeight,
@@ -47,9 +48,9 @@ class ChatPage extends GetView<ChatController> {
     );
   }
 
-  Widget _toolPanelBuild() {
+  Widget _toolPanelBuild(AppTheme theme) {
     return Container(
-      color: Colors.black,
+      color: theme.themeColor,
       padding: EdgeInsets.all(20.w),
       child: GridView.builder(
         shrinkWrap: true,
@@ -75,11 +76,12 @@ class ChatPage extends GetView<ChatController> {
                     borderRadius: BorderRadius.circular(5.w),
                     color: Colors.grey,
                   ),
-                  child: Icon(item["icon"], color: Colors.white, size: 24.sp),
+                  child:
+                      Icon(item["icon"], color: theme.textColor, size: 24.sp),
                 ),
                 Text(
                   item['name'],
-                  style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                  style: TextStyle(color: theme.textColor, fontSize: 12.sp),
                 )
               ],
             ),

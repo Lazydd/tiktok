@@ -4,21 +4,21 @@ class CommentPage extends GetView<CommentController> {
   const CommentPage({super.key});
 
   // 主视图
-  Widget _buildView(context) {
+  Widget _buildView(BuildContext context) {
     List<Widget> list = [];
     for (int i = 0; i < controller.commitlist.length; i++) {
-      list.add(_comment(controller.commitlist[i], index: i));
+      list.add(_comment(controller.commitlist[i], index: i, context: context));
     }
     return list.toColumn();
   }
 
-  Widget _comment(item, {int? index}) {
+  Widget _comment(item, {int? index, required BuildContext context}) {
     return Column(
       children: [
-        _commentWidget(item, index: index),
+        _commentWidget(item, index: index, context: context),
         if (item['children'] != null)
           Column(
-            children: _repeatCommentWidget(item),
+            children: _repeatCommentWidget(item, context: context),
           ).marginOnly(left: 55.w),
         if (int.parse(item['sub_comment_count']) > 0)
           Align(
@@ -52,19 +52,25 @@ class CommentPage extends GetView<CommentController> {
     );
   }
 
-  List<Widget> _repeatCommentWidget(dynamic item) {
+  List<Widget> _repeatCommentWidget(dynamic item,
+      {required BuildContext context}) {
     List<Widget> ws = [];
     for (int j = 0; j < item['children'].length; j++) {
       dynamic childItem = item['children'][j];
       ws.add(
-        _commentWidget(childItem, avatarSize: 20, index: j)
-            .marginOnly(top: 10.h),
+        _commentWidget(
+          childItem,
+          avatarSize: 20,
+          index: j,
+          context: context,
+        ).marginOnly(top: 10.h),
       );
     }
     return ws;
   }
 
-  Widget _commentWidget(dynamic item, {double avatarSize = 37.5, int? index}) {
+  Widget _commentWidget(dynamic item,
+      {double avatarSize = 37.5, int? index, required BuildContext context}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -89,7 +95,9 @@ class CommentPage extends GetView<CommentController> {
               Text(
                 item['user_buried'] ? '该评论已折叠' : item['content'],
                 style: TextStyle(
-                  color: item['user_buried'] ? AppColors.text_3 : Colors.white,
+                  color: item['user_buried']
+                      ? Context(context).theme.textColor2
+                      : Context(context).theme.textColor,
                   fontSize: 14.sp,
                 ),
               ),

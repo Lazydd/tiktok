@@ -35,7 +35,8 @@ class EditUserInfoPage extends GetView<EditUserInfoController> {
   };
 
   // 主视图
-  Widget _buildView(context) {
+  Widget _buildView(BuildContext context) {
+    final theme = Context(context).theme;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -50,7 +51,7 @@ class EditUserInfoPage extends GetView<EditUserInfoController> {
             controller: controller.eventNameController,
             textAlign: TextAlign.left,
             style: TextStyle(
-              color: Colors.white,
+              color: theme.textColor,
               fontSize: 17.sp,
             ),
             maxLines: controller.type == "2" ? 10 : 1,
@@ -62,7 +63,7 @@ class EditUserInfoPage extends GetView<EditUserInfoController> {
                 overflow: TextOverflow.clip,
               ),
               filled: controller.type == "2",
-              fillColor: const Color(0xff1f2534),
+              fillColor: theme.fillColor,
               contentPadding: controller.type == "2"
                   ? const EdgeInsets.all(15)
                   : const EdgeInsets.fromLTRB(0, 15, 0, 15),

@@ -19,7 +19,7 @@ class ShopController extends GetxController {
 
   _getListData() async {
     Map<String, dynamic> data = <String, dynamic>{};
-
+  
     data["pageSize"] = _pageSize;
     data["pageNum"] = _pageNum;
 

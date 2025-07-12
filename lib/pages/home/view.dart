@@ -19,7 +19,12 @@ class HomePage extends GetView<HomeController> {
             GlobalKey<RecommendPageState>();
         return Scaffold(
           extendBodyBehindAppBar: true,
+          backgroundColor: const Color(0xff161616),
           appBar: AppBar(
+            iconTheme: IconThemeData(
+              color: CupertinoColors.white,
+              size: 24.sp,
+            ),
             leading: Builder(
               builder: (context) => IconButton(
                 onPressed: () {
@@ -35,6 +40,7 @@ class HomePage extends GetView<HomeController> {
               )
             ],
             title: TabBar(
+              labelColor: CupertinoColors.white,
               controller: controller._tabController,
               isScrollable: true,
               unselectedLabelColor: Colors.white70,

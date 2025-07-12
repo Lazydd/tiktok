@@ -18,19 +18,35 @@ void main() async {
 
   Global.init().then((_) {
     Future.wait([]).whenComplete(() {
-      runApp(
-        ChangeNotifierProvider.value(
-          value: mqttAppState,
-          child: const MyApp(),
+      runApp(MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(
+            value: mqttAppState,
+          ),
+          ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ],
+        child: Consumer2<MQTTAppState, ThemeProvider>(
+          builder: (context, mqttAppState, theme, child) {
+            return MyApp(
+              themeProvider: theme.ensureInitialized(),
+            );
+          },
         ),
-      );
+      ));
     });
   });
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key, this.themeProvider});
 
+  final ThemeProvider? themeProvider;
+
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // GlobalKey<NavigatorState> globalKey = GlobalKey();
@@ -80,46 +96,10 @@ class MyApp extends StatelessWidget {
             title: 'Tiktok',
             // showPerformanceOverlay: true,
             // navigatorKey: globalKey,
-            theme: ThemeData(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.black,
-                primary: Colors.blue[600],
-                onPrimary: const Color.fromRGBO(255, 255, 255, .7),
-                surface: const Color(0xff151724),
-              ),
-              tabBarTheme: const TabBarTheme(
-                dividerColor: Colors.transparent,
-                labelColor: Colors.white,
-                unselectedLabelStyle: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  color: Color.fromRGBO(255, 255, 255, .7),
-                ),
-              ),
-              appBarTheme: AppBarTheme(
-                color: Colors.transparent,
-                centerTitle: true,
-                titleTextStyle: TextStyle(color: Colors.white, fontSize: 24.sp),
-                iconTheme: const IconThemeData(color: Colors.white),
-              ),
-              bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                unselectedItemColor: const Color.fromRGBO(255, 255, 255, 0.7),
-                selectedItemColor: Colors.white,
-                selectedLabelStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.sp,
-                ),
-                unselectedLabelStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.sp,
-                ),
-              ),
-              useMaterial3: true,
-            ),
-            // darkTheme: ThemeData.dark(),
-            themeMode: ThemeMode.dark,
+
+            theme: widget.themeProvider?.light?.data,
+            darkTheme: widget.themeProvider?.dark?.data,
+            themeMode: widget.themeProvider!.mode,
             debugShowCheckedModeBanner: false,
             initialRoute: UserFunc.jumpRouteName(false), //false 不走权限，true走权限
             getPages: RoutePages.pages,
@@ -136,5 +116,11 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.themeProvider?.dispose();
   }
 }

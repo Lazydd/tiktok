@@ -5,8 +5,9 @@ class SharePage extends GetView<ShareController> {
 
   // 主视图
   Widget _buildView(BuildContext context) {
+    final theme = Context(context).theme;
     return SizedBox(
-      height: 350.h,
+      height: 320.h,
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -17,7 +18,7 @@ class SharePage extends GetView<ShareController> {
             children: [
               Text(
                 '分享给朋友',
-                style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                style: TextStyle(color: theme.textColor, fontSize: 14.sp),
               ),
               Container(
                 alignment: Alignment.center,
@@ -55,12 +56,15 @@ class SharePage extends GetView<ShareController> {
                               color:
                                   ShareController.topList[i]['type'] == 'wechat'
                                       ? const Color(0xff07C160)
-                                      : const Color(0xff333333),
+                                      : theme.shareIconColor,
                               borderRadius: BorderRadius.circular(29.r),
                             ),
                             child: Icon(
                               ShareController.topList[i]['icon'],
-                              color: Colors.white,
+                              color:
+                                  ShareController.topList[i]['type'] == 'wechat'
+                                      ? const Color(0xffffffff)
+                                      : theme.shareFontColor,
                               size: 40.sp,
                             ),
                           )
@@ -73,7 +77,7 @@ class SharePage extends GetView<ShareController> {
                     Text(
                       ShareController.topList[i]['name'],
                       style: TextStyle(
-                        color: const Color(0xffcdcdcd),
+                        color: theme.shareFontColor,
                         fontSize: 10.sp,
                       ),
                       maxLines: 1,
@@ -100,19 +104,19 @@ class SharePage extends GetView<ShareController> {
                       alignment: Alignment.center,
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
-                        color: const Color(0xff333333),
+                        color: theme.shareIconColor,
                         borderRadius: BorderRadius.circular(29.r),
                       ),
                       child: Icon(
                         ShareController.bottomList[i]['icon'],
-                        color: Colors.white,
+                        color: theme.shareFontColor,
                         size: 40.sp,
                       ),
                     ),
                     Text(
                       ShareController.bottomList[i]['name'],
                       style: TextStyle(
-                        color: const Color(0xffcdcdcd),
+                        color: theme.shareFontColor,
                         fontSize: 10.sp,
                       ),
                       maxLines: 1,
