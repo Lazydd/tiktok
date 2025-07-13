@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tiktok/common/extension/index.dart';
 
 class TagWidget extends StatelessWidget {
   final String? text;
@@ -27,13 +28,13 @@ class TagWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(radius ?? 2.sp),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
-        color: backgroundColor ?? const Color.fromRGBO(58, 58, 58, 0.4),
+        color: backgroundColor ?? context.theme.tagBackgroundColor,
         child: Row(children: [
           if (icon != null) ...[icon ?? const SizedBox(), SizedBox(width: 2.w)],
           Text(
             text ?? '',
             style: TextStyle(
-              color: color ?? const Color(0xffbababb),
+              color: color ?? context.theme.tagTextColor,
               fontSize: 12.sp,
             ),
           )

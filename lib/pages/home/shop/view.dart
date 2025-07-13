@@ -29,15 +29,15 @@ class _ShopViewGetX extends GetView<ShopController> {
       id: "shop",
       builder: (_) {
         return SmartRefresher(
-          controller: _.refreshController,
+          controller: controller.refreshController,
           // 刷新控制器
           enablePullDown: true,
           // 启用加载
           enablePullUp: true,
           // 启用上拉加载
-          onRefresh: _.onRefresh,
+          onRefresh: controller.onRefresh,
           // 下拉刷新回调
-          onLoading: _.onLoading,
+          onLoading: controller.onLoading,
           child: MasonryGridView.count(
             crossAxisCount: 2,
             mainAxisSpacing: 6.sp,
@@ -64,7 +64,7 @@ class _ShopViewGetX extends GetView<ShopController> {
                     Get.context!,
                     MaterialPageRoute(
                       builder: (context) => PhotoPreview(
-                        galleryItems: _.list2,
+                        galleryItems: controller.list.map((v) => v['avatar']).toList(),
                         defaultImageIndex: index,
                         slider: false,
                         closePhotoView: () => Get.back(),

@@ -4,7 +4,8 @@ class InteractivePage extends GetView<InteractiveController> {
   const InteractivePage({super.key});
 
   // 主视图
-  Widget _buildView(controller) {
+  Widget _buildView(BuildContext context) {
+    final theme = Context(context).theme;
     return Column(
       children: [
         Stack(
@@ -88,9 +89,10 @@ class InteractivePage extends GetView<InteractiveController> {
             const CommentPage(),
             title: Text(
               '2.2万条评论',
-              style: TextStyle(color: Colors.white, fontSize: 14.sp),
+              style: TextStyle(color: theme.textColor, fontSize: 14.sp),
             ),
             height: .6,
+            bottomSheetColor: theme.drawerBackgroundColor,
           );
         }),
         SizedBox(height: 20.h),
@@ -142,7 +144,7 @@ class InteractivePage extends GetView<InteractiveController> {
           ],
         ).onTap(() {
           Get.bottomSheet(
-            backgroundColor: Colors.black,
+            backgroundColor: theme.drawerBackgroundColor,
             isScrollControlled: true,
             const SharePage(),
           );
@@ -157,7 +159,7 @@ class InteractivePage extends GetView<InteractiveController> {
       init: InteractiveController(),
       id: "interactive",
       builder: (_) {
-        return _buildView(_);
+        return _buildView(context);
       },
     );
   }

@@ -79,7 +79,12 @@ class FriendPage extends GetView<FriendController> {
       builder: (_) {
         return Scaffold(
           extendBodyBehindAppBar: true,
+          backgroundColor: const Color(0xff161616),
           appBar: AppBar(
+            iconTheme: IconThemeData(
+              color: CupertinoColors.white,
+              size: 24.sp,
+            ),
             leading: Builder(
               builder: (context) => IconButton(
                 onPressed: () {
@@ -88,7 +93,10 @@ class FriendPage extends GetView<FriendController> {
                 icon: Icon(Icons.person_add, size: 24.sp),
               ),
             ),
-            title: const Text("朋友"),
+            title: const Text(
+              "朋友",
+              style: TextStyle(color: CupertinoColors.white),
+            ),
             actions: [
               IconButton(
                 onPressed: () {},

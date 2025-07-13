@@ -6,7 +6,6 @@ class ShopController extends GetxController {
   RefreshController refreshController = RefreshController();
 
   List list = [];
-  List list2 = [];
 
   // 页码
   int _pageNum = 1;
@@ -25,9 +24,6 @@ class ShopController extends GetxController {
 
     Map<String, dynamic> r = await TodoAPI.getEventListByPage3(data);
     list.addAll(r['list']);
-    for (int i = 0; i < r['list'].length; i++) {
-      list2.add(r['list'][i]['avatar']);
-    }
     _total = r['total'];
     update(["shop"]);
   }

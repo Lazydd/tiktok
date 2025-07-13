@@ -5,8 +5,9 @@ class SlidebarPage extends GetView<SlidebarController> {
 
   // 主视图
   Widget _buildView(SlidebarController controller, BuildContext context) {
+    final theme = Context(context).theme;
     return Drawer(
-      backgroundColor: const Color(0xff161616),
+      backgroundColor: theme.drawerBackgroundColor,
       width: 320.w,
       child: ListView(
         physics: const BouncingScrollPhysics(),
@@ -18,7 +19,7 @@ class SlidebarPage extends GetView<SlidebarController> {
             children: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.settings, color: Colors.white, size: 24.sp),
+                icon: Icon(Icons.settings, color: theme.iconColor, size: 24.sp),
                 color: const Color(0xff1d1d1d),
               ),
               CupertinoButton(
@@ -33,17 +34,18 @@ class SlidebarPage extends GetView<SlidebarController> {
                   var result = await Get.to(() => const ScanCodePage());
                   return result;
                 },
-                color: const Color(0xff1d1d1d),
+                color: theme.cardBackgroundColor,
                 padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.crop_free, color: Colors.white, size: 24.sp),
+                    Icon(Icons.crop_free, color: theme.iconColor, size: 24.sp),
                     Padding(
                       padding: EdgeInsets.only(left: 8.w),
                       child: Text(
                         '扫一扫',
-                        style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                        style:
+                            TextStyle(fontSize: 16.sp, color: theme.textColor),
                       ),
                     )
                   ],
@@ -69,7 +71,7 @@ class SlidebarPage extends GetView<SlidebarController> {
                       '手机充值：12元话费卷已到达账户手机充值：12元话费卷已到达账户',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      style: TextStyle(color: theme.textColor, fontSize: 12.sp),
                     ),
                   ),
                   SizedBox(width: 4.w),
@@ -97,7 +99,7 @@ class SlidebarPage extends GetView<SlidebarController> {
                       '钱包服务：抖音支付活动抖音支付活动抖音支付活动',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                      style: TextStyle(color: theme.textColor, fontSize: 12.sp),
                     ),
                   ),
                   SizedBox(width: 4.w),
@@ -111,7 +113,7 @@ class SlidebarPage extends GetView<SlidebarController> {
             ],
           ).card(
             radius: 12.r,
-            color: const Color(0xff1d1d1d),
+            color: theme.cardBackgroundColor,
             padding: 15,
             title: _title(
               '通知消息',
@@ -142,14 +144,14 @@ class SlidebarPage extends GetView<SlidebarController> {
                   SizedBox(height: 8.h),
                   Text(
                     item["name"],
-                    style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                    style: TextStyle(color: theme.textColor, fontSize: 16.sp),
                   )
                 ],
               ).onTap(item["onTap"]);
             },
           ).card(
             radius: 12.r,
-            color: const Color(0xff1d1d1d),
+            color: theme.cardBackgroundColor,
             title: _title('常用小程序', more: true, onTap: () {}),
           ),
           SizedBox(height: 10.h),
@@ -166,18 +168,18 @@ class SlidebarPage extends GetView<SlidebarController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(item["icon"], color: Colors.white, size: 24.sp),
+                  Icon(item["icon"], color: theme.iconColor, size: 24.sp),
                   SizedBox(height: 8.h),
                   Text(
                     item["name"],
-                    style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                    style: TextStyle(color: theme.textColor, fontSize: 16.sp),
                   )
                 ],
               ).onTap(item["onTap"]);
             },
           ).card(
             radius: 12.r,
-            color: const Color(0xff1d1d1d),
+            color: theme.cardBackgroundColor,
             title: _title('常用功能'),
           ),
           SizedBox(height: 10.h),
@@ -194,18 +196,18 @@ class SlidebarPage extends GetView<SlidebarController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(item["icon"], color: Colors.white, size: 24.sp),
+                  Icon(item["icon"], color: theme.iconColor, size: 24.sp),
                   SizedBox(height: 8.h),
                   Text(
                     item["name"],
-                    style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                    style: TextStyle(color: theme.textColor, fontSize: 16.sp),
                   )
                 ],
               ).onTap(item["onTap"]);
             },
           ).card(
             radius: 12.r,
-            color: const Color(0xff1d1d1d),
+            color: theme.cardBackgroundColor,
             title: _title('生活动态'),
           ),
         ],

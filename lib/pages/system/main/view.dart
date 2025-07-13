@@ -18,7 +18,7 @@ class _MainViewGetX extends GetView<MainController> {
   const _MainViewGetX({Key? key}) : super(key: key);
 
   // 主视图
-  Widget _buildView(context) {
+  Widget _buildView(BuildContext context) {
     DateTime? lastPressedAt;
     return WillPopScope(
         child: Scaffold(
@@ -87,7 +87,8 @@ class _MainViewGetX extends GetView<MainController> {
                       child: Center(
                         child: Icon(
                           Icons.add_box,
-                          color: Colors.white,
+                          color:
+                              Context(context).theme.bottomNavigationBarColor70,
                           size: 32.sp,
                         ),
                       ),

@@ -100,11 +100,12 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Context(context).theme;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(child: _buildList()),
-        _buildInputView(),
+        _buildInputView(theme),
         _buildPanelContainer(),
       ],
     );
@@ -239,16 +240,16 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
 
   final _padding = ValueNotifier(EdgeInsets.zero);
 
-  Widget _buildInputView() {
+  Widget _buildInputView(AppTheme theme) {
     return Theme(
       data: Theme.of(Get.context!).copyWith(
-        iconTheme: IconThemeData(color: Colors.white, size: 30.sp),
+        iconTheme: IconThemeData(color: theme.iconColor, size: 30.sp),
       ),
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.all(15.w),
-            color: Colors.black,
+            color: theme.themeColor,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [

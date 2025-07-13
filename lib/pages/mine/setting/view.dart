@@ -11,14 +11,15 @@ class SettingPage extends GetView<SettingController> {
 
   // 主视图
   Widget _buildView(context) {
+    final theme = Context(context).theme;
     return Drawer(
-      backgroundColor: const Color(0xff151724),
+      backgroundColor: theme.themeColor,
       width: 260.w,
       child: Theme(
         data: Theme.of(context).copyWith(
-          listTileTheme: const ListTileThemeData(
-            textColor: Colors.white,
-            iconColor: Colors.white,
+          listTileTheme: ListTileThemeData(
+            textColor: theme.textColor,
+            iconColor: theme.iconColor,
           ),
           iconTheme: IconThemeData(size: 26.sp),
         ),
@@ -82,18 +83,18 @@ class SettingPage extends GetView<SettingController> {
             Divider(height: 1.h).marginOnly(top: 20.h, bottom: 20.h),
             CupertinoButton(
               onPressed: () {},
-              color: const Color(0xff3a3a46),
+              color: theme.buttonBackgroundColor,
               padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
               borderRadius: BorderRadius.all(Radius.circular(AppRadius.button)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.view_cozy, color: Colors.white),
+                  Icon(Icons.view_cozy, color: theme.textColor),
                   Padding(
                     padding: EdgeInsets.only(left: 8.w),
                     child: Text(
                       '更多更能',
-                      style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                      style: TextStyle(fontSize: 16.sp, color: theme.textColor),
                     ),
                   )
                 ],
