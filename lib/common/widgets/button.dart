@@ -506,7 +506,7 @@ class CustomButton extends StatelessWidget {
               case CustomButtonType.ghost:
               case CustomButtonType.borderless:
                 final color = foregroundColor ?? colorScheme.primary;
-                final opacity = color.opacity / 2;
+                final opacity = color.a / 2;
                 if (states.contains(WidgetState.pressed)) {
                   return color.withValues(alpha: opacity);
                 }
@@ -522,7 +522,7 @@ class CustomButton extends StatelessWidget {
                 final color =
                     backgroundColor ??
                     colorScheme.primary.withValues(alpha: isIcon ? 0.1 : 1);
-                final opacity = color.opacity / 2;
+                final opacity = color.a / 2;
                 if (states.contains(WidgetState.pressed)) {
                   return color.withValues(alpha: opacity);
                 }
@@ -542,7 +542,7 @@ class CustomButton extends StatelessWidget {
                 return BorderSide.none;
               case CustomButtonType.ghost:
                 final color = foregroundColor ?? colorScheme.primary;
-                final opacity = color.opacity / 2;
+                final opacity = color.a / 2;
                 if (states.contains(WidgetState.pressed)) {
                   return BorderSide(
                     color: color.withValues(alpha: opacity),
