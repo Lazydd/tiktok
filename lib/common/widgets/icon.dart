@@ -42,7 +42,7 @@ class IconWidget extends StatelessWidget {
   final BoxFit? fit;
 
   const IconWidget({
-    Key? key,
+    super.key,
     this.type = IconWidgetType.icon,
     this.size,
     this.width,
@@ -54,11 +54,11 @@ class IconWidget extends StatelessWidget {
     this.assetName,
     this.imageUrl,
     this.fit,
-  }) : super(key: key);
+  });
 
   IconWidget.icon(
     this.iconData, {
-    Key? key,
+    super.key,
     this.type = IconWidgetType.icon,
     this.size = 24,
     this.width,
@@ -69,13 +69,13 @@ class IconWidget extends StatelessWidget {
     this.assetName,
     this.imageUrl,
     this.fit,
-  }) : super(key: key) {
+  }) {
     return;
   }
 
   IconWidget.image(
     this.assetName, {
-    Key? key,
+    super.key,
     this.type = IconWidgetType.image,
     this.size = 24,
     this.width,
@@ -86,13 +86,13 @@ class IconWidget extends StatelessWidget {
     this.badgeString,
     this.imageUrl,
     this.fit,
-  }) : super(key: key) {
+  }) {
     return;
   }
 
   IconWidget.svg(
     this.assetName, {
-    Key? key,
+    super.key,
     this.type = IconWidgetType.svg,
     this.size = 24,
     this.width,
@@ -103,13 +103,13 @@ class IconWidget extends StatelessWidget {
     this.badgeString,
     this.imageUrl,
     this.fit,
-  }) : super(key: key) {
+  }) {
     return;
   }
 
   IconWidget.url(
     this.imageUrl, {
-    Key? key,
+    super.key,
     this.type = IconWidgetType.url,
     this.size = 24,
     this.width,
@@ -120,20 +120,16 @@ class IconWidget extends StatelessWidget {
     this.badgeString,
     this.assetName,
     this.fit,
-  }) : super(key: key) {
+  }) {
     return;
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget? icon;
+    Widget icon = const SizedBox();
     switch (type) {
       case IconWidgetType.icon:
-        icon = Icon(
-          iconData,
-          size: size,
-          color: color,
-        );
+        icon = Icon(iconData, size: size, color: color);
         break;
       case IconWidgetType.svg:
         icon = VectorGraphic(
@@ -162,8 +158,6 @@ class IconWidget extends StatelessWidget {
           fit: fit ?? BoxFit.contain,
         );
         break;
-      default:
-        return const SizedBox();
     }
 
     // 圆点
@@ -185,10 +179,7 @@ class IconWidget extends StatelessWidget {
       return badges.Badge(
         badgeContent: Text(
           count <= 99 ? count.toString() : "99+",
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 9,
-          ),
+          style: const TextStyle(color: Colors.white, fontSize: 9),
         ),
         position: badges.BadgePosition.topEnd(top: -7, end: -10),
         badgeStyle: const badges.BadgeStyle(

@@ -11,11 +11,7 @@ class PolymerData {
 }
 
 class PolymerState extends InheritedWidget {
-  const PolymerState({
-    super.key,
-    required this.data,
-    required super.child,
-  });
+  const PolymerState({super.key, required this.data, required super.child});
 
   final PolymerData data;
 
@@ -126,9 +122,7 @@ class RecordingStatusMaskView extends StatelessWidget {
                 //     isLeft: false,
                 //   ),
                 // ),
-                _Bubble(
-                  paddingSide: paddingSide,
-                ),
+                _Bubble(paddingSide: paddingSide),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -140,7 +134,8 @@ class RecordingStatusMaskView extends StatelessWidget {
                     CustomPaint(
                       // size: Size(double.infinity, data.sendAreaHeight),
                       painter: _RecordingPainter(
-                          value == SoundsMessageStatus.recording),
+                        value == SoundsMessageStatus.recording,
+                      ),
                       child: Container(
                         width: double.infinity,
                         height: data.sendAreaHeight,
@@ -160,11 +155,7 @@ class RecordingStatusMaskView extends StatelessWidget {
 }
 
 class VoiceIcon extends StatelessWidget {
-  const VoiceIcon({
-    super.key,
-    this.color,
-    this.size,
-  });
+  const VoiceIcon({super.key, this.color, this.size});
 
   final Color? color;
 
@@ -174,19 +165,13 @@ class VoiceIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Transform.rotate(
       angle: pi / 2,
-      child: Icon(
-        Icons.wifi_rounded,
-        size: size ?? 26.w,
-        color: color,
-      ),
+      child: Icon(Icons.wifi_rounded, size: size ?? 26.w, color: color),
     );
   }
 }
 
 class _MaskStackView extends StatelessWidget {
-  const _MaskStackView({
-    required this.children,
-  });
+  const _MaskStackView({required this.children});
 
   final List<Widget> children;
 
@@ -198,46 +183,43 @@ class _MaskStackView extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Stack(alignment: Alignment.bottomCenter, children: [
-        Positioned(
-          child: Container(
-            decoration: const BoxDecoration(
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Positioned(
+            child: Container(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              colors: [
-                Color(0xFF474747),
-                Color(0x00474747),
-              ],
-            )),
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [Color(0xFF474747), Color(0x00474747)],
+                ),
+              ),
+            ),
           ),
-        ),
-        Positioned(
-          child: Container(
-            height: polymerState.data.sendAreaHeight +
-                polymerState.data.iconFocusSize,
-            decoration: const BoxDecoration(
+          Positioned(
+            child: Container(
+              height: polymerState.data.sendAreaHeight +
+                  polymerState.data.iconFocusSize,
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              colors: [
-                Color(0xFF474747),
-                Color(0x22474747),
-              ],
-            )),
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [Color(0xFF474747), Color(0x22474747)],
+                ),
+              ),
+            ),
           ),
-        ),
-        ...children,
-      ]),
+          ...children,
+        ],
+      ),
     );
   }
 }
 
 /// 显示气泡
 class _Bubble extends StatelessWidget {
-  const _Bubble({
-    required this.paddingSide,
-  });
+  const _Bubble({required this.paddingSide});
 
   final double paddingSide;
 
@@ -250,16 +232,24 @@ class _Bubble extends StatelessWidget {
 
     // 80 是气泡整体高度
     const height = 64.0;
-    Rect rect = Rect.fromLTRB(paddingSide + data.iconFocusSize / 2, 0,
-        paddingSide + data.iconFocusSize / 2, height);
+    Rect rect = Rect.fromLTRB(
+      paddingSide + data.iconFocusSize / 2,
+      0,
+      paddingSide + data.iconFocusSize / 2,
+      height,
+    );
 
     // if (status == SoundsMessageStatus.recording) {
     //   rect = Rect.fromLTRB(paddingSide + data.iconFocusSize / 2, 0,
     //       paddingSide + data.iconFocusSize / 2, height);
     // } else
     if (status == SoundsMessageStatus.canceling) {
-      rect = Rect.fromLTRB(paddingSide + data.iconFocusSize / 2 + 32, 0,
-          paddingSide + data.iconFocusSize / 2 + 32, height);
+      rect = Rect.fromLTRB(
+        paddingSide + data.iconFocusSize / 2 + 32,
+        0,
+        paddingSide + data.iconFocusSize / 2 + 32,
+        height,
+      );
     }
 
     double bottom = 0;
@@ -295,7 +285,11 @@ class _Bubble extends StatelessWidget {
             painter: _BubblePainter(data, status, paddingSide),
             child: Container(
               padding: const EdgeInsets.only(
-                  left: 10, right: 10, top: 10, bottom: 10),
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
+              ),
               child: const AmpContent(),
             ),
           ),

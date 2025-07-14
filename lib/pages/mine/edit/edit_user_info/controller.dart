@@ -1,10 +1,7 @@
-part of edit_user_info;
+part of 'index.dart';
 
 class EditUserInfoController extends GetxController {
-  EditUserInfoController(
-    this.type,
-    this.value,
-  );
+  EditUserInfoController(this.type, this.value);
 
   String type;
   String value;

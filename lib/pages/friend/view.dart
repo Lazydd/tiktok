@@ -1,14 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:tiktok/common/index.dart';
-import 'package:tiktok/pages/friend/widget/row.dart';
-
-import 'index.dart';
+part of 'index.dart';
 
 class FriendPage extends GetView<FriendController> {
-  const FriendPage({Key? key}) : super(key: key);
+  const FriendPage({super.key});
 
   // 主视图
   Widget _buildView(context) {

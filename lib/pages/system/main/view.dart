@@ -1,4 +1,4 @@
-part of main;
+part of 'index.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -15,7 +15,7 @@ class _MainPageState extends State<MainPage> {
 }
 
 class _MainViewGetX extends GetView<MainController> {
-  const _MainViewGetX({Key? key}) : super(key: key);
+  const _MainViewGetX();
 
   // 主视图
   Widget _buildView(BuildContext context) {

@@ -1,4 +1,4 @@
-part of opus;
+part of 'index.dart';
 
 class OpusPage extends StatefulWidget {
   final int type;
@@ -22,22 +22,22 @@ class _OpusPageState extends State<OpusPage>
 
 class _MainViewGetX extends GetView<OpusController> {
   final int type;
-  const _MainViewGetX(this.type, {Key? key}) : super(key: key);
+  const _MainViewGetX(this.type);
 
   // 主视图
-  Widget _buildView(OpusController _) {
+  Widget _buildView(OpusController controller) {
     return SmartRefresher(
-      controller: _.refreshController,
+      controller: controller.refreshController,
       // 刷新控制器
       enablePullDown: true,
       // 启用加载
       enablePullUp: true,
       // 启用上拉加载
-      onRefresh: _.onRefresh,
+      onRefresh: controller.onRefresh,
       // 下拉刷新回调
-      onLoading: _.onLoading,
+      onLoading: controller.onLoading,
       child: GridView.builder(
-        itemCount: _.list.length,
+        itemCount: controller.list.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           mainAxisSpacing: 1,
@@ -47,7 +47,7 @@ class _MainViewGetX extends GetView<OpusController> {
         // addAutomaticKeepAlives: false,
         padding: EdgeInsets.all(0.5.r),
         itemBuilder: (BuildContext context, index) {
-          Map item = _.list[index];
+          Map item = controller.list[index];
           return Stack(
             alignment: Alignment.bottomLeft,
             fit: StackFit.expand,
@@ -72,33 +72,27 @@ class _MainViewGetX extends GetView<OpusController> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Icon(
-                    Icons.favorite,
-                    color: Colors.white,
-                    size: 24.sp,
-                  ),
+                  Icon(Icons.favorite, color: Colors.white, size: 24.sp),
                   Text(
                     Unit.formatNumber(item['statistics']['digg_count']),
                     style: TextStyle(color: Colors.white, fontSize: 16.sp),
                   ),
                 ],
-              ).marginOnly(left: 5.w, bottom: 2.h)
+              ).marginOnly(left: 5.w, bottom: 2.h),
             ],
-          ).onTap(
-            () {
-              Navigator.push(
-                Get.context!,
-                MaterialPageRoute(
-                  builder: (context) => PhotoPreview(
-                    galleryItems: _.list2,
-                    defaultImageIndex: index,
-                    slider: false,
-                    closePhotoView: () => Get.back(),
-                  ),
+          ).onTap(() {
+            Navigator.push(
+              Get.context!,
+              MaterialPageRoute(
+                builder: (context) => PhotoPreview(
+                  galleryItems: controller.list2,
+                  defaultImageIndex: index,
+                  slider: false,
+                  closePhotoView: () => Get.back(),
                 ),
-              );
-            },
-          );
+              ),
+            );
+          });
         },
       ),
     );
@@ -110,12 +104,8 @@ class _MainViewGetX extends GetView<OpusController> {
       init: OpusController(type),
       id: "opus",
       tag: type.toString(),
-      builder: (_) {
-        return Scaffold(
-          body: SafeArea(
-            child: _buildView(_),
-          ),
-        );
+      builder: (OpusController controller) {
+        return _buildView(controller);
       },
     );
   }

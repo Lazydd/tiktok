@@ -1,4 +1,4 @@
-part of chat;
+part of 'index.dart';
 
 class ChatPage extends GetView<ChatController> {
   final String peerId;

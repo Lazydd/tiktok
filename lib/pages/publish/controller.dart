@@ -1,4 +1,4 @@
-part of publish;
+part of 'index.dart';
 
 class PublishController extends GetxController {
   PublishController();

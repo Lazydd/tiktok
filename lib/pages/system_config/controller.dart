@@ -1,4 +1,4 @@
-part of system_config;
+part of 'index.dart';
 
 class SystemConfigController extends GetxController {
   SystemConfigController();

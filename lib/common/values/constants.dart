@@ -9,7 +9,7 @@ class Constants {
   static get mainBaseUrl {
     if (Storage().getString(Constants.storageIPConfig).isNotEmpty) {
       var ipMap = jsonDecode(Storage().getString(Constants.storageIPConfig));
-      return ipMap["protocol"] + "://" + ipMap["ipAddress"];
+      return '${ipMap["protocol"]}://${ipMap["ipAddress"]}';
     } else {
       return baseUrl;
     }

@@ -1,4 +1,4 @@
-part of routers;
+part of 'index.dart';
 
 // https://www.jianshu.com/p/3edfa7d694e7 如何使用RouteAware进行页面级监听
 /// 记录路由的变化

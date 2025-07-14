@@ -1,4 +1,4 @@
-part of general;
+part of 'index.dart';
 
 class GeneralController extends GetxController {
   GeneralController();

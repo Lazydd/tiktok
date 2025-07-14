@@ -11,11 +11,7 @@ class PolymerData {
 }
 
 class PolymerState extends InheritedWidget {
-  const PolymerState({
-    super.key,
-    required this.data,
-    required super.child,
-  });
+  const PolymerState({super.key, required this.data, required super.child});
 
   final PolymerData data;
 
@@ -83,8 +79,9 @@ class RecordingStatusMaskView extends StatelessWidget {
                         if (!polymerData.controller.isTranslated) {
                           await Future.delayed(Durations.extralong4);
 
-                          polymerData.controller
-                              .updateTextProcessed('我是语音转文字内容');
+                          polymerData.controller.updateTextProcessed(
+                            '我是语音转文字内容',
+                          );
                         }
                         return true;
                       },
@@ -100,9 +97,7 @@ class RecordingStatusMaskView extends StatelessWidget {
                     right: paddingSide + data.iconFocusSize + 45 * 4,
                     child: _TextCancelSend(onCancelSend),
                   ),
-                  _Bubble(
-                    paddingSide: paddingSide,
-                  ),
+                  _Bubble(paddingSide: paddingSide),
                 ],
               );
             }
@@ -126,9 +121,7 @@ class RecordingStatusMaskView extends StatelessWidget {
                     isLeft: false,
                   ),
                 ),
-                _Bubble(
-                  paddingSide: paddingSide,
-                ),
+                _Bubble(paddingSide: paddingSide),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -140,7 +133,8 @@ class RecordingStatusMaskView extends StatelessWidget {
                     CustomPaint(
                       // size: Size(double.infinity, data.sendAreaHeight),
                       painter: _RecordingPainter(
-                          value == SoundsMessageStatus.recording),
+                        value == SoundsMessageStatus.recording,
+                      ),
                       child: Container(
                         width: double.infinity,
                         height: data.sendAreaHeight,
@@ -160,11 +154,7 @@ class RecordingStatusMaskView extends StatelessWidget {
 }
 
 class VoiceIcon extends StatelessWidget {
-  const VoiceIcon({
-    super.key,
-    this.color,
-    this.size,
-  });
+  const VoiceIcon({super.key, this.color, this.size});
 
   final Color? color;
 
@@ -174,19 +164,13 @@ class VoiceIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Transform.rotate(
       angle: pi / 2,
-      child: Icon(
-        Icons.wifi_rounded,
-        size: size ?? 26.w,
-        color: color,
-      ),
+      child: Icon(Icons.wifi_rounded, size: size ?? 26.w, color: color),
     );
   }
 }
 
 class _MaskStackView extends StatelessWidget {
-  const _MaskStackView({
-    required this.children,
-  });
+  const _MaskStackView({required this.children});
 
   final List<Widget> children;
 
@@ -198,46 +182,43 @@ class _MaskStackView extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Stack(alignment: Alignment.bottomCenter, children: [
-        Positioned(
-          child: Container(
-            decoration: const BoxDecoration(
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Positioned(
+            child: Container(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              colors: [
-                Color(0xFF474747),
-                Color(0x00474747),
-              ],
-            )),
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [Color(0xFF474747), Color(0x00474747)],
+                ),
+              ),
+            ),
           ),
-        ),
-        Positioned(
-          child: Container(
-            height: polymerState.data.sendAreaHeight +
-                polymerState.data.iconFocusSize,
-            decoration: const BoxDecoration(
+          Positioned(
+            child: Container(
+              height: polymerState.data.sendAreaHeight +
+                  polymerState.data.iconFocusSize,
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              colors: [
-                Color(0xFF474747),
-                Color(0x22474747),
-              ],
-            )),
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [Color(0xFF474747), Color(0x22474747)],
+                ),
+              ),
+            ),
           ),
-        ),
-        ...children,
-      ]),
+          ...children,
+        ],
+      ),
     );
   }
 }
 
 /// 显示气泡
 class _Bubble extends StatelessWidget {
-  const _Bubble({
-    required this.paddingSide,
-  });
+  const _Bubble({required this.paddingSide});
 
   final double paddingSide;
 
@@ -253,14 +234,19 @@ class _Bubble extends StatelessWidget {
     Rect rect = const Rect.fromLTRB(24, 0, 24, height);
 
     if (status == SoundsMessageStatus.recording) {
-      rect = Rect.fromLTRB(paddingSide + data.iconFocusSize / 2, 0,
-          paddingSide + data.iconFocusSize / 2, height);
+      rect = Rect.fromLTRB(
+        paddingSide + data.iconFocusSize / 2,
+        0,
+        paddingSide + data.iconFocusSize / 2,
+        height,
+      );
     } else if (status == SoundsMessageStatus.canceling) {
       rect = Rect.fromLTRB(
-          paddingSide - 5,
-          0,
-          ScreenUtil().screenWidth - data.iconFocusSize - paddingSide - 10,
-          height);
+        paddingSide - 5,
+        0,
+        ScreenUtil().screenWidth - data.iconFocusSize - paddingSide - 10,
+        height,
+      );
     }
 
     double bottom = 0;
@@ -296,7 +282,11 @@ class _Bubble extends StatelessWidget {
             painter: _BubblePainter(data, status, paddingSide),
             child: Container(
               padding: const EdgeInsets.only(
-                  left: 10, right: 10, top: 10, bottom: 10),
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
+              ),
               child: status == SoundsMessageStatus.textProcessing ||
                       status == SoundsMessageStatus.textProcessed
                   ? const _TextProcessedContent()
@@ -362,8 +352,9 @@ class _TextProcessedContentState extends State<_TextProcessedContent> {
                 border: InputBorder.none,
                 // border: OutlineInputBorder(),
                 hintText: '语音转文字...',
-                hintStyle:
-                    TextStyle(color: ui.Color.fromARGB(148, 107, 104, 104)),
+                hintStyle: TextStyle(
+                  color: ui.Color.fromARGB(148, 107, 104, 104),
+                ),
                 contentPadding: EdgeInsets.zero,
                 isDense: true,
               ),
@@ -373,12 +364,8 @@ class _TextProcessedContentState extends State<_TextProcessedContent> {
           Visibility(
             visible: polymerState.controller.status.value ==
                 SoundsMessageStatus.textProcessing,
-            child: const Positioned(
-              right: 40,
-              bottom: 5,
-              child: AmpContent(),
-            ),
-          )
+            child: const Positioned(right: 40, bottom: 5, child: AmpContent()),
+          ),
         ],
       ),
     );
@@ -431,30 +418,28 @@ class _Circle extends StatelessWidget {
             borderRadius: BorderRadius.circular(data.iconFocusSize),
           ),
           child: Transform.rotate(
-              angle: isLeft ? -0.2 : 0.2,
-              child: isLeft
-                  ? Icon(
-                      Icons.close,
-                      size: 28,
-                      color:
-                          isFocus ? data.iconFocusTxtColor : data.iconTxtColor,
-                    )
-                  : Icon(
-                      Icons.text_decrease,
-                      size: 28,
-                      color:
-                          isFocus ? data.iconFocusTxtColor : data.iconTxtColor,
-                    )
-              // : Text(
-              //     '文',
-              //     style: TextStyle(
-              //       fontSize: 22,
-              //       fontWeight: FontWeight.bold,
-              //       color:
-              //           isFocus ? data.iconFocusTxtColor : data.iconTxtColor,
-              //     ),
-              //   ),
-              ),
+            angle: isLeft ? -0.2 : 0.2,
+            child: isLeft
+                ? Icon(
+                    Icons.close,
+                    size: 28,
+                    color: isFocus ? data.iconFocusTxtColor : data.iconTxtColor,
+                  )
+                : Icon(
+                    Icons.text_decrease,
+                    size: 28,
+                    color: isFocus ? data.iconFocusTxtColor : data.iconTxtColor,
+                  ),
+            // : Text(
+            //     '文',
+            //     style: TextStyle(
+            //       fontSize: 22,
+            //       fontWeight: FontWeight.bold,
+            //       color:
+            //           isFocus ? data.iconFocusTxtColor : data.iconTxtColor,
+            //     ),
+            //   ),
+          ),
         ),
       ],
     );
@@ -463,11 +448,7 @@ class _Circle extends StatelessWidget {
 
 /// 转文字的等待按钮
 class _TextProcessedCircle extends StatelessWidget {
-  const _TextProcessedCircle({
-    required this.data,
-    this.onLoading,
-    this.onTap,
-  });
+  const _TextProcessedCircle({required this.data, this.onLoading, this.onTap});
 
   final RecordingMaskOverlayData data;
 
@@ -533,10 +514,7 @@ class _TextVoiceSend extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          VoiceIcon(
-            color: Colors.white,
-            size: 20.w,
-          ),
+          VoiceIcon(color: Colors.white, size: 20.w),
           const SizedBox(height: 5),
           const Text(
             '发送原语音',
@@ -561,16 +539,9 @@ class _TextCancelSend extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          Icon(
-            Icons.close_rounded,
-            size: 20.w,
-            color: Colors.white,
-          ),
+          Icon(Icons.close_rounded, size: 20.w, color: Colors.white),
           const SizedBox(height: 5),
-          const Text(
-            '取消',
-            style: TextStyle(fontSize: 13, color: Colors.white),
-          ),
+          const Text('取消', style: TextStyle(fontSize: 13, color: Colors.white)),
         ],
       ),
     );

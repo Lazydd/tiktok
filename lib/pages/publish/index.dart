@@ -1,5 +1,3 @@
-library publish;
-
 import 'dart:io';
 
 import 'package:camerawesome/camerawesome_plugin.dart';

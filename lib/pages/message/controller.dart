@@ -1,4 +1,4 @@
-part of message;
+part of 'index.dart';
 
 class MessageController extends GetxController {
   MessageController();

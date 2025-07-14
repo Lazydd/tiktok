@@ -22,10 +22,7 @@ class SoundsMessageButton extends StatefulWidget {
   });
 
   /// 自定义发送按钮视图
-  final Function(
-    BuildContext context,
-    SoundsMessageStatus status,
-  )? builder;
+  final Function(BuildContext context, SoundsMessageStatus status)? builder;
 
   /// 状态监听， 回调到外部自定义处理
   final Function(SoundsMessageStatus status)? onChanged;
@@ -87,12 +84,16 @@ class _SoundsMessageButtonState extends State<SoundsMessageButton> {
             },
             onVoiceSend: () {
               widget.onSendSounds?.call(
-                  SendContentType.voice, _soundsRecorder.path.value ?? '');
+                SendContentType.voice,
+                _soundsRecorder.path.value ?? '',
+              );
               _removeMask();
             },
             onTextSend: () {
-              widget.onSendSounds?.call(SendContentType.text,
-                  _soundsRecorder.textProcessedController.text);
+              widget.onSendSounds?.call(
+                SendContentType.text,
+                _soundsRecorder.textProcessedController.text,
+              );
               _removeMask();
             },
           ),
@@ -228,15 +229,12 @@ class _SoundsMessageButtonState extends State<SoundsMessageButton> {
               borderRadius: BorderRadius.circular(4),
               color: Colors.white,
               boxShadow: const [
-                BoxShadow(color: Color(0xffeeeeee), blurRadius: 2)
+                BoxShadow(color: Color(0xffeeeeee), blurRadius: 2),
               ],
             ),
             child: Text(
               value.title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           );
         },

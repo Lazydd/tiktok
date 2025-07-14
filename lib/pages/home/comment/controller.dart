@@ -1,4 +1,4 @@
-part of comment;
+part of 'index.dart';
 
 class CommentController extends GetxController {
   CommentController();

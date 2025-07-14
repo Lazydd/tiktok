@@ -1,4 +1,4 @@
-part of rtc;
+part of 'index.dart';
 
 class RtcPage extends GetView<RtcController> {
   const RtcPage({super.key, this.isDial = "false"});

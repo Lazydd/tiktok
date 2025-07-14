@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+part of 'index.dart';
 
 class FriendController extends GetxController {
   FriendController();

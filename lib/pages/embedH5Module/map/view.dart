@@ -1,4 +1,4 @@
-part of map;
+part of 'index.dart';
 
 class MapPage extends GetView<MapController> {
   /// 是否只读
@@ -19,14 +19,14 @@ class MapPage extends GetView<MapController> {
   /// 是否需要实时定位
   final bool isRealTimePosition;
   const MapPage({
-    Key? key,
+    super.key,
     this.isOnlyRead = false,
     this.receiveLocation = "",
     this.receiveName = "",
     this.isNearBy = false,
     this.isSearch = false,
     this.isRealTimePosition = false,
-  }) : super(key: key);
+  });
 
   // 主视图
   Widget _buildView() {
@@ -49,86 +49,95 @@ class MapPage extends GetView<MapController> {
           },
         ),
         GetBuilder<MapController>(
-            id: "embed_web",
-            builder: (_) {
-              return InAppWebView(
-                  initialSettings: InAppWebViewSettings(
-                    transparentBackground: true,
-                    cacheEnabled: false,
-                  ),
-                  initialUrlRequest: URLRequest(
-                    url: WebUri(_.innerUrl),
-                  ),
-                  // 创建控制并回调返回该控制器
-                  onWebViewCreated: (InAppWebViewController controller) {
-                    // _.webViewController = controller;
-                    // controller.addJavaScriptHandler(
-                    //     handlerName: 'onReceiveLocationHandler',
-                    //     callback: (args) {
-                    //       if (!isOnlyRead) {
-                    //         // console.warning("JavaScript主动传的方法:${args[0]}");
-                    //         if (args.isNotEmpty && _.isSuccessLocalLocation) {
-                    //           _.isReLocation = false;
-                    //           _.update(["site_web_title", "location_icon"]);
-                    //         }
-                    //       }
-                    //     });
-                    // controller.addJavaScriptHandler(
-                    //     handlerName: 'onInitHandler',
-                    //     callback: (args) {
-                    //       // if (_.isOnlyRead && _.receiveLocation.isNotEmpty) {
-                    //       //   _.requestReceiveLocation();
-                    //       // } else {
-                    //       //   _.requestCurrentLocation();
-                    //       // }
-                    //       if (!_.isOnlyRead && _.receiveLocation.isEmpty) {
-                    //         _.requestCurrentLocation();
-                    //       } else {
-                    //         _.requestReceiveLocation();
-                    //       }
-                    //     });
-                  },
-                  // 当 WebView 开始加载某个 URL 时触发该事件
-                  onLoadStart: (InAppWebViewController controller, Uri? uri) {
-                    _.innerUrl = uri.toString();
-                  },
-                  // 当 WebView 完成一个 URL 的加载时触发该事件
-                  onLoadStop:
-                      (InAppWebViewController controller, Uri? uri) async {
-                    _.innerUrl = uri.toString();
-                  },
-                  // 当 WebView 的主页收到 HTTP 错误时触发该事件
-                  onReceivedHttpError: (InAppWebViewController controller,
-                      WebResourceRequest webResourceRequest,
-                      WebResourceResponse webResourceResponse) {
-                    _.onWebLoadHttpError(
-                        controller, webResourceRequest, webResourceResponse);
-                  },
-                  // 当 WebView收到一条 JavaScript 控制台消息（如 console.log 、 console.error ）时触发该事件
-                  onConsoleMessage: (InAppWebViewController controller,
-                      ConsoleMessage consoleMessage) {
-                    // console.error("consoleMessage:$consoleMessage");
-                  },
-                  onProgressChanged: (InAppWebViewController c, int progress) {
-                    controller.onWebProgressChanged(c, progress);
-                  }).height(ScreenFunc.screenHeight - _.locationBottom);
-            }),
+          id: "embed_web",
+          builder: (MapController mapController) {
+            return InAppWebView(
+              initialSettings: InAppWebViewSettings(
+                transparentBackground: true,
+                cacheEnabled: false,
+              ),
+              initialUrlRequest: URLRequest(
+                url: WebUri(mapController.innerUrl),
+              ),
+              // 创建控制并回调返回该控制器
+              onWebViewCreated: (InAppWebViewController controller) {
+                // mapController.webViewController = controller;
+                // controller.addJavaScriptHandler(
+                //     handlerName: 'onReceiveLocationHandler',
+                //     callback: (args) {
+                //       if (!isOnlyRead) {
+                //         // console.warning("JavaScript主动传的方法:${args[0]}");
+                //         if (args.isNotEmpty && mapController.isSuccessLocalLocation) {
+                //           mapController.isReLocation = false;
+                //           mapController.update(["site_web_title", "location_icon"]);
+                //         }
+                //       }
+                //     });
+                // controller.addJavaScriptHandler(
+                //     handlerName: 'onInitHandler',
+                //     callback: (args) {
+                //       // if (mapController.isOnlyRead && mapController.receiveLocation.isNotEmpty) {
+                //       //   mapController.requestReceiveLocation();
+                //       // } else {
+                //       //   mapController.requestCurrentLocation();
+                //       // }
+                //       if (!mapController.isOnlyRead && mapController.receiveLocation.isEmpty) {
+                //         mapController.requestCurrentLocation();
+                //       } else {
+                //         mapController.requestReceiveLocation();
+                //       }
+                //     });
+              },
+              // 当 WebView 开始加载某个 URL 时触发该事件
+              onLoadStart: (InAppWebViewController controller, Uri? uri) {
+                mapController.innerUrl = uri.toString();
+              },
+              // 当 WebView 完成一个 URL 的加载时触发该事件
+              onLoadStop: (InAppWebViewController controller, Uri? uri) async {
+                mapController.innerUrl = uri.toString();
+              },
+              // 当 WebView 的主页收到 HTTP 错误时触发该事件
+              onReceivedHttpError: (
+                InAppWebViewController controller,
+                WebResourceRequest webResourceRequest,
+                WebResourceResponse webResourceResponse,
+              ) {
+                mapController.onWebLoadHttpError(
+                  controller,
+                  webResourceRequest,
+                  webResourceResponse,
+                );
+              },
+              // 当 WebView收到一条 JavaScript 控制台消息（如 console.log 、 console.error ）时触发该事件
+              onConsoleMessage: (
+                InAppWebViewController controller,
+                ConsoleMessage consoleMessage,
+              ) {
+                // console.error("consoleMessage:$consoleMessage");
+              },
+              onProgressChanged: (InAppWebViewController c, int progress) {
+                controller.onWebProgressChanged(c, progress);
+              },
+            ).height(ScreenFunc.screenHeight - mapController.locationBottom);
+          },
+        ),
         Positioned(
           top: ScreenFunc.statusBar + 20.w,
           left: 20.w,
           child: GetBuilder<MapController>(
             id: "location_submit",
             builder: (_) => Container(
-              padding: EdgeInsets.symmetric(vertical: 5.w, horizontal: 15.w),
+              padding: EdgeInsets.symmetric(
+                vertical: 5.w,
+                horizontal: 15.w,
+              ),
               decoration: BoxDecoration(
                 color: Colors.red.shade600,
                 borderRadius: BorderRadius.circular(3.r),
               ),
               child: const Text(
                 "取消",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ).onTap(() {
@@ -146,26 +155,33 @@ class MapPage extends GetView<MapController> {
             child: GetBuilder<MapController>(
               id: "location_submit",
               builder: (_) => Container(
-                padding: EdgeInsets.symmetric(vertical: 5.w, horizontal: 15.w),
+                padding: EdgeInsets.symmetric(
+                  vertical: 5.w,
+                  horizontal: 15.w,
+                ),
                 decoration: BoxDecoration(
-                  color: _.isDone ? AppColors.primary : Colors.grey.shade400,
+                  color: controller.isDone
+                      ? AppColors.primary
+                      : Colors.grey.shade400,
                   borderRadius: BorderRadius.circular(3.r),
                 ),
                 child: Text(
                   "确定",
                   style: TextStyle(
-                    color: _.isDone ? Colors.white : Colors.grey.shade200,
+                    color:
+                        controller.isDone ? Colors.white : Colors.grey.shade200,
                   ),
                 ),
               ).onTap(() async {
-                if (_.isDone) {
+                if (controller.isDone) {
                   Map<String, dynamic> params = {
                     "location": controller.currentLocation.join(","),
                     "address": controller.locationName,
                   };
                   if (isNearBy) {
-                    params["dataPoiModel"] =
-                        jsonEncode(controller.currentDataPoi!.toJson());
+                    params["dataPoiModel"] = jsonEncode(
+                      controller.currentDataPoi!.toJson(),
+                    );
                   }
                   Get.back(result: jsonEncode(params));
                 }
@@ -181,14 +197,16 @@ class MapPage extends GetView<MapController> {
               builder: (_) => Container(
                 padding: EdgeInsets.symmetric(vertical: 5.w, horizontal: 15.w),
                 decoration: BoxDecoration(
-                  color: _.isCollection ? Colors.grey : Colors.green,
+                  color: controller.isCollection ? Colors.grey : Colors.green,
                   borderRadius: BorderRadius.circular(3.r),
                 ),
                 child: Text(
-                  _.isCollection == false ? "开始采集" : "${_.collectionTime}s",
+                  controller.isCollection == false
+                      ? "开始采集"
+                      : "${controller.collectionTime}s",
                   style: const TextStyle(color: Colors.white),
                 ),
-              ).onTap(() => _.onCollectionTap()),
+              ).onTap(() => controller.onCollectionTap()),
             ),
           ),
       ],
@@ -214,7 +232,7 @@ class MapPage extends GetView<MapController> {
             ),
             child: GetBuilder<MapController>(
               id: "location_icon",
-              builder: (_) => _.isReLocation
+              builder: (_) => controller.isReLocation
                   ? Transform.rotate(
                       angle: 45 * pi / 180,
                       child: IconWidget.svg(
@@ -269,10 +287,10 @@ class MapPage extends GetView<MapController> {
                     initialChildSize: isOnlyRead ? 0.15 : 0.4,
                     minChildSize: isOnlyRead ? 0.15 : 0.4,
                     maxChildSize: isOnlyRead ? 0.15 : 0.7,
-                    controller: _.dragController,
+                    controller: controller.dragController,
                     builder: (context, scrollController) {
                       List<Widget> ws = [];
-                      if (_.isNear) {
+                      if (controller.isNear) {
                         for (int i = 0;
                             i < controller.dataPoiList.length;
                             i++) {
@@ -294,11 +312,8 @@ class MapPage extends GetView<MapController> {
                                 ),
                               ),
                               showCellDivider: true,
-                              trailing: _.poiId == poi.pointId
-                                  ? Icon(
-                                      Icons.done,
-                                      color: AppColors.primary,
-                                    )
+                              trailing: controller.poiId == poi.pointId
+                                  ? Icon(Icons.done, color: AppColors.primary)
                                   : const SizedBox(),
                               showArrow: false,
                               onTap: () {
@@ -350,11 +365,8 @@ class MapPage extends GetView<MapController> {
                                 ),
                               ),
                               showCellDivider: true,
-                              trailing: _.poiId == poi.id
-                                  ? Icon(
-                                      Icons.done,
-                                      color: AppColors.primary,
-                                    )
+                              trailing: controller.poiId == poi.id
+                                  ? Icon(Icons.done, color: AppColors.primary)
                                   : const SizedBox(),
                               showArrow: false,
                               onTap: () {
@@ -391,28 +403,22 @@ class MapPage extends GetView<MapController> {
                         children: [
                           Container(
                             color: Colors.white,
-                            padding: const EdgeInsets.only(
-                              top: 80,
-                            ),
+                            padding: const EdgeInsets.only(top: 80),
                             child: SmartRefresher(
-                              controller: _.refreshController, // 刷新控制器
+                              controller: controller.refreshController, // 刷新控制器
                               enablePullDown: false, // 启用加载
                               enablePullUp: true, // 启用上拉加载
-                              onLoading: _.onLoading, // 上拉加载回调
+                              onLoading: controller.onLoading, // 上拉加载回调
                               child: CustomScrollView(
                                 slivers: [
                                   SliverToBoxAdapter(
-                                    child: Column(
-                                      children: ws,
-                                    )
+                                    child: Column(children: ws)
                                         .paddingHorizontal(AppSpace.page)
                                         .paddingBottom(ScreenFunc.bottomBar),
                                   ),
                                 ],
                               ),
-                            ).borderRadius(
-                              topLeft: 10.r,
-                            ),
+                            ).borderRadius(topLeft: 10.r),
                           ),
                           SingleChildScrollView(
                             physics: const ClampingScrollPhysics(),
@@ -429,8 +435,9 @@ class MapPage extends GetView<MapController> {
                                         width: 30.0,
                                         height: 5.0,
                                         decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50.0),
+                                          borderRadius: BorderRadius.circular(
+                                            50.0,
+                                          ),
                                           color: Colors.grey,
                                         ),
                                       ),
@@ -460,8 +467,9 @@ class MapPage extends GetView<MapController> {
                                                     Icons.close,
                                                     color: AppColors.info,
                                                   ).paddingRight(10.w).onTap(
-                                                      () => controller
-                                                          .onClearTextFieldHandle()),
+                                                        () => controller
+                                                            .onClearTextFieldHandle(),
+                                                      ),
                                                 Container(
                                                   color: AppColors.info,
                                                   width: 0.5.w,
@@ -477,22 +485,29 @@ class MapPage extends GetView<MapController> {
                                                     .paddingHorizontal(15.w)
                                                     .paddingVertical(10.w)
                                                     .onTap(() {
-                                                  FocusScope.of(Get.context!)
-                                                      .requestFocus(
-                                                          FocusNode()); //收起键盘
-                                                  _.onSubmitSearch(controller
-                                                      .searchEditController
-                                                      .text);
+                                                  FocusScope.of(
+                                                    Get.context!,
+                                                  ).requestFocus(
+                                                    FocusNode(),
+                                                  ); //收起键盘
+                                                  controller.onSubmitSearch(
+                                                    controller
+                                                        .searchEditController
+                                                        .text,
+                                                  );
                                                 }),
                                               ].toRow(
                                                   mainAxisSize:
                                                       MainAxisSize.min),
                                               onSubmitted: (String value) {
-                                                _.onSubmitSearch(value);
+                                                controller.onSubmitSearch(
+                                                  value,
+                                                );
                                               },
                                               onChanged: (String value) {
-                                                controller
-                                                    .onChangeValueHandle(value);
+                                                controller.onChangeValueHandle(
+                                                  value,
+                                                );
                                               },
                                             )
                                           : Column(
@@ -501,7 +516,7 @@ class MapPage extends GetView<MapController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                if (_.titleStatus ==
+                                                if (controller.titleStatus ==
                                                     TitleStatusEnum.success)
                                                   Row(
                                                     mainAxisAlignment:
@@ -515,7 +530,8 @@ class MapPage extends GetView<MapController> {
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              _.locationName,
+                                                              controller
+                                                                  .locationName,
                                                               softWrap: false,
                                                               overflow:
                                                                   TextOverflow
@@ -528,7 +544,8 @@ class MapPage extends GetView<MapController> {
                                                               ),
                                                             ),
                                                             Text(
-                                                              _.currentTitle,
+                                                              controller
+                                                                  .currentTitle,
                                                               softWrap: false,
                                                               overflow:
                                                                   TextOverflow
@@ -546,7 +563,8 @@ class MapPage extends GetView<MapController> {
                                                         Row(
                                                           children: [
                                                             Text(
-                                                              _.realDistance,
+                                                              controller
+                                                                  .realDistance,
                                                               style: TextStyle(
                                                                 color: AppColors
                                                                     .primary,
@@ -568,13 +586,14 @@ class MapPage extends GetView<MapController> {
                                                         ),
                                                     ],
                                                   ),
-                                                if (_.titleStatus !=
+                                                if (controller.titleStatus !=
                                                     TitleStatusEnum.success)
                                                   Text.rich(
                                                     textAlign: TextAlign.center,
                                                     TextSpan(
                                                       children: [
-                                                        if (_.titleStatus ==
+                                                        if (controller
+                                                                .titleStatus ==
                                                             TitleStatusEnum
                                                                 .loading)
                                                           WidgetSpan(
@@ -590,7 +609,8 @@ class MapPage extends GetView<MapController> {
                                                             ).paddingRight(
                                                                 10.w),
                                                           ),
-                                                        if (_.titleStatus ==
+                                                        if (controller
+                                                                .titleStatus ==
                                                             TitleStatusEnum
                                                                 .error)
                                                           WidgetSpan(
@@ -602,7 +622,8 @@ class MapPage extends GetView<MapController> {
                                                                 10.w),
                                                           ),
                                                         TextSpan(
-                                                          text: _.currentTitle,
+                                                          text: controller
+                                                              .currentTitle,
                                                           style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,

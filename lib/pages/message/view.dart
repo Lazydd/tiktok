@@ -1,7 +1,7 @@
-part of message;
+part of 'index.dart';
 
 class MessagePage extends GetView<MessageController> {
-  const MessagePage({Key? key}) : super(key: key);
+  const MessagePage({super.key});
 
   // 主视图
   Widget _buildView(BuildContext context) {
@@ -97,7 +97,9 @@ class MessagePage extends GetView<MessageController> {
                   children: [
                     Text(
                       item['name'],
-                      style: TextStyle(color: Context(context).theme.textColor, fontSize: 16.sp),
+                      style: TextStyle(
+                          color: Context(context).theme.textColor,
+                          fontSize: 16.sp),
                     ),
                     Text.rich(TextSpan(
                       children: [

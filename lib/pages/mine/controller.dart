@@ -1,4 +1,4 @@
-part of mine;
+part of 'index.dart';
 
 class MineController extends GetxController {
   MineController();

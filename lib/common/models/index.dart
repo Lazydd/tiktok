@@ -1,5 +1,3 @@
-library models;
-
 export 'request/user_login.dart'; // 用户登录 model
 
 export 'response/user_profile.dart'; // 用户profile model

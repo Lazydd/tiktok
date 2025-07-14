@@ -51,41 +51,48 @@ class WavePainter extends CustomPainter {
 
     // 中间值
     canvas.drawRRect(
-        RRect.fromRectAndRadius(
-          Rect.fromCenter(
-            center: center,
-            width: lineSize.width,
-            height: lineHeight(tempList[centerConut]),
-          ),
-          radius,
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: center,
+          width: lineSize.width,
+          height: lineHeight(tempList[centerConut]),
         ),
-        paint);
+        radius,
+      ),
+      paint,
+    );
 
     // 边缘值
     for (var i = 0; i <= centerConut; i++) {
       canvas.drawRRect(
-          RRect.fromRectAndRadius(
-            Rect.fromCenter(
-              center: Offset(
-                  center.dx + (lineSize.width + lineSpec) * i, center.dy),
-              width: lineSize.width,
-              height: lineHeight(tempList[i]),
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: Offset(
+              center.dx + (lineSize.width + lineSpec) * i,
+              center.dy,
             ),
-            radius,
+            width: lineSize.width,
+            height: lineHeight(tempList[i]),
           ),
-          paint);
+          radius,
+        ),
+        paint,
+      );
 
       canvas.drawRRect(
-          RRect.fromRectAndRadius(
-            Rect.fromCenter(
-              center: Offset(
-                  center.dx - (lineSize.width + lineSpec) * i, center.dy),
-              width: lineSize.width,
-              height: lineHeight(tempList[i]),
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: Offset(
+              center.dx - (lineSize.width + lineSpec) * i,
+              center.dy,
             ),
-            radius,
+            width: lineSize.width,
+            height: lineHeight(tempList[i]),
           ),
-          paint);
+          radius,
+        ),
+        paint,
+      );
     }
   }
 

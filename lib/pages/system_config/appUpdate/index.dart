@@ -1,7 +1,4 @@
-library app_update;
-
 import 'dart:io';
-
 import 'package:tiktok/common/index.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

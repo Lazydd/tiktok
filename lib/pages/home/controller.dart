@@ -1,4 +1,4 @@
-part of home;
+part of 'index.dart';
 
 class HomeController extends GetxController with GetTickerProviderStateMixin {
   HomeController();

@@ -85,7 +85,7 @@ class InputWidget extends StatelessWidget {
   final bool autofocus;
 
   const InputWidget({
-    Key? key,
+    super.key,
     this.type = InputWidgetType.none,
     this.onSubmitted,
     this.controller,
@@ -109,11 +109,11 @@ class InputWidget extends StatelessWidget {
     this.onChanged,
     this.onEditingComplete,
     this.autofocus = false,
-  }) : super(key: key);
+  });
 
   /// 文本输入
   const InputWidget.text({
-    Key? key,
+    super.key,
     this.type = InputWidgetType.text,
     this.controller,
     this.onSubmitted,
@@ -137,11 +137,11 @@ class InputWidget extends StatelessWidget {
     this.onChanged,
     this.onEditingComplete,
     this.autofocus = false,
-  }) : super(key: key);
+  });
 
   /// 文本输入 - 边框
   const InputWidget.textBorder({
-    Key? key,
+    super.key,
     this.type = InputWidgetType.textBorder,
     this.onSubmitted,
     this.focusNode,
@@ -165,11 +165,11 @@ class InputWidget extends StatelessWidget {
     this.onChanged,
     this.onEditingComplete,
     this.autofocus = false,
-  }) : super(key: key);
+  });
 
   /// 文本输入 - 填充
   InputWidget.textFilled({
-    Key? key,
+    super.key,
     this.type = InputWidgetType.textFilled,
     Color? fillColor, // 输入颜色
     this.onSubmitted,
@@ -193,13 +193,12 @@ class InputWidget extends StatelessWidget {
     this.onEditingComplete,
     this.controller,
     this.autofocus = false,
-  })  : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5),
-        super(key: key);
+  }) : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5);
 
   /// 文本输入 - 图标文本填充
   InputWidget.iconTextFilled(
     this.icon, {
-    Key? key,
+    super.key,
     this.type = InputWidgetType.iconTextFilled,
     Color? fillColor, // 输入颜色
     this.onSubmitted,
@@ -222,13 +221,12 @@ class InputWidget extends StatelessWidget {
     this.onEditingComplete,
     this.controller,
     this.autofocus = false,
-  })  : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5),
-        super(key: key);
+  }) : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5);
 
   /// 文本输入 - 后缀图标文本填充
   InputWidget.suffixTextFilled(
     this.suffixIcon, {
-    Key? key,
+    super.key,
     this.type = InputWidgetType.suffixTextFilled,
     Color? fillColor, // 输入颜色
     this.icon,
@@ -251,12 +249,11 @@ class InputWidget extends StatelessWidget {
     this.onEditingComplete,
     this.controller,
     this.autofocus = false,
-  })  : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5),
-        super(key: key);
+  }) : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5);
 
   /// 搜索
   InputWidget.search({
-    Key? key,
+    super.key,
     this.type = InputWidgetType.search,
     Color? fillColor, // 输入颜色
     Widget? icon,
@@ -280,13 +277,8 @@ class InputWidget extends StatelessWidget {
     this.onEditingComplete,
     this.controller,
     this.autofocus = false,
-  })  : icon = icon ??
-            IconWidget.icon(
-              Icons.search,
-              color: AppColors.outline,
-            ),
-        fillColor = fillColor ?? AppColors.surface.withOpacity(0.5),
-        super(key: key);
+  })  : icon = icon ?? IconWidget.icon(Icons.search, color: AppColors.outline),
+        fillColor = fillColor ?? AppColors.surface.withOpacity(0.5);
 
   // 边框
   InputBorder? get _border {
@@ -296,10 +288,12 @@ class InputWidget extends StatelessWidget {
         return InputBorder.none;
       default:
         return OutlineInputBorder(
-          borderSide:
-              BorderSide(color: borderColor ?? AppColors.surfaceVariant),
+          borderSide: BorderSide(
+            color: borderColor ?? AppColors.surfaceVariant,
+          ),
           borderRadius: BorderRadius.all(
-              Radius.circular(borderRadius ?? AppRadius.input)),
+            Radius.circular(borderRadius ?? AppRadius.input),
+          ),
         );
     }
   }
@@ -318,7 +312,7 @@ class InputWidget extends StatelessWidget {
               IconWidget.icon(
                 Icons.photo_camera_outlined,
                 color: AppColors.outline,
-              )
+              ),
         ].toRow().width(30).paddingRight(5);
       default:
         return suffixIcon;
@@ -352,15 +346,9 @@ class InputWidget extends StatelessWidget {
       decoration: InputDecoration(
         fillColor: fillColor ?? Colors.transparent,
         prefixIcon: icon,
-        prefixIconConstraints: const BoxConstraints(
-          minWidth: 30,
-          minHeight: 0,
-        ),
+        prefixIconConstraints: const BoxConstraints(minWidth: 30, minHeight: 0),
         suffixIcon: _suffixIcon,
-        suffixIconConstraints: const BoxConstraints(
-          minWidth: 30,
-          minHeight: 0,
-        ),
+        suffixIconConstraints: const BoxConstraints(minWidth: 30, minHeight: 0),
         hintText: hintText,
         hintStyle: AppTextStyles.bodyText2?.copyWith(
           fontWeight: FontWeight.w300,

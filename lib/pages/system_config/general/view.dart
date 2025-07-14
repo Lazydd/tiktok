@@ -1,4 +1,4 @@
-part of general;
+part of 'index.dart';
 
 class GeneralPage extends GetView<GeneralController> {
   const GeneralPage({super.key});

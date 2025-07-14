@@ -18,12 +18,7 @@ import 'wave.dart';
 part 'recording_status_mask.dart';
 part 'canvas.dart';
 
-enum PanelType {
-  none,
-  keyboard,
-  emoji,
-  tool,
-}
+enum PanelType { none, keyboard, emoji, tool }
 
 class ChatButtomContainer extends StatefulWidget {
   const ChatButtomContainer(
@@ -324,9 +319,10 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
                           debugPrint(status.toString());
                           // 120 是遮罩层的视图高度
                           _padding.value = EdgeInsets.symmetric(
-                              vertical: status == SoundsMessageStatus.none
-                                  ? 0
-                                  : (120 + 60 - (30 + 44) / 2) / 2 + 15);
+                            vertical: status == SoundsMessageStatus.none
+                                ? 0
+                                : (120 + 60 - (30 + 44) / 2) / 2 + 15,
+                          );
                           widget.scrollController?.animateTo(
                             0,
                             duration: const Duration(milliseconds: 200),
@@ -346,7 +342,7 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
                 GestureDetector(
                   onTap: toolChange,
                   child: const Icon(Icons.add_circle),
-                )
+                ),
               ],
             ),
           ),
@@ -421,9 +417,7 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
     controller.updatePanelType(ChatBottomPanelType.none);
   }
 
-  bool updateInputView({
-    required bool isReadOnly,
-  }) {
+  bool updateInputView({required bool isReadOnly}) {
     if (readOnly != isReadOnly) {
       readOnly = isReadOnly;
       // You can just refresh the input view.

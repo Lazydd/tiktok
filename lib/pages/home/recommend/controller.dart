@@ -1,4 +1,4 @@
-part of recommend;
+part of 'index.dart';
 
 class RecommendController extends GetxController {
   RecommendController();

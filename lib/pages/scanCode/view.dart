@@ -1,4 +1,4 @@
-part of scancode;
+part of 'index.dart';
 
 // 扫码框宽高
 final cutOutWidth = ScreenFunc.screenWidth - 70;
@@ -11,9 +11,7 @@ const bottomBarHeight = 100.0;
 const scanLineHeight = 70.0;
 
 class ScanCodePage extends GetView<ScanCodeController> {
-  const ScanCodePage({
-    Key? key,
-  }) : super(key: key);
+  const ScanCodePage({super.key});
 
   // 主视图
   Widget _buildView() {
@@ -22,18 +20,17 @@ class ScanCodePage extends GetView<ScanCodeController> {
       children: [
         SizedBox(
           child: QRView(
-              key: GlobalKey(debugLabel: controller.qrKey.toString()),
-              onQRViewCreated: (controller) async {
-                await _onQRViewCreated(controller);
-              }),
+            key: GlobalKey(debugLabel: controller.qrKey.toString()),
+            onQRViewCreated: (controller) async {
+              await _onQRViewCreated(controller);
+            },
+          ),
         ),
         // 遮罩层
         Positioned(
           top: 0,
           left: 0,
-          child: CustomPaint(
-            painter: _ScanFramePainter(),
-          ),
+          child: CustomPaint(painter: _ScanFramePainter()),
         ),
         // 闪光灯
         Positioned(
@@ -43,7 +40,7 @@ class ScanCodePage extends GetView<ScanCodeController> {
               60,
           child: GetBuilder<ScanCodeController>(
             id: "scan_code_flash",
-            builder: (_) {
+            builder: (controller) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -56,7 +53,7 @@ class ScanCodePage extends GetView<ScanCodeController> {
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
-                      _.isFlash
+                      controller.isFlash
                           ? Icons.flash_off_rounded
                           : Icons.flash_on_rounded,
                       color: Colors.white,
@@ -64,7 +61,7 @@ class ScanCodePage extends GetView<ScanCodeController> {
                     ).paddingLeft(2).paddingTop(3),
                   ),
                   Text(
-                    _.isFlash ? "关闭" : "开启",
+                    controller.isFlash ? "关闭" : "开启",
                     style: const TextStyle(color: Colors.white),
                   ),
                 ],
@@ -82,9 +79,7 @@ class ScanCodePage extends GetView<ScanCodeController> {
             child: Text(
               "扫描二维码，读取信息",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.grey.shade200,
-              ),
+              style: TextStyle(color: Colors.grey.shade200),
             ),
           ),
         ),
@@ -145,7 +140,7 @@ class ScanCodePage extends GetView<ScanCodeController> {
               color: Color.fromRGBO(19, 199, 95, 1),
               shape: BoxShape.circle,
             ),
-          )
+          ),
         ],
       ),
     );
@@ -181,7 +176,7 @@ class ScanCodePage extends GetView<ScanCodeController> {
 }
 
 class LoopVerticalAnimation extends StatefulWidget {
-  const LoopVerticalAnimation({Key? key}) : super(key: key);
+  const LoopVerticalAnimation({super.key});
 
   @override
   LoopVerticalAnimationState createState() => LoopVerticalAnimationState();
@@ -199,8 +194,10 @@ class LoopVerticalAnimationState extends State<LoopVerticalAnimation>
     //用来控制动画的开始与结束以及设置动画的监听
     //vsync参数，存在vsync时会防止屏幕外动画（动画的UI不在当前屏幕时）消耗不必要的资源
     //duration 动画的时长，这里设置的 seconds: 2 为2秒，当然也可以设置毫秒 milliseconds：2000.
-    controller =
-        AnimationController(duration: const Duration(seconds: 3), vsync: this);
+    controller = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
     //动画开始、结束、向前移动或向后移动时会调用StatusListener
     controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -217,9 +214,9 @@ class LoopVerticalAnimationState extends State<LoopVerticalAnimation>
       }
     });
     animation = Tween(
-            begin: const Offset(0, 0),
-            end: Offset(0, cutOutHeight / scanLineHeight))
-        .animate(controller);
+      begin: const Offset(0, 0),
+      end: Offset(0, cutOutHeight / scanLineHeight),
+    ).animate(controller);
 
     //开始执行
     controller.forward();
@@ -271,8 +268,12 @@ class _ScanFramePainter extends CustomPainter {
         bottomBarHeight / 2;
     double height = ScreenFunc.screenHeight - bottomBarHeight;
 
-    var rect =
-        Rect.fromLTWH(leftTopX, leftTopY, frameSize.width, frameSize.height);
+    var rect = Rect.fromLTWH(
+      leftTopX,
+      leftTopY,
+      frameSize.width,
+      frameSize.height,
+    );
     // 4个点的坐标
     Offset leftTop = rect.topLeft;
     Offset leftBottom = rect.bottomLeft;

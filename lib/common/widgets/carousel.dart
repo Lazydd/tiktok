@@ -4,7 +4,7 @@ import 'package:tiktok/common/index.dart';
 
 class CarouselWidget extends StatelessWidget {
   const CarouselWidget({
-    Key? key,
+    super.key,
     this.onPageChanged,
     this.onTap,
     required this.items,
@@ -16,7 +16,7 @@ class CarouselWidget extends StatelessWidget {
     this.indicatorLeft,
     this.indicatorRight,
     this.indicatorBottom,
-  }) : super(key: key);
+  });
 
   /// 切换页码
   final Function(int, CarouselPageChangedReason)? onPageChanged;
@@ -66,7 +66,7 @@ class CarouselWidget extends StatelessWidget {
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),
-            )
+            ),
         ],
       ),
     ];

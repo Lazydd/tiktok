@@ -1,5 +1,3 @@
-library widgets;
-
 export 'text.dart';
 export 'button.dart';
 export 'carousel.dart';

@@ -1,4 +1,4 @@
-part of theme;
+part of 'index.dart';
 
 const String _DATA_KEY = "system.theme";
 

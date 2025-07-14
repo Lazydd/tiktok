@@ -1,4 +1,4 @@
-part of system_config;
+part of 'index.dart';
 
 class SystemConfigPage extends GetView<SystemConfigController> {
   const SystemConfigPage({super.key});
