@@ -80,18 +80,18 @@ abstract class RoutePages {
         name: Get.parameters['name']!,
       ),
     ),
-    GetPage(
-      name: RouteNames.rtcRoute,
-      page: () => RtcPage(
-        isDial: Get.parameters['isDial'].toString(),
-      ),
-    ),
-    GetPage(
-      name: RouteNames.rtcMoreRoute,
-      page: () => RtcMorePage(
-        isDial: Get.parameters['isDial'].toString(),
-      ),
-    ),
+    // GetPage(
+    //   name: RouteNames.rtcRoute,
+    //   page: () => RtcPage(
+    //     isDial: Get.parameters['isDial'].toString(),
+    //   ),
+    // ),
+    // GetPage(
+    //   name: RouteNames.rtcMoreRoute,
+    //   page: () => RtcMorePage(
+    //     isDial: Get.parameters['isDial'].toString(),
+    //   ),
+    // ),
     GetPage(
       name: RouteNames.mapRoute,
       page: () => MapPage(
