@@ -20,9 +20,8 @@ class RecommendController extends GetxController {
     update(["recommend"]);
   }
 
-  GlobalKey<VideoPlayerWidgetState>? get currentVideoKey {
-    return videoKeys[currentIndex];
-  }
+  VideoPlayerWidgetState? get currentVideoKey =>
+      videoKeys[currentIndex]?.currentState;
 
   void pageChange(int page) {
     currentIndex = page;

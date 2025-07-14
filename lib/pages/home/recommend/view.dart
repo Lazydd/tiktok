@@ -19,11 +19,11 @@ class RecommendPageState extends State<RecommendPage>
   }
 
   play() {
-    Get.find<RecommendController>().currentVideoKey?.currentState?.play();
+    Get.find<RecommendController>().currentVideoKey?.play();
   }
 
   pause() {
-    Get.find<RecommendController>().currentVideoKey?.currentState?.pause();
+    Get.find<RecommendController>().currentVideoKey?.pause();
   }
 }
 
