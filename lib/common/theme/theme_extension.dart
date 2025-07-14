@@ -65,7 +65,7 @@ final class AppTheme extends _ThemeData<AppTheme> {
         titleTextStyle: TextStyle(color: appBarIconColor, fontSize: 24),
         iconTheme: IconThemeData(color: appBarIconColor),
       ),
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: TabBarThemeData(
         dividerColor: Colors.transparent,
         labelColor: textColor,
         unselectedLabelStyle: TextStyle(
