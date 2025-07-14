@@ -60,7 +60,7 @@ class _PhotoPreviewState extends State<PhotoPreview> {
       backgroundColor: Colors.black,
       appBar: _isShowNavBar
           ? AppBar(
-              backgroundColor: Colors.black.withOpacity(0.6),
+              backgroundColor: Colors.black.withValues(alpha: 0.6),
               elevation: 0,
               centerTitle: true,
               title: Text(

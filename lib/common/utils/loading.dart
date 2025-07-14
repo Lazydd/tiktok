@@ -14,20 +14,16 @@ class Loading {
       ..lineWidth = 2
       ..radius = 10.0
       ..progressColor = Colors.white
-      ..backgroundColor = Colors.black.withOpacity(0.7)
+      ..backgroundColor = Colors.black.withValues(alpha: 0.7)
       ..indicatorColor = Colors.white
       ..textColor = Colors.white
-      ..maskColor = Colors.black.withOpacity(0.7)
+      ..maskColor = Colors.black.withValues(alpha: 0.7)
       ..userInteractions = true
       ..dismissOnTap = false;
   }
 
   /// show Loading
-  static void show(
-    String? text, {
-    Color? indicatorColor,
-    Color? textColor,
-  }) {
+  static void show(String? text, {Color? indicatorColor, Color? textColor}) {
     EasyLoading.instance
       ..indicatorColor = indicatorColor ?? Colors.white
       ..textColor = textColor ?? Colors.white
@@ -74,10 +70,7 @@ class Loading {
     EasyLoading.showToast(text, toastPosition: toastPosition);
   }
 
-  static void showProgress(
-    double value, {
-    String? status,
-  }) {
+  static void showProgress(double value, {String? status}) {
     EasyLoading.showProgress(value, status: status);
   }
 

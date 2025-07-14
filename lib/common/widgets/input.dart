@@ -193,7 +193,7 @@ class InputWidget extends StatelessWidget {
     this.onEditingComplete,
     this.controller,
     this.autofocus = false,
-  }) : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5);
+  }) : fillColor = fillColor ?? AppColors.surface.withValues(alpha: 0.5);
 
   /// 文本输入 - 图标文本填充
   InputWidget.iconTextFilled(
@@ -221,7 +221,7 @@ class InputWidget extends StatelessWidget {
     this.onEditingComplete,
     this.controller,
     this.autofocus = false,
-  }) : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5);
+  }) : fillColor = fillColor ?? AppColors.surface.withValues(alpha: 0.5);
 
   /// 文本输入 - 后缀图标文本填充
   InputWidget.suffixTextFilled(
@@ -249,7 +249,7 @@ class InputWidget extends StatelessWidget {
     this.onEditingComplete,
     this.controller,
     this.autofocus = false,
-  }) : fillColor = fillColor ?? AppColors.surface.withOpacity(0.5);
+  }) : fillColor = fillColor ?? AppColors.surface.withValues(alpha: 0.5);
 
   /// 搜索
   InputWidget.search({
@@ -278,7 +278,7 @@ class InputWidget extends StatelessWidget {
     this.controller,
     this.autofocus = false,
   }) : icon = icon ?? IconWidget.icon(Icons.search, color: AppColors.outline),
-       fillColor = fillColor ?? AppColors.surface.withOpacity(0.5);
+       fillColor = fillColor ?? AppColors.surface.withValues(alpha: 0.5);
 
   // 边框
   InputBorder? get _border {
@@ -352,7 +352,7 @@ class InputWidget extends StatelessWidget {
         hintText: hintText,
         hintStyle: AppTextStyles.bodyText2?.copyWith(
           fontWeight: FontWeight.w300,
-          color: AppColors.secondary.withOpacity(0.5),
+          color: AppColors.secondary.withValues(alpha: 0.5),
         ),
         contentPadding: contentPadding ?? AppSpace.edgeInput,
         isCollapsed: true,

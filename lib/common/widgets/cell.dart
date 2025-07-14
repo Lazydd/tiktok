@@ -176,7 +176,7 @@ class CustomCell extends StatelessWidget {
             textAlign: TextAlign.right,
             style: TextStyle(
               fontSize: 16.w,
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha: 0.7),
             ).merge(valueStyle),
             child: value!,
           ),

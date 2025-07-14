@@ -33,7 +33,7 @@ class SliderIndicatorWidget extends StatelessWidget {
           height: !isCircle ? 5 : 8,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(4)),
-            color: currentIndex == index ? color : color.withOpacity(0.3),
+            color: currentIndex == index ? color : color.withValues(alpha: 0.3),
           ),
         );
       }),

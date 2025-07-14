@@ -38,7 +38,7 @@ class _VoiceBubbleState extends State<VoiceBubble> {
         child: Row(
           children: [
             Container(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withValues(alpha: 0.5),
               margin: EdgeInsets.only(right: 5.w),
               child: CustomPaint(
                 // width * 1.5

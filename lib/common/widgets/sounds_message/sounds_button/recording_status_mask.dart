@@ -58,7 +58,7 @@ class RecordingStatusMaskView extends StatelessWidget {
 
     return Material(
       // type: MaterialType.transparency,
-      color: Colors.black.withOpacity(0.7),
+      color: Colors.black.withValues(alpha: 0.7),
       // color: Colors.transparent,
       child: PolymerState(
         data: polymerData,

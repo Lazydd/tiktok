@@ -107,12 +107,12 @@ class ButtonWidget extends StatelessWidget {
     this.borderColor,
     this.width,
     this.height,
-  })  : child = TextWidget.button(
-          text: text!,
-          size: textSize,
-          color: textColor ?? AppColors.onPrimaryContainer,
-          weight: textWeight,
-        );
+  }) : child = TextWidget.button(
+         text: text!,
+         size: textSize,
+         color: textColor ?? AppColors.onPrimaryContainer,
+         weight: textWeight,
+       );
 
   /// 图标
   const ButtonWidget.icon(
@@ -144,13 +144,13 @@ class ButtonWidget extends StatelessWidget {
     this.borderColor,
     this.width,
     this.height,
-  })  : backgroundColor = bgColor ?? AppColors.primary,
-        child = TextWidget.button(
-          text: text!,
-          size: textSize,
-          color: textColor ?? AppColors.onPrimaryContainer,
-          weight: textWeight,
-        );
+  }) : backgroundColor = bgColor ?? AppColors.primary,
+       child = TextWidget.button(
+         text: text!,
+         size: textSize,
+         color: textColor ?? AppColors.onPrimaryContainer,
+         weight: textWeight,
+       );
 
   /// 文字/填充/圆形 按钮
   ButtonWidget.textRoundFilled(
@@ -167,13 +167,13 @@ class ButtonWidget extends StatelessWidget {
     this.borderColor,
     this.width,
     this.height,
-  })  : backgroundColor = bgColor ?? AppColors.primary,
-        child = TextWidget.button(
-          text: text!,
-          size: textSize,
-          color: textColor ?? AppColors.onPrimaryContainer,
-          weight: textWeight,
-        );
+  }) : backgroundColor = bgColor ?? AppColors.primary,
+       child = TextWidget.button(
+         text: text!,
+         size: textSize,
+         color: textColor ?? AppColors.onPrimaryContainer,
+         weight: textWeight,
+       );
 
   /// 图标文字 上下
   ButtonWidget.iconTextUpDown(
@@ -190,17 +190,15 @@ class ButtonWidget extends StatelessWidget {
     this.borderColor,
     this.width,
     this.height,
-  })  : child = <Widget>[
-          icon!,
-          TextWidget.button(
-            text: text!,
-            size: textSize,
-            color: textColor ?? AppColors.onPrimaryContainer,
-            weight: textWeight,
-          ),
-        ].toColumn(
-          mainAxisSize: MainAxisSize.min,
-        );
+  }) : child = <Widget>[
+         icon!,
+         TextWidget.button(
+           text: text!,
+           size: textSize,
+           color: textColor ?? AppColors.onPrimaryContainer,
+           weight: textWeight,
+         ),
+       ].toColumn(mainAxisSize: MainAxisSize.min);
 
   /// 图标 / 文字 / 边框
   ButtonWidget.iconTextOutlined(
@@ -217,17 +215,15 @@ class ButtonWidget extends StatelessWidget {
     this.borderColor,
     this.width,
     this.height,
-  })  : child = <Widget>[
-          icon!,
-          TextWidget.button(
-            text: text!,
-            size: textSize,
-            color: textColor ?? AppColors.onPrimaryContainer,
-            weight: textWeight,
-          ),
-        ].toRow(
-          mainAxisSize: MainAxisSize.min,
-        );
+  }) : child = <Widget>[
+         icon!,
+         TextWidget.button(
+           text: text!,
+           size: textSize,
+           color: textColor ?? AppColors.onPrimaryContainer,
+           weight: textWeight,
+         ),
+       ].toRow(mainAxisSize: MainAxisSize.min);
 
   /// 图标 / 文字 / 上下 / 边框
   ButtonWidget.iconTextUpDownOutlined(
@@ -244,17 +240,15 @@ class ButtonWidget extends StatelessWidget {
     this.borderColor,
     this.width,
     this.height,
-  })  : child = <Widget>[
-          icon!,
-          TextWidget.button(
-            text: text!,
-            size: textSize,
-            color: textColor ?? AppColors.onPrimaryContainer,
-            weight: textWeight,
-          ),
-        ].toColumn(
-          mainAxisSize: MainAxisSize.min,
-        );
+  }) : child = <Widget>[
+         icon!,
+         TextWidget.button(
+           text: text!,
+           size: textSize,
+           color: textColor ?? AppColors.onPrimaryContainer,
+           weight: textWeight,
+         ),
+       ].toColumn(mainAxisSize: MainAxisSize.min);
 
   /// 文字 / 图标
   ButtonWidget.textIcon(
@@ -271,17 +265,15 @@ class ButtonWidget extends StatelessWidget {
     this.borderColor,
     this.width,
     this.height,
-  })  : child = <Widget>[
-          icon!,
-          TextWidget.button(
-            text: text!,
-            size: textSize,
-            color: textColor ?? AppColors.onPrimaryContainer,
-            weight: textWeight,
-          ),
-        ].toRow(
-          mainAxisSize: MainAxisSize.min,
-        );
+  }) : child = <Widget>[
+         icon!,
+         TextWidget.button(
+           text: text!,
+           size: textSize,
+           color: textColor ?? AppColors.onPrimaryContainer,
+           weight: textWeight,
+         ),
+       ].toRow(mainAxisSize: MainAxisSize.min);
 
   // 背景
   WidgetStateProperty<Color?>? get _backgroundColor {
@@ -297,16 +289,14 @@ class ButtonWidget extends StatelessWidget {
   WidgetStateProperty<BorderSide?>? get _side {
     switch (type) {
       case ButtonWidgetType.secondary:
-        return WidgetStateProperty.all(BorderSide(
-          color: borderColor ?? AppColors.primary,
-          width: 1,
-        ));
+        return WidgetStateProperty.all(
+          BorderSide(color: borderColor ?? AppColors.primary, width: 1),
+        );
       case ButtonWidgetType.iconTextOutlined:
       case ButtonWidgetType.iconTextUpDownOutlined:
-        return WidgetStateProperty.all(BorderSide(
-          color: borderColor ?? AppColors.outline,
-          width: 1,
-        ));
+        return WidgetStateProperty.all(
+          BorderSide(color: borderColor ?? AppColors.outline, width: 1),
+        );
       default:
         return null;
     }
@@ -330,7 +320,8 @@ class ButtonWidget extends StatelessWidget {
         return WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius ?? AppRadius.button)),
+              Radius.circular(borderRadius ?? AppRadius.button),
+            ),
           ),
         );
       case ButtonWidgetType.textFilled:
@@ -339,7 +330,8 @@ class ButtonWidget extends StatelessWidget {
         return WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
-                Radius.circular(borderRadius ?? AppRadius.buttonTextFilled)),
+              Radius.circular(borderRadius ?? AppRadius.buttonTextFilled),
+            ),
           ),
         );
       case ButtonWidgetType.textRoundFilled:
@@ -374,10 +366,7 @@ class ButtonWidget extends StatelessWidget {
           color: AppColors.onPrimary,
         );
       case ButtonWidgetType.secondary:
-        return TextWidget.button(
-          text: text!,
-          color: AppColors.primary,
-        );
+        return TextWidget.button(text: text!, color: AppColors.primary);
       case ButtonWidgetType.icon:
         return icon;
       default:
@@ -466,13 +455,9 @@ class CustomButton extends StatelessWidget {
       case CustomButtonShape.stadium:
         return const StadiumBorder();
       case CustomButtonShape.radius:
-        return RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.w),
-        );
+        return RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.w));
       case CustomButtonShape.square:
-        return const RoundedRectangleBorder(
-          borderRadius: BorderRadius.zero,
-        );
+        return const RoundedRectangleBorder(borderRadius: BorderRadius.zero);
     }
   }
 
@@ -508,10 +493,9 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: ButtonStyle(
           textStyle: WidgetStateProperty.all(
-            Theme.of(context)
-                .textTheme
-                .labelLarge
-                ?.copyWith(fontSize: fontSize ?? _fontSize),
+            Theme.of(
+              context,
+            ).textTheme.labelLarge?.copyWith(fontSize: fontSize ?? _fontSize),
           ),
           padding: WidgetStateProperty.all(padding ?? _padding),
           foregroundColor: WidgetStateProperty.resolveWith((states) {
@@ -524,10 +508,10 @@ class CustomButton extends StatelessWidget {
                 final color = foregroundColor ?? colorScheme.primary;
                 final opacity = color.opacity / 2;
                 if (states.contains(WidgetState.pressed)) {
-                  return color.withOpacity(opacity);
+                  return color.withValues(alpha: opacity);
                 }
                 if (states.contains(WidgetState.disabled)) {
-                  return color.withOpacity(opacity);
+                  return color.withValues(alpha: opacity);
                 }
                 return color;
             }
@@ -535,14 +519,15 @@ class CustomButton extends StatelessWidget {
           backgroundColor: WidgetStateProperty.resolveWith((states) {
             switch (type) {
               case CustomButtonType.filled:
-                final color = backgroundColor ??
-                    colorScheme.primary.withOpacity(isIcon ? 0.1 : 1);
+                final color =
+                    backgroundColor ??
+                    colorScheme.primary.withValues(alpha: isIcon ? 0.1 : 1);
                 final opacity = color.opacity / 2;
                 if (states.contains(WidgetState.pressed)) {
-                  return color.withOpacity(opacity);
+                  return color.withValues(alpha: opacity);
                 }
                 if (states.contains(WidgetState.disabled)) {
-                  return color.withOpacity(opacity);
+                  return color.withValues(alpha: opacity);
                 }
                 return color;
               case CustomButtonType.ghost:
@@ -560,17 +545,14 @@ class CustomButton extends StatelessWidget {
                 final opacity = color.opacity / 2;
                 if (states.contains(WidgetState.pressed)) {
                   return BorderSide(
-                    color: color.withOpacity(opacity),
+                    color: color.withValues(alpha: opacity),
                     width: 2.w,
                   );
                 }
                 if (states.contains(WidgetState.disabled)) {
-                  return BorderSide(color: color.withOpacity(opacity));
+                  return BorderSide(color: color.withValues(alpha: opacity));
                 }
-                return BorderSide(
-                  color: color,
-                  width: 2.w,
-                );
+                return BorderSide(color: color, width: 2.w);
             }
           }),
           shape: WidgetStateProperty.all(_shape),
@@ -596,15 +578,12 @@ class _ButtonWithIcon extends CustomButton {
     super.height,
     EdgeInsetsGeometry? padding,
   }) : super(
-          child: _ButtonWithIconChild(
-            icon: icon,
-            size: size,
-            padding: padding,
-          ),
-          backgroundColor: backgroundColor ?? foregroundColor?.withOpacity(0.1),
-          isIcon: true,
-          padding: padding ?? const EdgeInsets.all(0),
-        );
+         child: _ButtonWithIconChild(icon: icon, size: size, padding: padding),
+         backgroundColor:
+             backgroundColor ?? foregroundColor?.withValues(alpha: 0.1),
+         isIcon: true,
+         padding: padding ?? const EdgeInsets.all(0),
+       );
 }
 
 class _ButtonWithIconChild extends StatelessWidget {
@@ -643,8 +622,9 @@ class _ButtonWithIconChild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          padding == null ? EdgeInsets.all(_padding) : const EdgeInsets.all(0),
+      padding: padding == null
+          ? EdgeInsets.all(_padding)
+          : const EdgeInsets.all(0),
       child: IconTheme.merge(
         data: IconThemeData(size: _iconSize),
         child: icon,

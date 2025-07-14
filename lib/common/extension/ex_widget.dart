@@ -13,15 +13,8 @@ typedef GestureOnTapChangeCallback = void Function<T>(T val);
 /// 扩展 Widget
 extension ExWidget on Widget {
   /// 对齐
-  Widget align(
-    AlignmentGeometry alignment, {
-    Key? key,
-  }) =>
-      Align(
-        key: key,
-        alignment: alignment,
-        child: this,
-      );
+  Widget align(AlignmentGeometry alignment, {Key? key}) =>
+      Align(key: key, alignment: alignment, child: this);
 
   /// 对齐 中间
   Widget alignCenter() => align(Alignment.center);
@@ -39,37 +32,24 @@ extension ExWidget on Widget {
   Widget alignBottom() => align(Alignment.bottomCenter);
 
   // 比例布局
-  Widget aspectRatio({
-    Key? key,
-    required double aspectRatio,
-  }) =>
-      AspectRatio(
-        key: key,
-        aspectRatio: aspectRatio,
-        child: this,
-      );
+  Widget aspectRatio({Key? key, required double aspectRatio}) =>
+      AspectRatio(key: key, aspectRatio: aspectRatio, child: this);
 
   /// 背景颜色
-  Widget backgroundColor(
-    Color color, {
-    Key? key,
-  }) =>
-      DecoratedBox(
-        key: key,
-        decoration: BoxDecoration(color: color),
-        child: this,
-      );
+  Widget backgroundColor(Color color, {Key? key}) => DecoratedBox(
+    key: key,
+    decoration: BoxDecoration(color: color),
+    child: this,
+  );
 
   /// 背景图片
-  Widget backgroundImage(
-    DecorationImage image, {
-    double? radius,
-    Key? key,
-  }) =>
+  Widget backgroundImage(DecorationImage image, {double? radius, Key? key}) =>
       DecoratedBox(
         key: key,
         decoration: BoxDecoration(
-            image: image, borderRadius: BorderRadius.circular(radius ?? 0)),
+          image: image,
+          borderRadius: BorderRadius.circular(radius ?? 0),
+        ),
         child: this,
       );
 
@@ -100,11 +80,7 @@ extension ExWidget on Widget {
             : BorderSide(color: color, width: bottom ?? all ?? 0, style: style),
       ),
     );
-    return DecoratedBox(
-      key: key,
-      decoration: decoration,
-      child: this,
-    );
+    return DecoratedBox(key: key, decoration: decoration, child: this);
   }
 
   /// 圆角
@@ -124,11 +100,7 @@ extension ExWidget on Widget {
         bottomRight: Radius.circular(bottomRight ?? all ?? 0.0),
       ),
     );
-    return DecoratedBox(
-      key: key,
-      decoration: decoration,
-      child: this,
-    );
+    return DecoratedBox(key: key, decoration: decoration, child: this);
   }
 
   /// 阴影
@@ -149,11 +121,7 @@ extension ExWidget on Widget {
         ),
       ],
     );
-    return DecoratedBox(
-      key: key,
-      decoration: decoration,
-      child: this,
-    );
+    return DecoratedBox(key: key, decoration: decoration, child: this);
   }
 
   /// 卡片
@@ -187,39 +155,37 @@ extension ExWidget on Widget {
     double? blurRadius,
     double? padding,
     Widget? title,
-  }) =>
-      Container(
-          padding: EdgeInsets.all(padding ?? 0),
-          decoration: BoxDecoration(
-            color: color ?? AppColors.background,
-            borderRadius: BorderRadius.all(
-              Radius.circular(radius ?? 5),
-            ),
-            border: border,
-            // boxShadow: [
-            //   BoxShadow(
-            //     // x偏移量 | y偏移量
-            //     offset: const Offset(0, 3),
-            //     color: shadowColor ?? AppColors.outline.withOpacity(0.15),
-            //     // 阴影模糊半径
-            //     blurRadius: blurRadius ?? 8,
-            //     // 阴影扩散半径
-            //     spreadRadius: 0,
-            //     blurStyle: BlurStyle.normal,
-            //   ),
-            // ],
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: (padding ?? 0) > 0
-                    ? const EdgeInsets.all(0)
-                    : const EdgeInsets.fromLTRB(15, 15, 15, 0),
-                child: title,
-              ),
-              this,
-            ],
-          ));
+  }) => Container(
+    padding: EdgeInsets.all(padding ?? 0),
+    decoration: BoxDecoration(
+      color: color ?? AppColors.background,
+      borderRadius: BorderRadius.all(Radius.circular(radius ?? 5)),
+      border: border,
+      // boxShadow: [
+      //   BoxShadow(
+      //     // x偏移量 | y偏移量
+      //     offset: const Offset(0, 3),
+      //     color: shadowColor ?? AppColors.outline.withValues(alpha:0.15),
+      //     // 阴影模糊半径
+      //     blurRadius: blurRadius ?? 8,
+      //     // 阴影扩散半径
+      //     spreadRadius: 0,
+      //     blurStyle: BlurStyle.normal,
+      //   ),
+      // ],
+    ),
+    child: Column(
+      children: [
+        Padding(
+          padding: (padding ?? 0) > 0
+              ? const EdgeInsets.all(0)
+              : const EdgeInsets.fromLTRB(15, 15, 15, 0),
+          child: title,
+        ),
+        this,
+      ],
+    ),
+  );
 
   Widget frostedCard({
     Key? key,
@@ -230,49 +196,41 @@ extension ExWidget on Widget {
     // 模糊度
     double? blurDegree,
     double? blurRadius,
-  }) =>
-      Container(
-        decoration: BoxDecoration(
-          color: color ??
-              (Get.isDarkMode
-                  ? const Color.fromRGBO(0, 0, 0, 0.4)
-                  : const Color.fromRGBO(223, 223, 223, 0.4)),
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? 5),
-          ),
-          boxShadow: [
-            BoxShadow(
-              // x偏移量 | y偏移量
-              offset: const Offset(0, 0),
-              color: shadowColor ?? AppColors.outline.withOpacity(0.1),
-              // 阴影模糊半径
-              blurRadius: blurRadius ?? 8,
-              // 阴影扩散半径
-              spreadRadius: 0,
-              blurStyle: BlurStyle.normal,
-            ),
-          ],
+  }) => Container(
+    decoration: BoxDecoration(
+      color:
+          color ??
+          (Get.isDarkMode
+              ? const Color.fromRGBO(0, 0, 0, 0.4)
+              : const Color.fromRGBO(223, 223, 223, 0.4)),
+      borderRadius: BorderRadius.all(Radius.circular(radius ?? 5)),
+      boxShadow: [
+        BoxShadow(
+          // x偏移量 | y偏移量
+          offset: const Offset(0, 0),
+          color: shadowColor ?? AppColors.outline.withValues(alpha: 0.1),
+          // 阴影模糊半径
+          blurRadius: blurRadius ?? 8,
+          // 阴影扩散半径
+          spreadRadius: 0,
+          blurStyle: BlurStyle.normal,
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? 5),
-          ),
-          //背景过滤器
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: blurDegree ?? 5.0,
-              sigmaY: blurDegree ?? 5.0,
-            ),
-            child: this,
-          ),
+      ],
+    ),
+    child: ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(radius ?? 5)),
+      //背景过滤器
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: blurDegree ?? 5.0,
+          sigmaY: blurDegree ?? 5.0,
         ),
-      );
+        child: this,
+      ),
+    ),
+  );
   // 居中
-  Widget center({
-    Key? key,
-    double? widthFactor,
-    double? heightFactor,
-  }) =>
+  Widget center({Key? key, double? widthFactor, double? heightFactor}) =>
       Center(
         key: key,
         widthFactor: widthFactor,
@@ -281,23 +239,19 @@ extension ExWidget on Widget {
       );
 
   /// 裁剪 oval
-  Widget clipOval({Key? key}) => ClipOval(
-        key: key,
-        child: this,
-      );
+  Widget clipOval({Key? key}) => ClipOval(key: key, child: this);
 
   /// 裁剪 rect
   Widget clipRect({
     Key? key,
     CustomClipper<Rect>? clipper,
     Clip clipBehavior = Clip.hardEdge,
-  }) =>
-      ClipRect(
-        key: key,
-        clipper: clipper,
-        clipBehavior: clipBehavior,
-        child: this,
-      );
+  }) => ClipRect(
+    key: key,
+    clipper: clipper,
+    clipBehavior: clipBehavior,
+    child: this,
+  );
 
   /// 裁剪圆角
   Widget clipRRect({
@@ -309,19 +263,18 @@ extension ExWidget on Widget {
     double? bottomRight,
     CustomClipper<RRect>? clipper,
     Clip clipBehavior = Clip.antiAlias,
-  }) =>
-      ClipRRect(
-        key: key,
-        clipper: clipper,
-        clipBehavior: clipBehavior,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(topLeft ?? all ?? 0.0),
-          topRight: Radius.circular(topRight ?? all ?? 0.0),
-          bottomLeft: Radius.circular(bottomLeft ?? all ?? 0.0),
-          bottomRight: Radius.circular(bottomRight ?? all ?? 0.0),
-        ),
-        child: this,
-      );
+  }) => ClipRRect(
+    key: key,
+    clipper: clipper,
+    clipBehavior: clipBehavior,
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(topLeft ?? all ?? 0.0),
+      topRight: Radius.circular(topRight ?? all ?? 0.0),
+      bottomLeft: Radius.circular(bottomLeft ?? all ?? 0.0),
+      bottomRight: Radius.circular(bottomRight ?? all ?? 0.0),
+    ),
+    child: this,
+  );
 
   /// 约束
   Widget constrained({
@@ -342,11 +295,7 @@ extension ExWidget on Widget {
     constraints = (width != null || height != null)
         ? constraints.tighten(width: width, height: height)
         : constraints;
-    return ConstrainedBox(
-      key: key,
-      constraints: constraints,
-      child: this,
-    );
+    return ConstrainedBox(key: key, constraints: constraints, child: this);
   }
 
   // 取消父级约束
@@ -356,15 +305,14 @@ extension ExWidget on Widget {
     AlignmentGeometry alignment = Alignment.center,
     Axis? constrainedAxis,
     Clip clipBehavior = Clip.none,
-  }) =>
-      UnconstrainedBox(
-        key: key,
-        textDirection: textDirection,
-        alignment: alignment,
-        constrainedAxis: constrainedAxis,
-        clipBehavior: clipBehavior,
-        child: this,
-      );
+  }) => UnconstrainedBox(
+    key: key,
+    textDirection: textDirection,
+    alignment: alignment,
+    constrainedAxis: constrainedAxis,
+    clipBehavior: clipBehavior,
+    child: this,
+  );
 
   /// 盒子装饰器
   Widget decorated({
@@ -403,67 +351,48 @@ extension ExWidget on Widget {
     Key? key,
     BorderRadiusGeometry borderRadius = BorderRadius.zero,
     Color shadowColor = const Color(0xFF000000),
-  }) =>
-      Material(
-        key: key,
-        color: Colors.transparent,
-        elevation: elevation,
-        borderRadius: borderRadius,
-        shadowColor: shadowColor,
-        child: this,
-      );
+  }) => Material(
+    key: key,
+    color: Colors.transparent,
+    elevation: elevation,
+    borderRadius: borderRadius,
+    shadowColor: shadowColor,
+    child: this,
+  );
 
   /// expanded 撑满
-  Widget expanded({
-    Key? key,
-    int flex = 1,
-  }) =>
-      Expanded(
-        key: key,
-        flex: flex,
-        child: this,
-      );
+  Widget expanded({Key? key, int flex = 1}) =>
+      Expanded(key: key, flex: flex, child: this);
 
   Widget fittedBox({
     Key? key,
     BoxFit fit = BoxFit.contain,
     AlignmentGeometry alignment = Alignment.centerLeft,
     Clip clipBehavior = Clip.none,
-  }) =>
-      FittedBox(
-        key: key,
-        fit: fit,
-        alignment: alignment,
-        clipBehavior: clipBehavior,
-        child: this,
-      );
+  }) => FittedBox(
+    key: key,
+    fit: fit,
+    alignment: alignment,
+    clipBehavior: clipBehavior,
+    child: this,
+  );
 
   /// 弹性布局 flexible
-  Widget flexible({
-    Key? key,
-    int flex = 1,
-    FlexFit fit = FlexFit.loose,
-  }) =>
-      Flexible(
-        key: key,
-        flex: flex,
-        fit: fit,
-        child: this,
-      );
+  Widget flexible({Key? key, int flex = 1, FlexFit fit = FlexFit.loose}) =>
+      Flexible(key: key, flex: flex, fit: fit, child: this);
 
   Widget fractionallySizedBox({
     Key? key,
     AlignmentGeometry alignment = Alignment.center,
     double? widthFactor,
     double? heightFactor,
-  }) =>
-      FractionallySizedBox(
-        key: key,
-        alignment: alignment,
-        widthFactor: widthFactor,
-        heightFactor: heightFactor,
-        child: this,
-      );
+  }) => FractionallySizedBox(
+    key: key,
+    alignment: alignment,
+    widthFactor: widthFactor,
+    heightFactor: heightFactor,
+    child: this,
+  );
 
   /// 手势
   Widget gestures({
@@ -507,55 +436,54 @@ extension ExWidget on Widget {
     HitTestBehavior? behavior,
     bool excludeFromSemantics = false,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-  }) =>
-      GestureDetector(
-        key: key,
-        onTapDown: (TapDownDetails tapDownDetails) {
-          if (onTapDown != null) onTapDown(tapDownDetails);
-          if (onTapChange != null) onTapChange(true);
-        },
-        onTapCancel: () {
-          if (onTapCancel != null) onTapCancel();
-          if (onTapChange != null) onTapChange(false);
-        },
-        onTap: () {
-          if (onTap != null) onTap();
-          if (onTapChange != null) onTapChange(false);
-        },
-        onTapUp: onTapUp,
-        onDoubleTap: onDoubleTap,
-        onLongPress: onLongPress,
-        onLongPressStart: onLongPressStart,
-        onLongPressEnd: onLongPressEnd,
-        onLongPressMoveUpdate: onLongPressMoveUpdate,
-        onLongPressUp: onLongPressUp,
-        onVerticalDragStart: onVerticalDragStart,
-        onVerticalDragEnd: onVerticalDragEnd,
-        onVerticalDragDown: onVerticalDragDown,
-        onVerticalDragCancel: onVerticalDragCancel,
-        onVerticalDragUpdate: onVerticalDragUpdate,
-        onHorizontalDragStart: onHorizontalDragStart,
-        onHorizontalDragEnd: onHorizontalDragEnd,
-        onHorizontalDragCancel: onHorizontalDragCancel,
-        onHorizontalDragUpdate: onHorizontalDragUpdate,
-        onHorizontalDragDown: onHorizontalDragDown,
-        onForcePressStart: onForcePressStart,
-        onForcePressEnd: onForcePressEnd,
-        onForcePressPeak: onForcePressPeak,
-        onForcePressUpdate: onForcePressUpdate,
-        onPanStart: onPanStart,
-        onPanEnd: onPanEnd,
-        onPanCancel: onPanCancel,
-        onPanDown: onPanDown,
-        onPanUpdate: onPanUpdate,
-        onScaleStart: onScaleStart,
-        onScaleEnd: onScaleEnd,
-        onScaleUpdate: onScaleUpdate,
-        behavior: behavior ?? HitTestBehavior.opaque,
-        excludeFromSemantics: excludeFromSemantics,
-        dragStartBehavior: dragStartBehavior,
-        child: this,
-      );
+  }) => GestureDetector(
+    key: key,
+    onTapDown: (TapDownDetails tapDownDetails) {
+      if (onTapDown != null) onTapDown(tapDownDetails);
+      if (onTapChange != null) onTapChange(true);
+    },
+    onTapCancel: () {
+      if (onTapCancel != null) onTapCancel();
+      if (onTapChange != null) onTapChange(false);
+    },
+    onTap: () {
+      if (onTap != null) onTap();
+      if (onTapChange != null) onTapChange(false);
+    },
+    onTapUp: onTapUp,
+    onDoubleTap: onDoubleTap,
+    onLongPress: onLongPress,
+    onLongPressStart: onLongPressStart,
+    onLongPressEnd: onLongPressEnd,
+    onLongPressMoveUpdate: onLongPressMoveUpdate,
+    onLongPressUp: onLongPressUp,
+    onVerticalDragStart: onVerticalDragStart,
+    onVerticalDragEnd: onVerticalDragEnd,
+    onVerticalDragDown: onVerticalDragDown,
+    onVerticalDragCancel: onVerticalDragCancel,
+    onVerticalDragUpdate: onVerticalDragUpdate,
+    onHorizontalDragStart: onHorizontalDragStart,
+    onHorizontalDragEnd: onHorizontalDragEnd,
+    onHorizontalDragCancel: onHorizontalDragCancel,
+    onHorizontalDragUpdate: onHorizontalDragUpdate,
+    onHorizontalDragDown: onHorizontalDragDown,
+    onForcePressStart: onForcePressStart,
+    onForcePressEnd: onForcePressEnd,
+    onForcePressPeak: onForcePressPeak,
+    onForcePressUpdate: onForcePressUpdate,
+    onPanStart: onPanStart,
+    onPanEnd: onPanEnd,
+    onPanCancel: onPanCancel,
+    onPanDown: onPanDown,
+    onPanUpdate: onPanUpdate,
+    onScaleStart: onScaleStart,
+    onScaleEnd: onScaleEnd,
+    onScaleUpdate: onScaleUpdate,
+    behavior: behavior ?? HitTestBehavior.opaque,
+    excludeFromSemantics: excludeFromSemantics,
+    dragStartBehavior: dragStartBehavior,
+    child: this,
+  );
 
   /// 手势
   Widget onTap(
@@ -564,15 +492,14 @@ extension ExWidget on Widget {
     HitTestBehavior? behavior,
     bool excludeFromSemantics = false,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-  }) =>
-      GestureDetector(
-        key: key,
-        onTap: onTap,
-        behavior: behavior ?? HitTestBehavior.opaque,
-        excludeFromSemantics: excludeFromSemantics,
-        dragStartBehavior: dragStartBehavior,
-        child: this,
-      );
+  }) => GestureDetector(
+    key: key,
+    onTap: onTap,
+    behavior: behavior ?? HitTestBehavior.opaque,
+    excludeFromSemantics: excludeFromSemantics,
+    dragStartBehavior: dragStartBehavior,
+    child: this,
+  );
 
   /// 长按手势
   Widget onLongPress(
@@ -581,63 +508,49 @@ extension ExWidget on Widget {
     HitTestBehavior? behavior,
     bool excludeFromSemantics = false,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-  }) =>
-      GestureDetector(
-        key: key,
-        onLongPress: onLongPress,
-        behavior: behavior ?? HitTestBehavior.opaque,
-        excludeFromSemantics: excludeFromSemantics,
-        dragStartBehavior: dragStartBehavior,
-        child: this,
-      );
+  }) => GestureDetector(
+    key: key,
+    onLongPress: onLongPress,
+    behavior: behavior ?? HitTestBehavior.opaque,
+    excludeFromSemantics: excludeFromSemantics,
+    dragStartBehavior: dragStartBehavior,
+    child: this,
+  );
 
   /// 约束 高度
-  Widget height(
-    double height, {
-    Key? key,
-  }) =>
-      ConstrainedBox(
-        key: key,
-        constraints: BoxConstraints.tightFor(height: height),
-        child: this,
-      );
+  Widget height(double height, {Key? key}) => ConstrainedBox(
+    key: key,
+    constraints: BoxConstraints.tightFor(height: height),
+    child: this,
+  );
 
   /// 限制盒子 最大宽高
   Widget limitedBox({
     Key? key,
     double maxWidth = double.infinity,
     double maxHeight = double.infinity,
-  }) =>
-      LimitedBox(
-        key: key,
-        maxWidth: maxWidth,
-        maxHeight: maxHeight,
-        child: this,
-      );
+  }) => LimitedBox(
+    key: key,
+    maxWidth: maxWidth,
+    maxHeight: maxHeight,
+    child: this,
+  );
 
   /// 偏移
-  Widget offstage({
-    Key? key,
-    bool offstage = true,
-  }) =>
-      Offstage(
-        key: key,
-        offstage: offstage,
-        child: this,
-      );
+  Widget offstage({Key? key, bool offstage = true}) =>
+      Offstage(key: key, offstage: offstage, child: this);
 
   /// 透明度
   Widget opacity(
     double opacity, {
     Key? key,
     bool alwaysIncludeSemantics = false,
-  }) =>
-      Opacity(
-        key: key,
-        opacity: opacity,
-        alwaysIncludeSemantics: alwaysIncludeSemantics,
-        child: this,
-      );
+  }) => Opacity(
+    key: key,
+    opacity: opacity,
+    alwaysIncludeSemantics: alwaysIncludeSemantics,
+    child: this,
+  );
 
   /// 溢出
   Widget overflow({
@@ -647,16 +560,15 @@ extension ExWidget on Widget {
     double? maxWidth,
     double? minHeight,
     double? maxHeight,
-  }) =>
-      OverflowBox(
-        key: key,
-        alignment: alignment,
-        minWidth: minWidth,
-        maxWidth: minWidth,
-        minHeight: minHeight,
-        maxHeight: maxHeight,
-        child: this,
-      );
+  }) => OverflowBox(
+    key: key,
+    alignment: alignment,
+    minWidth: minWidth,
+    maxWidth: minWidth,
+    minHeight: minHeight,
+    maxHeight: maxHeight,
+    child: this,
+  );
 
   /// 内间距
   Widget padding({
@@ -669,18 +581,18 @@ extension ExWidget on Widget {
     double? bottom,
     double? left,
     double? right,
-  }) =>
-      Padding(
-        key: key,
-        padding: value ??
-            EdgeInsets.only(
-              top: top ?? vertical ?? all ?? 0.0,
-              bottom: bottom ?? vertical ?? all ?? 0.0,
-              left: left ?? horizontal ?? all ?? 0.0,
-              right: right ?? horizontal ?? all ?? 0.0,
-            ),
-        child: this,
-      );
+  }) => Padding(
+    key: key,
+    padding:
+        value ??
+        EdgeInsets.only(
+          top: top ?? vertical ?? all ?? 0.0,
+          bottom: bottom ?? vertical ?? all ?? 0.0,
+          left: left ?? horizontal ?? all ?? 0.0,
+          right: right ?? horizontal ?? all ?? 0.0,
+        ),
+    child: this,
+  );
 
   // /// 内间距 全
   // Widget paddingAll(double val) => padding(all: val);
@@ -714,18 +626,18 @@ extension ExWidget on Widget {
     double? bottom,
     double? left,
     double? right,
-  }) =>
-      SliverPadding(
-        key: key,
-        padding: value ??
-            EdgeInsets.only(
-              top: top ?? vertical ?? all ?? 0.0,
-              bottom: bottom ?? vertical ?? all ?? 0.0,
-              left: left ?? horizontal ?? all ?? 0.0,
-              right: right ?? horizontal ?? all ?? 0.0,
-            ),
-        sliver: this,
-      );
+  }) => SliverPadding(
+    key: key,
+    padding:
+        value ??
+        EdgeInsets.only(
+          top: top ?? vertical ?? all ?? 0.0,
+          bottom: bottom ?? vertical ?? all ?? 0.0,
+          left: left ?? horizontal ?? all ?? 0.0,
+          right: right ?? horizontal ?? all ?? 0.0,
+        ),
+    sliver: this,
+  );
 
   /// 内间距 下
   Widget sliverPaddingBottom(double val) => sliverPadding(bottom: val);
@@ -754,17 +666,16 @@ extension ExWidget on Widget {
     double? bottom,
     double? width,
     double? height,
-  }) =>
-      Positioned(
-        key: key,
-        left: left,
-        top: top,
-        right: right,
-        bottom: bottom,
-        width: width,
-        height: height,
-        child: this,
-      );
+  }) => Positioned(
+    key: key,
+    left: left,
+    top: top,
+    right: right,
+    bottom: bottom,
+    width: width,
+    height: height,
+    child: this,
+  );
 
   // 墨水纹
   Widget inkWell({
@@ -773,23 +684,20 @@ extension ExWidget on Widget {
     double? borderRadius,
     Color? highlightColor,
     Color? splashColor,
-  }) =>
-      Material(
-        color: Colors.transparent,
-        child: Ink(
-          child: InkWell(
-            borderRadius: borderRadius != null
-                ? BorderRadius.all(
-                    Radius.circular(borderRadius),
-                  )
-                : null,
-            onTap: onTap ?? () {},
-            highlightColor: highlightColor ?? Colors.transparent,
-            splashColor: splashColor ?? Colors.transparent,
-            child: this,
-          ),
-        ),
-      );
+  }) => Material(
+    color: Colors.transparent,
+    child: Ink(
+      child: InkWell(
+        borderRadius: borderRadius != null
+            ? BorderRadius.all(Radius.circular(borderRadius))
+            : null,
+        onTap: onTap ?? () {},
+        highlightColor: highlightColor ?? Colors.transparent,
+        splashColor: splashColor ?? Colors.transparent,
+        child: this,
+      ),
+    ),
+  );
 
   /// 涟漪
   Widget ripple({
@@ -807,38 +715,34 @@ extension ExWidget on Widget {
     bool canRequestFocus = true,
     bool autoFocus = false,
     bool enable = true,
-  }) =>
-      enable
-          ? Builder(
-              key: key,
-              builder: (BuildContext context) {
-                GestureDetector? gestures =
-                    context.findAncestorWidgetOfExactType<GestureDetector>();
-                return Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    focusColor: focusColor,
-                    hoverColor: hoverColor,
-                    highlightColor: highlightColor,
-                    splashColor: splashColor,
-                    splashFactory: splashFactory,
-                    radius: radius,
-                    customBorder: customBorder,
-                    enableFeedback: enableFeedback,
-                    excludeFromSemantics: excludeFromSemantics,
-                    focusNode: focusNode,
-                    canRequestFocus: canRequestFocus,
-                    autofocus: autoFocus,
-                    onTap: gestures?.onTap,
-                    child: this,
-                  ),
-                );
-              },
-            )
-          : Builder(
-              key: key,
-              builder: (context) => this,
+  }) => enable
+      ? Builder(
+          key: key,
+          builder: (BuildContext context) {
+            GestureDetector? gestures = context
+                .findAncestorWidgetOfExactType<GestureDetector>();
+            return Material(
+              color: Colors.transparent,
+              child: InkWell(
+                focusColor: focusColor,
+                hoverColor: hoverColor,
+                highlightColor: highlightColor,
+                splashColor: splashColor,
+                splashFactory: splashFactory,
+                radius: radius,
+                customBorder: customBorder,
+                enableFeedback: enableFeedback,
+                excludeFromSemantics: excludeFromSemantics,
+                focusNode: focusNode,
+                canRequestFocus: canRequestFocus,
+                autofocus: autoFocus,
+                onTap: gestures?.onTap,
+                child: this,
+              ),
             );
+          },
+        )
+      : Builder(key: key, builder: (context) => this);
 
   // 刘海屏 特殊屏幕 留白
   Widget safeArea({
@@ -847,15 +751,14 @@ extension ExWidget on Widget {
     bool bottom = true,
     bool left = true,
     bool right = true,
-  }) =>
-      SafeArea(
-        key: key,
-        top: top,
-        bottom: bottom,
-        left: left,
-        right: right,
-        child: this,
-      );
+  }) => SafeArea(
+    key: key,
+    top: top,
+    bottom: bottom,
+    left: left,
+    right: right,
+    child: this,
+  );
 
   /// 比例缩放
   Widget scale({
@@ -866,15 +769,14 @@ extension ExWidget on Widget {
     Offset? origin,
     AlignmentGeometry alignment = Alignment.center,
     bool transformHitTests = true,
-  }) =>
-      Transform(
-        key: key,
-        transform: Matrix4.diagonal3Values(x ?? all ?? 0, y ?? all ?? 0, 1.0),
-        alignment: alignment,
-        origin: origin,
-        transformHitTests: transformHitTests,
-        child: this,
-      );
+  }) => Transform(
+    key: key,
+    transform: Matrix4.diagonal3Values(x ?? all ?? 0, y ?? all ?? 0, 1.0),
+    alignment: alignment,
+    origin: origin,
+    transformHitTests: transformHitTests,
+    child: this,
+  );
 
   /// 滚动视图
   Widget scrollable({
@@ -886,53 +788,39 @@ extension ExWidget on Widget {
     ScrollController? controller,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
     EdgeInsetsGeometry? padding,
-  }) =>
-      SingleChildScrollView(
-        key: key,
-        scrollDirection: scrollDirection,
-        reverse: reverse,
-        primary: primary,
-        physics: physics,
-        controller: controller,
-        dragStartBehavior: dragStartBehavior,
-        padding: padding,
-        child: this,
-      );
+  }) => SingleChildScrollView(
+    key: key,
+    scrollDirection: scrollDirection,
+    reverse: reverse,
+    primary: primary,
+    physics: physics,
+    controller: controller,
+    dragStartBehavior: dragStartBehavior,
+    padding: padding,
+    child: this,
+  );
 
   /// 语义调试
   /// MaterialApp.showSemanticsDebugger: true,
-  Widget semanticsLabel(
-    String label, {
-    Key? key,
-  }) =>
-      Semantics.fromProperties(
-        key: key,
-        properties: SemanticsProperties(label: label),
-        child: this,
-      );
+  Widget semanticsLabel(String label, {Key? key}) => Semantics.fromProperties(
+    key: key,
+    properties: SemanticsProperties(label: label),
+    child: this,
+  );
 
   /// 约束 宽高
-  Widget tight({
-    double? width,
-    double? height,
-    Key? key,
-  }) =>
-      ConstrainedBox(
-        key: key,
-        constraints: BoxConstraints.tightFor(width: width, height: height),
-        child: this,
-      );
+  Widget tight({double? width, double? height, Key? key}) => ConstrainedBox(
+    key: key,
+    constraints: BoxConstraints.tightFor(width: width, height: height),
+    child: this,
+  );
 
   /// 约束 宽高 size
-  Widget tightSize(
-    double size, {
-    Key? key,
-  }) =>
-      ConstrainedBox(
-        key: key,
-        constraints: BoxConstraints.tightFor(width: size, height: size),
-        child: this,
-      );
+  Widget tightSize(double size, {Key? key}) => ConstrainedBox(
+    key: key,
+    constraints: BoxConstraints.tightFor(width: size, height: size),
+    child: this,
+  );
 
   /// transforms Matrix4
   Widget transform({
@@ -941,43 +829,35 @@ extension ExWidget on Widget {
     Offset? origin,
     AlignmentGeometry? alignment,
     bool transformHitTests = true,
-  }) =>
-      Transform(
-        key: key,
-        transform: transform,
-        alignment: alignment,
-        origin: origin,
-        transformHitTests: transformHitTests,
-        child: this,
-      );
+  }) => Transform(
+    key: key,
+    transform: transform,
+    alignment: alignment,
+    origin: origin,
+    transformHitTests: transformHitTests,
+    child: this,
+  );
 
   /// translate 变化位置
   Widget translate({
     Key? key,
     required Offset offset,
     bool transformHitTests = true,
-  }) =>
-      Transform.translate(
-        key: key,
-        offset: offset,
-        transformHitTests: transformHitTests,
-        child: this,
-      );
+  }) => Transform.translate(
+    key: key,
+    offset: offset,
+    transformHitTests: transformHitTests,
+    child: this,
+  );
 
   /// 约束 宽度
-  Widget width(
-    double width, {
-    Key? key,
-  }) =>
-      ConstrainedBox(
-        key: key,
-        constraints: BoxConstraints.tightFor(width: width),
-        child: this,
-      );
+  Widget width(double width, {Key? key}) => ConstrainedBox(
+    key: key,
+    constraints: BoxConstraints.tightFor(width: width),
+    child: this,
+  );
 
   /// SliverToBoxAdapter
-  Widget sliverToBoxAdapter({
-    Key? key,
-  }) =>
+  Widget sliverToBoxAdapter({Key? key}) =>
       SliverToBoxAdapter(key: key, child: this);
 }

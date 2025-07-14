@@ -32,38 +32,46 @@ class RoutePageTransition extends StatelessWidget {
     required Animation<double> secondaryRouteAnimation,
     required this.child,
     required bool linearTransition,
-  })  : _primaryPositionAnimation = (linearTransition
-                ? primaryRouteAnimation
-                : CurvedAnimation(
-                    parent: primaryRouteAnimation,
-                    curve: Curves.linearToEaseOut,
-                    reverseCurve: Curves.easeInToLinear,
-                  ))
-            .drive(Tween<Offset>(
-          begin: const Offset(1.0, 0.0),
-          end: Offset.zero,
-        )),
-        _secondaryPositionAnimation = (linearTransition
-                ? secondaryRouteAnimation
-                : CurvedAnimation(
-                    parent: secondaryRouteAnimation,
-                    curve: Curves.linearToEaseOut,
-                    reverseCurve: Curves.easeInToLinear,
-                  ))
-            .drive(Tween<Offset>(
-          begin: Offset.zero,
-          end: const Offset(-1.0 / 3.0, 0.0),
-        )),
-        _primaryShadowAnimation = (linearTransition
-                ? primaryRouteAnimation
-                : CurvedAnimation(
-                    parent: primaryRouteAnimation,
-                    curve: Curves.linearToEaseOut,
-                  ))
-            .drive(DecorationTween(
-          begin: const BoxDecoration(color: Colors.transparent),
-          end: BoxDecoration(color: Colors.black.withOpacity(0.2)),
-        ));
+  }) : _primaryPositionAnimation =
+           (linearTransition
+                   ? primaryRouteAnimation
+                   : CurvedAnimation(
+                       parent: primaryRouteAnimation,
+                       curve: Curves.linearToEaseOut,
+                       reverseCurve: Curves.easeInToLinear,
+                     ))
+               .drive(
+                 Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero),
+               ),
+       _secondaryPositionAnimation =
+           (linearTransition
+                   ? secondaryRouteAnimation
+                   : CurvedAnimation(
+                       parent: secondaryRouteAnimation,
+                       curve: Curves.linearToEaseOut,
+                       reverseCurve: Curves.easeInToLinear,
+                     ))
+               .drive(
+                 Tween<Offset>(
+                   begin: Offset.zero,
+                   end: const Offset(-1.0 / 3.0, 0.0),
+                 ),
+               ),
+       _primaryShadowAnimation =
+           (linearTransition
+                   ? primaryRouteAnimation
+                   : CurvedAnimation(
+                       parent: primaryRouteAnimation,
+                       curve: Curves.linearToEaseOut,
+                     ))
+               .drive(
+                 DecorationTween(
+                   begin: const BoxDecoration(color: Colors.transparent),
+                   end: BoxDecoration(
+                     color: Colors.black.withValues(alpha: 0.2),
+                   ),
+                 ),
+               );
 
   @override
   Widget build(BuildContext context) {
