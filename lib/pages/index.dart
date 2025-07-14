@@ -1,5 +1,3 @@
-library pages;
-
 export 'system/main/index.dart';
 export 'system/login/index.dart';
 

@@ -12,11 +12,7 @@ abstract class RoutePages {
       customTransition: RouteTransition(),
       // binding: MainBinding(),
     ),
-    GetPage(
-      name: RouteNames.loginRoute,
-      page: () => const LoginPage(),
-    ),
-
+    GetPage(name: RouteNames.loginRoute, page: () => const LoginPage()),
     /// 系统
     GetPage(
       name: RouteNames.homeRoute,
@@ -74,18 +70,9 @@ abstract class RoutePages {
       name: RouteNames.systemConfigRoute,
       page: () => const SystemConfigPage(),
     ),
-    GetPage(
-      name: RouteNames.appUpdateRoute,
-      page: () => const AppUpdatePage(),
-    ),
-    GetPage(
-      name: RouteNames.generalRoute,
-      page: () => const GeneralPage(),
-    ),
-    GetPage(
-      name: RouteNames.scanCodeRoute,
-      page: () => const ScanCodePage(),
-    ),
+    GetPage(name: RouteNames.appUpdateRoute, page: () => const AppUpdatePage()),
+    GetPage(name: RouteNames.generalRoute, page: () => const GeneralPage()),
+    GetPage(name: RouteNames.scanCodeRoute, page: () => const ScanCodePage()),
     GetPage(
       name: RouteNames.chatRoute,
       page: () => ChatPage(

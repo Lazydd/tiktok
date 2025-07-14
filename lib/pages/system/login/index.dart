@@ -1,4 +1,5 @@
-library login;
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-export './controller.dart';
-export './view.dart';
+part 'controller.dart';
+part 'view.dart';

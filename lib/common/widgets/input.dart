@@ -277,8 +277,8 @@ class InputWidget extends StatelessWidget {
     this.onEditingComplete,
     this.controller,
     this.autofocus = false,
-  })  : icon = icon ?? IconWidget.icon(Icons.search, color: AppColors.outline),
-        fillColor = fillColor ?? AppColors.surface.withOpacity(0.5);
+  }) : icon = icon ?? IconWidget.icon(Icons.search, color: AppColors.outline),
+       fillColor = fillColor ?? AppColors.surface.withOpacity(0.5);
 
   // 边框
   InputBorder? get _border {

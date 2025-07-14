@@ -140,27 +140,28 @@ class CustomCell extends StatelessWidget {
     cellItems.add(
       Expanded(
         // 文本的样式默认是可以被继承
-        child: <Widget>[
-          DefaultTextStyle.merge(
-            child: title,
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17.w),
-          ).translate(offset: const Offset(0, 0)),
-          // 副标题
-          if (subtitle != null)
-            Container(
-              padding: const EdgeInsets.only(top: 5),
-              child: DefaultTextStyle.merge(
-                child: subtitle!,
-                style: TextStyle(
-                  color: AppColors.secondary,
-                  fontSize: 15.w,
+        child:
+            <Widget>[
+              DefaultTextStyle.merge(
+                child: title,
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17.w),
+              ).translate(offset: const Offset(0, 0)),
+              // 副标题
+              if (subtitle != null)
+                Container(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: DefaultTextStyle.merge(
+                    child: subtitle!,
+                    style: TextStyle(
+                      color: AppColors.secondary,
+                      fontSize: 15.w,
+                    ),
+                  ),
                 ),
-              ),
+            ].toColumn(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
             ),
-        ].toColumn(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
       ),
     );
 
@@ -229,12 +230,12 @@ class CustomCell extends StatelessWidget {
 
 class _CellWithSimple extends CustomCell {
   _CellWithSimple({super.key, required super.title, super.value, super.padding})
-      : super(
-          titleStyle: TextStyle(fontSize: 18.w),
-          valueStyle: TextStyle(
-            fontWeight: FontWeight.w600,
-            color: AppColors.primary,
-            fontSize: 18.w,
-          ),
-        );
+    : super(
+        titleStyle: TextStyle(fontSize: 18.w),
+        valueStyle: TextStyle(
+          fontWeight: FontWeight.w600,
+          color: AppColors.primary,
+          fontSize: 18.w,
+        ),
+      );
 }

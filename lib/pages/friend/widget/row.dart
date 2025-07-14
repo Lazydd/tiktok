@@ -6,7 +6,7 @@ class BuildRow extends StatelessWidget {
   final String? text;
   final String? icon;
 
-  const BuildRow({Key? key, this.text = '', this.icon = ''}) : super(key: key);
+  const BuildRow({super.key, this.text = '', this.icon = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +33,10 @@ class BuildRow extends StatelessWidget {
             Text(
               text ?? '',
               style: TextStyle(color: Colors.white, fontSize: 14.sp),
-            )
+            ),
           ],
         ),
-        Icon(
-          Icons.arrow_forward_ios_rounded,
-          size: 16.w,
-          color: Colors.white,
-        )
+        Icon(Icons.arrow_forward_ios_rounded, size: 16.w, color: Colors.white),
       ],
     );
   }

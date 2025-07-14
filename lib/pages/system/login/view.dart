@@ -1,16 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import 'index.dart';
+part of 'index.dart';
 
 class LoginPage extends GetView<LoginController> {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   // 主视图
   Widget _buildView() {
-    return const Center(
-      child: Text("LoginPage"),
-    );
+    return const Center(child: Text("LoginPage"));
   }
 
   @override
@@ -21,9 +16,7 @@ class LoginPage extends GetView<LoginController> {
       builder: (_) {
         return Scaffold(
           appBar: AppBar(title: const Text("login")),
-          body: SafeArea(
-            child: _buildView(),
-          ),
+          body: SafeArea(child: _buildView()),
         );
       },
     );

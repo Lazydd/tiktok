@@ -198,7 +198,8 @@ class _MaskStackView extends StatelessWidget {
           ),
           Positioned(
             child: Container(
-              height: polymerState.data.sendAreaHeight +
+              height:
+                  polymerState.data.sendAreaHeight +
                   polymerState.data.iconFocusSize,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -263,7 +264,7 @@ class _Bubble extends StatelessWidget {
       // 键盘高度
       bottom:
           max(keyboardHeight, data.sendAreaHeight * 2 + data.iconFocusSize) +
-              20,
+          20,
       // bottom: data.sendAreaHeight * 2 + data.iconFocusSize,
       child: AnimatedContainer(
         duration: _duration,
@@ -287,7 +288,8 @@ class _Bubble extends StatelessWidget {
                 top: 10,
                 bottom: 10,
               ),
-              child: status == SoundsMessageStatus.textProcessing ||
+              child:
+                  status == SoundsMessageStatus.textProcessing ||
                       status == SoundsMessageStatus.textProcessed
                   ? const _TextProcessedContent()
                   : const AmpContent(),
@@ -362,7 +364,8 @@ class _TextProcessedContentState extends State<_TextProcessedContent> {
             ),
           ),
           Visibility(
-            visible: polymerState.controller.status.value ==
+            visible:
+                polymerState.controller.status.value ==
                 SoundsMessageStatus.textProcessing,
             child: const Positioned(right: 40, bottom: 5, child: AmpContent()),
           ),

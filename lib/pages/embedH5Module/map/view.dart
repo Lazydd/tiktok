@@ -37,8 +37,9 @@ class MapPage extends GetView<MapController> {
           id: "web_progress",
           builder: (_) {
             return Visibility(
-              visible: !(controller.progressValue == 0 ||
-                  controller.progressValue == 1),
+              visible:
+                  !(controller.progressValue == 0 ||
+                      controller.progressValue == 1),
               child: CircularProgressIndicator(
                 value: controller.progressValue,
                 backgroundColor: Colors.grey[200],
@@ -97,24 +98,26 @@ class MapPage extends GetView<MapController> {
                 mapController.innerUrl = uri.toString();
               },
               // 当 WebView 的主页收到 HTTP 错误时触发该事件
-              onReceivedHttpError: (
-                InAppWebViewController controller,
-                WebResourceRequest webResourceRequest,
-                WebResourceResponse webResourceResponse,
-              ) {
-                mapController.onWebLoadHttpError(
-                  controller,
-                  webResourceRequest,
-                  webResourceResponse,
-                );
-              },
+              onReceivedHttpError:
+                  (
+                    InAppWebViewController controller,
+                    WebResourceRequest webResourceRequest,
+                    WebResourceResponse webResourceResponse,
+                  ) {
+                    mapController.onWebLoadHttpError(
+                      controller,
+                      webResourceRequest,
+                      webResourceResponse,
+                    );
+                  },
               // 当 WebView收到一条 JavaScript 控制台消息（如 console.log 、 console.error ）时触发该事件
-              onConsoleMessage: (
-                InAppWebViewController controller,
-                ConsoleMessage consoleMessage,
-              ) {
-                // console.error("consoleMessage:$consoleMessage");
-              },
+              onConsoleMessage:
+                  (
+                    InAppWebViewController controller,
+                    ConsoleMessage consoleMessage,
+                  ) {
+                    // console.error("consoleMessage:$consoleMessage");
+                  },
               onProgressChanged: (InAppWebViewController c, int progress) {
                 controller.onWebProgressChanged(c, progress);
               },
@@ -124,29 +127,30 @@ class MapPage extends GetView<MapController> {
         Positioned(
           top: ScreenFunc.statusBar + 20.w,
           left: 20.w,
-          child: GetBuilder<MapController>(
-            id: "location_submit",
-            builder: (_) => Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 5.w,
-                horizontal: 15.w,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.red.shade600,
-                borderRadius: BorderRadius.circular(3.r),
-              ),
-              child: const Text(
-                "取消",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ).onTap(() {
-            if (isRealTimePosition) {
-              Get.back(result: controller.realDistance);
-            } else {
-              Get.back();
-            }
-          }),
+          child:
+              GetBuilder<MapController>(
+                id: "location_submit",
+                builder: (_) => Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 5.w,
+                    horizontal: 15.w,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.red.shade600,
+                    borderRadius: BorderRadius.circular(3.r),
+                  ),
+                  child: const Text(
+                    "取消",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ).onTap(() {
+                if (isRealTimePosition) {
+                  Get.back(result: controller.realDistance);
+                } else {
+                  Get.back();
+                }
+              }),
         ),
         if (!controller.isOnlyRead)
           Positioned(
@@ -154,38 +158,40 @@ class MapPage extends GetView<MapController> {
             right: 20.w,
             child: GetBuilder<MapController>(
               id: "location_submit",
-              builder: (_) => Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 5.w,
-                  horizontal: 15.w,
-                ),
-                decoration: BoxDecoration(
-                  color: controller.isDone
-                      ? AppColors.primary
-                      : Colors.grey.shade400,
-                  borderRadius: BorderRadius.circular(3.r),
-                ),
-                child: Text(
-                  "确定",
-                  style: TextStyle(
-                    color:
-                        controller.isDone ? Colors.white : Colors.grey.shade200,
-                  ),
-                ),
-              ).onTap(() async {
-                if (controller.isDone) {
-                  Map<String, dynamic> params = {
-                    "location": controller.currentLocation.join(","),
-                    "address": controller.locationName,
-                  };
-                  if (isNearBy) {
-                    params["dataPoiModel"] = jsonEncode(
-                      controller.currentDataPoi!.toJson(),
-                    );
-                  }
-                  Get.back(result: jsonEncode(params));
-                }
-              }),
+              builder: (_) =>
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 5.w,
+                      horizontal: 15.w,
+                    ),
+                    decoration: BoxDecoration(
+                      color: controller.isDone
+                          ? AppColors.primary
+                          : Colors.grey.shade400,
+                      borderRadius: BorderRadius.circular(3.r),
+                    ),
+                    child: Text(
+                      "确定",
+                      style: TextStyle(
+                        color: controller.isDone
+                            ? Colors.white
+                            : Colors.grey.shade200,
+                      ),
+                    ),
+                  ).onTap(() async {
+                    if (controller.isDone) {
+                      Map<String, dynamic> params = {
+                        "location": controller.currentLocation.join(","),
+                        "address": controller.locationName,
+                      };
+                      if (isNearBy) {
+                        params["dataPoiModel"] = jsonEncode(
+                          controller.currentDataPoi!.toJson(),
+                        );
+                      }
+                      Get.back(result: jsonEncode(params));
+                    }
+                  }),
             ),
           ),
         if (controller.isRealTimePosition && Constants.jwStorageDebug)
@@ -220,38 +226,39 @@ class MapPage extends GetView<MapController> {
       builder: (controller) => Positioned(
         bottom: controller.locationBottom + 20,
         left: 20,
-        child: SizedBox(
-          width: 40.w,
-          height: 40.w,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: 8.w,
-              right: 8.w,
-              bottom: 10.w,
-              left: 10.w,
-            ),
-            child: GetBuilder<MapController>(
-              id: "location_icon",
-              builder: (_) => controller.isReLocation
-                  ? Transform.rotate(
-                      angle: 45 * pi / 180,
-                      child: IconWidget.svg(
-                        AssetsSvgs.relocateFillSvg,
-                        color: AppColors.primary,
-                      ),
-                    )
-                  : Transform.rotate(
-                      angle: 45 * pi / 180,
-                      child: IconWidget.svg(
-                        AssetsSvgs.relocateSvg,
-                        color: Colors.grey,
-                      ),
-                    ),
-            ),
-          ),
-        ).card().onTap(() {
-          controller.requestCurrentLocation();
-        }),
+        child:
+            SizedBox(
+              width: 40.w,
+              height: 40.w,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: 8.w,
+                  right: 8.w,
+                  bottom: 10.w,
+                  left: 10.w,
+                ),
+                child: GetBuilder<MapController>(
+                  id: "location_icon",
+                  builder: (_) => controller.isReLocation
+                      ? Transform.rotate(
+                          angle: 45 * pi / 180,
+                          child: IconWidget.svg(
+                            AssetsSvgs.relocateFillSvg,
+                            color: AppColors.primary,
+                          ),
+                        )
+                      : Transform.rotate(
+                          angle: 45 * pi / 180,
+                          child: IconWidget.svg(
+                            AssetsSvgs.relocateSvg,
+                            color: Colors.grey,
+                          ),
+                        ),
+                ),
+              ),
+            ).card().onTap(() {
+              controller.requestCurrentLocation();
+            }),
       ),
     );
   }
@@ -291,9 +298,11 @@ class MapPage extends GetView<MapController> {
                     builder: (context, scrollController) {
                       List<Widget> ws = [];
                       if (controller.isNear) {
-                        for (int i = 0;
-                            i < controller.dataPoiList.length;
-                            i++) {
+                        for (
+                          int i = 0;
+                          i < controller.dataPoiList.length;
+                          i++
+                        ) {
                           var poi = controller.dataPoiList[i];
                           ws.add(
                             CustomCell(
@@ -462,11 +471,14 @@ class MapPage extends GetView<MapController> {
                                               ),
                                               suffixIcon: <Widget>[
                                                 if (controller
-                                                    .searchKeyWord.isNotEmpty)
+                                                    .searchKeyWord
+                                                    .isNotEmpty)
                                                   Icon(
-                                                    Icons.close,
-                                                    color: AppColors.info,
-                                                  ).paddingRight(10.w).onTap(
+                                                        Icons.close,
+                                                        color: AppColors.info,
+                                                      )
+                                                      .paddingRight(10.w)
+                                                      .onTap(
                                                         () => controller
                                                             .onClearTextFieldHandle(),
                                                       ),
@@ -476,29 +488,27 @@ class MapPage extends GetView<MapController> {
                                                   height: AppSpace.page,
                                                 ).paddingRight(0.w),
                                                 Text(
-                                                  "搜索",
-                                                  style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 16.sp,
-                                                  ),
-                                                )
+                                                      "搜索",
+                                                      style: TextStyle(
+                                                        color: Colors.blue,
+                                                        fontSize: 16.sp,
+                                                      ),
+                                                    )
                                                     .paddingHorizontal(15.w)
                                                     .paddingVertical(10.w)
                                                     .onTap(() {
-                                                  FocusScope.of(
-                                                    Get.context!,
-                                                  ).requestFocus(
-                                                    FocusNode(),
-                                                  ); //收起键盘
-                                                  controller.onSubmitSearch(
-                                                    controller
-                                                        .searchEditController
-                                                        .text,
-                                                  );
-                                                }),
-                                              ].toRow(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min),
+                                                      FocusScope.of(
+                                                        Get.context!,
+                                                      ).requestFocus(
+                                                        FocusNode(),
+                                                      ); //收起键盘
+                                                      controller.onSubmitSearch(
+                                                        controller
+                                                            .searchEditController
+                                                            .text,
+                                                      );
+                                                    }),
+                                              ].toRow(mainAxisSize: MainAxisSize.min),
                                               onSubmitted: (String value) {
                                                 controller.onSubmitSearch(
                                                   value,
@@ -600,14 +610,12 @@ class MapPage extends GetView<MapController> {
                                                             child: SizedBox(
                                                               width: 20,
                                                               height: 20,
-                                                              child:
-                                                                  CircularProgressIndicator(
+                                                              child: CircularProgressIndicator(
                                                                 strokeWidth: 2,
                                                                 color: AppColors
                                                                     .primary,
                                                               ),
-                                                            ).paddingRight(
-                                                                10.w),
+                                                            ).paddingRight(10.w),
                                                           ),
                                                         if (controller
                                                                 .titleStatus ==
@@ -618,8 +626,7 @@ class MapPage extends GetView<MapController> {
                                                               Icons
                                                                   .error_outline_rounded,
                                                               color: Colors.red,
-                                                            ).paddingRight(
-                                                                10.w),
+                                                            ).paddingRight(10.w),
                                                           ),
                                                         TextSpan(
                                                           text: controller

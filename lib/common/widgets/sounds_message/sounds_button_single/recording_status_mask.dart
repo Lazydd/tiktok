@@ -199,7 +199,8 @@ class _MaskStackView extends StatelessWidget {
           ),
           Positioned(
             child: Container(
-              height: polymerState.data.sendAreaHeight +
+              height:
+                  polymerState.data.sendAreaHeight +
                   polymerState.data.iconFocusSize,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -266,7 +267,7 @@ class _Bubble extends StatelessWidget {
       // 键盘高度
       bottom:
           max(keyboardHeight, data.sendAreaHeight * 2 + data.iconFocusSize) +
-              20,
+          20,
       // bottom: data.sendAreaHeight * 2 + data.iconFocusSize,
       child: AnimatedContainer(
         duration: _duration,
