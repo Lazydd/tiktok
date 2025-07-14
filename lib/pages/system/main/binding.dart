@@ -8,6 +8,5 @@ class MainBinding extends Bindings {
     Get.lazyPut<FriendController>(() => FriendController());
     Get.lazyPut<MessageController>(() => MessageController());
     Get.lazyPut<MineController>(() => MineController());
-    Get.lazyPut<MainController>(() => MainController());
   }
 }
