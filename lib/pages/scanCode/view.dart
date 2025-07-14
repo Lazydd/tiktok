@@ -105,7 +105,6 @@ class ScanCodePage extends GetView<ScanCodeController> {
       String code = scanData.code ?? "";
       if (code.isNotEmpty) {
         qrViewController.pauseCamera();
-        qrViewController.dispose();
         Get.back(result: code);
       }
     });
