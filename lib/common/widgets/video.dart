@@ -77,6 +77,7 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   RxBool sliderBar = false.obs;
 
   void onTap() {
+    if (_isBuffering) return;
     if (_isPlaying) {
       _videoPlayerController.pause();
     } else {
@@ -106,26 +107,6 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         ? Stack(
             children: [
               AbsorbPointer(child: Chewie(controller: _chewieController)),
-              TikTokVideoGesture(
-                onSingleTap: onTap,
-                onAddFavorite: () {},
-                child: Container(
-                  color: Colors.transparent,
-                  height: double.infinity,
-                  width: double.infinity,
-                ),
-              ),
-              Positioned(
-                bottom: -18.h,
-                left: 0,
-                width: MediaQuery.of(context).size.width,
-                child: AnimatedOpacity(
-                  duration: const Duration(seconds: 2),
-                  curve: Curves.easeOutExpo,
-                  opacity: sliderBar.value ? 1.0 : 0.0,
-                  child: _slider(_videoPlayerController.value),
-                ),
-              ),
               Opacity(
                 opacity: !_isPlaying ? 1 : 0,
                 child: Center(
@@ -140,7 +121,27 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               Opacity(
                 opacity: _isBuffering ? 1 : 0,
                 child: Center(child: widget.loading),
-              )
+              ),
+              TikTokVideoGesture(
+                onSingleTap: onTap,
+                onAddFavorite: () {},
+                child: Container(
+                  color: Colors.transparent,
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                ),
+              ),
+              Positioned(
+                bottom: -18.h,
+                left: 0,
+                width: MediaQuery.of(context).size.width,
+                child: AnimatedOpacity(
+                  duration: const Duration(seconds: 2),
+                  curve: Curves.easeOutExpo,
+                  opacity: sliderBar.value ? 1.0 : 0.0,
+                  child: _slider(_videoPlayerController.value),
+                ),
+              ),
             ],
           )
         : Center(child: widget.loading);
