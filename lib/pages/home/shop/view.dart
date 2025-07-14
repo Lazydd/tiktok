@@ -1,7 +1,7 @@
-part of shop;
+part of 'index.dart';
 
 class ShopPage extends StatefulWidget {
-  const ShopPage({Key? key}) : super(key: key);
+  const ShopPage({super.key});
 
   @override
   State<ShopPage> createState() => _ShopPageState();
@@ -57,14 +57,15 @@ class _ShopViewGetX extends GetView<ShopController> {
                     Text(
                       controller.list[index]['content'],
                       style: const TextStyle(color: Colors.white),
-                    )
+                    ),
                   ],
                 ).onTap(() {
                   Navigator.push(
                     Get.context!,
                     MaterialPageRoute(
                       builder: (context) => PhotoPreview(
-                        galleryItems: controller.list.map((v) => v['avatar']).toList(),
+                        galleryItems:
+                            controller.list.map((v) => v['avatar']).toList(),
                         defaultImageIndex: index,
                         slider: false,
                         closePhotoView: () => Get.back(),

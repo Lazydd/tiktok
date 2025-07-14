@@ -1,4 +1,4 @@
-part of routers;
+part of 'index.dart';
 
 abstract class RoutePages {
   static final RouteObserver<Route> observer = RouteObservers();

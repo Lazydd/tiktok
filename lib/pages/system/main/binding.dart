@@ -1,4 +1,4 @@
-part of main;
+part of 'index.dart';
 
 /// 主界面依赖
 class MainBinding extends Bindings {

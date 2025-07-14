@@ -10,14 +10,13 @@ class SliderIndicatorWidget extends StatelessWidget {
   final MainAxisAlignment alignment;
 
   SliderIndicatorWidget({
-    Key? key,
+    super.key,
     required this.length,
     required this.currentIndex,
     Color? color,
     this.isCircle = false,
     this.alignment = MainAxisAlignment.center,
-  })  : color = color ?? AppColors.primary,
-        super(key: key);
+  }) : color = color ?? AppColors.primary;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +27,8 @@ class SliderIndicatorWidget extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 5),
           width: !isCircle
               ? currentIndex == index
-                  ? 15.0
-                  : 8
+                    ? 15.0
+                    : 8
               : 8,
           height: !isCircle ? 5 : 8,
           decoration: BoxDecoration(

@@ -1,4 +1,4 @@
-part of share;
+part of 'index.dart';
 
 class ShareController extends GetxController {
   ShareController();

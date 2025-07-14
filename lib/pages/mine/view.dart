@@ -1,4 +1,4 @@
-part of mine;
+part of 'index.dart';
 
 const double headerOpacityThreshold = 120;
 
@@ -89,7 +89,7 @@ class _MinePageState extends State<MinePage>
                     },
                     icon: Icon(Icons.menu, size: 24.sp),
                   ),
-                )
+                ),
               ],
               backgroundColor: Context(context).theme.themeColor,
               flexibleSpace: RepaintBoundary(
@@ -111,9 +111,7 @@ class _MinePageState extends State<MinePage>
                   controller: _tabController,
                   indicatorColor: const Color(0xffFFD700),
                   indicatorSize: TabBarIndicatorSize.tab,
-                  labelStyle: TextStyle(
-                    fontSize: 18.sp,
-                  ),
+                  labelStyle: TextStyle(fontSize: 18.sp),
                   tabs: [
                     Tab(text: '作品', height: kToolbarHeight.h),
                     Tab(text: '私密', height: kToolbarHeight.h),
@@ -122,17 +120,12 @@ class _MinePageState extends State<MinePage>
                   ],
                 ),
               ),
-            )
+            ),
           ];
         },
         body: TabBarView(
           controller: _tabController,
-          children: const [
-            OpusPage(1),
-            OpusPage(2),
-            OpusPage(3),
-            OpusPage(4),
-          ],
+          children: const [OpusPage(1), OpusPage(2), OpusPage(3), OpusPage(4)],
         ),
       ),
     );
@@ -146,7 +139,10 @@ class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return Container(
       color: Theme.of(context).colorScheme.surface,
       child: child,
@@ -169,7 +165,8 @@ Widget _info() {
     decoration: const BoxDecoration(
       image: DecorationImage(
         image: NetworkImage(
-            '${Constants.imagesUrl}/images/aTnyHICCi-NMudWfVELeO.png'),
+          '${Constants.imagesUrl}/images/aTnyHICCi-NMudWfVELeO.png',
+        ),
         fit: BoxFit.cover,
       ),
     ),
@@ -187,7 +184,8 @@ Widget _info() {
             borderRadius: BorderRadius.circular(50.r),
           ),
           child: const ImageWidget(
-              'https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-avt-0015_f14282e10099a4b436a9ca62c0902595~c5_168x168.jpeg?from=2956013662'),
+            'https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-avt-0015_f14282e10099a4b436a9ca62c0902595~c5_168x168.jpeg?from=2956013662',
+          ),
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -200,131 +198,210 @@ Widget _info() {
             Text(
               '抖音号：12345xiaolaohu',
               style: TextStyle(color: const Color(0xFFbababb), fontSize: 12.sp),
-            )
+            ),
           ],
-        )
+        ),
       ],
     ).padding(left: 20, top: 40, right: 20, bottom: 20),
   );
 }
 
 Widget _detail(BuildContext context) {
-  return Column(children: [
-    Row(children: [
-      Expanded(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(children: [
-              Text(
-                '124',
-                style: TextStyle(
-                    color: Context(context).theme.textColor, fontSize: 14.sp),
+  return Column(
+    children: [
+      Row(
+        children: [
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      '124',
+                      style: TextStyle(
+                        color: Context(context).theme.textColor,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    Text(
+                      '获赞',
+                      style: TextStyle(
+                        color: Context(context).theme.textColor,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      '3778',
+                      style: TextStyle(
+                        color: Context(context).theme.textColor,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    Text(
+                      '朋友',
+                      style: TextStyle(
+                        color: Context(context).theme.textColor,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      '3778',
+                      style: TextStyle(
+                        color: Context(context).theme.textColor,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    Text(
+                      '关注',
+                      style: TextStyle(
+                        color: Context(context).theme.textColor,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      '173.5万',
+                      style: TextStyle(
+                        color: Context(context).theme.textColor,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    Text(
+                      '粉丝',
+                      style: TextStyle(
+                        color: Context(context).theme.textColor,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: 40.w),
+          CupertinoButton(
+            onPressed: () => Get.toNamed('/edit'),
+            color: Context(context).theme.buttonBackgroundColor,
+            padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+            borderRadius: BorderRadius.all(Radius.circular(AppRadius.button)),
+            child: Text(
+              '编辑资料',
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: Context(context).theme.textColor,
               ),
-              Text('获赞',
-                  style: TextStyle(
-                      color: Context(context).theme.textColor, fontSize: 14.sp))
-            ]),
-            Column(children: [
-              Text('3778',
-                  style: TextStyle(
-                      color: Context(context).theme.textColor,
-                      fontSize: 14.sp)),
-              Text('朋友',
-                  style: TextStyle(
-                      color: Context(context).theme.textColor, fontSize: 14.sp))
-            ]),
-            Column(children: [
-              Text('3778',
-                  style: TextStyle(
-                      color: Context(context).theme.textColor,
-                      fontSize: 14.sp)),
-              Text('关注',
-                  style: TextStyle(
-                      color: Context(context).theme.textColor, fontSize: 14.sp))
-            ]),
-            Column(children: [
-              Text('173.5万',
-                  style: TextStyle(
-                      color: Context(context).theme.textColor,
-                      fontSize: 14.sp)),
-              Text('粉丝',
-                  style: TextStyle(
-                      color: Context(context).theme.textColor, fontSize: 14.sp))
-            ])
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
-      SizedBox(width: 40.w),
-      CupertinoButton(
-        onPressed: () => Get.toNamed('/edit'),
-        color: Context(context).theme.buttonBackgroundColor,
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-        borderRadius: BorderRadius.all(Radius.circular(AppRadius.button)),
-        child: Text(
-          '编辑资料',
-          style: TextStyle(
-              fontSize: 16.sp, color: Context(context).theme.textColor),
+      SizedBox(height: 20.h),
+      Text(
+        '每晚12:00直播 韩舞业余，专业蹦迪！虎的小号@杨巅峰🐑🐯💜商务V：Joymedia7 💜💙这辈子人潮汹涌 遇到你  我很幸运💙',
+        style: TextStyle(
+          color: Context(context).theme.textColor,
+          fontSize: 14.sp,
         ),
-      )
-    ]),
-    SizedBox(height: 20.h),
-    Text(
-      '每晚12:00直播 韩舞业余，专业蹦迪！虎的小号@杨巅峰🐑🐯💜商务V：Joymedia7 💜💙这辈子人潮汹涌 遇到你  我很幸运💙',
-      style:
-          TextStyle(color: Context(context).theme.textColor, fontSize: 14.sp),
-      maxLines: 3,
-      overflow: TextOverflow.ellipsis,
-    ),
-    SizedBox(height: 10.h),
-    Row(children: [
-      TagWidget(
-        '27岁',
-        icon: Icon(
-          Icons.female,
-          color: const Color.fromARGB(255, 255, 107, 236),
-          size: 12.sp,
-        ),
+        maxLines: 3,
+        overflow: TextOverflow.ellipsis,
       ),
-      SizedBox(width: 8.w),
-      const TagWidget(
-        '广东 - 珠海',
-      )
-    ]),
-    SizedBox(height: 10.h),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Column(children: [
-          Icon(Icons.shopping_cart,
-              color: Context(context).theme.textColor, size: 24.sp),
-          Text('抖音商城',
-              style: TextStyle(
-                  color: Context(context).theme.textColor, fontSize: 16.sp))
-        ]),
-        Column(children: [
-          Icon(Icons.music_note,
-              color: Context(context).theme.textColor, size: 24.sp),
-          Text('我的音乐',
-              style: TextStyle(
-                  color: Context(context).theme.textColor, fontSize: 16.sp))
-        ]),
-        Column(children: [
-          Icon(Icons.chat,
-              color: Context(context).theme.textColor, size: 24.sp),
-          Text('我的群聊',
-              style: TextStyle(
-                  color: Context(context).theme.textColor, fontSize: 16.sp))
-        ]),
-        Column(children: [
-          Icon(Icons.widgets,
-              color: Context(context).theme.textColor, size: 24.sp),
-          Text('查看更多',
-              style: TextStyle(
-                  color: Context(context).theme.textColor, fontSize: 16.sp))
-        ]),
-      ],
-    )
-  ]);
+      SizedBox(height: 10.h),
+      Row(
+        children: [
+          TagWidget(
+            '27岁',
+            icon: Icon(
+              Icons.female,
+              color: const Color.fromARGB(255, 255, 107, 236),
+              size: 12.sp,
+            ),
+          ),
+          SizedBox(width: 8.w),
+          const TagWidget('广东 - 珠海'),
+        ],
+      ),
+      SizedBox(height: 10.h),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Column(
+            children: [
+              Icon(
+                Icons.shopping_cart,
+                color: Context(context).theme.textColor,
+                size: 24.sp,
+              ),
+              Text(
+                '抖音商城',
+                style: TextStyle(
+                  color: Context(context).theme.textColor,
+                  fontSize: 16.sp,
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Icon(
+                Icons.music_note,
+                color: Context(context).theme.textColor,
+                size: 24.sp,
+              ),
+              Text(
+                '我的音乐',
+                style: TextStyle(
+                  color: Context(context).theme.textColor,
+                  fontSize: 16.sp,
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Icon(
+                Icons.chat,
+                color: Context(context).theme.textColor,
+                size: 24.sp,
+              ),
+              Text(
+                '我的群聊',
+                style: TextStyle(
+                  color: Context(context).theme.textColor,
+                  fontSize: 16.sp,
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Icon(
+                Icons.widgets,
+                color: Context(context).theme.textColor,
+                size: 24.sp,
+              ),
+              Text(
+                '查看更多',
+                style: TextStyle(
+                  color: Context(context).theme.textColor,
+                  fontSize: 16.sp,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ],
+  );
 }

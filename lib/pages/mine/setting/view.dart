@@ -1,13 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:tiktok/common/index.dart';
-
-import 'index.dart';
+part of 'index.dart';
 
 class SettingPage extends GetView<SettingController> {
-  const SettingPage({Key? key}) : super(key: key);
+  const SettingPage({super.key});
 
   // 主视图
   Widget _buildView(context) {
@@ -96,7 +90,7 @@ class SettingPage extends GetView<SettingController> {
                       '更多更能',
                       style: TextStyle(fontSize: 16.sp, color: theme.textColor),
                     ),
-                  )
+                  ),
                 ],
               ),
             ).marginOnly(left: 20.w, right: 20.w),
@@ -113,9 +107,7 @@ class SettingPage extends GetView<SettingController> {
       init: SettingController(),
       id: "setting",
       builder: (_) {
-        return SafeArea(
-          child: _buildView(context),
-        );
+        return SafeArea(child: _buildView(context));
       },
     );
   }

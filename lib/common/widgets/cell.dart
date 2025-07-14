@@ -9,11 +9,11 @@ class CustomCellGroup extends StatelessWidget {
   final bool showDivider;
 
   const CustomCellGroup({
-    Key? key,
+    super.key,
     this.children = const [],
     this.minHeight,
     this.showDivider = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ class CustomCell extends StatelessWidget {
   final void Function()? onArrowTap;
 
   const CustomCell({
-    Key? key,
+    super.key,
     required this.title,
     this.subtitle,
     this.iconPath,
@@ -100,7 +100,7 @@ class CustomCell extends StatelessWidget {
     this.leading,
     this.trailing,
     this.showCellDivider = false,
-  }) : super(key: key);
+  });
 
   /// 简单的cell风格
   factory CustomCell.simple({
@@ -118,10 +118,7 @@ class CustomCell extends StatelessWidget {
       // 图标
       cellItems.add(
         IconTheme(
-          data: IconThemeData(
-            color: colorScheme.primary,
-            size: 26.w,
-          ),
+          data: IconThemeData(color: colorScheme.primary, size: 26.w),
           child: IconWidget.svg(
             iconPath!,
             color: iconColor ?? AppColors.primary,
@@ -146,13 +143,8 @@ class CustomCell extends StatelessWidget {
         child: <Widget>[
           DefaultTextStyle.merge(
             child: title,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 17.w,
-            ),
-          ).translate(
-            offset: const Offset(0, 0),
-          ),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17.w),
+          ).translate(offset: const Offset(0, 0)),
           // 副标题
           if (subtitle != null)
             Container(
@@ -199,17 +191,19 @@ class CustomCell extends StatelessWidget {
     // 点击事件以及箭头
     if (onTap != null && showArrow != false) {
       cellItems.add(SizedBox(width: 8.w));
-      cellItems.add(Icon(
-        Icons.arrow_forward_ios_rounded,
-        size: 16.w,
-        color: Colors.grey,
-      ).onTap(() {
-        if (onArrowTap != null) {
-          onArrowTap!();
-        } else {
-          onTap!();
-        }
-      }));
+      cellItems.add(
+        Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 16.w,
+          color: Colors.grey,
+        ).onTap(() {
+          if (onArrowTap != null) {
+            onArrowTap!();
+          } else {
+            onTap!();
+          }
+        }),
+      );
     }
 
     return GestureDetector(
@@ -221,13 +215,12 @@ class CustomCell extends StatelessWidget {
         children: [
           Padding(
             padding: padding ?? EdgeInsets.symmetric(vertical: 15.w),
-            child:
-                cellItems.toRow(crossAxisAlignment: CrossAxisAlignment.center),
+            child: cellItems.toRow(
+              crossAxisAlignment: CrossAxisAlignment.center,
+            ),
           ),
           if (showCellDivider == true)
-            Divider(
-              height: 1.w,
-            ).paddingHorizontal(10.w),
+            Divider(height: 1.w).paddingHorizontal(10.w),
         ],
       ),
     );
@@ -235,21 +228,13 @@ class CustomCell extends StatelessWidget {
 }
 
 class _CellWithSimple extends CustomCell {
-  _CellWithSimple({
-    Key? key,
-    required Widget title,
-    Widget? value,
-    EdgeInsets? padding,
-  }) : super(
-          key: key,
-          title: title,
-          value: value,
+  _CellWithSimple({super.key, required super.title, super.value, super.padding})
+      : super(
           titleStyle: TextStyle(fontSize: 18.w),
           valueStyle: TextStyle(
             fontWeight: FontWeight.w600,
             color: AppColors.primary,
             fontSize: 18.w,
           ),
-          padding: padding,
         );
 }

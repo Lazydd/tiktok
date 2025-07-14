@@ -1,10 +1,10 @@
-part of slidebar;
+part of 'index.dart';
 
 class SlidebarPage extends GetView<SlidebarController> {
-  const SlidebarPage({Key? key}) : super(key: key);
+  const SlidebarPage({super.key});
 
   // 主视图
-  Widget _buildView(SlidebarController controller, BuildContext context) {
+  Widget _buildView(BuildContext context) {
     final theme = Context(context).theme;
     return Drawer(
       backgroundColor: theme.drawerBackgroundColor,
@@ -44,10 +44,12 @@ class SlidebarPage extends GetView<SlidebarController> {
                       padding: EdgeInsets.only(left: 8.w),
                       child: Text(
                         '扫一扫',
-                        style:
-                            TextStyle(fontSize: 16.sp, color: theme.textColor),
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: theme.textColor,
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -81,7 +83,7 @@ class SlidebarPage extends GetView<SlidebarController> {
                       color: const Color(0xff808080),
                       fontSize: 12.sp,
                     ),
-                  )
+                  ),
                 ],
               ),
               Row(
@@ -106,21 +108,18 @@ class SlidebarPage extends GetView<SlidebarController> {
                   Text(
                     '昨天 23:27',
                     style: TextStyle(
-                        color: const Color(0xff808080), fontSize: 12.sp),
-                  )
+                      color: const Color(0xff808080),
+                      fontSize: 12.sp,
+                    ),
+                  ),
                 ],
-              )
+              ),
             ],
           ).card(
             radius: 12.r,
             color: theme.cardBackgroundColor,
             padding: 15,
-            title: _title(
-              '通知消息',
-              subtTitle: '有新消息',
-              more: true,
-              onTap: () {},
-            ),
+            title: _title('通知消息', subtTitle: '有新消息', more: true, onTap: () {}),
           ),
           SizedBox(height: 10.h),
           GridView.builder(
@@ -145,7 +144,7 @@ class SlidebarPage extends GetView<SlidebarController> {
                   Text(
                     item["name"],
                     style: TextStyle(color: theme.textColor, fontSize: 16.sp),
-                  )
+                  ),
                 ],
               ).onTap(item["onTap"]);
             },
@@ -173,7 +172,7 @@ class SlidebarPage extends GetView<SlidebarController> {
                   Text(
                     item["name"],
                     style: TextStyle(color: theme.textColor, fontSize: 16.sp),
-                  )
+                  ),
                 ],
               ).onTap(item["onTap"]);
             },
@@ -201,7 +200,7 @@ class SlidebarPage extends GetView<SlidebarController> {
                   Text(
                     item["name"],
                     style: TextStyle(color: theme.textColor, fontSize: 16.sp),
-                  )
+                  ),
                 ],
               ).onTap(item["onTap"]);
             },
@@ -221,10 +220,43 @@ class SlidebarPage extends GetView<SlidebarController> {
       init: SlidebarController(),
       id: "slidebar",
       builder: (_) {
-        return SafeArea(
-          child: _buildView(_, context),
-        );
+        return SafeArea(child: _buildView(context));
       },
     );
   }
+}
+
+Widget _title(
+  String title, {
+  String? subtTitle,
+  bool more = false,
+  Function()? onTap,
+}) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text(
+        title,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      if (more)
+        Row(
+          children: [
+            Text(
+              subtTitle ?? '全部',
+              style: TextStyle(color: const Color(0xff808080), fontSize: 12.sp),
+            ),
+            Icon(
+              Icons.chevron_right,
+              color: const Color(0xff808080),
+              size: 12.sp,
+            ),
+          ],
+        ).onTap(onTap),
+    ],
+  );
 }

@@ -75,39 +75,38 @@ class _VoicePlayPainter extends CustomPainter {
     final center = Offset(0, size.height / 2);
 
     canvas.drawArc(
-        Rect.fromCenter(
-          center: center,
-          width: size.width / 2,
-          height: size.height / 2,
-        ),
-        7 * pi / 4,
-        pi / 2,
-        true,
-        paint);
+      Rect.fromCenter(
+        center: center,
+        width: size.width / 2,
+        height: size.height / 2,
+      ),
+      7 * pi / 4,
+      pi / 2,
+      true,
+      paint,
+    );
 
     paint.style = PaintingStyle.stroke;
 
     canvas.drawArc(
-        Rect.fromCenter(
-          center: center,
-          width: size.width,
-          height: size.height,
-        ),
-        7 * pi / 4,
-        pi / 2,
-        false,
-        paint);
+      Rect.fromCenter(center: center, width: size.width, height: size.height),
+      7 * pi / 4,
+      pi / 2,
+      false,
+      paint,
+    );
 
     canvas.drawArc(
-        Rect.fromCenter(
-          center: center,
-          width: size.width * 1.5,
-          height: size.height * 1.5,
-        ),
-        7 * pi / 4,
-        pi / 2,
-        false,
-        paint);
+      Rect.fromCenter(
+        center: center,
+        width: size.width * 1.5,
+        height: size.height * 1.5,
+      ),
+      7 * pi / 4,
+      pi / 2,
+      false,
+      paint,
+    );
   }
 
   @override

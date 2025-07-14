@@ -1,7 +1,7 @@
-part of edit;
+part of 'index.dart';
 
 class EditPage extends GetView<EditController> {
-  const EditPage({Key? key}) : super(key: key);
+  const EditPage({super.key});
 
   // 主视图
   Widget _buildView(context) {
@@ -31,9 +31,11 @@ class EditPage extends GetView<EditController> {
                         ).marginOnly(bottom: 5.w),
                         Text(
                           '更换头像',
-                          style:
-                              TextStyle(color: Colors.white, fontSize: 14.sp),
-                        )
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.sp,
+                          ),
+                        ),
                       ],
                     ),
             ).onTap(() async {
@@ -41,15 +43,15 @@ class EditPage extends GetView<EditController> {
             }),
             CustomCell(
               title: const Text.rich(
-                TextSpan(children: [
-                  // TextSpan(text: "*  ", style: TextStyle(color: Colors.red)),
-                  TextSpan(
-                    text: "名字",
-                    style: TextStyle(
-                      color: Color(0xffbababb),
+                TextSpan(
+                  children: [
+                    // TextSpan(text: "*  ", style: TextStyle(color: Colors.red)),
+                    TextSpan(
+                      text: "名字",
+                      style: TextStyle(color: Color(0xffbababb)),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
               value: Text(
                 controller.name != '' ? controller.name : "填写名字",
@@ -64,14 +66,15 @@ class EditPage extends GetView<EditController> {
             ),
             CustomCell(
               title: const Text.rich(
-                TextSpan(children: [
-                  // TextSpan(text: "*  ", style: TextStyle(color: Colors.red)),
-                  TextSpan(
+                TextSpan(
+                  children: [
+                    // TextSpan(text: "*  ", style: TextStyle(color: Colors.red)),
+                    TextSpan(
                       text: "简介",
-                      style: TextStyle(
-                        color: Color(0xffbababb),
-                      )),
-                ]),
+                      style: TextStyle(color: Color(0xffbababb)),
+                    ),
+                  ],
+                ),
               ),
               value: const Text(
                 "介绍喜好、个性或@你的亲友",
@@ -86,14 +89,15 @@ class EditPage extends GetView<EditController> {
             ),
             CustomCell(
               title: const Text.rich(
-                TextSpan(children: [
-                  // TextSpan(text: "*  ", style: TextStyle(color: Colors.red)),
-                  TextSpan(
+                TextSpan(
+                  children: [
+                    // TextSpan(text: "*  ", style: TextStyle(color: Colors.red)),
+                    TextSpan(
                       text: "性别",
-                      style: TextStyle(
-                        color: Color(0xffbababb),
-                      )),
-                ]),
+                      style: TextStyle(color: Color(0xffbababb)),
+                    ),
+                  ],
+                ),
               ),
               value: Text(
                 controller.getSex(),
@@ -126,7 +130,7 @@ class EditPage extends GetView<EditController> {
                           controller.changeSex('3');
                         },
                         child: const Text('不展示'),
-                      )
+                      ),
                     ],
                     cancelButton: CupertinoActionSheetAction(
                       onPressed: () {
@@ -140,14 +144,15 @@ class EditPage extends GetView<EditController> {
             ),
             CustomCell(
               title: const Text.rich(
-                TextSpan(children: [
-                  // TextSpan(text: "*  ", style: TextStyle(color: Colors.red)),
-                  TextSpan(
+                TextSpan(
+                  children: [
+                    // TextSpan(text: "*  ", style: TextStyle(color: Colors.red)),
+                    TextSpan(
                       text: "生日",
-                      style: TextStyle(
-                        color: Color(0xffbababb),
-                      )),
-                ]),
+                      style: TextStyle(color: Color(0xffbababb)),
+                    ),
+                  ],
+                ),
               ),
               value: Text(
                 controller.birthday != ''
@@ -172,15 +177,15 @@ class EditPage extends GetView<EditController> {
             ),
             CustomCell(
               title: const Text.rich(
-                TextSpan(children: [
-                  // TextSpan(text: "*  ", style: TextStyle(color: Colors.red)),
-                  TextSpan(
-                    text: "抖音号",
-                    style: TextStyle(
-                      color: Color(0xffbababb),
+                TextSpan(
+                  children: [
+                    // TextSpan(text: "*  ", style: TextStyle(color: Colors.red)),
+                    TextSpan(
+                      text: "抖音号",
+                      style: TextStyle(color: Color(0xffbababb)),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
               value: Text(
                 controller.userUniqueId != ''
@@ -194,7 +199,7 @@ class EditPage extends GetView<EditController> {
                 RouteNames.editUserInfoRoute,
                 parameters: {"type": "3", "value": controller.userUniqueId},
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -203,46 +208,41 @@ class EditPage extends GetView<EditController> {
 
   _showPhotoActionSheet() async {
     var result = await showCupertinoModalPopup(
-        context: Get.context!,
-        builder: (context) {
-          return CupertinoActionSheet(
-            actions: [
-              CupertinoActionSheetAction(
-                child: Text(
-                  "拍摄照片",
-                  style: TextStyle(fontSize: 20.sp),
-                ),
-                onPressed: () async {
-                  Access.openCamera(
-                    context,
-                    onCameraGranted: () {
-                      Get.back(result: AccessEnum.takePhoto);
-                    },
-                    isNavigatorPop: true,
-                  );
-                },
-              ),
-              CupertinoActionSheetAction(
-                child: Text(
-                  "从手机相册选择",
-                  style: TextStyle(fontSize: 20.sp),
-                ),
-                onPressed: () {
-                  Get.back(result: AccessEnum.photoLibrary);
-                },
-              ),
-            ],
-            cancelButton: CupertinoActionSheetAction(
-              child: Text(
-                "取消",
-                style: TextStyle(color: Colors.red, fontSize: 20.sp),
-              ),
-              onPressed: () {
-                Get.back();
+      context: Get.context!,
+      builder: (context) {
+        return CupertinoActionSheet(
+          actions: [
+            CupertinoActionSheetAction(
+              child: Text("拍摄照片", style: TextStyle(fontSize: 20.sp)),
+              onPressed: () async {
+                Access.openCamera(
+                  context,
+                  onCameraGranted: () {
+                    Get.back(result: AccessEnum.takePhoto);
+                  },
+                  isNavigatorPop: true,
+                );
               },
             ),
-          );
-        });
+            CupertinoActionSheetAction(
+              child: Text("从手机相册选择", style: TextStyle(fontSize: 20.sp)),
+              onPressed: () {
+                Get.back(result: AccessEnum.photoLibrary);
+              },
+            ),
+          ],
+          cancelButton: CupertinoActionSheetAction(
+            child: Text(
+              "取消",
+              style: TextStyle(color: Colors.red, fontSize: 20.sp),
+            ),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        );
+      },
+    );
     if (result == AccessEnum.takePhoto) {
       dynamic fileObj = await Access.showTakePhoto(Get.context!);
       // controller.addProfileImgFile(fileObj);
@@ -255,11 +255,7 @@ class EditPage extends GetView<EditController> {
     }
   }
 
-  formatImage(
-    dynamic imageFileItem, {
-    bool isPath = false,
-    String? api,
-  }) async {
+  formatImage(dynamic imageFileItem, {bool isPath = false, String? api}) async {
     if (imageFileItem != null) {
       File? file = await UtilsFunc.compressImage(
         imageFileItem['file'],
@@ -267,9 +263,7 @@ class EditPage extends GetView<EditController> {
       );
       file ??= imageFileItem['file'];
       if (isPath) {
-        Map<String, dynamic> params = {
-          "path": 'devicetype',
-        };
+        Map<String, dynamic> params = {"path": 'devicetype'};
         // String url = await OtherAPI.uploadFile(file!, params, api: api);
         // if (url.isNotEmpty) {
         //   return url;
@@ -305,12 +299,10 @@ class EditPage extends GetView<EditController> {
                   controller.addProfileImgFile(fileObj);
                 },
                 icon: Icon(Icons.photo_camera, size: 24.sp),
-              )
+              ),
             ],
           ),
-          body: SafeArea(
-            child: _buildView(context),
-          ),
+          body: SafeArea(child: _buildView(context)),
         );
       },
     );

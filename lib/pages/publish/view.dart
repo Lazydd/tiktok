@@ -1,4 +1,4 @@
-part of publish;
+part of 'index.dart';
 
 class PublishPage extends GetView<PublishController> {
   const PublishPage({super.key});

@@ -1,4 +1,4 @@
-part of home;
+part of 'index.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});

@@ -1,4 +1,4 @@
-part of comment;
+part of 'index.dart';
 
 class CommentPage extends GetView<CommentController> {
   const CommentPage({super.key});

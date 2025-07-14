@@ -1,4 +1,4 @@
-part of shop;
+part of 'index.dart';
 
 class ShopController extends GetxController {
   ShopController();

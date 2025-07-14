@@ -1,7 +1,7 @@
-part of recommend;
+part of 'index.dart';
 
 class RecommendPage extends StatefulWidget {
-  const RecommendPage({Key? key}) : super(key: key);
+  const RecommendPage({super.key});
 
   @override
   State<RecommendPage> createState() => RecommendPageState();

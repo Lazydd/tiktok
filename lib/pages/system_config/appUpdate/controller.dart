@@ -1,4 +1,4 @@
-part of app_update;
+part of 'index.dart';
 
 class AppUpdateController extends GetxController {
   AppUpdateController();

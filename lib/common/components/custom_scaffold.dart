@@ -3,20 +3,15 @@ import 'package:tiktok/common/index.dart';
 
 class CustomScaffold extends Scaffold {
   CustomScaffold({
-    Key? key,
-    PreferredSizeWidget? appBar,
+    super.key,
+    super.appBar,
     extendBodyBehindAppBar = false,
-    Widget? body,
+    super.body,
     Color? backgroundColor,
-    Widget? bottomNavigationBar,
-    Widget? floatingActionButton,
+    super.bottomNavigationBar,
+    super.floatingActionButton,
   }) : super(
-          key: key,
-          appBar: appBar,
           extendBodyBehindAppBar: extendBodyBehindAppBar,
-          body: body,
           backgroundColor: backgroundColor ?? AppColors.bgColor,
-          bottomNavigationBar: bottomNavigationBar,
-          floatingActionButton: floatingActionButton,
         );
 }

@@ -1,4 +1,4 @@
-part of routers;
+part of 'index.dart';
 
 class RouteNames {
   static const mainRoute = '/';

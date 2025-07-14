@@ -1,5 +1,3 @@
-library comment;
-
 import 'dart:math';
 import 'package:get/get.dart';
 import 'package:tiktok/common/index.dart';

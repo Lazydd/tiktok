@@ -1,4 +1,4 @@
-part of rtc_more;
+part of 'index.dart';
 
 class RtcMoreController extends GetxController {
   String isDial = 'false';

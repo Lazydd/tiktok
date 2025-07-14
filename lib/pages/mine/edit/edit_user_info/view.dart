@@ -1,32 +1,16 @@
-part of edit_user_info;
+part of 'index.dart';
 
 class EditUserInfoPage extends GetView<EditUserInfoController> {
   String type;
   String value;
 
-  EditUserInfoPage({
-    Key? key,
-    this.type = "",
-    this.value = "",
-  }) : super(key: key);
+  EditUserInfoPage({super.key, this.type = "", this.value = ""});
 
-  Map titleMap = {
-    '1': '修改名字',
-    '2': '修改简介',
-    '3': '修改抖音号',
-  };
+  Map titleMap = {'1': '修改名字', '2': '修改简介', '3': '修改抖音号'};
 
-  Map typeMap = {
-    '1': '我的名字',
-    '2': '个人简介',
-    '3': '我的抖音号',
-  };
+  Map typeMap = {'1': '我的名字', '2': '个人简介', '3': '我的抖音号'};
 
-  Map hintTextMap = {
-    '1': '填写名字',
-    '2': '介绍喜好、个性或@你的亲友',
-    '3': '',
-  };
+  Map hintTextMap = {'1': '填写名字', '2': '介绍喜好、个性或@你的亲友', '3': ''};
 
   Map tipsMap = {
     '1': '名字30天内可修改4次，2024-08-31前还可修改4次',
@@ -50,10 +34,7 @@ class EditUserInfoPage extends GetView<EditUserInfoController> {
           TextField(
             controller: controller.eventNameController,
             textAlign: TextAlign.left,
-            style: TextStyle(
-              color: theme.textColor,
-              fontSize: 17.sp,
-            ),
+            style: TextStyle(color: theme.textColor, fontSize: 17.sp),
             maxLines: controller.type == "2" ? 10 : 1,
             minLines: controller.type == "2" ? 10 : 1,
             decoration: InputDecoration(
@@ -93,10 +74,10 @@ class EditUserInfoPage extends GetView<EditUserInfoController> {
                     color: Colors.grey.shade400,
                     fontSize: 12.sp,
                   ),
-                )
+                ),
               ],
-            )
-          ]
+            ),
+          ],
         ],
       ),
     );
@@ -136,7 +117,7 @@ class EditUserInfoPage extends GetView<EditUserInfoController> {
                             controller.submit();
                           },
                           child: const Text('保存'),
-                        )
+                        ),
                       ],
                     ),
                   );
@@ -154,12 +135,10 @@ class EditUserInfoPage extends GetView<EditUserInfoController> {
                     fontSize: 14.sp,
                   ),
                 ),
-              )
+              ),
             ],
           ),
-          body: SafeArea(
-            child: _buildView(context),
-          ),
+          body: SafeArea(child: _buildView(context)),
         );
       },
     );

@@ -25,10 +25,7 @@ class SoundsMessageButton extends StatefulWidget {
   final Widget child;
 
   /// 自定义发送按钮视图
-  final Function(
-    BuildContext context,
-    SoundsMessageStatus status,
-  )? builder;
+  final Function(BuildContext context, SoundsMessageStatus status)? builder;
 
   /// 状态监听， 回调到外部自定义处理
   final Function(SoundsMessageStatus status)? onChanged;
@@ -90,12 +87,16 @@ class _SoundsMessageButtonState extends State<SoundsMessageButton> {
             },
             onVoiceSend: () {
               widget.onSendSounds?.call(
-                  SendContentType.voice, _soundsRecorder.path.value ?? '');
+                SendContentType.voice,
+                _soundsRecorder.path.value ?? '',
+              );
               _removeMask();
             },
             onTextSend: () {
-              widget.onSendSounds?.call(SendContentType.text,
-                  _soundsRecorder.textProcessedController.text);
+              widget.onSendSounds?.call(
+                SendContentType.text,
+                _soundsRecorder.textProcessedController.text,
+              );
               _removeMask();
             },
           ),

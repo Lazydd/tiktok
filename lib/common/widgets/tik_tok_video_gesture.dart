@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 /// 双击：点赞，双击后再次单击也是增加点赞爱心
 class TikTokVideoGesture extends StatefulWidget {
   const TikTokVideoGesture({
-    Key? key,
+    super.key,
     required this.child,
     this.onAddFavorite,
     this.onSingleTap,
-  }) : super(key: key);
+  });
 
   final Function? onAddFavorite;
   final Function? onSingleTap;
@@ -72,12 +72,7 @@ class TikTokVideoGestureState extends State<TikTokVideoGesture> {
           canAddFavorite = true;
         },
         onTapCancel: () {},
-        child: Stack(
-          children: <Widget>[
-            widget.child,
-            iconStack,
-          ],
-        ),
+        child: Stack(children: <Widget>[widget.child, iconStack]),
       );
     } catch (e) {
       return Container();
@@ -91,11 +86,11 @@ class TikTokFavoriteAnimationIcon extends StatefulWidget {
   final Function? onAnimationComplete;
 
   const TikTokFavoriteAnimationIcon({
-    Key? key,
+    super.key,
     this.onAnimationComplete,
     this.position,
     this.size = 100,
-  }) : super(key: key);
+  });
 
   @override
   TikTokFavoriteAnimationIconState createState() =>
@@ -190,10 +185,7 @@ class TikTokFavoriteAnimationIconState
       blendMode: BlendMode.srcATop,
       shaderCallback: (Rect bounds) => RadialGradient(
         center: Alignment.topLeft.add(const Alignment(0.66, 0.66)),
-        colors: [
-          Colors.pink.shade200,
-          const Color(0xffE91E63),
-        ],
+        colors: [Colors.pink.shade200, const Color(0xffE91E63)],
       ).createShader(bounds),
       child: content,
     );

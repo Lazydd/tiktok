@@ -1,7 +1,7 @@
-part of share;
+part of 'index.dart';
 
 class SharePage extends GetView<ShareController> {
-  const SharePage({Key? key}) : super(key: key);
+  const SharePage({super.key});
 
   // 主视图
   Widget _buildView(BuildContext context) {

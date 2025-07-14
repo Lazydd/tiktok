@@ -1,4 +1,4 @@
-part of theme;
+part of 'index.dart';
 
 abstract class _ThemeData<T extends ThemeExtension<T>>
     extends ThemeExtension<T> {

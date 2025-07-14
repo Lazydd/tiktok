@@ -5,10 +5,7 @@ import 'package:badges/badges.dart' as badges;
 class BuildConditional extends StatelessWidget {
   final dynamic item;
 
-  const BuildConditional(
-    this.item, {
-    Key? key,
-  }) : super(key: key);
+  const BuildConditional(this.item, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +26,7 @@ class BuildConditional extends StatelessWidget {
       wd = badges.Badge(
         badgeContent: Text(
           item <= 99 ? item.toString() : "99+",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 12.sp,
-          ),
+          style: TextStyle(color: Colors.white, fontSize: 12.sp),
         ),
         badgeStyle: badges.BadgeStyle(
           badgeColor: Colors.red,

@@ -1,4 +1,4 @@
-part of opus;
+part of 'index.dart';
 
 class OpusController extends GetxController {
   final int type;
@@ -88,8 +88,9 @@ class OpusController extends GetxController {
     _initData();
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    refreshController.dispose();
+    super.onClose();
+  }
 }

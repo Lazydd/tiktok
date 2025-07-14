@@ -1,4 +1,4 @@
-part of scancode;
+part of 'index.dart';
 
 class ScanCodeController extends GetxController {
   ScanCodeController();

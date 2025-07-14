@@ -1,6 +1,6 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
-part of map;
+part of 'index.dart';
 
 enum TitleStatusEnum {
   first, // 第一次

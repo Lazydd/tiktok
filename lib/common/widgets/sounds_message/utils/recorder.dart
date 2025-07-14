@@ -7,11 +7,7 @@ import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-enum SendContentType {
-  voice,
-
-  text,
-}
+enum SendContentType { voice, text }
 
 enum SoundsMessageStatus {
   /// 默认状态 未交互/交互完成

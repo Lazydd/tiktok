@@ -1,4 +1,4 @@
-part of theme;
+part of 'index.dart';
 
 final class AppTheme extends _ThemeData<AppTheme> {
   late final ThemeData data;

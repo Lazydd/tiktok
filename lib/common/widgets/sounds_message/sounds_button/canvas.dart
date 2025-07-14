@@ -9,9 +9,10 @@ class _RecordingPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) async {
     final bgOvalRect = Rect.fromCenter(
-        center: Offset(size.width / 2, size.height * 3 / 2),
-        width: size.width * 1.8,
-        height: size.height * 3);
+      center: Offset(size.width / 2, size.height * 3 / 2),
+      width: size.width * 1.8,
+      height: size.height * 3,
+    );
 
     final paint = Paint()
       ..color = const Color(0xff393939)
@@ -30,16 +31,14 @@ class _RecordingPainter extends CustomPainter {
         height: bgOvalRect.height * scale,
       );
       canvas.drawPath(
-          Path()..addOval(bgShaderRect),
-          Paint()
-            ..shader = ui.Gradient.linear(
-              Offset(size.width / 2, size.height),
-              Offset(size.width / 2, 0),
-              [
-                const Color(0xffd5d5d5),
-                const Color(0xff999999),
-              ],
-            ));
+        Path()..addOval(bgShaderRect),
+        Paint()
+          ..shader = ui.Gradient.linear(
+            Offset(size.width / 2, size.height),
+            Offset(size.width / 2, 0),
+            [const Color(0xffd5d5d5), const Color(0xff999999)],
+          ),
+      );
 
       // canvas.drawImage(
       //     await 'assets/images/ic_voice.png'.uiimage, Offset.zero, paint);

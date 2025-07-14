@@ -1,5 +1,3 @@
-library map;
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';

@@ -1,4 +1,4 @@
-part of interactive;
+part of 'index.dart';
 
 class InteractiveController extends GetxController {
   InteractiveController();

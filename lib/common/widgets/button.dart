@@ -49,7 +49,7 @@ class ButtonWidget extends StatelessWidget {
   final double? height;
 
   const ButtonWidget({
-    Key? key,
+    super.key,
     this.type = ButtonWidgetType.none,
     this.onTap,
     this.text,
@@ -60,12 +60,12 @@ class ButtonWidget extends StatelessWidget {
     this.borderColor,
     this.width,
     this.height,
-  }) : super(key: key);
+  });
 
   /// 主要
   const ButtonWidget.primary(
     this.text, {
-    Key? key,
+    super.key,
     this.type = ButtonWidgetType.primary,
     this.width = double.infinity,
     this.height = 55,
@@ -75,12 +75,12 @@ class ButtonWidget extends StatelessWidget {
     this.backgroundColor,
     this.icon,
     this.borderColor,
-  }) : super(key: key);
+  });
 
   /// 次要
   const ButtonWidget.secondary(
     this.text, {
-    Key? key,
+    super.key,
     this.type = ButtonWidgetType.secondary,
     this.width = double.infinity,
     this.height = 55,
@@ -90,12 +90,12 @@ class ButtonWidget extends StatelessWidget {
     this.backgroundColor,
     this.icon,
     this.borderColor,
-  }) : super(key: key);
+  });
 
   /// 文字
   ButtonWidget.text(
     this.text, {
-    Key? key,
+    super.key,
     this.type = ButtonWidgetType.text,
     this.onTap,
     Color? textColor,
@@ -112,13 +112,12 @@ class ButtonWidget extends StatelessWidget {
           size: textSize,
           color: textColor ?? AppColors.onPrimaryContainer,
           weight: textWeight,
-        ),
-        super(key: key);
+        );
 
   /// 图标
   const ButtonWidget.icon(
     this.icon, {
-    Key? key,
+    super.key,
     this.type = ButtonWidgetType.icon,
     this.onTap,
     this.text,
@@ -128,12 +127,12 @@ class ButtonWidget extends StatelessWidget {
     this.borderColor,
     this.width,
     this.height,
-  }) : super(key: key);
+  });
 
   /// 文字/填充
   ButtonWidget.textFilled(
     this.text, {
-    Key? key,
+    super.key,
     this.type = ButtonWidgetType.textFilled,
     Color? bgColor,
     Color? textColor,
@@ -151,13 +150,12 @@ class ButtonWidget extends StatelessWidget {
           size: textSize,
           color: textColor ?? AppColors.onPrimaryContainer,
           weight: textWeight,
-        ),
-        super(key: key);
+        );
 
   /// 文字/填充/圆形 按钮
   ButtonWidget.textRoundFilled(
     this.text, {
-    Key? key,
+    super.key,
     this.type = ButtonWidgetType.textRoundFilled,
     Color? bgColor,
     Color? textColor,
@@ -175,14 +173,13 @@ class ButtonWidget extends StatelessWidget {
           size: textSize,
           color: textColor ?? AppColors.onPrimaryContainer,
           weight: textWeight,
-        ),
-        super(key: key);
+        );
 
   /// 图标文字 上下
   ButtonWidget.iconTextUpDown(
     this.icon,
     this.text, {
-    Key? key,
+    super.key,
     this.type = ButtonWidgetType.iconTextUpDown,
     Color? textColor,
     double? textSize,
@@ -203,14 +200,13 @@ class ButtonWidget extends StatelessWidget {
           ),
         ].toColumn(
           mainAxisSize: MainAxisSize.min,
-        ),
-        super(key: key);
+        );
 
   /// 图标 / 文字 / 边框
   ButtonWidget.iconTextOutlined(
     this.icon,
     this.text, {
-    Key? key,
+    super.key,
     this.type = ButtonWidgetType.iconTextOutlined,
     this.onTap,
     Color? textColor,
@@ -231,14 +227,13 @@ class ButtonWidget extends StatelessWidget {
           ),
         ].toRow(
           mainAxisSize: MainAxisSize.min,
-        ),
-        super(key: key);
+        );
 
   /// 图标 / 文字 / 上下 / 边框
   ButtonWidget.iconTextUpDownOutlined(
     this.icon,
     this.text, {
-    Key? key,
+    super.key,
     this.type = ButtonWidgetType.iconTextUpDownOutlined,
     this.onTap,
     Color? textColor,
@@ -259,14 +254,13 @@ class ButtonWidget extends StatelessWidget {
           ),
         ].toColumn(
           mainAxisSize: MainAxisSize.min,
-        ),
-        super(key: key);
+        );
 
   /// 文字 / 图标
   ButtonWidget.textIcon(
     this.text,
     this.icon, {
-    Key? key,
+    super.key,
     Color? textColor,
     double? textSize,
     FontWeight? textWeight,
@@ -287,8 +281,7 @@ class ButtonWidget extends StatelessWidget {
           ),
         ].toRow(
           mainAxisSize: MainAxisSize.min,
-        ),
-        super(key: key);
+        );
 
   // 背景
   WidgetStateProperty<Color?>? get _backgroundColor {
@@ -440,7 +433,7 @@ class CustomButton extends StatelessWidget {
   final bool isIcon;
 
   const CustomButton({
-    Key? key,
+    super.key,
     required this.child,
     this.onPressed,
     this.foregroundColor,
@@ -453,7 +446,7 @@ class CustomButton extends StatelessWidget {
     this.fontSize,
     this.padding,
     this.isIcon = false,
-  }) : super(key: key);
+  });
 
   factory CustomButton.icon({
     Key? key,
@@ -592,32 +585,23 @@ class _ButtonWithIcon extends CustomButton {
   final Icon icon;
 
   _ButtonWithIcon({
-    Key? key,
+    super.key,
     required this.icon,
-    void Function()? onPressed,
-    Color? foregroundColor,
+    super.onPressed,
+    super.foregroundColor,
     Color? backgroundColor,
-    CustomButtonType type = CustomButtonType.filled,
-    CustomButtonSize size = CustomButtonSize.medium,
-    CustomButtonShape shape = CustomButtonShape.radius,
-    double? width,
-    double? height,
+    super.size,
+    super.shape,
+    super.width,
+    super.height,
     EdgeInsetsGeometry? padding,
   }) : super(
-          key: key,
           child: _ButtonWithIconChild(
             icon: icon,
             size: size,
             padding: padding,
           ),
-          onPressed: onPressed,
-          foregroundColor: foregroundColor,
           backgroundColor: backgroundColor ?? foregroundColor?.withOpacity(0.1),
-          type: type,
-          size: size,
-          shape: shape,
-          width: width,
-          height: height,
           isIcon: true,
           padding: padding ?? const EdgeInsets.all(0),
         );
@@ -629,11 +613,10 @@ class _ButtonWithIconChild extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
 
   const _ButtonWithIconChild({
-    Key? key,
     required this.icon,
     required this.size,
     this.padding,
-  }) : super(key: key);
+  });
 
   double? get _iconSize {
     switch (size) {

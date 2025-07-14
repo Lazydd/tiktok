@@ -62,7 +62,8 @@ class Validdator {
     return (v) {
       if (v?.isEmpty ?? true) return null;
       final emailRegex = RegExp(
-          r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$",
+      );
       if (emailRegex.hasMatch(v!)) return null;
       return m;
     };
@@ -91,7 +92,8 @@ class Validdator {
   //   Validator.max(4, 'field max 4')
   // ])
   static FormFieldValidator<String> multiple(
-      List<FormFieldValidator<String>> v) {
+    List<FormFieldValidator<String>> v,
+  ) {
     return (value) {
       for (final validator in v) {
         final result = validator(value);
@@ -117,7 +119,9 @@ class Validdator {
   // Compare two values using desired input controller
   /// e.g.: Validator.compare(inputController, 'Passwords do not match')
   static FormFieldValidator<String> compareDifferent(
-      TextEditingController? controller, String message) {
+    TextEditingController? controller,
+    String message,
+  ) {
     return (value) {
       final textCompare = controller?.text ?? '';
       if (value == null || textCompare != value) {
@@ -130,7 +134,9 @@ class Validdator {
   // Compare two values using desired input controller
   /// e.g.: Validator.compare(inputController, 'Passwords do not match')
   static FormFieldValidator<String> compareSame(
-      TextEditingController? controller, String message) {
+    TextEditingController? controller,
+    String message,
+  ) {
     return (value) {
       final textCompare = controller?.text ?? '';
       if (value == null || textCompare == value) {
@@ -144,20 +150,25 @@ class Validdator {
   static bool ipAddressValidator(String? value) {
     // 带端口
     final ipAddressWithPortRegex = RegExp(
-        r"^((http|https):\/\/)?(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])(\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])){3}:([0-9]|[1-9]\d|[1-9]\d{2}|[1-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$");
+      r"^((http|https):\/\/)?(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])(\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])){3}:([0-9]|[1-9]\d|[1-9]\d{2}|[1-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$",
+    );
     // 不带端口
     final ipAddressRegex = RegExp(
-        r"^((http|https):\/\/)?(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$");
+      r"^((http|https):\/\/)?(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$",
+    );
 
     if (ipAddressWithPortRegex.hasMatch(value!) ||
-        ipAddressRegex.hasMatch(value)) return true;
+        ipAddressRegex.hasMatch(value)) {
+      return true;
+    }
     return false;
   }
 
   /// 校验 域名+IP 带端口的地址
   static bool networkAddressValidator(String? value) {
     final networkRegex = RegExp(
-        r"^((https|http|ftp|rtsp|igmp|file|rtspt|rtspu):\/\/)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(\/[a-zA-Z0-9\&%_\./-~-]*)?$");
+      r"^((https|http|ftp|rtsp|igmp|file|rtspt|rtspu):\/\/)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(\/[a-zA-Z0-9\&%_\./-~-]*)?$",
+    );
     if (networkRegex.hasMatch(value!)) return true;
     return false;
   }
@@ -190,7 +201,8 @@ class Validdator {
   /// 车牌校验 （新能源+非新能源）
   static bool vehiclePlateValidator(String? value) {
     final plateRegex = RegExp(
-        r"^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使][A-HJ-NP-Z][A-HJ-NP-Z0-9]{4,5}[A-HJ-NP-Z0-9挂学警港澳领]$");
+      r"^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使][A-HJ-NP-Z][A-HJ-NP-Z0-9]{4,5}[A-HJ-NP-Z0-9挂学警港澳领]$",
+    );
     if (plateRegex.hasMatch(value!)) return true;
     return false;
   }

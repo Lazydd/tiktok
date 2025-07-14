@@ -1,4 +1,4 @@
-part of theme;
+part of 'index.dart';
 
 const _darkThemes_ = <String, dynamic>{
   "themeColor": Color(0xff161616),

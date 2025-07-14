@@ -1,7 +1,7 @@
-part of app_update;
+part of 'index.dart';
 
 class AppUpdatePage extends GetView<AppUpdateController> {
-  const AppUpdatePage({Key? key}) : super(key: key);
+  const AppUpdatePage({super.key});
 
   // 主视图
   Widget _buildView() {
@@ -19,9 +19,7 @@ class AppUpdatePage extends GetView<AppUpdateController> {
             const Text(
               "由于签名修改，需卸载重新安装，复制右上角链接至浏览器下载。",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.red,
-              ),
+              style: TextStyle(color: Colors.red),
             ).paddingBottom(20.w).paddingHorizontal(20.w),
           if (VersionFunc.androidKeySeries == Constants.androidKeySeries)
             ButtonWidget.primary(
@@ -65,20 +63,21 @@ class AppUpdatePage extends GetView<AppUpdateController> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10.0), // 圆角半径
                     child: LinearProgressIndicator(
-                      value: _.progressValue, // 进度的值（0.0 到 1.0）
+                      value: controller.progressValue, // 进度的值（0.0 到 1.0）
                       minHeight: 8, // 进度条的最小高度（可选）
                       backgroundColor: Colors.grey.shade200, // 进度条背景颜色（可选）
                       valueColor: AlwaysStoppedAnimation<Color>(
-                          Colors.green.shade500), // 进度条颜色（可选）
+                        Colors.green.shade500,
+                      ), // 进度条颜色（可选）
                     ),
                   ),
                   // ),
                   SizedBox(height: 10.w),
                   Text(
-                    _.progressValue == 1 ? "即将更新完成，进行安装！" : "正在更新中，请勿退出App！",
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                    ),
+                    controller.progressValue == 1
+                        ? "即将更新完成，进行安装！"
+                        : "正在更新中，请勿退出App！",
+                    style: TextStyle(color: Colors.grey.shade700),
                   ),
                 ],
               ),
@@ -111,19 +110,18 @@ class AppUpdatePage extends GetView<AppUpdateController> {
                   color: AppColors.primary,
                 ).onTap(() async {
                   String? androidPath = VersionFunc.versionModel.android!.path;
-                  final uri =
-                      Uri.parse(androidPath ?? Constants.androidDownloadURL);
+                  final uri = Uri.parse(
+                    androidPath ?? Constants.androidDownloadURL,
+                  );
                   Clipboard.setData(ClipboardData(text: uri.toString()));
                   Loading.toast("安装包下载链接已复制");
                   // if (await canLaunchUrl(uri)) {
                   //   await launchUrl(uri, mode: LaunchMode.externalApplication);
                   // }
-                })
+                }),
               ],
             ),
-            body: SafeArea(
-              child: _buildView(),
-            ),
+            body: SafeArea(child: _buildView()),
             backgroundColor: Colors.white,
             bottomNavigationBar: Row(
               mainAxisAlignment: MainAxisAlignment.center,

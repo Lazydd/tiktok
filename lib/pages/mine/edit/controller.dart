@@ -1,4 +1,4 @@
-part of edit;
+part of 'index.dart';
 
 class EditController extends GetxController {
   EditController();
