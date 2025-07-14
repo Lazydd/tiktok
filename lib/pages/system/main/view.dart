@@ -20,109 +20,118 @@ class _MainViewGetX extends GetView<MainController> {
   // 主视图
   Widget _buildView(BuildContext context) {
     DateTime? lastPressedAt;
-    return WillPopScope(
-        child: Scaffold(
-          bottomNavigationBar: GetBuilder<MainController>(
-            id: 'navigation',
-            builder: (_) {
-              return Stack(
-                children: [
-                  BottomNavigationBar(
-                    type: BottomNavigationBarType.fixed,
-                    currentIndex: controller.currentIndex,
-                    onTap: controller.onJumpToPage,
-                    items: const [
-                      BottomNavigationBarItem(
-                        icon: SizedBox.shrink(),
-                        label: '首页',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: SizedBox.shrink(),
-                        label: '朋友',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: SizedBox.shrink(),
-                        label: '', // Dummy item for spacing
-                      ),
-                      BottomNavigationBarItem(
-                        icon: SizedBox.shrink(),
-                        label: '消息',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: SizedBox.shrink(),
-                        label: '我',
-                      )
-                    ],
-                  ),
-                  Positioned(
-                    left: MediaQuery.of(context).size.width / 2 - 15.w,
-                    top: 0,
-                    bottom: 0,
-                    child: InkWell(
-                      onTap: () async {
-                        if (await Access.isBiometricAvailable()) {
-                          List<BiometricType> availableBiometrics =
-                              await Access.getAvailableBiometrics();
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, dynamic result) {
+        if (didPop) return;
+        if (closeOnConfirm()) {
+          SystemNavigator.pop();
+        }
+      },
+      child: Scaffold(
+        bottomNavigationBar: GetBuilder<MainController>(
+          id: 'navigation',
+          builder: (_) {
+            return Stack(
+              children: [
+                BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  currentIndex: controller.currentIndex,
+                  onTap: controller.onJumpToPage,
+                  items: const [
+                    BottomNavigationBarItem(
+                      icon: SizedBox.shrink(),
+                      label: '首页',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SizedBox.shrink(),
+                      label: '朋友',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SizedBox.shrink(),
+                      label: '', // Dummy item for spacing
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SizedBox.shrink(),
+                      label: '消息',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SizedBox.shrink(),
+                      label: '我',
+                    ),
+                  ],
+                ),
+                Positioned(
+                  left: MediaQuery.of(context).size.width / 2 - 15.w,
+                  top: 0,
+                  bottom: 0,
+                  child: InkWell(
+                    onTap: () async {
+                      if (await Access.isBiometricAvailable()) {
+                        List<BiometricType> availableBiometrics =
+                            await Access.getAvailableBiometrics();
 
-                          if (availableBiometrics
-                              .contains(BiometricType.fingerprint)) {
-                            debugPrint('支持指纹识别');
-                          }
-                          if (availableBiometrics
-                              .contains(BiometricType.face)) {
-                            debugPrint('支持面部识别');
-                          }
-
-                          bool authenticated = await Access.authenticate();
-
-                          if (authenticated) {
-                            Get.toNamed('/publish');
-                          } else {
-                            Loading.error('认证失败');
-                          }
-                        } else {
-                          Loading.error('当前设备不支持生物识别');
+                        if (availableBiometrics.contains(
+                          BiometricType.fingerprint,
+                        )) {
+                          debugPrint('支持指纹识别');
                         }
-                      },
-                      child: Center(
-                        child: Icon(
-                          Icons.add_box,
-                          color:
-                              Context(context).theme.bottomNavigationBarColor70,
-                          size: 32.sp,
-                        ),
+                        if (availableBiometrics.contains(BiometricType.face)) {
+                          debugPrint('支持面部识别');
+                        }
+
+                        bool authenticated = await Access.authenticate();
+
+                        if (authenticated) {
+                          Get.toNamed('/publish');
+                        } else {
+                          Loading.error('认证失败');
+                        }
+                      } else {
+                        Loading.error('当前设备不支持生物识别');
+                      }
+                    },
+                    child: Center(
+                      child: Icon(
+                        Icons.add_box,
+                        color: Context(
+                          context,
+                        ).theme.bottomNavigationBarColor70,
+                        size: 32.sp,
                       ),
                     ),
-                  )
-                ],
-              );
-            },
-          ),
-          body: PageView(
-            physics: const NeverScrollableScrollPhysics(), // 不响应用户的滚动
-            controller: controller.pageController,
-            onPageChanged: controller.onIndexChanged,
-            children: const [
-              HomePage(),
-              FriendPage(),
-              SizedBox.shrink(),
-              MessagePage(),
-              MinePage(),
-            ],
-          ),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
-        onWillPop: () async {
-          if (lastPressedAt == null ||
-              DateTime.now().difference(lastPressedAt!) >
-                  const Duration(seconds: 1)) {
-            //两次点击间隔超过1秒则重新计时
-            lastPressedAt = DateTime.now();
-            Loading.toast("再点击一次退出应用");
-            return false;
-          }
-          await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-          return true;
-        });
+        body: PageView(
+          physics: const NeverScrollableScrollPhysics(), // 不响应用户的滚动
+          controller: controller.pageController,
+          onPageChanged: controller.onIndexChanged,
+          children: const [
+            HomePage(),
+            FriendPage(),
+            SizedBox.shrink(),
+            MessagePage(),
+            MinePage(),
+          ],
+        ),
+      ),
+      // onWillPop: () async {
+      //   if (lastPressedAt == null ||
+      //       DateTime.now().difference(lastPressedAt!) >
+      //           const Duration(seconds: 1)) {
+      //     //两次点击间隔超过1秒则重新计时
+      //     lastPressedAt = DateTime.now();
+      //     Loading.toast("再点击一次退出应用");
+      //     return false;
+      //   }
+      //   await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+      //   return true;
+      // },
+    );
   }
 
   @override
@@ -131,12 +140,22 @@ class _MainViewGetX extends GetView<MainController> {
       init: MainController(),
       id: "main",
       builder: (_) {
-        return Scaffold(
-          body: SafeArea(
-            child: _buildView(context),
-          ),
-        );
+        return Scaffold(body: SafeArea(child: _buildView(context)));
       },
     );
   }
+}
+
+DateTime? currentBackPressTime;
+
+bool closeOnConfirm() {
+  DateTime now = DateTime.now();
+  if (currentBackPressTime == null ||
+      now.difference(currentBackPressTime!) > const Duration(seconds: 4)) {
+    currentBackPressTime = now;
+    Loading.toast("再点击一次退出应用");
+    return false;
+  }
+  currentBackPressTime = null;
+  return true;
 }

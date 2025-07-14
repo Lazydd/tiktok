@@ -276,10 +276,10 @@ class MapPage extends GetView<MapController> {
       ),
       id: "site_web",
       builder: (_) {
-        return WillPopScope(
-          onWillPop: () async {
+        return PopScope(
+          onPopInvokedWithResult: (bool didPop, dynamic result) async {
             //此方法会导致iOS的右滑手势失效
-            return false;
+            return;
           },
           child: CustomScaffold(
             body: Stack(
