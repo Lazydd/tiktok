@@ -28,7 +28,7 @@ class RecommendPageState extends State<RecommendPage>
 }
 
 class _RecommendViewGetX extends GetView<RecommendController> {
-  const _RecommendViewGetX({Key? key}) : super(key: key);
+  const _RecommendViewGetX();
 
   @override
   Widget build(BuildContext context) {

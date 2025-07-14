@@ -27,7 +27,7 @@ class RoutePageTransition extends StatelessWidget {
   final Widget child;
 
   RoutePageTransition({
-    Key? key,
+    super.key,
     required Animation<double> primaryRouteAnimation,
     required Animation<double> secondaryRouteAnimation,
     required this.child,
@@ -63,8 +63,7 @@ class RoutePageTransition extends StatelessWidget {
             .drive(DecorationTween(
           begin: const BoxDecoration(color: Colors.transparent),
           end: BoxDecoration(color: Colors.black.withOpacity(0.2)),
-        )),
-        super(key: key);
+        ));
 
   @override
   Widget build(BuildContext context) {

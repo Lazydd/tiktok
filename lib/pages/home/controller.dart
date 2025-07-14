@@ -16,10 +16,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     );
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  // @override
+  // void onReady() {
+  //   super.onReady();
+  // }
 
   @override
   void onClose() {

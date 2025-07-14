@@ -20,7 +20,7 @@ class _ShopPageState extends State<ShopPage>
 }
 
 class _ShopViewGetX extends GetView<ShopController> {
-  const _ShopViewGetX({Key? key}) : super(key: key);
+  const _ShopViewGetX();
 
   @override
   Widget build(BuildContext context) {
@@ -48,31 +48,33 @@ class _ShopViewGetX extends GetView<ShopController> {
               return Container(
                 height: (index % 5 + 1) * 100,
                 // color: AppColors.randomColor,
-                child: Stack(
-                  children: [
-                    Hero(
-                      tag: controller.list[index]['avatar'],
-                      child: ImageWidget(controller.list[index]['avatar']),
-                    ),
-                    Text(
-                      controller.list[index]['content'],
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ).onTap(() {
-                  Navigator.push(
-                    Get.context!,
-                    MaterialPageRoute(
-                      builder: (context) => PhotoPreview(
-                        galleryItems:
-                            controller.list.map((v) => v['avatar']).toList(),
-                        defaultImageIndex: index,
-                        slider: false,
-                        closePhotoView: () => Get.back(),
-                      ),
-                    ),
-                  );
-                }),
+                child:
+                    Stack(
+                      children: [
+                        Hero(
+                          tag: controller.list[index]['avatar'],
+                          child: ImageWidget(controller.list[index]['avatar']),
+                        ),
+                        Text(
+                          controller.list[index]['content'],
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ).onTap(() {
+                      Navigator.push(
+                        Get.context!,
+                        MaterialPageRoute(
+                          builder: (context) => PhotoPreview(
+                            galleryItems: controller.list
+                                .map((v) => v['avatar'])
+                                .toList(),
+                            defaultImageIndex: index,
+                            slider: false,
+                            closePhotoView: () => Get.back(),
+                          ),
+                        ),
+                      );
+                    }),
               );
             },
           ),

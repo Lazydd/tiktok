@@ -188,8 +188,9 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
         _messageTextController.text += emoji.emoji;
       },
       onBackspacePressed: () {
-        _messageTextController.text =
-            _messageTextController.text.characters.skipLast(1).toString();
+        _messageTextController.text = _messageTextController.text.characters
+            .skipLast(1)
+            .toString();
       },
       config: Config(
         height: height,
@@ -201,7 +202,8 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
         ),
         emojiViewConfig: EmojiViewConfig(
           // Issue: https://github.com/flutter/flutter/issues/28894
-          emojiSizeMax: 28 *
+          emojiSizeMax:
+              28 *
               (foundation.defaultTargetPlatform == TargetPlatform.iOS
                   ? 1.2
                   : 1.0),
@@ -269,8 +271,9 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
                           readOnly: readOnly,
                           showCursor: true,
                           enabled: !talk.value,
-                          textAlign:
-                              talk.value ? TextAlign.center : TextAlign.start,
+                          textAlign: talk.value
+                              ? TextAlign.center
+                              : TextAlign.start,
                           controller: _messageTextController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(

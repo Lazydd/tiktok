@@ -16,20 +16,20 @@ class CustomAppBar extends AppBar {
     super.toolbarHeight,
     super.systemOverlayStyle,
   }) : super(
-          backgroundColor: backgroundColor ?? Colors.white,
-          centerTitle: centerTitle ?? true,
-          elevation: elevation ?? 0,
-          actions: _buildActions(actions),
-          iconTheme: IconThemeData(
-            color: AppColors.primary, // 返回按钮颜色
-          ),
-          toolbarTextStyle: const TextStyle(color: Colors.black, fontSize: 18),
-          titleTextStyle: const TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-        );
+         backgroundColor: backgroundColor ?? Colors.white,
+         centerTitle: centerTitle ?? true,
+         elevation: elevation ?? 0,
+         actions: _buildActions(actions),
+         iconTheme: IconThemeData(
+           color: AppColors.primary, // 返回按钮颜色
+         ),
+         toolbarTextStyle: const TextStyle(color: Colors.black, fontSize: 18),
+         titleTextStyle: const TextStyle(
+           color: Colors.black,
+           fontSize: 20,
+           fontWeight: FontWeight.w600,
+         ),
+       );
 
   static List<Widget>? _buildActions(List<Widget>? items) {
     if ((items ?? []).isEmpty) return null;

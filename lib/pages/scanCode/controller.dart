@@ -34,8 +34,8 @@ class ScanCodeController extends GetxController {
     _initData();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   super.onClose();
+  // }
 }

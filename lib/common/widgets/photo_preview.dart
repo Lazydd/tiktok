@@ -75,19 +75,20 @@ class _PhotoPreviewState extends State<PhotoPreview> {
               actions: [
                 Icon(Icons.download, color: Colors.white, size: 24.sp)
                     .onTap(() {
-                  // file 与 network 的图片下载方式不一样
-                  if (UtilsFunc.isNetImage(
-                    widget.galleryItems[selectedIndex - 1],
-                  )) {
-                    Access.saveNetWorkImage(
-                      context,
-                      widget.galleryItems[selectedIndex - 1],
-                    );
-                  } else {
-                    File file = widget.galleryItems[selectedIndex - 1];
-                    Access.saveAssetsImg(context, file.path);
-                  }
-                }).paddingRight(20.w),
+                      // file 与 network 的图片下载方式不一样
+                      if (UtilsFunc.isNetImage(
+                        widget.galleryItems[selectedIndex - 1],
+                      )) {
+                        Access.saveNetWorkImage(
+                          context,
+                          widget.galleryItems[selectedIndex - 1],
+                        );
+                      } else {
+                        File file = widget.galleryItems[selectedIndex - 1];
+                        Access.saveAssetsImg(context, file.path);
+                      }
+                    })
+                    .paddingRight(20.w),
               ],
             )
           : null,
@@ -121,7 +122,8 @@ class _PhotoPreviewState extends State<PhotoPreview> {
               loadingBuilder: (context, event) => const Center(
                 child: CircularProgressIndicator(color: Colors.white),
               ),
-              backgroundDecoration: widget.decoration ??
+              backgroundDecoration:
+                  widget.decoration ??
                   const BoxDecoration(color: Color.fromRGBO(0, 0, 0, 1)),
               pageController: PageController(
                 initialPage: widget.defaultImageIndex,

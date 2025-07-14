@@ -97,9 +97,7 @@ class MessagePage extends GetView<MessageController> {
                   children: [
                     Text(
                       item['name'],
-                      style: TextStyle(
-                          color: Context(context).theme.textColor,
-                          fontSize: 16.sp),
+                      style: TextStyle(color: Context(context).theme.textColor, fontSize: 16.sp),
                     ),
                     Text.rich(TextSpan(
                       children: [

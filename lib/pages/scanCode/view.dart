@@ -34,7 +34,8 @@ class ScanCodePage extends GetView<ScanCodeController> {
         ),
         // 闪光灯
         Positioned(
-          top: (ScreenFunc.screenHeight - cutOutHeight) / 2 -
+          top:
+              (ScreenFunc.screenHeight - cutOutHeight) / 2 -
               bottomBarHeight +
               cutOutHeight +
               60,
@@ -84,7 +85,8 @@ class ScanCodePage extends GetView<ScanCodeController> {
           ),
         ),
         Positioned(
-          top: (ScreenFunc.screenHeight - cutOutHeight) / 2 -
+          top:
+              (ScreenFunc.screenHeight - cutOutHeight) / 2 -
               bottomBarHeight -
               20,
           child: const LoopVerticalAnimation(),
@@ -158,12 +160,13 @@ class ScanCodePage extends GetView<ScanCodeController> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             leadingWidth: 64,
-            leading: IconWidget.svg(
-              AssetsSvgs.commonExpandBackSvg,
-              color: const Color.fromRGBO(227, 224, 231, 1),
-            ).padding(all: 12).onTap(() {
-              Get.back();
-            }),
+            leading:
+                IconWidget.svg(
+                  AssetsSvgs.commonExpandBackSvg,
+                  color: const Color.fromRGBO(227, 224, 231, 1),
+                ).padding(all: 12).onTap(() {
+                  Get.back();
+                }),
           ),
           extendBodyBehindAppBar: true,
           body: _buildView(),
@@ -263,7 +266,8 @@ class _ScanFramePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     double leftTopX = ScreenFunc.screenWidth / 2 - frameSize.width / 2;
-    double leftTopY = ScreenFunc.screenHeight / 2 -
+    double leftTopY =
+        ScreenFunc.screenHeight / 2 -
         frameSize.height / 2 -
         bottomBarHeight / 2;
     double height = ScreenFunc.screenHeight - bottomBarHeight;
@@ -288,7 +292,8 @@ class _ScanFramePainter extends CustomPainter {
     //绘制罩层
     //画笔
     Paint bgPaint = Paint()
-      ..color = const Color.fromRGBO(0, 0, 0, 0.6) //透明灰
+      ..color =
+          const Color.fromRGBO(0, 0, 0, 0.6) //透明灰
       ..style = PaintingStyle.fill; // 画笔的模式，填充
     //左侧矩形
     canvas.drawRect(Rect.fromLTRB(0, 0, leftTopX, height), bgPaint);
@@ -309,7 +314,8 @@ class _ScanFramePainter extends CustomPainter {
     paint
       ..color = Colors.white
       ..strokeWidth = 4.0
-      ..strokeCap = StrokeCap.square // 解决因为线宽导致交界处不是直角的问题
+      ..strokeCap = StrokeCap
+          .square // 解决因为线宽导致交界处不是直角的问题
       ..style = PaintingStyle.stroke;
     // 横向线条的坐标偏移
     Offset horizontalOffset = const Offset(cornerLength, 0);

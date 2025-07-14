@@ -10,8 +10,8 @@ final class AppTheme extends _ThemeData<AppTheme> {
   AppTheme._({
     required Brightness brightness,
     required Map<String, dynamic> defines,
-  })  : _brightness = brightness,
-        super(defines) {
+  }) : _brightness = brightness,
+       super(defines) {
     data = _createThemeOf();
     scheme = data.colorScheme;
   }
@@ -50,15 +50,14 @@ final class AppTheme extends _ThemeData<AppTheme> {
 
   ThemeData _createThemeOf() {
     final isDark = _brightness == Brightness.dark;
-    final schema =
-        isDark ? const ColorScheme.dark() : const ColorScheme.light();
+    final schema = isDark
+        ? const ColorScheme.dark()
+        : const ColorScheme.light();
     return ThemeData(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       hoverColor: Colors.transparent,
-      colorScheme: schema.copyWith(
-        surface: themeColor,
-      ),
+      colorScheme: schema.copyWith(surface: themeColor),
       useMaterial3: true,
       appBarTheme: const AppBarTheme().copyWith(
         color: Colors.transparent,
@@ -66,7 +65,7 @@ final class AppTheme extends _ThemeData<AppTheme> {
         titleTextStyle: TextStyle(color: appBarIconColor, fontSize: 24),
         iconTheme: IconThemeData(color: appBarIconColor),
       ),
-      tabBarTheme: const TabBarTheme().copyWith(
+      tabBarTheme: TabBarTheme(
         dividerColor: Colors.transparent,
         labelColor: textColor,
         unselectedLabelStyle: TextStyle(

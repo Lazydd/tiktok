@@ -132,12 +132,12 @@ class TextWidget extends StatelessWidget {
     this.size,
     this.weight,
     this.textAlign,
-  })  : color = color ?? AppColors.secondary,
-        style = TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: color,
-        );
+  }) : color = color ?? AppColors.secondary,
+       style = TextStyle(
+         fontSize: 14,
+         fontWeight: FontWeight.w500,
+         color: color,
+       );
 
   /// 文字 - 导航
   const TextWidget.navigation({
@@ -161,7 +161,7 @@ class TextWidget extends StatelessWidget {
       text,
       style:
           style?.copyWith(color: color, fontSize: size, fontWeight: weight) ??
-              TextStyle(color: color, fontSize: size, fontWeight: weight),
+          TextStyle(color: color, fontSize: size, fontWeight: weight),
       overflow: overflow,
       maxLines: maxLines,
       softWrap: softWrap,

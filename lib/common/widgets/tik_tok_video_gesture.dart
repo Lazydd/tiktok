@@ -98,7 +98,8 @@ class TikTokFavoriteAnimationIcon extends StatefulWidget {
 }
 
 class TikTokFavoriteAnimationIconState
-    extends State<TikTokFavoriteAnimationIcon> with TickerProviderStateMixin {
+    extends State<TikTokFavoriteAnimationIcon>
+    with TickerProviderStateMixin {
   AnimationController? _animationController;
 
   @override
