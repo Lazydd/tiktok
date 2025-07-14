@@ -23,14 +23,6 @@ class TikTokVideoGesture extends StatefulWidget {
 }
 
 class TikTokVideoGestureState extends State<TikTokVideoGesture> {
-  final GlobalKey _key = GlobalKey();
-
-  // 内部转换坐标点
-  Offset _p(Offset p) {
-    RenderBox getBox = _key.currentContext!.findRenderObject() as RenderBox;
-    return getBox.globalToLocal(p);
-  }
-
   List<Offset> icons = [];
 
   bool canAddFavorite = false;
@@ -43,6 +35,7 @@ class TikTokVideoGestureState extends State<TikTokVideoGesture> {
       children: icons
           .map<Widget>(
             (p) => TikTokFavoriteAnimationIcon(
+              // key: Key(p.toString()),
               position: p,
               onAnimationComplete: () {
                 icons.remove(p);
@@ -51,39 +44,44 @@ class TikTokVideoGestureState extends State<TikTokVideoGesture> {
           )
           .toList(),
     );
-    return GestureDetector(
-      key: _key,
-      onTapDown: (detail) {
-        setState(() {
-          if (canAddFavorite) {
-            icons.add(_p(detail.globalPosition));
-            widget.onAddFavorite?.call();
-            justAddFavorite = true;
-          } else {
-            justAddFavorite = false;
-          }
-        });
-      },
-      onTapUp: (detail) {
-        timer?.cancel();
-        var delay = canAddFavorite ? 600 : 300;
-        timer = Timer(Duration(milliseconds: delay), () {
-          canAddFavorite = false;
-          timer = null;
-          if (!justAddFavorite) {
-            widget.onSingleTap?.call();
-          }
-        });
-        canAddFavorite = true;
-      },
-      onTapCancel: () {},
-      child: Stack(
-        children: <Widget>[
-          widget.child,
-          iconStack,
-        ],
-      ),
-    );
+    try {
+      return GestureDetector(
+        onTapDown: (detail) {
+          var box = context.findRenderObject() as RenderBox;
+          var pos = box.globalToLocal(detail.globalPosition);
+          setState(() {
+            if (canAddFavorite) {
+              icons.add(pos);
+              widget.onAddFavorite?.call();
+              justAddFavorite = true;
+            } else {
+              justAddFavorite = false;
+            }
+          });
+        },
+        onTapUp: (detail) {
+          timer?.cancel();
+          var delay = canAddFavorite ? 600 : 300;
+          timer = Timer(Duration(milliseconds: delay), () {
+            canAddFavorite = false;
+            timer = null;
+            if (!justAddFavorite) {
+              widget.onSingleTap?.call();
+            }
+          });
+          canAddFavorite = true;
+        },
+        onTapCancel: () {},
+        child: Stack(
+          children: <Widget>[
+            widget.child,
+            iconStack,
+          ],
+        ),
+      );
+    } catch (e) {
+      return Container();
+    }
   }
 }
 
@@ -122,9 +120,9 @@ class TikTokFavoriteAnimationIconState
   @override
   void initState() {
     _animationController = AnimationController(
-      lowerBound: 0,
+      lowerBound: 0.75,
       upperBound: 1,
-      duration: const Duration(milliseconds: 1600),
+      duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
 
@@ -144,8 +142,8 @@ class TikTokFavoriteAnimationIconState
 
   double? get value => _animationController?.value;
 
-  double appearDuration = 0.1;
-  double dismissDuration = 0.8;
+  double appearDuration = 0.8;
+  double dismissDuration = 0.95;
 
   double get opa {
     if (value! < appearDuration) {
@@ -159,13 +157,26 @@ class TikTokFavoriteAnimationIconState
   }
 
   double get scale {
+    const k = 400;
     if (value! < appearDuration) {
-      return 1 + appearDuration - value!;
+      var temp1 = k * (value! - 0.775) * (value! - 0.8) + 1;
+      return temp1;
     }
     if (value! < dismissDuration) {
       return 1;
     }
-    return (value! - dismissDuration) / (1 - dismissDuration) + 1;
+    const axis = 1.05;
+    var k1 = axis - dismissDuration;
+    return -(k1) / (value! - axis);
+  }
+
+  double get top {
+    if (value! < dismissDuration) {
+      return (sqrt(dismissDuration)) * 150 +
+          (pow(dismissDuration, 3)) * 100 -
+          50;
+    }
+    return (sqrt(value!)) * 150 + (value! * value! * value!) * 100 - 50;
   }
 
   @override
@@ -179,9 +190,9 @@ class TikTokFavoriteAnimationIconState
       blendMode: BlendMode.srcATop,
       shaderCallback: (Rect bounds) => RadialGradient(
         center: Alignment.topLeft.add(const Alignment(0.66, 0.66)),
-        colors: const [
-          Color(0xffEF6F6F),
-          Color(0xffF03E3E),
+        colors: [
+          Colors.pink.shade200,
+          const Color(0xffE91E63),
         ],
       ).createShader(bounds),
       child: content,
