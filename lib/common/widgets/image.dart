@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:tiktok/common/index.dart';
 
 class ImageWidget extends StatelessWidget {
   final String url;
