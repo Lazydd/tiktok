@@ -36,7 +36,6 @@ class ScanCodeController extends GetxController {
 
   @override
   void onClose() {
-    qrViewController?.dispose();
     super.onClose();
   }
 }

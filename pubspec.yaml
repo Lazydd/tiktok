@@ -91,7 +91,7 @@ dependencies:
   # 推特点赞效果
   like_button: ^2.0.5
   # 二维码扫描
-  qr_code_scanner: ^1.0.1
+  qr_code_scanner_plus: ^2.0.10+1
   # 聊天
   flutter_chat_ui: ^1.6.15
   flutter_chat_types: ^3.6.2
