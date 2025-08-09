@@ -5,6 +5,7 @@ class EditPage extends GetView<EditController> {
 
   // 主视图
   Widget _buildView(context) {
+    late final FormController formController = FormController();
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -200,6 +201,58 @@ class EditPage extends GetView<EditController> {
                 parameters: {"type": "3", "value": controller.userUniqueId},
               ),
             ),
+            FormInput(
+                controller: formController,
+                showErrors: true,
+                validateOnInput: true,
+                children: [
+                  Input.leading("标题名称"),
+                  Input.text(
+                      name: 'name1', label: "label1", placeholder: "请输入用户名"),
+                  Input.text(
+                      name: 'name2', label: "label2", placeholder: "请输入用户名"),
+                  Input.text(
+                      name: 'name3', label: "label3", placeholder: "请输入用户名"),
+                  Input.text(
+                      name: 'name4', label: "label4", placeholder: "请输入用户名"),
+                  Input.text(
+                      name: 'name5',
+                      label: "label5",
+                      placeholder: "请输入用户名",
+                      required: true,
+                      validator: [
+                        Validator.limited(2, 10),
+                        Validator.equals(() => formController.form, "name2")
+                      ]),
+                ]),
+            ElevatedButton(
+              onPressed: () {
+                print("${formController.form}");
+                if (formController.validate()) {
+                  print("验证通过了！！！！！！！！！！！！！！！！！");
+                } else {
+                  final errors = formController.getErrors();
+                  print("------------------- errors -------------------");
+                  errors.forEach((k, v) => print("$k : $v"));
+                  print("----------------------------------------------");
+                }
+              },
+              child: const Text('验证'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                print("--------------------- FromValue ---------------------");
+                formController.getValue().forEach((k, v) => print("$k : $v"));
+                print("-----------------------------------------------------");
+              },
+              child: const Text('获取表单值'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                formController.reset();
+              },
+              child: const Text('重置'),
+            )
           ],
         ),
       ),
