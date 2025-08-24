@@ -406,14 +406,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.6.15"
-  flutter_datetime_picker_plus:
-    dependency: "direct main"
-    description:
-      name: flutter_datetime_picker_plus
-      sha256: "7d82da02c4e070bb28a9107de119ad195e2319b45c786fecc13482a9ffcc51da"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.2.0"
   flutter_easyloading:
     dependency: "direct main"
     description:
@@ -566,6 +558,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.2.1"
+  flutter_picker_plus:
+    dependency: "direct main"
+    description:
+      name: flutter_picker_plus
+      sha256: b6627014739b4bef1eb62cdc3416638aebb67d97a5bf997ce2c2b6dd8def5e5e
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.5.2"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

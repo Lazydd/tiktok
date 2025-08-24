@@ -6,6 +6,7 @@ import 'package:fps_monitor/widget/custom_widget_inspector.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:tiktok/common/values/consts.dart';
 
 import 'global.dart';
 import 'common/index.dart';
@@ -15,7 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final MQTTAppState mqttAppState = MQTTAppState();
-
+  await Consts.ensureInitialized();
   Global.init().then((_) {
     Future.wait([]).whenComplete(() {
       runApp(MultiProvider(

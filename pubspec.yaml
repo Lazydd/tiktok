@@ -79,7 +79,7 @@ dependencies:
   # badges 标记
   badges: ^3.1.2
   # 时间选择器
-  flutter_datetime_picker_plus: ^2.2.0
+  flutter_picker_plus: ^1.5.2
   # 滑动列表
   flutter_slidable: ^3.1.1
   # 视频发布
@@ -165,6 +165,7 @@ flutter:
     - assets/videos/
     - assets/lotties/
     - assets/comments/
+    - assets/city.json
 
     - path: assets/svg/
       transformers:

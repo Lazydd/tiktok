@@ -12,3 +12,4 @@ export 'chat_buttom_container.dart';
 export 'input.dart';
 export 'tik_tok_video_gesture.dart';
 export 'tik_tok_loading.dart';
+export 'input_text.dart';
