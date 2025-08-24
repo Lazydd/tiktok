@@ -96,7 +96,7 @@ dependencies:
   # 内嵌webview https://inappwebview.dev/
   flutter_inappwebview: ^6.1.5
   # 音视频通话（rtc）
-  agora_rtc_engine: ^6.5.2
+  agora_rtc_engine_plus: ^6.5.2
   # 实时消息（rtm）
   agora_rtm: ^1.5.9
   # 长列表优化
