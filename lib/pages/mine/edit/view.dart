@@ -5,6 +5,7 @@ class EditPage extends GetView<EditController> {
 
   // 主视图
   Widget _buildView(context) {
+    late final FormController formController = FormController();
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -163,16 +164,7 @@ class EditPage extends GetView<EditController> {
               ).width(220.w),
               showArrow: true,
               onTap: () {
-                DatePicker.showDatePicker(
-                  context,
-                  showTitleActions: true,
-                  minTime: DateTime(0, 1, 1),
-                  maxTime: DateTime(10000, 12, 31),
-                  onChanged: (date) {},
-                  onConfirm: controller.changeBirthday,
-                  currentTime: DateTime.now(),
-                  locale: LocaleType.zh,
-                );
+                DataPicker.datetime(context: context).show().then((items) {});
               },
             ),
             CustomCell(
@@ -200,6 +192,108 @@ class EditPage extends GetView<EditController> {
                 parameters: {"type": "3", "value": controller.userUniqueId},
               ),
             ),
+            // FormInput(
+            //   controller: formController,
+            //   showErrors: true,
+            //   validateOnInput: true,
+            //   children: [
+            //     Input.leading("标题名称"),
+            //     Input.text(
+            //       name: 'name2',
+            //       label: "label2",
+            //       placeholder: "请输入用户名",
+            //       required: true,
+            //     ),
+            //     Input.text(
+            //       name: 'name5',
+            //       label: "label5",
+            //       placeholder: "请输入用户名",
+            //       required: true,
+            //       validator: [
+            //         Validator.limited(2, 10),
+            //         Validator.equals(() => formController.form, "name2"),
+            //       ],
+            //     ),
+            //     Input.switcher(
+            //       name: "kai",
+            //       label: "开关",
+            //       subtitle: "是否起",
+            //       onChanged: (value) => print(value),
+            //     ),
+            //     Input.numberStepper(
+            //       name: "pice",
+            //       label: "数量",
+            //       minValue: 1,
+            //       maxValue: 50,
+            //       suffix: "个",
+            //     ),
+            //     Input.regional(name: "address", label: "地址", required: true),
+            //     // Input.datetime(
+            //     //   name: "date",
+            //     //   label: "生日",
+            //     //   placeholder: "请选择时间",
+            //     //   renderer: (value) => Dates.format('yyyy', value),
+            //     //   formatter: DateTimeFormatter.YYYY_MM_DD,
+            //     // ),
+            //     // Input.number(
+            //     //   name: "height",
+            //     //   label: "身高",
+            //     //   minValue: 0,
+            //     //   maxValue: 120,
+            //     //   suffix: "cm",
+            //     //   placeholder: "请选择身高",
+            //     // ),
+            //     // Input.select(
+            //     //   name: "gender",
+            //     //   label: "性别",
+            //     //   options: [
+            //     //     Option(label: "男", value: "male"),
+            //     //     Option(label: "女", value: "female"),
+            //     //   ],
+            //     // ),
+            //     // Input.selectList(
+            //     //   name: "multiple",
+            //     //   label: "多选",
+            //     //   options: [
+            //     //     Option(label: "男1", value: "male1"),
+            //     //     Option(label: "男2", value: "male2"),
+            //     //     Option(label: "男21", value: "male255"),
+            //     //     Option(label: "男222", value: "male24"),
+            //     //     Option(label: "男2333", value: "male23"),
+            //     //     Option(label: "男24444", value: "male22"),
+            //     //   ],
+            //     // ),
+            //   ],
+            // ),
+
+            // ElevatedButton(
+            //   onPressed: () {
+            //     print("${formController.form}");
+            //     if (formController.validate()) {
+            //       print("验证通过了！！！！！！！！！！！！！！！！！");
+            //     } else {
+            //       final errors = formController.getErrors();
+            //       print("------------------- errors -------------------");
+            //       errors.forEach((k, v) => print("$k : $v"));
+            //       print("----------------------------------------------");
+            //     }
+            //   },
+            //   child: const Text('验证'),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     print("--------------------- FromValue ---------------------");
+            //     formController.getValue().forEach((k, v) => print("$k : $v"));
+            //     print("-----------------------------------------------------");
+            //   },
+            //   child: const Text('获取表单值'),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     formController.reset();
+            //   },
+            //   child: const Text('重置'),
+            // ),
           ],
         ),
       ),

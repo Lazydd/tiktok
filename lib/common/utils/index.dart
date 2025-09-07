@@ -10,3 +10,5 @@ export 'date_func.dart';
 export 'location.dart';
 export 'version_func.dart';
 export 'cache.dart';
+export 'helper.dart';
+export 'dates.dart';

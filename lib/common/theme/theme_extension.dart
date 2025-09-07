@@ -7,6 +7,9 @@ final class AppTheme extends _ThemeData<AppTheme> {
 
   static final Map<Brightness, AppTheme> _cache = {};
 
+  static StrutStyle structStyle = const StrutStyle();
+  static ScrollPhysics physics = const BouncingScrollPhysics();
+
   AppTheme._({
     required Brightness brightness,
     required Map<String, dynamic> defines,
