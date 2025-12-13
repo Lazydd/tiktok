@@ -3,7 +3,7 @@ part of 'index.dart';
 class PublishController extends GetxController {
   PublishController();
 
-  _initData() {
+  void _initData() {
     update(["publish"]);
   }
 

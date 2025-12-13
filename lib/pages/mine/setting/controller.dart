@@ -3,7 +3,7 @@ part of 'index.dart';
 class SettingController extends GetxController {
   SettingController();
 
-  _initData() {
+  void _initData() {
     update(["setting"]);
   }
 

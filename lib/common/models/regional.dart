@@ -33,7 +33,7 @@ class Regional extends TreeModel<Regional> {
     );
   }
 
-  get value => null;
+  Null get value => null;
 
   @override
   Map<String, dynamic> toJson() {

@@ -18,7 +18,7 @@ class OpusController extends GetxController {
   // 页尺寸
   final int _pageSize = 20;
 
-  _getListData() async {
+  Future<void> _getListData() async {
     // 1-待受理，2-待执行，3-待审核，4-待复核,6-已驳回,7-错单待处理,10-已完成
     Map<String, dynamic> data = <String, dynamic>{};
     data["type"] = type;
@@ -70,7 +70,7 @@ class OpusController extends GetxController {
     }
   }
 
-  _initData() {
+  void _initData() {
     _getListData();
     update(["opus"]);
   }

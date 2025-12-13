@@ -5,7 +5,7 @@ class CommentController extends GetxController {
 
   List commitlist = [];
 
-  _getCommentData() async {
+  Future<void> _getCommentData() async {
     commitlist = await TodoAPI.getComments(id: '1');
     update(["comment"]);
   }
@@ -23,7 +23,7 @@ class CommentController extends GetxController {
     return list;
   }
 
-  showChildrenComment(dynamic item) {
+  void showChildrenComment(dynamic item) {
     if (item['showChildren'] == null) {
       item['children'] = _sampleSize(commitlist, 3);
       item['showChildren'] = true;
@@ -33,7 +33,7 @@ class CommentController extends GetxController {
     update(["comment"]);
   }
 
-  _initData() {
+  void _initData() {
     _getCommentData();
     update(["comment"]);
   }

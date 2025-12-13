@@ -99,7 +99,7 @@ class RtcController extends GetxController {
     update(["rtc"]);
   }
 
-  _initData() {
+  void _initData() {
     initAgora();
     update(["rtc"]);
   }

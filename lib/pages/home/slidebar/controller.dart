@@ -50,7 +50,7 @@ class SlidebarController extends GetxController {
     {"name": "K歌", "icon": Icons.mic, "onTap": () => Get.toNamed('')},
   ];
 
-  _initData() {
+  void _initData() {
     update(["slidebar"]);
   }
 

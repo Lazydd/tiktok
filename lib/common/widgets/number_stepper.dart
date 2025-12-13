@@ -194,7 +194,7 @@ class _NumberStepperState extends State<NumberStepper> {
 
       if (timer == null) notifyChanged();
     } else if (timer != null) {
-      timer?.cancel();
+      timer.cancel();
       notifyChanged();
     }
   }
@@ -205,7 +205,7 @@ class _NumberStepperState extends State<NumberStepper> {
 
       if (timer == null) notifyChanged();
     } else if (timer != null) {
-      timer?.cancel();
+      timer.cancel();
       notifyChanged();
     }
   }

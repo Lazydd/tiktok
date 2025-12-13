@@ -113,11 +113,11 @@ class MQTTManager {
   }
 
   ///取消订阅
-  onUnsubscribed(String? topic) {
+  void onUnsubscribed(String? topic) {
     debugPrint("已取消订阅 $topic");
   }
 
-  onSubscribeFail(String topic) {
+  void onSubscribeFail(String topic) {
     debugPrint("订阅失败 $topic");
   }
 

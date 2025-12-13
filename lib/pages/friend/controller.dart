@@ -3,7 +3,7 @@ part of 'index.dart';
 class FriendController extends GetxController {
   FriendController();
 
-  _initData() {
+  void _initData() {
     update(["friend"]);
   }
 

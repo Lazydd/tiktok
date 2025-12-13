@@ -28,7 +28,7 @@ class ShareController extends GetxController {
     {"name": "播放反馈", "icon": Icons.edit_square},
   ];
 
-  _initData() {
+  void _initData() {
     update(["share"]);
   }
 

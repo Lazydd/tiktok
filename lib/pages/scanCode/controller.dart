@@ -19,7 +19,7 @@ class ScanCodeController extends GetxController {
     update(["scan_code_flash"]);
   }
 
-  _initData() {
+  void _initData() {
     update(["scan_code"]);
   }
 

@@ -12,14 +12,14 @@ class MineController extends GetxController {
 
   GlobalKey userformKey = GlobalKey<FormState>();
 
-  onAccountValidator() {
+  FormFieldValidator<String> onAccountValidator() {
     return Validdator.multiple([
       Validdator.required("请输入你的手机号"),
       Validdator.phone("请输入正确的手机号"),
     ]);
   }
 
-  onPasswordValidator() {
+  FormFieldValidator<String> onPasswordValidator() {
     return Validdator.multiple([
       Validdator.required("请输入你的密码"),
       Validdator.min(6, "密码至少需要6位数字、字母或字符"),
@@ -42,7 +42,7 @@ class MineController extends GetxController {
     }
   }
 
-  _initData() {
+  void _initData() {
     update(["mine"]);
   }
 

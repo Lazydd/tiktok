@@ -4,7 +4,7 @@ class EditPage extends GetView<EditController> {
   const EditPage({super.key});
 
   // 主视图
-  Widget _buildView(context) {
+  Widget _buildView(BuildContext context) {
     late final FormController formController = FormController();
     return Center(
       child: Padding(
@@ -300,7 +300,7 @@ class EditPage extends GetView<EditController> {
     );
   }
 
-  _showPhotoActionSheet() async {
+  Future<void> _showPhotoActionSheet() async {
     var result = await showCupertinoModalPopup(
       context: Get.context!,
       builder: (context) {
@@ -349,7 +349,7 @@ class EditPage extends GetView<EditController> {
     }
   }
 
-  formatImage(dynamic imageFileItem, {bool isPath = false, String? api}) async {
+  Future<String?>? formatImage(dynamic imageFileItem, {bool isPath = false, String? api}) async {
     if (imageFileItem != null) {
       File? file = await UtilsFunc.compressImage(
         imageFileItem['file'],

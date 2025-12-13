@@ -18,11 +18,11 @@ class RecommendPageState extends State<RecommendPage>
     return const _RecommendViewGetX();
   }
 
-  play() {
+  void play() {
     Get.find<RecommendController>().currentVideoKey?.play();
   }
 
-  pause() {
+  void pause() {
     Get.find<RecommendController>().currentVideoKey?.pause();
   }
 }
@@ -70,7 +70,7 @@ class _RecommendViewGetX extends GetView<RecommendController> {
   }
 }
 
-Widget _desc(context) {
+Widget _desc(BuildContext context) {
   return Positioned(
     left: 10.w,
     bottom: 10.h,

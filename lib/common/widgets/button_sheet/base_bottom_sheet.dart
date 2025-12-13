@@ -173,9 +173,7 @@ abstract class BottomSheetWidget<P extends BaseBottomSheet> {
       child: Container(
         padding: parent.padding,
         alignment: Alignment.center,
-        decoration: hasCancelBtn == null
-            ? null
-            : BoxDecoration(border: Border(right: border)),
+        decoration: BoxDecoration(border: Border(right: border)),
         child: Text(
           parent.confirmText ?? "我选好了",
           style: const TextStyle(fontSize: 16, color: Colors.black),

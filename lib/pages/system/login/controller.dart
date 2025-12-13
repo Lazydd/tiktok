@@ -3,7 +3,7 @@ part of 'index.dart';
 class LoginController extends GetxController {
   LoginController();
 
-  _initData() {
+  void _initData() {
     update(["login"]);
   }
 

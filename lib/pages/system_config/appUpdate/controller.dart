@@ -6,7 +6,7 @@ class AppUpdateController extends GetxController {
   double progressValue = 0;
   String progressLabel = "0B / 0B";
 
-  downloadAndroid() async {
+  Future<void> downloadAndroid() async {
     final deviceInfo = await DeviceInfoPlugin().androidInfo;
     String url =
         VersionFunc.versionModel.android!.path ?? Constants.androidDownloadURL;
@@ -27,7 +27,7 @@ class AppUpdateController extends GetxController {
   }
 
   ///开始下载
-  startDownLoad(String url) async {
+  Future<void> startDownLoad(String url) async {
     /// 创建存储文件
     Directory? storageDir = await getExternalStorageDirectory();
     String storagePath = "";
@@ -66,14 +66,14 @@ class AppUpdateController extends GetxController {
   }
 
   //打开apk 开始安装
-  openApk(String path) {
+  void openApk(String path) {
     final FlutterAppInstaller flutterAppInstaller = FlutterAppInstaller();
     flutterAppInstaller.installApk(
       filePath: path,
     );
   }
 
-  _initData() {
+  void _initData() {
     update(["app_update"]);
   }
 

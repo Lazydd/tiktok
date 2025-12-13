@@ -129,13 +129,13 @@ class MapController extends GetxController {
   // web 提供的相关方法 =======================
 
   // 当 WebView 的主页收到 HTTP 错误时触发该事件
-  onWebLoadHttpError(
+  void onWebLoadHttpError(
       InAppWebViewController controller,
       WebResourceRequest webResourceRequest,
       WebResourceResponse webResourceResponse) {}
 
   /// 获取当前定位数据
-  requestCurrentLocation() async {
+  Future<void> requestCurrentLocation() async {
     var res = await Location.requestLocation();
     currentTitle = "获取当前定位信息中，请稍后...";
     titleStatus = TitleStatusEnum.loading;
@@ -180,7 +180,7 @@ class MapController extends GetxController {
   }
 
   /// 定位外部传值的定位数据
-  requestReceiveLocation() {
+  void requestReceiveLocation() {
     if (receiveLocation.isNotEmpty) {
       List locationList = receiveLocation.split(",");
       currentLocation.add(double.parse(locationList[0]));
@@ -211,7 +211,7 @@ class MapController extends GetxController {
   }
 
   /// 获取周边POI
-  onInitMapPOI() async {
+  Future<void> onInitMapPOI() async {
     isLoading = true;
     _page = 1;
     double lng = currentLocation[0];
@@ -245,7 +245,7 @@ class MapController extends GetxController {
   }
 
   /// 接口获取周围点位数据
-  onInitNearByMapPOI() async {
+  Future<void> onInitNearByMapPOI() async {
     isLoading = true;
     double lng = currentLocation[0];
     double lat = currentLocation[1];
@@ -263,7 +263,7 @@ class MapController extends GetxController {
   }
 
   /// Map POI点击事件
-  onLocationMapPoiClickHandle(MapPoiModel poi, {bool isCenter = true}) {
+  void onLocationMapPoiClickHandle(MapPoiModel poi, {bool isCenter = true}) {
     if (poi.id != null && poi.id != poiId) {
       poiId = poi.id!;
       locationName = poi.name!;
@@ -287,7 +287,7 @@ class MapController extends GetxController {
   }
 
   /// 后台获取 Data POI点击事件
-  onLocationDataPoiClickHandle(DataPoiModel poi, {bool isCenter = true}) {
+  void onLocationDataPoiClickHandle(DataPoiModel poi, {bool isCenter = true}) {
     if (poi.pointId != null && poi.pointId != poiId) {
       poiId = poi.pointId!;
       locationName = poi.areaName!;
@@ -325,7 +325,7 @@ class MapController extends GetxController {
 
   // ================== js方法 ==================
   /// 设置经纬度返回中心点位 - JS方法
-  onSetMapCenterEvaluateJS() {
+  void onSetMapCenterEvaluateJS() {
     if (currentLocation.isNotEmpty) {
       String yourCode =
           "window.mapSetCenter(${currentLocation[0]},${currentLocation[1]})";
@@ -334,7 +334,7 @@ class MapController extends GetxController {
   }
 
   /// 绘制中心点位 - 只有在可拖动地图的情况下且接收到js的回调时触发
-  onRenderCenterEvaluateJS(double longitude, double latitude) {
+  void onRenderCenterEvaluateJS(double longitude, double latitude) {
     if (currentLocation.isNotEmpty) {
       String yourCode = "window.renderCustomPoint($longitude,$latitude)";
       onJavaScriptEvaluate(yourCode, (value) {});
@@ -342,7 +342,7 @@ class MapController extends GetxController {
   }
 
   /// 指定某个经纬度为中点
-  onPanToCenterJS(double longitude, double latitude) {
+  void onPanToCenterJS(double longitude, double latitude) {
     if (currentLocation.isNotEmpty) {
       String yourCode = "window.panTo($longitude,$latitude)";
       onJavaScriptEvaluate(yourCode, (value) {});
@@ -350,7 +350,7 @@ class MapController extends GetxController {
   }
 
   /// Google坐标系 转 高德坐标系
-  onGPStoCGCSJS(double longitude, double latitude, cb) {
+  void onGPStoCGCSJS(double longitude, double latitude, cb) {
     if (currentLocation.isNotEmpty) {
       String yourCode = "window.gpsTogcj($longitude,$latitude)";
       onJavaScriptEvaluate(yourCode, (value) {
@@ -365,7 +365,7 @@ class MapController extends GetxController {
   }
 
   /// 高德坐标系 转 Google坐标系
-  onCGCStoGPSJS(double longitude, double latitude, cb) {
+  void onCGCStoGPSJS(double longitude, double latitude, cb) {
     if (currentLocation.isNotEmpty) {
       String yourCode = "window.gcjTogps($longitude,$latitude)";
       onJavaScriptEvaluate(yourCode, (value) {
@@ -380,7 +380,7 @@ class MapController extends GetxController {
   }
 
   /// 在地图上渲染所有点位的位置
-  onRenderAreaPointList(List<DataPoiModel> dataPoiList) {
+  void onRenderAreaPointList(List<DataPoiModel> dataPoiList) {
     List<Map<String, dynamic>> pointMapList = dataPoiList.map((point) {
       return point.toJson();
     }).toList();
@@ -392,7 +392,7 @@ class MapController extends GetxController {
   }
 
   /// 触发JavaScript方法
-  onJavaScriptEvaluate(String jsSourceCode, cb) {
+  void onJavaScriptEvaluate(String jsSourceCode, cb) {
     webViewController.evaluateJavascript(source: jsSourceCode).then((value) {
       // console.error("触发JS之后进行回调:$value");
       cb(value);
@@ -412,7 +412,7 @@ class MapController extends GetxController {
   String realDistance = '0m';
 
   /// 提示目标位置和实时定位之间的信息
-  onDistanceToast() {
+  void onDistanceToast() {
     double targetLng = currentLocation[0];
     double targetLat = currentLocation[1];
     double realLng = realTimeLocation[0];
@@ -444,7 +444,7 @@ class MapController extends GetxController {
   }
 
   /// 获取定位信息
-  getRealLocation() async {
+  Future<void> getRealLocation() async {
     var res = await Location.requestLocation();
     if (res != null && res != false) {
       Position position = res as Position;
@@ -492,27 +492,27 @@ class MapController extends GetxController {
   final searchKeyWord = "".obs;
 
   /// 每次输入 - 防抖处理
-  onChangeValueHandle(String value) {
+  void onChangeValueHandle(String value) {
     UtilsFunc.debounce(() {
       searchKeyWord.value = value;
       update(["site_web_title"]);
     }, durationTime: 500);
   }
 
-  onSubmitSearch(String value) {
+  void onSubmitSearch(String value) {
     searchKeyWord.value = value;
     onInitMapPOI();
   }
 
   /// 清空文本框
-  onClearTextFieldHandle() {
+  void onClearTextFieldHandle() {
     searchKeyWord.value = "";
     searchEditController.clear();
     // onSubmitSearch("");
     update(["site_web_title"]);
   }
 
-  _initData() {
+  void _initData() {
     dragController.addListener(() {
       // console.log("监听了:${dragController.size}");
       //  dragController.jumpTo(0.5);
@@ -524,7 +524,7 @@ class MapController extends GetxController {
   }
 
   double progressValue = 0;
-  onWebProgressChanged(InAppWebViewController controller, int progress) {
+  void onWebProgressChanged(InAppWebViewController controller, int progress) {
     if (progress == 100) {}
     progressValue = progress == 100 ? 0 : progress / 100;
     update(["web_progress"]);

@@ -68,7 +68,7 @@ class _SoundsMessageButtonState extends State<SoundsMessageButton> {
     super.dispose();
   }
 
-  _removeMask() {
+  void _removeMask() {
     if (_entry != null) {
       _entry!.remove();
       _entry = null;
@@ -76,7 +76,7 @@ class _SoundsMessageButtonState extends State<SoundsMessageButton> {
     }
   }
 
-  _showRecordingMask() {
+  void _showRecordingMask() {
     _entry = OverlayEntry(
       builder: (context) {
         return RepaintBoundary(

@@ -4,7 +4,7 @@ class FriendPage extends GetView<FriendController> {
   const FriendPage({super.key});
 
   // 主视图
-  Widget _buildView(context) {
+  Widget _buildView(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[

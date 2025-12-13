@@ -12,7 +12,7 @@ class CommentPage extends GetView<CommentController> {
     return list.toColumn();
   }
 
-  Widget _comment(item, {int? index, required BuildContext context}) {
+  Widget _comment(dynamic item, {int? index, required BuildContext context}) {
     return Column(
       children: [
         _commentWidget(item, index: index, context: context),

@@ -173,7 +173,7 @@ class RequestInterceptors extends Interceptor {
   }
 
   /// 退出并重新登录
-  _errorNoAuthLogout() {
+  void _errorNoAuthLogout() {
     //添加提示 todo
     Loading.error("登录已过期，请重新登录");
 

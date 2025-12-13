@@ -322,7 +322,9 @@ class _InputTextState extends State<InputText> {
     if (widget.expands ||
         !widget.enabled ||
         widget.readOnly ||
-        widget.maxLines > 2) return null;
+        widget.maxLines > 2) {
+      return null;
+    }
     final items = <Widget>[];
 
     //数量统计

@@ -148,7 +148,7 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   }
 
   late Timer timer;
-  Widget _slider(playInfos) {
+  Widget _slider(dynamic playInfos) {
     return SliderTheme(
       data: SliderTheme.of(context).copyWith(
         trackHeight: 4.h,

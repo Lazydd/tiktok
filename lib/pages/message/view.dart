@@ -50,7 +50,7 @@ class MessagePage extends GetView<MessageController> {
     ]);
   }
 
-  doNothing(BuildContext context, item) {
+  void doNothing(BuildContext context, item) {
     controller.deleteMessage(item);
   }
 

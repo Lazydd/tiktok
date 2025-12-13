@@ -16,7 +16,7 @@ class InteractiveController extends GetxController {
     update(['interactive']);
   }
 
-  _initData() {
+  void _initData() {
     update(["interactive"]);
   }
 

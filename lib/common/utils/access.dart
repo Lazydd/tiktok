@@ -18,10 +18,7 @@ import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
-enum AccessEnum {
-  takePhoto,
-  photoLibrary,
-}
+enum AccessEnum { takePhoto, photoLibrary }
 
 final LocalAuthentication auth = LocalAuthentication();
 
@@ -63,8 +60,11 @@ abstract class Access {
   }
 
   /// 是否开启相机，开机了回调回去，否则警告框提示；isNavigatorPop：是否需要隐藏某些弹框页，默认不隐藏
-  static Future<void> openCamera(BuildContext context,
-      {required Function onCameraGranted, bool isNavigatorPop = false}) async {
+  static Future<void> openCamera(
+    BuildContext context, {
+    required Function onCameraGranted,
+    bool isNavigatorPop = false,
+  }) async {
     if (await requestCameraPermisson()) {
       onCameraGranted();
     } else {
@@ -88,8 +88,10 @@ abstract class Access {
     String imageUrl,
   ) async {
     if (await requestPhotoPermisson()) {
-      var response = await Dio()
-          .get(imageUrl, options: Options(responseType: ResponseType.bytes));
+      var response = await Dio().get(
+        imageUrl,
+        options: Options(responseType: ResponseType.bytes),
+      );
       final result = await ImageGallerySaverPlus.saveImage(
         Uint8List.fromList(response.data),
         quality: 80,
@@ -111,16 +113,21 @@ abstract class Access {
     Uri myUri = Uri.parse(filePath);
     File file = File.fromUri(myUri);
     late Uint8List bytes;
-    await file.readAsBytes().then((value) {
-      bytes = Uint8List.fromList(value);
-      if (kDebugMode) {
-        debugPrint('reading of bytes is completed');
-      }
-    }).catchError((onError) {
-      if (kDebugMode) {
-        debugPrint('Exception Error while reading audio from path:$onError');
-      }
-    });
+    await file
+        .readAsBytes()
+        .then((value) {
+          bytes = Uint8List.fromList(value);
+          if (kDebugMode) {
+            debugPrint('reading of bytes is completed');
+          }
+        })
+        .catchError((onError) {
+          if (kDebugMode) {
+            debugPrint(
+              'Exception Error while reading audio from path:$onError',
+            );
+          }
+        });
     return bytes;
   }
 
@@ -140,8 +147,10 @@ abstract class Access {
         data = ByteData.view(byteArray.buffer);
       }
 
-      List<int> bytesData =
-          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      List<int> bytesData = data.buffer.asUint8List(
+        data.offsetInBytes,
+        data.lengthInBytes,
+      );
 
       if (bytesData.isNotEmpty) {
         final result = await ImageGallerySaverPlus.saveImage(
@@ -168,12 +177,17 @@ abstract class Access {
       var appDocDir = await getTemporaryDirectory();
       String savePath =
           "${appDocDir.path}/${DateTime.now().millisecondsSinceEpoch.toString()}.mp4";
-      await Dio().download(url, savePath,
-          onReceiveProgress: (int current, int total) {
-        Loading.showProgress(current / total,
+      await Dio().download(
+        url,
+        savePath,
+        onReceiveProgress: (int current, int total) {
+          Loading.showProgress(
+            current / total,
             status:
-                "文件下载中(${(current / total * 100).truncate().toString()}%),请稍后....");
-      });
+                "文件下载中(${(current / total * 100).truncate().toString()}%),请稍后....",
+          );
+        },
+      );
       final result = await ImageGallerySaverPlus.saveFile(savePath);
       if (result["isSuccess"]) {
         Loading.success("已保存到相册");
@@ -194,8 +208,10 @@ abstract class Access {
       String savePath = "${appDocDir.path}/temp.gif";
       String fileUrl = url;
       await Dio().download(fileUrl, savePath);
-      final result = await ImageGallerySaverPlus.saveFile(savePath,
-          isReturnPathOfIOS: true);
+      final result = await ImageGallerySaverPlus.saveFile(
+        savePath,
+        isReturnPathOfIOS: true,
+      );
       if (result['isSuccess']) {
         Loading.success("已保存到相册");
       } else {
@@ -221,10 +237,7 @@ abstract class Access {
           ),
         );
         if (entityList != null) {
-          return {
-            "key": entityList[0].id,
-            "file": await entityList[0].file,
-          };
+          return {"key": entityList[0].id, "file": await entityList[0].file};
         }
       }
     } else {
@@ -264,12 +277,10 @@ abstract class Access {
     try {
       final bool authenticated = await auth.authenticate(
         localizedReason: '请进行生物识别认证', // 显示给用户看的提示文本
-        options: const AuthenticationOptions(
-          stickyAuth: true, // 如果用户切换应用，认证对话框依然存在
-          biometricOnly: true, // 只使用生物识别，不允许回退到PIN/密码
-          useErrorDialogs: true, // 使用系统错误对话框
-          sensitiveTransaction: true, // 用于敏感操作的认证
-        ),
+        persistAcrossBackgrounding: true, // 如果用户切换应用，认证对话框依然存在
+        biometricOnly: true, // 只使用生物识别，不允许回退到PIN/密码
+        sensitiveTransaction: true, // 用于敏感操作的认证
+        // useErrorDialogs: true, // 使用系统错误对话框
       );
       return authenticated;
     } catch (e) {
@@ -314,21 +325,21 @@ abstract class Access {
           NativeDeviceOrientationCommunicator()
               .orientation(useSensor: true)
               .then((value) {
-            NativeDeviceOrientation? orientation = value;
-            switch (orientation) {
-              case NativeDeviceOrientation.landscapeRight:
-                rotate = 90;
-                break;
-              case NativeDeviceOrientation.portraitDown:
-                rotate = 180;
-                break;
-              case NativeDeviceOrientation.landscapeLeft:
-                rotate = 270;
-                break;
-              default:
-                rotate = 0;
-            }
-          });
+                NativeDeviceOrientation? orientation = value;
+                switch (orientation) {
+                  case NativeDeviceOrientation.landscapeRight:
+                    rotate = 90;
+                    break;
+                  case NativeDeviceOrientation.portraitDown:
+                    rotate = 180;
+                    break;
+                  case NativeDeviceOrientation.landscapeLeft:
+                    rotate = 270;
+                    break;
+                  default:
+                    rotate = 0;
+                }
+              });
 
           return false;
         },
@@ -351,45 +362,36 @@ abstract class Access {
       };
     }
     if (entity != null) {
-      return {
-        "key": entity.id,
-        "file": await entity.file,
-        "rotate": rotate,
-      };
+      return {"key": entity.id, "file": await entity.file, "rotate": rotate};
     }
   }
 
   /// 未开权限弹框提示
-  static showPermissionAlertDialog(BuildContext context, String content) {
+  static void showPermissionAlertDialog(BuildContext context, String content) {
     showCupertinoDialog(
-        context: context,
-        builder: (context) {
-          return CupertinoAlertDialog(
-            title: const Text(
-              "提示",
-              style: TextStyle(color: Colors.blue),
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: const Text("提示", style: TextStyle(color: Colors.blue)),
+          content: Text(content),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              child: const Text("取消", style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-            content: Text(content),
-            actions: <Widget>[
-              CupertinoDialogAction(
-                child: const Text(
-                  "取消",
-                  style: TextStyle(color: Colors.red),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              CupertinoDialogAction(
-                child: const Text("确认"),
-                onPressed: () {
-                  Navigator.pop(context);
-                  // 打开手机上该App的权限设置页面
-                  Access.setting();
-                },
-              ),
-            ],
-          );
-        });
+            CupertinoDialogAction(
+              child: const Text("确认"),
+              onPressed: () {
+                Navigator.pop(context);
+                // 打开手机上该App的权限设置页面
+                Access.setting();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

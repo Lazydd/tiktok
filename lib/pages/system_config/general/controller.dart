@@ -3,7 +3,7 @@ part of 'index.dart';
 class GeneralController extends GetxController {
   GeneralController();
 
-  _initData() {
+  void _initData() {
     update(["general"]);
   }
 

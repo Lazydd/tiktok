@@ -20,7 +20,7 @@ class MainController extends GetxController {
     update(['navigation']);
   }
 
-  _initData() {
+  void _initData() {
     update(["main"]);
   }
 
@@ -29,8 +29,8 @@ class MainController extends GetxController {
   bool didAuthenticate = false;
 
   Future<bool> _checkBiometric() async {
-    final List<BiometricType> availableBiometrics =
-        await auth.getAvailableBiometrics();
+    final List<BiometricType> availableBiometrics = await auth
+        .getAvailableBiometrics();
     bool isAuthorized = false;
 
     if (availableBiometrics.isEmpty) {
@@ -41,11 +41,9 @@ class MainController extends GetxController {
       try {
         isAuthorized = await auth.authenticate(
           localizedReason: "Please authenticate to complete your transaction",
-          options: const AuthenticationOptions(
-            useErrorDialogs: true,
-            stickyAuth: true,
-            biometricOnly: true,
-          ),
+          persistAcrossBackgrounding: true, // 如果用户切换应用，认证对话框依然存在
+          biometricOnly: true, // 只使用生物识别，不允许回退到PIN/密码
+          // useErrorDialogs: true, // 使用系统错误对话框
         );
       } on PlatformException catch (e) {
         Loading.error(e.message);

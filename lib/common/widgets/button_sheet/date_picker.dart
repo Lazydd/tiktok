@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 import 'dart:math';
 
@@ -266,12 +268,12 @@ final class DataPicker {
     if (Helper.isEmpty(values)) return null;
     int maxLevel = sources.map((o) => o.level).reduce((a, b) => max(a, b));
     List<int> selected = List.generate(maxLevel, (index) => 0);
-    List<T>? items = sources!;
+    List<T>? items = sources;
     for (int i = 0; i < values!.length; i++) {
-      final initValue = values![i];
+      final initValue = values[i];
       final index = items!.indexWhere((e) => getValue(e) == initValue);
       if (index >= 0) {
-        final tempList = items![index].children;
+        final tempList = items[index].children;
         if (Helper.isNotEmpty(tempList)) {
           items = tempList;
         }

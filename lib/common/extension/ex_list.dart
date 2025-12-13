@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// 扩展 List<String>
 extension ExStringListWidget<E> on List<String> {
   /// 是否有值
   bool hasValue(String val) {
@@ -13,7 +12,6 @@ extension ExStringListWidget<E> on List<String> {
   }
 }
 
-/// 扩展 List<Widget>
 extension ExListWidget<E> on List<Widget> {
   /// 转 Wrap
   Widget toWrap({

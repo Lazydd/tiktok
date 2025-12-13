@@ -59,7 +59,9 @@ class _Required<T> extends Validator<T> {
     return validateIt(label, value as T);
   }
 
-  String? validateIt(String label, T value) {}
+  String? validateIt(String label, T value) {
+    return null;
+  }
 }
 
 class _Includes<IN> extends _Required<IN> {
@@ -72,6 +74,7 @@ class _Includes<IN> extends _Required<IN> {
     if (!Helper.contains(value, items)) {
       return "$label中必须包含（${items.join('，')}）等字符。";
     }
+    return null;
   }
 }
 
@@ -85,6 +88,7 @@ class _Excludes<IN> extends _Required<IN> {
     if (Helper.contains(value, items)) {
       return "$label中不能包含（${items.join('，')}）等字符。";
     }
+    return null;
   }
 }
 
@@ -100,6 +104,7 @@ class _LengthLimited extends _Required<String> {
 
     if (length < min) return "$label最小需要输入$min个字符！";
     if (max != null && length > max!) return "$label最多只能输入$max个字符！";
+    return null;
   }
 }
 
@@ -115,6 +120,7 @@ class _IsUrl extends _Required<String> {
         (Helper.isNotEmpty(uri.scheme) && protocols.contains(uri.scheme))) {
       return "$label不是一个标准的URL地址";
     }
+    return null;
   }
 }
 
@@ -134,5 +140,6 @@ class _Equals<T> extends _Required<T> {
         return "$label和${field?.widget.label}的值必须一致";
       }
     }
+    return null;
   }
 }

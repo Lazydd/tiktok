@@ -7,7 +7,7 @@ class ChatController extends GetxController {
   final AutoScrollController _scrollController = AutoScrollController();
   late ChatBottomPanelContainerController panelController;
 
-  _initData() {
+  void _initData() {
     final textMessage = types.TextMessage(
       author: _user2,
       createdAt: DateTime.now().millisecondsSinceEpoch,
@@ -210,7 +210,7 @@ class ChatController extends GetxController {
   String topic = 'text';
   late MQTTManager manager;
   MQTTAppState currentAppState = Provider.of<MQTTAppState>(Get.context!);
-  _connectMQTT() {
+  void _connectMQTT() {
     manager = MQTTManager(
       server: "10.100.23.159",
       topic: topic,
@@ -233,7 +233,7 @@ class ChatController extends GetxController {
 
   late RTMClient rtmClient;
 
-  _initRTM() async {
+  Future<void> _initRTM() async {
     rtmClient = RTMClient();
     rtmClient.onMessage = (message, peerId) {
       final textMessage = types.TextMessage(

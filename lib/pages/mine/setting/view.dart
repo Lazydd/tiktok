@@ -4,7 +4,7 @@ class SettingPage extends GetView<SettingController> {
   const SettingPage({super.key});
 
   // 主视图
-  Widget _buildView(context) {
+  Widget _buildView(BuildContext context) {
     final theme = Context(context).theme;
     return Drawer(
       backgroundColor: theme.themeColor,

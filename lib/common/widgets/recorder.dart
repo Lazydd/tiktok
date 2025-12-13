@@ -7,11 +7,7 @@ import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-enum SendContentType {
-  voice,
-
-  text,
-}
+enum SendContentType { voice, text }
 
 enum SoundsMessageStatus {
   /// 默认状态 未交互/交互完成
@@ -81,7 +77,7 @@ class SoundsRecorderController {
   Function(String? path, Duration duration)? _onAllCompleted;
 
   /// 录制
-  beginRec({
+  Future<void> beginRec({
     /// 录制状态
     ValueChanged<RecorderState>? onStateChanged,
 
@@ -99,11 +95,18 @@ class SoundsRecorderController {
       reset();
       _onAllCompleted = onCompleted;
 
-      recorderController = RecorderController()
-        ..androidEncoder = AndroidEncoder.aac
-        ..androidOutputFormat = AndroidOutputFormat.mpeg4
-        ..iosEncoder = IosEncoder.kAudioFormatMPEG4AAC
-        ..sampleRate = 44100;
+      recorderController = RecorderController();
+      await recorderController?.record(
+        recorderSettings: RecorderSettings(
+          androidEncoderSettings: AndroidEncoderSettings(
+            androidEncoder: .aacLc,
+          ),
+          iosEncoderSettings: IosEncoderSetting(
+            iosEncoder: .kAudioFormatMPEG4AAC,
+          ),
+          sampleRate: 44100,
+        ),
+      );
 
       updateStatus(SoundsMessageStatus.recording);
 
@@ -151,7 +154,7 @@ class SoundsRecorderController {
   }
 
   /// 重置
-  reset() {
+  void reset() {
     _timer?.cancel();
     duration.value = Duration.zero;
     recorderController?.dispose();
@@ -165,7 +168,7 @@ class SoundsRecorderController {
   }
 
   /// 更新状态
-  updateStatus(SoundsMessageStatus value) {
+  void updateStatus(SoundsMessageStatus value) {
     status.value = value;
   }
 

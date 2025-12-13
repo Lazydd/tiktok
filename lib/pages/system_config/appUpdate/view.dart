@@ -8,7 +8,7 @@ class AppUpdatePage extends GetView<AppUpdateController> {
     return controller.isUpdating ? _buildUpdateWidget() : _buildTextWidget();
   }
 
-  _buildTextWidget() {
+  Center _buildTextWidget() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +35,7 @@ class AppUpdatePage extends GetView<AppUpdateController> {
     );
   }
 
-  _buildUpdateWidget() {
+  Center _buildUpdateWidget() {
     return Center(
       child: Column(
         children: [

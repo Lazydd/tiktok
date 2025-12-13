@@ -16,7 +16,7 @@ class RecommendController extends GetxController {
 
   int currentIndex = 0;
 
-  _initData() {
+  void _initData() {
     update(["recommend"]);
   }
 
@@ -41,7 +41,7 @@ class RecommendController extends GetxController {
     _initData();
   }
 
-  find() {}
+  void find() {}
 
   // @override
   // void onClose() {

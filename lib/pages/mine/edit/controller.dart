@@ -36,7 +36,7 @@ class EditController extends GetxController {
     return str;
   }
 
-  addHeadImgFile(dynamic imgFileItem) async {
+  Future<void> addHeadImgFile(dynamic imgFileItem) async {
     if (imgFileItem != null) {
       File? file = await UtilsFunc.compressImage(imgFileItem['file']);
       // debugPrint(file);
@@ -50,7 +50,7 @@ class EditController extends GetxController {
     }
   }
 
-  addProfileImgFile(dynamic imgFileItem) async {
+  Future<void> addProfileImgFile(dynamic imgFileItem) async {
     if (imgFileItem != null) {
       File? file = await UtilsFunc.compressImage(imgFileItem['file']);
       // file ??= imgFileItem['file'];
@@ -64,7 +64,7 @@ class EditController extends GetxController {
     }
   }
 
-  _initData() {
+  void _initData() {
     update(["edit"]);
   }
 

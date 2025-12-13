@@ -129,7 +129,7 @@ class TikTokFavoriteAnimationIconState
     super.initState();
   }
 
-  startAnimation() async {
+  Future<void> startAnimation() async {
     await _animationController!.forward();
     widget.onAnimationComplete?.call();
   }

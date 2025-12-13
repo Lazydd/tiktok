@@ -7,7 +7,7 @@ class ChatPage extends GetView<ChatController> {
   const ChatPage({super.key, required this.peerId, required this.name});
 
   // 主视图
-  Widget _buildView(context) {
+  Widget _buildView(BuildContext context) {
     final theme = Context(context).theme;
     return ChatButtomContainer(
       Chat(

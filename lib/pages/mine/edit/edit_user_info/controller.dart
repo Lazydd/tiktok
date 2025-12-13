@@ -8,7 +8,7 @@ class EditUserInfoController extends GetxController {
 
   TextEditingController eventNameController = TextEditingController();
 
-  _initData() {
+  void _initData() {
     update(["edit_user_info"]);
     eventNameController.text = value;
   }

@@ -374,7 +374,7 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
     }
   }
 
-  updatePanelType(PanelType type) async {
+  Future<void> updatePanelType(PanelType type) async {
     final isSwitchToKeyboard = PanelType.keyboard == type;
     final isSwitchToEmojiPanel = PanelType.emoji == type;
     bool isUpdated = false;
@@ -411,7 +411,7 @@ class _ChatButtomContainerState extends State<ChatButtomContainer>
     }
   }
 
-  hidePanel() {
+  void hidePanel() {
     if (inputFocusNode.hasFocus) {
       inputFocusNode.unfocus();
     }

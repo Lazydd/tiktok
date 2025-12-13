@@ -120,26 +120,22 @@ class FormXFieldDateTimeState<OUT>
         widget.minValueBy != widget.name) {
       final state =
           form?.getField(widget.minValueBy!) as FormXFieldDateTimeState;
-      if (state != null) {
-        if (inputValue != null &&
-            (state.rawValue?.isAfter(inputValue) ?? false)) {
-          state.setValue(inputValue);
-        }
-        _minValue = state.rawValue ?? state._minValue;
-        state._maxValue = inputValue;
+      if (inputValue != null &&
+          (state.rawValue?.isAfter(inputValue) ?? false)) {
+        state.setValue(inputValue);
       }
-    } else if (Helper.isNotEmpty(widget.maxValueBy) &&
+      _minValue = state.rawValue ?? state._minValue;
+      state._maxValue = inputValue;
+        } else if (Helper.isNotEmpty(widget.maxValueBy) &&
         widget.maxValueBy != widget.name) {
       final state =
           form?.getField(widget.maxValueBy!) as FormXFieldDateTimeState;
-      if (state != null) {
-        if (inputValue != null &&
-            (state.rawValue?.isBefore(inputValue) ?? false)) {
-          state.setValue(inputValue);
-        }
-        _maxValue = state.rawValue ?? state._maxValue;
-        state._minValue = inputValue;
+      if (inputValue != null &&
+          (state.rawValue?.isBefore(inputValue) ?? false)) {
+        state.setValue(inputValue);
       }
-    }
+      _maxValue = state.rawValue ?? state._maxValue;
+      state._minValue = inputValue;
+        }
   }
 }

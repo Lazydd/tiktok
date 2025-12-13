@@ -27,7 +27,7 @@ class UtilsFunc {
   static Timer? timer;
 
   /// 防抖
-  static debounce(Function doSomething, {durationTime = deFaultDurationTime}) {
+  static void debounce(Function doSomething, {durationTime = deFaultDurationTime}) {
     if (timer != null) {
       timer!.cancel();
     }
@@ -41,7 +41,7 @@ class UtilsFunc {
   /// [text] 文字
   /// [maxLength] 限制最大字数
   /// [replaceCharacter] 超出部分用特殊符号代替
-  static interceptStringByEllipsis(
+  static String interceptStringByEllipsis(
     String text, {
     int maxLength = 6,
     String replaceCharacter = ".",
@@ -59,7 +59,7 @@ class UtilsFunc {
   }
 
   /// 随机生成某范围的数值 - 生成min ~ max - 1的值
-  static randomRangeNum(int min, int max) {
+  static int randomRangeNum(int min, int max) {
     //实例化 Random类 并赋值给 私有变量 _random
     final random = Random();
     var number = min + random.nextInt(max - min);
@@ -112,7 +112,7 @@ class UtilsFunc {
   /// "key"相同的两个Map为其中一带TextEditingController进行text赋值
   /// param textControllerMap // "value" => TextEditingController的Map
   /// param srcMap // "value" => textControllerMap所需text的值
-  static cloneValueToTextContoller(
+  static void cloneValueToTextContoller(
       Map<String, TextEditingController> textControllerMap, Map srcMap) {
     for (String key in textControllerMap.keys.toList()) {
       textControllerMap[key]!.text = srcMap[key];
@@ -120,7 +120,7 @@ class UtilsFunc {
   }
 
   /// 后台返回的图片处理，有可能要自己拼接url
-  static imgUrlSplice(String urlString, {String standByUrl = ""}) {
+  static String imgUrlSplice(String urlString, {String standByUrl = ""}) {
     final url = Uri.tryParse(urlString);
     if (url != null && url.scheme.contains('http')) {
       return urlString;
@@ -143,7 +143,7 @@ class UtilsFunc {
       final url = Uri.tryParse(dynamicParams);
       if (url != null && url.scheme.contains('http') ||
           (url != null &&
-              (imgUrlSplice(dynamicParams) as String).contains('http'))) {
+              (imgUrlSplice(dynamicParams)).contains('http'))) {
         return true;
       } else {
         return false;
@@ -178,6 +178,7 @@ class UtilsFunc {
       // ignore: unnecessary_type_check
       if (json is Map<String, dynamic>) {
         return true;
+      // ignore: dead_code
       } else {
         return false;
       }

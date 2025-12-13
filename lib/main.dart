@@ -19,21 +19,19 @@ void main() async {
   await Consts.ensureInitialized();
   Global.init().then((_) {
     Future.wait([]).whenComplete(() {
-      runApp(MultiProvider(
-        providers: [
-          ChangeNotifierProvider.value(
-            value: mqttAppState,
+      runApp(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider.value(value: mqttAppState),
+            ChangeNotifierProvider(create: (context) => ThemeProvider()),
+          ],
+          child: Consumer2<MQTTAppState, ThemeProvider>(
+            builder: (context, mqttAppState, theme, child) {
+              return MyApp(themeProvider: theme.ensureInitialized());
+            },
           ),
-          ChangeNotifierProvider(create: (context) => ThemeProvider()),
-        ],
-        child: Consumer2<MQTTAppState, ThemeProvider>(
-          builder: (context, mqttAppState, theme, child) {
-            return MyApp(
-              themeProvider: theme.ensureInitialized(),
-            );
-          },
         ),
-      ));
+      );
     });
   });
 }
@@ -95,9 +93,9 @@ class _MyAppState extends State<MyApp> {
           footerTriggerDistance: 150.h,
           child: GetMaterialApp(
             title: 'Tiktok',
+
             // showPerformanceOverlay: true,
             // navigatorKey: globalKey,
-
             theme: widget.themeProvider?.light?.data,
             darkTheme: widget.themeProvider?.dark?.data,
             themeMode: widget.themeProvider!.mode,
@@ -108,8 +106,9 @@ class _MyAppState extends State<MyApp> {
             builder: (context, child) {
               child = EasyLoading.init()(context, child); // EasyLoading 初始化
               return MediaQuery(
-                data: MediaQuery.of(context)
-                    .copyWith(textScaler: const TextScaler.linear(1.0)),
+                data: MediaQuery.of(
+                  context,
+                ).copyWith(textScaler: const TextScaler.linear(1.0)),
                 child: child,
               );
             },

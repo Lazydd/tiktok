@@ -63,7 +63,7 @@ final class AppTheme extends _ThemeData<AppTheme> {
       colorScheme: schema.copyWith(surface: themeColor),
       useMaterial3: true,
       appBarTheme: const AppBarTheme().copyWith(
-        color: Colors.transparent,
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         titleTextStyle: TextStyle(color: appBarIconColor, fontSize: 24),
         iconTheme: IconThemeData(color: appBarIconColor),

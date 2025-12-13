@@ -58,7 +58,7 @@ class FormXFieldRegional
       for (String code in field.rawValue!) {
         for (int i = 0, size = regionals!.length; i < size; i++) {
           final regional = regionals![i];
-          if (regional != null && regional.code == code) {
+          if (regional.code == code) {
             names.add(regional.name);
             regionals = regional.children;
             break;

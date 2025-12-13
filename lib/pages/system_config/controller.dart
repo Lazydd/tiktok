@@ -3,7 +3,7 @@ part of 'index.dart';
 class SystemConfigController extends GetxController {
   SystemConfigController();
 
-  _initData() {
+  void _initData() {
     update(["system_config"]);
   }
 

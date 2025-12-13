@@ -16,7 +16,6 @@ class RtcMoreController extends GetxController {
   late final Future<bool?> initStatus;
 
   final Set<int> _remoteUid = {};
-  bool _localUserJoined = false;
   late RtcEngine _engine;
 
   Future<bool> initAgora() async {
@@ -36,7 +35,6 @@ class RtcMoreController extends GetxController {
         // 加入频道成功
         onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
           debugPrint("加入频道成功：$channel");
-          _localUserJoined = true;
           update(["rtc_more"]);
         },
         // 有用户加入
@@ -54,7 +52,6 @@ class RtcMoreController extends GetxController {
         },
         // 离开频道
         onLeaveChannel: (RtcConnection connection, RtcStats stats) {
-          _localUserJoined = false;
           _remoteUid.clear();
           _dispose();
           update(["rtc_more"]);
@@ -103,7 +100,7 @@ class RtcMoreController extends GetxController {
     return true;
   }
 
-  _initData() {
+  void _initData() {
     initStatus = initAgora();
     update(["rtc_more"]);
   }

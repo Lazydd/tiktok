@@ -6,7 +6,7 @@ class Constants {
   // 服务 api
   static const baseUrl = 'https://mock.presstime.cn';
 
-  static get mainBaseUrl {
+  static String get mainBaseUrl {
     if (Storage().getString(Constants.storageIPConfig).isNotEmpty) {
       var ipMap = jsonDecode(Storage().getString(Constants.storageIPConfig));
       return '${ipMap["protocol"]}://${ipMap["ipAddress"]}';
@@ -16,7 +16,7 @@ class Constants {
   }
 
   // 查看是否开启debug模式
-  static get jwStorageDebug {
+  static bool get jwStorageDebug {
     return Storage().getBool(Constants.storageDebug);
   }
 
@@ -38,7 +38,7 @@ class Constants {
 
   static const androidDefaultDownloadURL = ""; // 安卓下载地址(http://xxx.apk)
 
-  static get androidDownloadURL {
+  static String get androidDownloadURL {
     if (Storage().getString(Constants.externalLink).isNotEmpty) {
       String url = jsonDecode(Storage().getString(Constants.externalLink));
       RegExp regex = RegExp(r'^(?:https?://)?([^:/]+)(?::\d+)?');

@@ -16,7 +16,7 @@ class ShopController extends GetxController {
   // 页尺寸
   final int _pageSize = 10;
 
-  _getListData() async {
+  Future<void> _getListData() async {
     Map<String, dynamic> data = <String, dynamic>{};
 
     data["pageSize"] = _pageSize;
@@ -61,7 +61,7 @@ class ShopController extends GetxController {
     }
   }
 
-  _initData() {
+  void _initData() {
     _getListData();
     update(["shop"]);
   }

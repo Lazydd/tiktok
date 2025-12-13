@@ -6,7 +6,7 @@ class RtcMorePage extends GetView<RtcMoreController> {
   final String isDial;
 
   // 主视图
-  Widget _buildView(context) {
+  Widget _buildView(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
