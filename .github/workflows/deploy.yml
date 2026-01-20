@@ -20,7 +20,7 @@ jobs:
         run: |
           flutter clean
           flutter pub get
-          flutter build web
+          flutter build web --base-href /tiktok/
       - name: "Web Deploy 🚀"
           # https://github.com/JamesIves/github-pages-deploy-action
         uses: JamesIves/github-pages-deploy-action@4.0.0
