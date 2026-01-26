@@ -6,10 +6,10 @@ class RecommendController extends GetxController {
   PageController pageController = PageController();
 
   List<String> list = [
+    'https://raw.githubusercontent.com/Lazydd/images/main/20250710135628505.mp4',
     'https://raw.githubusercontent.com/Lazydd/images/main/20250710134657219.mp4',
     'https://raw.githubusercontent.com/Lazydd/images/main/20250710135247921.mp4',
-    'https://raw.githubusercontent.com/Lazydd/images/main/20250710135331880.mp4',
-    'https://raw.githubusercontent.com/Lazydd/images/main/20250710135628505.mp4'
+    'https://raw.githubusercontent.com/Lazydd/images/main/20250710135331880.mp4'
   ];
 
   Map<int, GlobalKey<VideoPlayerWidgetState>> videoKeys = {};
