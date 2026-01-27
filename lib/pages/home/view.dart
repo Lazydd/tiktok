@@ -21,10 +21,7 @@ class HomePage extends GetView<HomeController> {
           extendBodyBehindAppBar: true,
           backgroundColor: const Color(0xff161616),
           appBar: AppBar(
-            iconTheme: IconThemeData(
-              color: CupertinoColors.white,
-              size: 24.sp,
-            ),
+            iconTheme: IconThemeData(color: CupertinoColors.white, size: 24.sp),
             leading: Builder(
               builder: (context) => IconButton(
                 onPressed: () {
@@ -35,7 +32,9 @@ class HomePage extends GetView<HomeController> {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(RouteNames.homeSearchRoute);
+                },
                 icon: Icon(Icons.search, size: 24.sp),
               )
             ],
@@ -71,7 +70,7 @@ class HomePage extends GetView<HomeController> {
                 child: RecommendPage(key: childKey),
               ),
               const ShopPage(),
-              more(controller.tabs[2])
+              more(controller.tabs[2]),
             ],
           ),
         );

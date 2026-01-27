@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiktok/pages/home/home_search/index.dart';
 import 'package:tiktok/pages/index.dart';
 
 part 'observers.dart'; //路由所指向的页面

@@ -7,6 +7,7 @@ class RouteNames {
   static const loginRoute = '/login';
 
   static const homeRoute = '/home';
+  static const homeSearchRoute = '/home_search';
   static const aboutRoute = '/about';
   static const repairRoute = '/repair';
   static const messageRoute = '/message';

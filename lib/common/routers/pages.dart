@@ -21,6 +21,12 @@ abstract class RoutePages {
       // binding: MainBinding(),
     ),
     GetPage(
+      name: RouteNames.homeSearchRoute,
+      page: () => const HomeSearchPage(),
+      customTransition: RouteTransition(),
+      // binding: MainBinding(),
+    ),
+    GetPage(
       name: RouteNames.repairRoute,
       page: () => const FriendPage(),
       // customTransition: RouteTransition(),
@@ -82,15 +88,11 @@ abstract class RoutePages {
     ),
     GetPage(
       name: RouteNames.rtcRoute,
-      page: () => RtcPage(
-        isDial: Get.parameters['isDial'].toString(),
-      ),
+      page: () => RtcPage(isDial: Get.parameters['isDial'].toString()),
     ),
     GetPage(
       name: RouteNames.rtcMoreRoute,
-      page: () => RtcMorePage(
-        isDial: Get.parameters['isDial'].toString(),
-      ),
+      page: () => RtcMorePage(isDial: Get.parameters['isDial'].toString()),
     ),
     GetPage(
       name: RouteNames.mapRoute,
