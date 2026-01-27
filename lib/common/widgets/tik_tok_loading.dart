@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TikTokLoading extends StatefulWidget {
-  const TikTokLoading({super.key});
+  final double? scale;
+  const TikTokLoading({super.key, this.scale = 0.7});
 
   @override
   TikTokLoadingState createState() => TikTokLoadingState();
@@ -32,7 +33,7 @@ class TikTokLoadingState extends State<TikTokLoading>
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scale: 0.7,
+      scale: widget.scale,
       child: AnimatedBuilder(
         animation: _controller,
         builder: (context, child) {
