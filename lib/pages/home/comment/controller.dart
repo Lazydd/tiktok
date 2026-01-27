@@ -5,8 +5,13 @@ class CommentController extends GetxController {
 
   List commitlist = [];
 
+  bool loading = false;
   Future<void> _getCommentData() async {
+    loading = true;
+    update(["comment"]);
+    await Future.delayed(const Duration(milliseconds: 1000));
     commitlist = await TodoAPI.getComments(id: '1');
+    loading = false;
     update(["comment"]);
   }
 
@@ -23,19 +28,22 @@ class CommentController extends GetxController {
     return list;
   }
 
-  void showChildrenComment(dynamic item) {
+  Future<void> showChildrenComment(dynamic item) async {
+    item['loadingComment'] = true;
+    update(["comment"]);
+    await Future.delayed(const Duration(milliseconds: 1000));
     if (item['showChildren'] == null) {
       item['children'] = _sampleSize(commitlist, 3);
       item['showChildren'] = true;
     } else {
       (item['children'] as List<dynamic>).addAll(_sampleSize(commitlist, 10));
     }
+    item['loadingComment'] = false;
     update(["comment"]);
   }
 
   void _initData() {
     _getCommentData();
-    update(["comment"]);
   }
 
   void onTap() {}
