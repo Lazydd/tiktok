@@ -59,25 +59,22 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return RefreshConfiguration(
           headerBuilder: () => ClassicHeader(
-            refreshingIcon: const CupertinoActivityIndicator(),
-            idleIcon: Icon(
-              Icons.arrow_downward,
-              color: Colors.grey,
-              size: 22.sp,
-            ),
-            releaseIcon: Icon(Icons.refresh, color: Colors.grey, size: 22.sp),
-            completeIcon: Icon(Icons.done, color: Colors.green, size: 22.sp),
+            refreshingIcon: const TikTokLoading(), //CupertinoActivityIndicator()
+            idleIcon: SizedBox.shrink(), //Icon(Icons.arrow_downward,color: Colors.grey,size: 22.sp)
+            releaseIcon: const TikTokLoading(), //Icon(Icons.refresh, color: Colors.grey, size: 22.sp)
+            completeIcon: const TikTokLoading(), //Icon(Icons.done, color: Colors.green, size: 22.sp)
             failedIcon: Icon(Icons.close, color: Colors.red, size: 22.sp),
-            refreshingText: "正在刷新，请稍后...",
-            completeText: "刷新成功",
-            idleText: "下拉刷新",
-            releaseText: "释放开始刷新",
+            refreshingText: "", //正在刷新，请稍后...
+            completeText: "", //刷新成功
+            idleText: "", //下拉刷新
+            releaseText: "", //释放开始刷新
             failedText: "刷新失败，请刷新重试",
             textStyle: TextStyle(color: Colors.grey, fontSize: 16.sp),
           ),
           footerBuilder: () => ClassicFooter(
+            loadingIcon: const TikTokLoading(),
             noDataText: "没有更多数据",
-            loadingText: "正在加载...",
+            loadingText: "", //正在加载...
             idleText: "上拉加载更多",
             failedText: "加载失败，请加载重试",
             canLoadingText: "加载更多",
