@@ -112,15 +112,16 @@ class _HomeSearchViewGetX extends GetView<HomeSearchController> {
       child: Column(
         children: [
           _buildHistory(context),
-          TextButton(
-            onPressed: () {
-              controller.changeHistoryType();
-            },
-            child: Text(
-              '展开全部',
-              style: TextStyle(color: Context(context).theme.tagTextColor),
+          if (controller.historyNum >= 2)
+            TextButton(
+              onPressed: () {
+                controller.changeHistoryType();
+              },
+              child: Text(
+                controller.showAllHistory ? "清除全部搜索记录" : "展开全部",
+                style: TextStyle(color: Context(context).theme.tagTextColor),
+              ),
             ),
-          ),
           Padding(
             padding: EdgeInsets.only(left: 20.w, right: 20.w),
             child: Row(
@@ -148,6 +149,7 @@ class _HomeSearchViewGetX extends GetView<HomeSearchController> {
             ),
           ),
           _buildMore(context),
+          Expanded(child: HotSport()),
         ],
       ),
     );

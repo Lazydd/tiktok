@@ -5,6 +5,7 @@ class HomeSearchController extends GetxController {
 
   final FormController formController = FormController();
   RefreshController refreshController = RefreshController();
+    late final TabController _tabController ;
 
   // 下拉刷新
   void onRefresh() async {
@@ -20,8 +21,12 @@ class HomeSearchController extends GetxController {
   bool showAllHistory = false;
 
   void changeHistoryType() {
-    showAllHistory = !showAllHistory;
-    historyNum = showAllHistory ? 10 : 2;
+    if (showAllHistory) {
+      historyNum = 0;
+    } else {
+      showAllHistory = !showAllHistory;
+      historyNum = showAllHistory ? 10 : 2;
+    }
     update(["home_search"]);
   }
 
