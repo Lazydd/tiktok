@@ -12,8 +12,8 @@ class MinePage extends StatefulWidget {
 class _MinePageState extends State<MinePage>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late final TabController _tabController;
+  late final ScrollController _scrollController;
 
-  final ScrollController _scrollController = ScrollController();
   final RxDouble _headerOpacity = 0.0.obs;
 
   @override
@@ -23,6 +23,7 @@ class _MinePageState extends State<MinePage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
+    _scrollController = ScrollController();
     _scrollController.addListener(() {
       double offset = _scrollController.offset;
       if (offset <= headerOpacityThreshold) {
@@ -44,6 +45,7 @@ class _MinePageState extends State<MinePage>
   @override
   void dispose() {
     _tabController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
