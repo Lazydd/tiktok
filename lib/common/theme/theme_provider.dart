@@ -18,7 +18,8 @@ final class ThemeProvider with ChangeNotifier {
   ThemeProvider ensureInitialized() {
     if (!_initialized) {
       final enumIndex = Storage().getInt(_DATA_KEY);
-      _mode = ThemeMode.values[enumIndex];
+      _mode = enumIndex == null ? ThemeMode.dark : ThemeMode.values[enumIndex];
+
       _initThem();
       _initialized = true;
     }
