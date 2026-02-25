@@ -12,6 +12,8 @@ flutter pub get
 flutter run
 or
 flutter run -d chrome --web-hostname=127.0.0.1
+or
+flutter run -d chrome --web-browser-flag "--disable-web-security"
 ```
 
 ✅ 视频滑动
