@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tiktok/common/index.dart';
+import 'package:vibration/vibration.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
@@ -25,6 +26,7 @@ class VideoPlayerWidget extends StatefulWidget {
 class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController _videoPlayerController;
   late ChewieController _chewieController;
+  int _acceleratingFingers = 0;
 
   @override
   void initState() {
@@ -44,8 +46,8 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     );
     _videoPlayerController.addListener(() {
       setState(() {
-        sliderValue =
-            _videoPlayerController.value.position.inSeconds.toDouble();
+        sliderValue = _videoPlayerController.value.position.inSeconds
+            .toDouble();
         _isBuffering = _videoPlayerController.value.isBuffering;
         _isPlaying = _videoPlayerController.value.isPlaying;
       });
@@ -110,7 +112,8 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               Opacity(
                 opacity: !_isPlaying ? 1 : 0,
                 child: Center(
-                  child: widget.pauseIcon ??
+                  child:
+                      widget.pauseIcon ??
                       IconWidget.svg(
                         AssetsSvgs.pauseSvg,
                         color: const Color.fromRGBO(255, 255, 255, .3),
@@ -124,6 +127,28 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               ),
               TikTokVideoGesture(
                 onSingleTap: onTap,
+                onLongPress: () {
+                  if (!_videoPlayerController.value.isInitialized) return;
+                  _acceleratingFingers++;
+                  if (_acceleratingFingers == 1) {
+                    Vibration.vibrate(duration: 50);
+                    sliderBar.value = true;
+                    _videoPlayerController.setPlaybackSpeed(2.0);
+                  }
+                },
+                onLongPressEnd: (LongPressEndDetails details) {
+                  if (_acceleratingFingers > 0) {
+                    _acceleratingFingers--;
+                    if (_acceleratingFingers == 0) {
+                      Vibration.vibrate(duration: 50);
+                      timer.cancel();
+                      timer = Timer(const Duration(seconds: 2), () {
+                        sliderBar.value = false;
+                      });
+                      _videoPlayerController.setPlaybackSpeed(1.0);
+                    }
+                  }
+                },
                 onAddFavorite: () {},
                 child: Container(
                   color: Colors.transparent,

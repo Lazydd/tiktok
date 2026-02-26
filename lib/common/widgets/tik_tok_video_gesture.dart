@@ -12,10 +12,14 @@ class TikTokVideoGesture extends StatefulWidget {
     required this.child,
     this.onAddFavorite,
     this.onSingleTap,
+    this.onLongPress,
+    this.onLongPressEnd,
   });
 
   final Function? onAddFavorite;
   final Function? onSingleTap;
+  final Function? onLongPress;
+  final Function? onLongPressEnd;
   final Widget child;
 
   @override
@@ -70,6 +74,12 @@ class TikTokVideoGestureState extends State<TikTokVideoGesture> {
             }
           });
           canAddFavorite = true;
+        },
+        onLongPress: () {
+          widget.onLongPress?.call();
+        },
+        onLongPressEnd: (LongPressEndDetails details) {
+          widget.onLongPressEnd?.call(details);
         },
         onTapCancel: () {},
         child: Stack(children: <Widget>[widget.child, iconStack]),
