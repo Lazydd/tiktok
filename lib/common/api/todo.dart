@@ -1,16 +1,15 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktok/common/index.dart';
 import 'package:tiktok/common/models/response/api_response.dart';
 
 abstract class TodoAPI {
   static Future<List<EventListItem>> getEventList(
-      Map<String, dynamic> data) async {
+    Map<String, dynamic> data,
+  ) async {
     data.removeWhere((key, value) => value == null || value == "");
-    var response = await HttpRequestService.to.get(
-      "/aaa",
-      params: data,
-    );
+    var response = await HttpRequestService.to.get("/aaa", params: data);
 
     if (response.data['body'] != null) {
       List<EventListItem> list = [];
@@ -25,7 +24,8 @@ abstract class TodoAPI {
   }
 
   static Future<Map<String, dynamic>> getEventListByPage(
-      Map<String, dynamic> data) async {
+    Map<String, dynamic> data,
+  ) async {
     final jsonData = await rootBundle.loadString('assets/videos/videos.json');
     final List response = json.decode(jsonData);
     List temp = [];
@@ -38,14 +38,12 @@ abstract class TodoAPI {
     } else if (data['type'] == 4) {
       temp = response.sublist(75, 100);
     }
-    return {
-      "total": temp.length,
-      "list": temp,
-    };
+    return {"total": temp.length, "list": temp};
   }
 
   static Future<Map<String, dynamic>> getEventListByPage2(
-      Map<String, dynamic> params) async {
+    Map<String, dynamic> params,
+  ) async {
     var response = await HttpRequestService.to.get(
       "/mock/6870c73ac3d879cfac4c170b/example/recommend",
       params: params,
@@ -57,7 +55,8 @@ abstract class TodoAPI {
   }
 
   static Future<Map<String, dynamic>> getEventListByPage3(
-      Map<String, dynamic> params) async {
+    Map<String, dynamic> params,
+  ) async {
     var response = await HttpRequestService.to.get(
       "/mock/6870c73ac3d879cfac4c170b/example/abc",
       params: params,
@@ -68,18 +67,31 @@ abstract class TodoAPI {
     };
   }
 
+  static Future<Map<String, dynamic>> getEventListByPage4(
+    Map<String, dynamic> params,
+  ) async {
+    var response = await HttpRequestService.to.get(
+      "/api/rs/next/",
+      params: params,
+      options: Options(headers: {'apiversion': '1.0'}),
+    );
+    return {"total": 12, "list": response.data['body']['posts']};
+  }
+
   static Future<Map<String, dynamic>> getMyVideosByPage(
-      Map<String, dynamic> data) async {
+    Map<String, dynamic> data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 2000));
     return {
       "total": 30,
-      "list": List.generate(9, (index) => ({"name": index}))
+      "list": List.generate(9, (index) => ({"name": index})),
     };
   }
 
   static Future<List> getComments({required String id}) async {
-    final jsonData =
-        await rootBundle.loadString('assets/comments/video_id_$id.json');
+    final jsonData = await rootBundle.loadString(
+      'assets/comments/video_id_$id.json',
+    );
     final List response = json.decode(jsonData);
     return response;
   }

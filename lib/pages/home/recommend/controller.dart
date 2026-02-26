@@ -9,15 +9,29 @@ class RecommendController extends GetxController {
     'https://raw.githubusercontent.com/Lazydd/images/main/20250710135628505.mp4',
     'https://raw.githubusercontent.com/Lazydd/images/main/20250710134657219.mp4',
     'https://raw.githubusercontent.com/Lazydd/images/main/20250710135247921.mp4',
-    'https://raw.githubusercontent.com/Lazydd/images/main/20250710135331880.mp4'
+    'https://raw.githubusercontent.com/Lazydd/images/main/20250710135331880.mp4',
   ];
 
   Map<int, GlobalKey<VideoPlayerWidgetState>> videoKeys = {};
 
   int currentIndex = 0;
 
-  void _initData() {
+  Future<void> _getListData() async {
+    list.addAll([
+      'https://raw.githubusercontent.com/Lazydd/images/main/20250710135628505.mp4',
+      'https://raw.githubusercontent.com/Lazydd/images/main/20250710134657219.mp4',
+      'https://raw.githubusercontent.com/Lazydd/images/main/20250710135247921.mp4',
+      'https://raw.githubusercontent.com/Lazydd/images/main/20250710135331880.mp4',
+      'https://raw.githubusercontent.com/Lazydd/images/main/20250710135628505.mp4',
+      'https://raw.githubusercontent.com/Lazydd/images/main/20250710134657219.mp4',
+      'https://raw.githubusercontent.com/Lazydd/images/main/20250710135247921.mp4',
+      'https://raw.githubusercontent.com/Lazydd/images/main/20250710135331880.mp4',
+    ]);
     update(["recommend"]);
+  }
+
+  void _initData() {
+    _getListData();
   }
 
   VideoPlayerWidgetState? get currentVideoKey =>
@@ -25,7 +39,9 @@ class RecommendController extends GetxController {
 
   void pageChange(int page) {
     currentIndex = page;
-    // update(['video']);
+    if (list.length - page <= 3) {
+      _getListData();
+    }
   }
 
   void onTap() {}
