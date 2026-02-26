@@ -62,7 +62,7 @@ class _MainViewGetX extends GetView<MainController> {
                   ],
                 ),
                 Positioned(
-                  left: MediaQuery.of(context).size.width / 2 - 15.w,
+                  left: MediaQuery.of(context).size.width / 2 - 25,
                   top: 0,
                   bottom: 0,
                   child: InkWell(
@@ -92,13 +92,7 @@ class _MainViewGetX extends GetView<MainController> {
                       }
                     },
                     child: Center(
-                      child: Icon(
-                        Icons.add_box,
-                        color: Context(
-                          context,
-                        ).theme.bottomNavigationBarColor70,
-                        size: 32.sp,
-                      ),
+                      child: const UploadIcon(),
                     ),
                   ),
                 ),
