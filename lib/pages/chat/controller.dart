@@ -279,6 +279,7 @@ class ChatController extends GetxController {
   void onClose() {
     manager.unsubscribe(topic);
     manager.disconnect();
+    _scrollController.dispose();
     super.onClose();
   }
 }
