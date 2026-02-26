@@ -46,14 +46,14 @@ dependencies:
   # 保存文件或图片到本地
   image_gallery_saver_plus: ^4.0.1
   # 仿微信 - 媒体选择
-  wechat_assets_picker: ^10.0.0
+  wechat_assets_picker: ^10.1.0
   wechat_camera_picker: ^4.4.0
   # svg
   vector_graphics: ^1.1.19
   # badges 标记
   badges: ^3.1.2
   # 时间选择器
-  flutter_picker_plus: ^1.5.4
+  flutter_picker_plus: ^1.5.6
   # 滑动列表
   flutter_slidable: ^4.0.3
   # 视频发布
