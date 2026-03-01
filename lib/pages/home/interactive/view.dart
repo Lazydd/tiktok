@@ -36,111 +36,55 @@ class InteractivePage extends GetView<InteractiveController> {
                   color: Colors.red,
                   borderRadius: BorderRadius.circular(9.r),
                 ),
-                child: Icon(
-                  Icons.add,
-                  size: 18.sp,
-                  color: Colors.white,
-                ),
+                child: Icon(Icons.add, size: 18.sp, color: Colors.white),
               ).onTap(() {}),
-            )
+            ),
           ],
         ),
-        SizedBox(height: 20.h),
-        LikeButton(
-          size: 40.sp,
-          onTap: (bool isLiked) async {
-            if (!isLiked) Vibration.vibrate();
-            return !isLiked;
-          },
-          countPostion: CountPostion.bottom,
-          likeBuilder: (bool isLiked) {
-            return Icon(
-              Icons.favorite,
-              color: isLiked ? Colors.pinkAccent : Colors.white,
-              size: 40.sp,
-            );
-          },
-          likeCount: 1247000,
-          likeCountAnimationType: LikeCountAnimationType.none,
-          countBuilder: (int? count, bool isLiked, String text) {
-            final color = isLiked ? Colors.pinkAccent : Colors.white;
-            Widget result = Text(
-              '124.7万',
-              style: TextStyle(color: color, fontSize: 14.sp),
-            );
-            return result;
-          },
-        ),
-        SizedBox(height: 20.h),
         Column(
           children: [
-            Icon(
-              Icons.chat,
-              color: Colors.white,
-              size: 40.sp,
+            ImageWidget(AssetsImages.likeIcon, width: 60.w, height: 60.w),
+            Text(
+              '124.7万',
+              style: TextStyle(color: Colors.white, fontSize: 14.sp),
             ),
+          ],
+        ),
+        Column(
+          children: [
+            ImageWidget(AssetsImages.commentIcon, width: 60.w, height: 60.w),
             Text(
               '2.2万',
               style: TextStyle(color: Colors.white, fontSize: 14.sp),
-            )
+            ),
           ],
         ).onTap(() {
           buttonSheet<void>(
             const CommentPage(),
             title: Text(
               '2.2万条评论',
-              style: TextStyle(color: theme.textColor, fontSize: 14.sp),
+              style: TextStyle(color: Colors.white, fontSize: 14.sp),
             ),
             height: .6,
             bottomSheetColor: theme.drawerBackgroundColor,
           );
         }),
-        SizedBox(height: 20.h),
-        LikeButton(
-          size: 40.sp,
-          circleColor: const CircleColor(
-            start: Color(0xffcebc20),
-            end: Color(0xffafac0c),
-          ),
-          bubblesColor: const BubblesColor(
-            dotPrimaryColor: Color(0xff33b5e5),
-            dotSecondaryColor: Color(0xff0099cc),
-          ),
-          onTap: (bool isLiked) async {
-            if (!isLiked) Vibration.vibrate();
-            return !isLiked;
-          },
-          countPostion: CountPostion.bottom,
-          likeBuilder: (bool isLiked) {
-            return Icon(
-              Icons.star,
-              color: isLiked ? Colors.yellow : Colors.white,
-              size: 40.sp,
-            );
-          },
-          likeCount: 1247000,
-          likeCountAnimationType: LikeCountAnimationType.none,
-          countBuilder: (int? count, bool isLiked, String text) {
-            final color = isLiked ? Colors.yellow : Colors.white;
-            Widget result = Text(
-              '2.2万',
-              style: TextStyle(color: color, fontSize: 14.sp),
-            );
-            return result;
-          },
-        ),
-        SizedBox(height: 20.h),
         Column(
           children: [
-            Icon(
-              Icons.ios_share,
-              color: Colors.white,
-              size: 40.sp,
+            ImageWidget(AssetsImages.starIcon, width: 60.w, height: 60.w),
+            Text(
+              '2.2万',
+              style: TextStyle(color: Colors.white, fontSize: 14.sp),
             ),
+          ],
+        ),
+        Column(
+          children: [
+            ImageWidget(AssetsImages.shareIcon, width: 60.w, height: 60.w),
             Text(
               '17.3',
               style: TextStyle(color: Colors.white, fontSize: 14.sp),
-            )
+            ),
           ],
         ).onTap(() {
           Get.bottomSheet(
