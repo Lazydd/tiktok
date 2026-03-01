@@ -116,7 +116,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  vector_graphics_compiler: ^1.1.17
+  vector_graphics_compiler: ^1.2.0
 
 flutter:
   uses-material-design: true
