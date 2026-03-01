@@ -103,6 +103,8 @@ class VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     await _videoPlayerController.pause();
   }
 
+  bool get isPlaying => _isPlaying;
+
   @override
   Widget build(BuildContext context) {
     return isInitialized

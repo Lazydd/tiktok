@@ -5,49 +5,49 @@ class MessagePage extends GetView<MessageController> {
 
   // 主视图
   Widget _buildView(BuildContext context) {
-    return ListView(children: [
-      SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.18.h,
-        child: ListView.builder(
-          itemExtent: 90.w,
-          itemCount: controller.topList.length,
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (BuildContext context, int i) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 70.w,
-                  height: 70.w,
-                  margin: EdgeInsets.only(bottom: 6.h),
-                  alignment: Alignment.center,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff333333),
-                    borderRadius: BorderRadius.circular(35.r),
+    return ListView(
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 0.18.h,
+          child: ListView.builder(
+            itemExtent: 90.w,
+            itemCount: controller.topList.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int i) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 70.w,
+                    height: 70.w,
+                    margin: EdgeInsets.only(bottom: 6.h),
+                    alignment: Alignment.center,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff333333),
+                      borderRadius: BorderRadius.circular(35.r),
+                    ),
+                    child: ImageWidget(controller.topList[i]['avatar']),
                   ),
-                  child: ImageWidget(
-                    controller.topList[i]['avatar'],
-                  ),
-                ),
-                Text(
-                  controller.topList[i]['name'],
-                  style: TextStyle(
-                    color: Context(context).theme.textColor,
-                    fontSize: 12.sp,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                ).width(70.w)
-              ],
-            );
-          },
+                  Text(
+                    controller.topList[i]['name'],
+                    style: TextStyle(
+                      color: Context(context).theme.textColor,
+                      fontSize: 12.sp,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                  ).width(70.w),
+                ],
+              );
+            },
+          ),
         ),
-      ),
-      _messageList(context)
-    ]);
+        _messageList(context),
+      ],
+    );
   }
 
   void doNothing(BuildContext context, item) {
@@ -85,11 +85,18 @@ class MessagePage extends GetView<MessageController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ImageWidget(
-                item['avatar'],
-                width: 55.w,
-                height: 55.w,
-              ).clipRRect(all: 27.5.r),
+              item['sys']
+                  ? Image.asset(
+                      item['avatar'],
+                      width: 55.w,
+                      height: 55.w,
+                      fit: BoxFit.cover,
+                    ).clipRRect(all: 27.5.r)
+                  : ImageWidget(
+                      item['avatar'],
+                      width: 55.w,
+                      height: 55.w,
+                    ).clipRRect(all: 27.5.r),
               SizedBox(width: 15.w),
               Expanded(
                 child: Column(
@@ -97,39 +104,44 @@ class MessagePage extends GetView<MessageController> {
                   children: [
                     Text(
                       item['name'],
-                      style: TextStyle(color: Context(context).theme.textColor, fontSize: 16.sp),
+                      style: TextStyle(
+                        color: Context(context).theme.textColor,
+                        fontSize: 16.sp,
+                      ),
                     ),
-                    Text.rich(TextSpan(
-                      children: [
-                        TextSpan(
-                          text: item['content'],
-                          style: TextStyle(
-                            color: const Color(0xffbababb),
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                        if (item['date'] != null) ...[
+                    Text.rich(
+                      TextSpan(
+                        children: [
                           TextSpan(
-                            text: '   ·  ',
+                            text: item['content'],
                             style: TextStyle(
                               color: const Color(0xffbababb),
                               fontSize: 14.sp,
                             ),
                           ),
-                          TextSpan(
-                            text: item['date'],
-                            style: TextStyle(
-                              color: const Color(0xffbababb),
-                              fontSize: 14.sp,
+                          if (item['date'] != null) ...[
+                            TextSpan(
+                              text: '   ·  ',
+                              style: TextStyle(
+                                color: const Color(0xffbababb),
+                                fontSize: 14.sp,
+                              ),
                             ),
-                          ),
-                        ]
-                      ],
-                    ))
+                            TextSpan(
+                              text: item['date'],
+                              style: TextStyle(
+                                color: const Color(0xffbababb),
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
-              BuildConditional(item['noRead'])
+              BuildConditional(item['noRead']),
             ],
           ).paddingSymmetric(horizontal: 20.w, vertical: 10.h),
         ).onTap(() {
@@ -165,7 +177,7 @@ class MessagePage extends GetView<MessageController> {
               IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.search, size: 24.sp),
-              )
+              ),
             ],
           ),
           body: SafeArea(child: _buildView(context)),

@@ -43,7 +43,7 @@ class InteractivePage extends GetView<InteractiveController> {
         ),
         Column(
           children: [
-            ImageWidget(AssetsImages.likeIcon, width: 60.w, height: 60.w),
+            Image.asset(AssetsImages.likeIcon, width: 60.w, height: 60.w),
             Text(
               '124.7万',
               style: TextStyle(color: Colors.white, fontSize: 14.sp),
@@ -52,7 +52,7 @@ class InteractivePage extends GetView<InteractiveController> {
         ),
         Column(
           children: [
-            ImageWidget(AssetsImages.commentIcon, width: 60.w, height: 60.w),
+            Image.asset(AssetsImages.commentIcon, width: 60.w, height: 60.w),
             Text(
               '2.2万',
               style: TextStyle(color: Colors.white, fontSize: 14.sp),
@@ -71,7 +71,7 @@ class InteractivePage extends GetView<InteractiveController> {
         }),
         Column(
           children: [
-            ImageWidget(AssetsImages.starIcon, width: 60.w, height: 60.w),
+            Image.asset(AssetsImages.starIcon, width: 60.w, height: 60.w),
             Text(
               '2.2万',
               style: TextStyle(color: Colors.white, fontSize: 14.sp),
@@ -80,7 +80,7 @@ class InteractivePage extends GetView<InteractiveController> {
         ),
         Column(
           children: [
-            ImageWidget(AssetsImages.shareIcon, width: 60.w, height: 60.w),
+            Image.asset(AssetsImages.shareIcon, width: 60.w, height: 60.w),
             Text(
               '17.3',
               style: TextStyle(color: Colors.white, fontSize: 14.sp),
@@ -93,6 +93,14 @@ class InteractivePage extends GetView<InteractiveController> {
             const SharePage(),
           );
         }),
+        SizedBox(height: 20.h),
+        RotatingWidget(
+          child: ImageWidget(
+            'https://p3-pc.douyinpic.com/img/aweme-avatar/tos-cn-avt-0015_f14282e10099a4b436a9ca62c0902595~c5_168x168.jpeg?from=2956013662',
+            width: 40.w,
+            height: 40.w,
+          ).clipRRect(all: 20.r),
+        ),
       ],
     );
   }

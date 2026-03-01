@@ -123,6 +123,7 @@ flutter:
 
   assets:
   - assets/images/
+  - assets/icons/
   - assets/videos/
   - assets/lotties/
   - assets/comments/

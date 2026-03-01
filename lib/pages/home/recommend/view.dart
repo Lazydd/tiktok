@@ -42,28 +42,29 @@ class _RecommendViewGetX extends GetView<RecommendController> {
           itemCount: controller.list.length,
           onPageChanged: controller.pageChange,
           itemBuilder: (context, index) => GetBuilder<RecommendController>(
-              id: "video",
-              builder: (_) {
-                if (!controller.videoKeys.containsKey(index)) {
-                  controller.videoKeys[index] =
-                      GlobalKey<VideoPlayerWidgetState>();
-                }
-                return Stack(
-                  children: [
-                    VideoPlayerWidget(
-                      key: controller.videoKeys[index],
-                      videoUrl: controller.list[index],
-                      loading: const TikTokLoading(),
-                    ),
-                    Positioned(
-                      right: 5.w,
-                      bottom: 15.h,
-                      child: const InteractivePage(),
-                    ),
-                    _desc(context)
-                  ],
-                );
-              }),
+            id: "video",
+            builder: (_) {
+              if (!controller.videoKeys.containsKey(index)) {
+                controller.videoKeys[index] =
+                    GlobalKey<VideoPlayerWidgetState>();
+              }
+              return Stack(
+                children: [
+                  VideoPlayerWidget(
+                    key: controller.videoKeys[index],
+                    videoUrl: controller.list[index],
+                    loading: const TikTokLoading(),
+                  ),
+                  Positioned(
+                    right: 5.w,
+                    bottom: 15.h,
+                    child: const InteractivePage(),
+                  ),
+                  _desc(context),
+                ],
+              );
+            },
+          ),
         );
       },
     );
@@ -77,7 +78,10 @@ Widget _desc(BuildContext context) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('@小橙子', style: TextStyle(color: Colors.white, fontSize: 18.sp)),
+        Text(
+          '@小橙子',
+          style: TextStyle(color: Colors.white, fontSize: 18.sp),
+        ),
         SizedBox(height: 10.h),
         SizedBox(
           width: MediaQuery.of(context).size.width - 75.w,

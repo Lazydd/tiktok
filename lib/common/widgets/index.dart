@@ -15,3 +15,4 @@ export 'tik_tok_loading.dart';
 export 'input_text.dart';
 export 'number_stepper.dart';
 export 'switcher.dart';
+export 'rotating.dart';

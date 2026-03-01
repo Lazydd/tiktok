@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok/common/values/images.dart';
 
 class TikTokLoading extends StatefulWidget {
   final double? scale;
@@ -56,7 +57,7 @@ class TikTokLoadingState extends State<TikTokLoading>
                   Positioned(
                     top: offsetY,
                     child: Image.asset(
-                      'assets/images/loading.webp',
+                      AssetsImages.loading,
                       width: frameHeight,
                       height: frameHeight * frameCount,
                       fit: BoxFit.fitWidth,

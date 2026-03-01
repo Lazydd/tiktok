@@ -57,6 +57,7 @@ class MessageController extends GetxController {
       "content": 'xxx关注了你',
       "noRead": false,
       "type": 1,
+      "sys": false,
     },
     {
       "name": "互动消息",
@@ -64,6 +65,7 @@ class MessageController extends GetxController {
       "content": 'xxx近期访问过你的主页',
       "noRead": false,
       "type": 2,
+      "sys": false,
     },
     {
       "name": "杨老虎🐯（单人）",
@@ -73,6 +75,7 @@ class MessageController extends GetxController {
       "noRead": 2,
       "type": 3,
       "id": '0',
+      "sys": false,
     },
     {
       "name": "杨老虎🐯（多人）",
@@ -82,6 +85,7 @@ class MessageController extends GetxController {
       "noRead": 2,
       "type": 3,
       "id": '2',
+      "sys": false,
     },
     {
       "name": "抖音小助手",
@@ -90,6 +94,7 @@ class MessageController extends GetxController {
       "date": "星期四",
       "noRead": true,
       "type": 1,
+      "sys": false,
     },
     {
       "name": "系统通知",
@@ -98,6 +103,7 @@ class MessageController extends GetxController {
       "date": "08-31",
       "noRead": true,
       "type": 1,
+      "sys": false,
     },
     {
       "name": "求更新",
@@ -106,6 +112,7 @@ class MessageController extends GetxController {
       "date": "08-31",
       "noRead": true,
       "type": 1,
+      "sys": true,
     },
     {
       "name": "任务通知",
@@ -114,6 +121,7 @@ class MessageController extends GetxController {
       "date": "05-26",
       "noRead": true,
       "type": 1,
+      "sys": true,
     },
     {
       "name": "直播通知",
@@ -122,6 +130,7 @@ class MessageController extends GetxController {
       "date": "05-26",
       "noRead": true,
       "type": 1,
+      "sys": true,
     },
     {
       "name": "钱包通知",
@@ -130,6 +139,7 @@ class MessageController extends GetxController {
       "date": "05-26",
       "noRead": true,
       "type": 1,
+      "sys": true,
     },
   ];
 
