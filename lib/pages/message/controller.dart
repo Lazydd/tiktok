@@ -153,7 +153,7 @@ class MessageController extends GetxController {
   }
 
   void _initData() {
-    update(["message"]);
+    // update(["message"]);
   }
 
   void onTap() {}

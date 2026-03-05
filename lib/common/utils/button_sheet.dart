@@ -7,19 +7,19 @@ import 'package:tiktok/common/index.dart';
 Future<T?> buttonSheet<T>(
   Widget child, {
   Text? title,
-  Color? bottomSheetColor,
-  double? height,
+  Color? bottomSheetColor = Colors.black,
+  double? height = .5,
   double? headerHeight,
   EdgeInsetsGeometry? padding,
 }) async {
   return showStickyFlexibleBottomSheet<T?>(
     minHeight: 0,
     initHeight: height ?? 0.5,
-    maxHeight: height ?? .5,
+    maxHeight: height,
     headerHeight: headerHeight ?? 50.h,
     context: Get.context!,
     isSafeArea: true,
-    bottomSheetColor: bottomSheetColor ?? Colors.black,
+    bottomSheetColor: bottomSheetColor,
     bottomSheetBorderRadius: const BorderRadius.only(
       topLeft: Radius.circular(10),
       topRight: Radius.circular(10),
@@ -28,7 +28,7 @@ Future<T?> buttonSheet<T>(
       return RepaintBoundary(
         child: Container(
           height: headerHeight ?? 50.h,
-          color: bottomSheetColor ?? Colors.black,
+          color: bottomSheetColor,
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,25 +41,21 @@ Future<T?> buttonSheet<T>(
                 height: 20.w,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(10.w),
                   color: const Color.fromRGBO(58, 58, 70, 0.4),
                 ),
-                child: Icon(
-                  Icons.close,
-                  color: Colors.white,
-                  size: 14.sp,
-                ),
-              ).onTap(Get.back)
+                child: Icon(Icons.close, color: Colors.white, size: 14.sp),
+              ).onTap(Get.back),
             ],
           ),
         ),
       );
     },
     bodyBuilder: (context, offset) {
-      return SliverChildListDelegate(
-        [Padding(padding: padding ?? EdgeInsets.all(10.w), child: child)],
-      );
+      return SliverChildListDelegate([
+        Padding(padding: padding ?? EdgeInsets.all(10.w), child: child),
+      ]);
     },
-    anchors: [height ?? 0.5],
+    anchors: [height!],
   );
 }

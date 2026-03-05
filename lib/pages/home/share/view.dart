@@ -29,12 +29,8 @@ class SharePage extends GetView<ShareController> {
                   color: const Color.fromRGBO(58, 58, 70, 0.4),
                   borderRadius: BorderRadius.circular(10.r),
                 ),
-                child: Icon(
-                  Icons.close,
-                  color: Colors.white,
-                  size: 14.sp,
-                ),
-              ).onTap(Get.back)
+                child: Icon(Icons.close, color: Colors.white, size: 14.sp),
+              ).onTap(Get.back),
             ],
           ).paddingSymmetric(horizontal: 20.w, vertical: 10.h),
           Expanded(
@@ -55,16 +51,16 @@ class SharePage extends GetView<ShareController> {
                             decoration: BoxDecoration(
                               color:
                                   ShareController.topList[i]['type'] == 'wechat'
-                                      ? const Color(0xff07C160)
-                                      : theme.shareIconColor,
+                                  ? const Color(0xff07C160)
+                                  : theme.shareIconColor,
                               borderRadius: BorderRadius.circular(29.r),
                             ),
                             child: Icon(
                               ShareController.topList[i]['icon'],
                               color:
                                   ShareController.topList[i]['type'] == 'wechat'
-                                      ? const Color(0xffffffff)
-                                      : theme.shareFontColor,
+                                  ? const Color(0xffffffff)
+                                  : theme.shareFontColor,
                               size: 40.sp,
                             ),
                           )
@@ -82,18 +78,17 @@ class SharePage extends GetView<ShareController> {
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                    )
+                    ),
                   ],
                 );
               },
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemExtent: 80.w,
-              itemCount: ShareController.bottomList.length,
+            child: ListView(
               scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int i) {
+              itemExtent: 80.w,
+              children: ShareController.bottomList.map((item) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -108,23 +103,23 @@ class SharePage extends GetView<ShareController> {
                         borderRadius: BorderRadius.circular(29.r),
                       ),
                       child: Icon(
-                        ShareController.bottomList[i]['icon'],
+                        item['icon'],
                         color: theme.shareFontColor,
                         size: 40.sp,
                       ),
                     ),
                     Text(
-                      ShareController.bottomList[i]['name'],
+                      item['name'],
                       style: TextStyle(
                         color: theme.shareFontColor,
                         fontSize: 10.sp,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                    )
+                    ),
                   ],
                 );
-              },
+              }).toList(),
             ),
           ),
         ],
@@ -138,9 +133,7 @@ class SharePage extends GetView<ShareController> {
       init: ShareController(),
       id: "share",
       builder: (_) {
-        return SafeArea(
-          child: _buildView(context),
-        );
+        return SafeArea(child: _buildView(context));
       },
     );
   }

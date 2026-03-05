@@ -29,7 +29,7 @@ class ShareController extends GetxController {
   ];
 
   void _initData() {
-    update(["share"]);
+    
   }
 
   void onTap() {}

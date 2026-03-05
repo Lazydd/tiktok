@@ -43,7 +43,7 @@ class MineController extends GetxController {
   }
 
   void _initData() {
-    update(["mine"]);
+    // update(["mine"]);
   }
 
   void onTap() {}
