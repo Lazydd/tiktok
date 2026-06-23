@@ -4,11 +4,14 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: ^3.10.4
-
+  sdk: ^3.12.2
 dependencies:
   flutter:
     sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
   # getx 路由 + 状态管理 + 多语言 + 主题
   get: ^4.7.3
   # 屏幕适配
