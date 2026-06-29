@@ -191,7 +191,7 @@ class ChatController extends GetxController {
           "icon": CupertinoIcons.location_solid,
           "name": "位置",
           "ontap": () {
-            Get.toNamed(RouteNames.mapRoute);
+
           }
         },
         {"icon": CupertinoIcons.mic, "name": "语音输入"},

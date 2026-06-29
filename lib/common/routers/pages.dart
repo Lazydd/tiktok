@@ -94,17 +94,5 @@ abstract class RoutePages {
       name: RouteNames.rtcMoreRoute,
       page: () => RtcMorePage(isDial: Get.parameters['isDial'].toString()),
     ),
-    GetPage(
-      name: RouteNames.mapRoute,
-      page: () => MapPage(
-        isOnlyRead: Get.parameters["isOnlyRead"].toString() == "true",
-        receiveLocation: Get.parameters["receiveLocation"].toString(),
-        receiveName: Get.parameters["receiveName"].toString(),
-        isNearBy: Get.parameters["isNearBy"].toString() == "true",
-        isSearch: Get.parameters["isSearch"].toString() == "true",
-        isRealTimePosition:
-            Get.parameters["isRealTimePosition"].toString() == "true",
-      ),
-    ),
   ];
 }

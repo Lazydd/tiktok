@@ -16,4 +16,3 @@ export 'chat/index.dart';
 export 'system_config/index.dart';
 export 'system_config/appUpdate/index.dart';
 export 'system_config/general/index.dart';
-export 'embedH5Module/map/index.dart';
