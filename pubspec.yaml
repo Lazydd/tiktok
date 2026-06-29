@@ -97,9 +97,9 @@ dependencies:
   # lottie动画 加载json
   lottie: ^3.3.2
   # 音视频通话（rtc）
-  agora_rtc_engine_plus: ^6.5.2
+  # agora_rtc_engine_plus: ^6.5.2
   # 实时消息（rtm）
-  agora_rtm: ^1.5.9
+  # agora_rtm: ^1.5.9
   # 长列表优化
   keframe: ^3.0.0
   # 调试展示fps

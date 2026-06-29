@@ -79,20 +79,20 @@ abstract class RoutePages {
     GetPage(name: RouteNames.appUpdateRoute, page: () => const AppUpdatePage()),
     GetPage(name: RouteNames.generalRoute, page: () => const GeneralPage()),
     GetPage(name: RouteNames.scanCodeRoute, page: () => const ScanCodePage()),
-    GetPage(
-      name: RouteNames.chatRoute,
-      page: () => ChatPage(
-        peerId: Get.parameters['peerId']!,
-        name: Get.parameters['name']!,
-      ),
-    ),
-    GetPage(
-      name: RouteNames.rtcRoute,
-      page: () => RtcPage(isDial: Get.parameters['isDial'].toString()),
-    ),
-    GetPage(
-      name: RouteNames.rtcMoreRoute,
-      page: () => RtcMorePage(isDial: Get.parameters['isDial'].toString()),
-    ),
+    // GetPage(
+    //   name: RouteNames.chatRoute,
+    //   page: () => ChatPage(
+    //     peerId: Get.parameters['peerId']!,
+    //     name: Get.parameters['name']!,
+    //   ),
+    // ),
+    // GetPage(
+    //   name: RouteNames.rtcRoute,
+    //   page: () => RtcPage(isDial: Get.parameters['isDial'].toString()),
+    // ),
+    // GetPage(
+    //   name: RouteNames.rtcMoreRoute,
+    //   page: () => RtcMorePage(isDial: Get.parameters['isDial'].toString()),
+    // ),
   ];
 }
